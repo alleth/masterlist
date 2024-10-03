@@ -99,6 +99,9 @@ require_once "auth.php";
                         <table id="example" class="table table-hover table-bordered">
                             <thead>
                             <tr>
+                                <th scope="col">Region</th>
+                                <th scope="col">Site Code</th>
+                                <th scope="col">Site Name</th>
                                 <th scope="col">Brand</th>
                                 <th scope="col">Model</th>
                                 <th scope="col">PE No.</th>
@@ -108,53 +111,7 @@ require_once "auth.php";
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">HP</th>
-                                <td>PRODESK</td>
-                                <td>00228</td>
-                                <td>SGH9130LZZ</td>
-                                <td>5 Years</td>
-                                <td>ON SITE</td>
-                                <td><a href="#">EDIT</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">HP</th>
-                                <td>G9</td>
-                                <td>00229</td>
-                                <td>SGH9131LZZ</td>
-                                <td>5 Years</td>
-                                <td>ON SITE</td>
-                                <td><a href="#">EDIT</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">HP</th>
-                                <td>PRO3000</td>
-                                <td>00230</td>
-                                <td>SGH9132LZZ</td>
-                                <td>9 Years</td>
-                                <td>ON SITE</td>
-                                <td><a href="#">EDIT</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">HP</th>
-                                <td>PRODESK</td>
-                                <td>00231</td>
-                                <td>SGH9133LZZ</td>
-                                <td>5 Years</td>
-                                <td>ON SITE</td>
-                                <td><a href="#">EDIT</a></td>
-                            </tr>
-                             <tr>
-                                 <th scope="row">HP</th>
-                                 <td>PRODESK</td>
-                                 <td>00232</td>
-                                 <td>SGH9134LZZ</td>
-                                 <td>5 Years</td>
-                                 <td>ON SITE</td>
-                                 <td><a href="#">EDIT</a></td>
-                            </tr>
-                            </tbody>
+                            <tbody id="tableDisplay"></tbody>
                         </table>
                     </div>
                 </div>
@@ -171,6 +128,27 @@ require_once "auth.php";
         </footer>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Hardware Information <i class="fas fa-info-circle"></i></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="hw_display">Display your data here...</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="js/jquery.main.js" type="text/javascript"></script>
 <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
@@ -180,7 +158,7 @@ require_once "auth.php";
 <script src="js/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
-<script src="js/index-script.js" type="text/javascript"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
+<script src="js/cpu-pc-script.js" type="text/javascript"></script>
 </body>
 </html>
