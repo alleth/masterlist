@@ -10,7 +10,7 @@
             $user_id = $_SESSION["sess_id"];
             header("location: index.php");
         }else{
-            echo "Username or password doesn't exist.";
+            echo "Username or password is incorrect";
         }
     }else{
         echo "Empty Set";

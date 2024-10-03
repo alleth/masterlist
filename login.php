@@ -22,11 +22,11 @@
                                     <div class="card-body">
                                         <form action="loginProcess.php" method="post" novalidate>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" name="user_name" type="username" placeholder="Enter your user name here" />
+                                                <input class="form-control" id="inputEmail" name="user_name" type="username" placeholder="Enter your user name here" required/>
                                                 <label for="inputEmail">User</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" name="user_pass" type="password" placeholder="Enter your password here" />
+                                                <input class="form-control" id="inputPassword" name="user_pass" type="password" placeholder="Enter your password here" required/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
