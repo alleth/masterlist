@@ -17,3 +17,19 @@ $(function(){
     });
 
 });
+
+function viewHWDetails(id){
+    var wordObj = {"hw_id" : id};
+    $.ajax({
+        type: "POST",
+        url: "view-single-data-cpu-pc.php",
+        data: wordObj,
+        success: function(data){
+            $("#hw_display").html(data);
+            $('#staticBackdrop').modal('show');
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+}

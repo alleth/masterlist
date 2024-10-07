@@ -22,7 +22,7 @@ class viewDataDAO extends BaseDAO {
                 $chk_age = (date("Y") - $row[10])." Years";
             }
 
-            echo "<tr id='".$row[0]."'>";
+            echo "<tr onclick='viewHWDetails(".$row[0].")' style='cursor:pointer;'>";
             echo "<td>".$row[1]."</td>";
             echo "<td>".$row[2]."</td>";
             echo "<td>".$row[3]."</td>";
@@ -32,7 +32,6 @@ class viewDataDAO extends BaseDAO {
             echo "<td>".$row[7]."</td>";
             echo "<td>".$chk_age."</td>";
             echo "<td>".$row[11]."</td>";
-            echo "<td><a href='#'>Edit</a></td>";
             echo "</tr>";
         }
     }

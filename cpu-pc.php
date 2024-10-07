@@ -108,7 +108,6 @@ require_once "auth.php";
                                 <th scope="col">Serial No.</th>
                                 <th scope="col">Age</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody id="tableDisplay"></tbody>
@@ -130,18 +129,20 @@ require_once "auth.php";
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Hardware Information <i class="fas fa-info-circle"></i></h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> &nbsp;Hardware Information</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="hw_display">Display your data here...</div>
+                <div id="hw_display">Loading...</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Edit Details</button>
+
             </div>
         </div>
     </div>
