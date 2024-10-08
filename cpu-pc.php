@@ -330,7 +330,7 @@ require_once "auth.php";
     </div>
 </div>
 
-
+<!--this is a comment-->
 
 <script src="js/jquery.main.js" type="text/javascript"></script>
 <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
