@@ -8,7 +8,6 @@ class viewSingleDataDAO extends BaseDAO{
         $stmt->execute();
         $this->closeConn();
 
-        $text_style = "";
         $alert_message ="";
 
         while ($row = $stmt->fetch()){
@@ -19,11 +18,10 @@ class viewSingleDataDAO extends BaseDAO{
                 $text_style = "text-danger";
                 $alert_message = "<div class='alert alert-danger d-flex align-items-center' role='alert'>
                                     <div>
-                                    <i class='fas fa-exclamation-triangle'></i> Action required. This hardware need to return to SMC.
+                                    <i class='fas fa-exclamation-triangle'></i> Action required. This hardware is for return to SMC.
                                     </div>
                                   </div>";
             }
-
             echo $alert_message;
             echo "<h5>Primary Information</h5>";
             echo "<br>";

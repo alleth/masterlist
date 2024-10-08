@@ -1,5 +1,10 @@
 $(function(){
 
+    $("#addCPUBtn").click(function(){
+        $('#addCPUHardware').modal('show');
+
+    });
+
     $.ajax({
         type: "POST",
         url: "view-data-cpu-pc.php",
