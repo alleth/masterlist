@@ -136,7 +136,7 @@ require_once "auth.php";
                                 <th scope="col">Status</th>
                             </tr>
                             </thead>
-                            <tbody id="tableDisplay"></tbody>
+                            <tbody id="tableDisplay"></tbody> <!--  "tableDisplay" id call function via ajax  -->
                         </table>
                     </div>
                 </div>
