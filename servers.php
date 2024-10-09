@@ -25,7 +25,7 @@ include "navigation.php"
                 </ol>
                 <div class="row">
                     <div class="col-auto">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addCPUBtn">Add Server &nbsp;<i class="fas fa-plus-circle"></i></button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addServerBtn">Add Server &nbsp;<i class="fas fa-plus-circle"></i></button>
                     </div>
                     <div class="col-sm-2">
                         <label class="visually-hidden" for="specificSizeSelect">Select Region</label>
@@ -65,14 +65,13 @@ include "navigation.php"
                                 <th scope="col">Status</th>
                             </tr>
                             </thead>
-                            <tbody id="tableDisplay"></tbody>
+                            <tbody id="tableDisplay2"></tbody>
                         </table>
                     </div>
                 </div>
 
             </div>
         </main>
-
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
@@ -104,7 +103,7 @@ include "navigation.php"
 </div>
 
 <!-- Modal Add CPU-PC-->
-<div class="modal modal-lg fade" id="addCPUHardware" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="addServerHardware" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -268,6 +267,6 @@ include "navigation.php"
 <script src="js/datatables-simple-demo.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
-<script src="js/cpu-pc-script.js" type="text/javascript"></script>
+<script src="js/servers-script.js" type="text/javascript"></script>
 </body>
 </html>
