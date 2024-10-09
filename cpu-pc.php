@@ -195,12 +195,16 @@ require_once "auth.php";
                                     </div>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Site Code</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Site Code">
+                                    <label class="sr-only">Site Name</label>
+                                    <div id="">
+                                        <select class="form-select" name="" id="viewSiteSelect" disabled>
+                                            <option>Select Site Name</option>
+                                        </select>
+                                    </div>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Site Name</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Site Name">
+                                    <label class="sr-only">Site Code</label>
+                                    <input type="text" class="form-control" name="site_code" placeholder="Site Code" disabled>
                                 </dd>
                                 <dd class="col-sm-12">
                                     <label class="sr-only">Brand</label>
