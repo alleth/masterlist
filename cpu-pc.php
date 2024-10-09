@@ -190,7 +190,9 @@ require_once "auth.php";
                             <div class="col-6">
                                 <dd class='col-sm-12'>
                                     <label class="sr-only">Region</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Region">
+                                    <div id="">
+                                        <select class="form-select" name="" id="viewRegionSelect"></select>
+                                    </div>
                                 </dd>
                                 <dd class="col-sm-12">
                                     <label class="sr-only">Site Code</label>

@@ -2,7 +2,6 @@ $(function(){
 
     $("#addCPUBtn").click(function(){
         $('#addCPUHardware').modal('show');
-
     });
 
     $.ajax({
@@ -15,6 +14,17 @@ $(function(){
                 "ordering" : true,
                 "searching" : true
             });
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "view-region-select.php",
+        success: function(data){
+            $("#viewRegionSelect").html(data);
         },
         error: function(){
             alert(data);
