@@ -24,7 +24,7 @@ $(function(){
 });
 
 function viewHWDetails(id){
-    var wordObj = {"hw_id" : id};//HW hardware
+    var wordObj = {"id" : id};
     $.ajax({
         type: "POST",
         url: "view-single-data-server.php",//For server single data originally "view-single-data-cpu-pc.php"
