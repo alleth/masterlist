@@ -30,7 +30,7 @@ function viewHWDetails(id){
         url: "view-single-data-server.php",//For server single data originally "view-single-data-cpu-pc.php"
         data: wordObj,
         success: function(data){
-            $("#hw_display").html(data);//HW Display
+            $("#hw_display").html(data);//for view display modal ID
             $('#staticBackdrop').modal('show');
         },
         error: function(){
