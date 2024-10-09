@@ -133,11 +133,11 @@ require_once "auth.php";
                                 <th scope="col">Model</th>
                                 <th scope="col">PE No.</th>
                                 <th scope="col">Serial No.</th>
-                                <th scope="col">Age</th>
+                                <th scope="col">Location</th>
                                 <th scope="col">Status</th>
                             </tr>
                             </thead>
-                            <tbody id="tableDisplay"></tbody>
+                            <tbody id="tableDisplay2"></tbody>
                         </table>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ require_once "auth.php";
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="hw_display">Loading...</div>
+                <div id="hw_display">Loading...</div><!--Hw display to be retrieved on server server-script.js-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
