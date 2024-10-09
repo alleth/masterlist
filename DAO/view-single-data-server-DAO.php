@@ -3,7 +3,7 @@ include "BaseDAO.php";
 class viewSingleDataDAO extends BaseDAO{
     function viewSingleData($hw_id){
         $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM servers WHERE id = ?");
+        $stmt = $this->dbh->prepare("SELECT * FROM srvr_tbl WHERE srvr_id = ?");
         $stmt->bindParam(1,$hw_id);
         $stmt->execute();
         $this->closeConn();
@@ -12,7 +12,7 @@ class viewSingleDataDAO extends BaseDAO{
 
         while ($row = $stmt->fetch()){
 
-            if($row[11] == "ON SITE"){
+            if($row[8] == "ON SITE"){
                 $text_style = "text-success";
             }else{
                 $text_style = "text-danger";

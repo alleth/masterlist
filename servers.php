@@ -164,7 +164,7 @@ require_once "auth.php";
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="hw_display">Loading...</div><!--Hw display to be retrieved on server server-script.js-->
+                <div id="srvr_info">Loading...</div><!--Hw display to be retrieved on server server-script.js-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
