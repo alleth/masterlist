@@ -8,7 +8,7 @@ class viewSiteListDAO extends BaseDAO {
         $stmt->execute();
 
         while ($row = $stmt->fetch()){
-            echo "<option onclick='site_name_option($row[0])'>$row[2]</option>";
+            echo "<option onclick='site_name_option(".$row[0].")'>$row[2]</option>";
         }
         $this->closeConn();
     }

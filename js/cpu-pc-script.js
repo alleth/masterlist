@@ -50,22 +50,24 @@ function viewHWDetails(id){
 }
 
 function region_option(id){
-    var wordObj = {"region_id" : id};
-    $.ajax({
-        type: "POST",
-        url: "view-site-list-option.php",
-        data: wordObj,
-        success: function(data){
-            $('#viewSiteSelect').prop('disabled', false);
-            $("#viewSiteSelect").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });
+    alert("try");
+    //var wordObj = {"region_id" : id};
+    //$.ajax({
+    //    type: "POST",
+    //    url: "view-site-list-option.php",
+    //    data: wordObj,
+    //    success: function(data){
+    //        $("#viewSiteSelect").html(data);
+            //$("#viewSiteSelect").prop('disabled', false).removeAttr('disabled');
+    //    },
+    //    error: function(){
+    //        alert(data);
+    //    }
+    //});
 }
 
 function site_name_option(id){
+
     var wordObj = {"site_id" : id};
     $.ajax({
         type: "POST",

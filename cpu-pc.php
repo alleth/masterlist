@@ -196,7 +196,7 @@ require_once "auth.php";
                                 </dd>
                                 <dd class="col-sm-12">
                                     <label class="sr-only">Site Name</label>
-                                    <div id="">
+                                    <div>
                                         <select class="form-select" name="" id="viewSiteSelect" disabled>
                                             <option>Select Site Name</option>
                                         </select>

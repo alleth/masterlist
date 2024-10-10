@@ -8,7 +8,7 @@ class viewRegionSelectDAO extends BaseDAO {
 
         echo "<option>Select Region</option>";
         while ($row = $stmt->fetch()){
-            echo "<option onclick='region_option($row[0])'>$row[1]</option>";
+            echo "<option onclick='region_option(".$row[0].")'>".$row[1]."</option>";
         }
         $this->closeConn();
     }
