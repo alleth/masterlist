@@ -189,41 +189,41 @@ require_once "auth.php";
                             <h4>Primary Information</h4>
                             <div class="col-6">
                                 <dd class='col-sm-12'>
-                                    <label class="sr-only">Region</label>
+                                    <div class="sr-only">Region</div>
                                     <div id="">
-                                        <select class="form-select" name="" id="viewRegionSelect"></select>
+                                        <select class="form-select" name="region_name" id="viewRegionSelect"></select>
                                     </div>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Site Name</label>
+                                    <div class="sr-only">Site Name</div>
                                     <div>
-                                        <select class="form-select" name="" id="viewSiteSelect" disabled>
+                                        <select class="form-select" name="site_name" id="viewSiteSelect" disabled>
                                             <option>Select Site Name</option>
                                         </select>
                                     </div>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Site Code</label>
+                                    <div class="sr-only">Site Code</div>
                                     <input type="text" class="form-control" name="site_code" placeholder="Site Code" disabled>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Brand</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Brand">
+                                    <div class="sr-only">Brand</div>
+                                    <input type="text" class="form-control" name="brand_name" placeholder="Brand">
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Model</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Model">
+                                    <div class="sr-only">Model</div>
+                                    <input type="text" class="form-control" name="model_name" placeholder="Model">
                                 </dd>
 
                             </div>
                             <div class="col-6">
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Asset No.:</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Asset Number">
+                                    <div class="sr-only">Asset No.:</div>
+                                    <input type="text" class="form-control" name="asset_num" placeholder="Asset Number">
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <label class="sr-only">Serial No.</label>
-                                    <input type="text" class="form-control" name="Region" placeholder="Serial Number">
+                                    <div class="sr-only">Serial No.</div>
+                                    <input type="text" class="form-control" name="serial_num" placeholder="Serial Number">
                                 </dd>
                                 <dt class="col-sm-4">Date Acquired:</dt>
                                 <dd class="d-flex col-sm-12">
@@ -312,7 +312,7 @@ require_once "auth.php";
                                     </select>
                                 </dd>
                                 <dd class="col-sm-12">
-                                    <select class="form-select">
+                                    <select class="form-select" name="status_option">
                                         <option value="ON SITE">ON SITE</option>
                                         <option value="ON SITE">DEFECTIVE</option>
                                         <option value="ON SITE">PULLED OUT</option>
@@ -342,10 +342,6 @@ require_once "auth.php";
 <script src="js/jquery.main.js" type="text/javascript"></script>
 <script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
-<script src="js/chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
-<script src="js/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
