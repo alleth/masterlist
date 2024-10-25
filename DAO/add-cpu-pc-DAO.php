@@ -8,6 +8,8 @@ class addCPUDataDAO extends BaseDAO {
         $stmt2->execute();
         $this->closeConn();
 
+        $chckAssetNum = "";
+        $chckSerialNum = "";
         while ($row = $stmt2->fetch()) {
             $chckAssetNum = $row[6];
             $chckSerialNum = $row[7];
@@ -28,9 +30,9 @@ class addCPUDataDAO extends BaseDAO {
         while ($row3 = $site_details->fetch()) {
             $chckSiteName = $row3[2];
         }
-        if($chckAssetNum == $asset_num){
+        if($asset_num == $chckAssetNum){
             echo "asset number";
-        }else if($chckSerialNum == $serial_num){
+        }else if($serial_num == $chckSerialNum){
             echo "serial number";
         }else{
             $this->openConn();

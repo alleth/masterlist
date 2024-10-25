@@ -6,6 +6,7 @@ $(function(){
     });
 
     $("#addDetailsCPU").click(function (){
+        var displayMessage = document.getElementById('addMessage');
         $("#addDetailsCPU").hide();
         $("#addDetailsCPULoading").show();
         var region_name = $("select[name='region_name']").val();
@@ -27,13 +28,11 @@ $(function(){
         var acquired_value = $("input[name='acquired_value']").val();
 
         if(region_name == "" || site_name == "" || site_code == "" || brand_name == "" || model_name == "" || asset_num == "" || serial_num == "" || hw_month == "" || hw_day == "" || hw_year == "" || status_option == "" || host_name == "" || ip_address == "" || mac_address == "" || user_name == "" || primary_role == "" || acquired_value == ""){
-            document.getElementById('addCPUAlert').classList.remove('d-none');
-            document.getElementById('addCPUSuccess').classList.add('d-none');
+            displayMessage.innerHTML = "<div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Please fill up all the fields.</div></div>";
             $("#addDetailsCPU").show();
             $("#addDetailsCPULoading").hide();
         }else{
             $("#addDetailsCPULoading").show();
-            var displayMessage = document.getElementById('addMessage');
             var wordObj = {
                 "region_name" : region_name,
                 "site_name" : site_name,
@@ -87,8 +86,7 @@ $(function(){
                         $("input[name='acquired_value']").val("");
                         $("#addDetailsCPULoading").hide();
                         $("#addDetailsCPU").show();
-                        document.getElementById('addCPUAlert').classList.add('d-none');
-                        document.getElementById('addCPUSuccess').classList.remove('d-none');
+                        displayMessage.innerHTML = "<div class='alert alert-success align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-check-circle'></i>&nbsp;You successfully added new CPU-PC on the list.</div></div>";
                     }
                 },
                 error: function(){

@@ -188,18 +188,6 @@ require_once "auth.php";
                     <div id="hw_add">
                         <div class="container">
                             <div id="addMessage"></div>
-                            <div id="addCPUAlert" class="alert alert-danger d-flex align-items-center d-none" role="alert">
-                                <div class="text-center">
-                                    <i class="fas fa-exclamation-triangle"></i> Please fill up all the fields.
-                                </div>
-                            </div>
-
-                            <div id="addCPUSuccess" class="alert alert-success align-items-center alert-dismissible fade show d-none" role="alert">
-                                <div class="text-center">
-                                    <i class="fa fa-check-circle"></i> You successfully added new CPU-PC on the list.
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <h4>Primary Information</h4>
                                 <div class="col-6">
