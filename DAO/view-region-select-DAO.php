@@ -6,10 +6,12 @@ class viewRegionSelectDAO extends BaseDAO {
         $stmt = $this->dbh->prepare("SELECT * FROM region_tbl");
         $stmt->execute();
 
-        echo "<option>Select Region</option>";
+        echo "<select id='region_select' class='form-select' name='region_name' onchange='region_option()' required>";
+        echo "<option value='' selected disabled>Select Region</option>";
         while ($row = $stmt->fetch()){
-            echo "<option onclick='region_option(".$row[0].")'>".$row[1]."</option>";
+            echo "<option value='".$row[0]."' onchange=''>".$row[1]."</option>";
         }
+        echo "</select>";
         $this->closeConn();
     }
 }

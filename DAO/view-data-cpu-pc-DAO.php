@@ -21,7 +21,6 @@ class viewDataDAO extends BaseDAO {
             }else{
                 $chk_age = (date("Y") - $row[10])." Years";
             }
-
             echo "<tr onclick='viewHWDetails(".$row[0].")' style='cursor:pointer;'>";
             echo "<td>".$row[1]."</td>";
             echo "<td>".$row[2]."</td>";

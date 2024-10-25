@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2024 at 07:31 AM
+-- Generation Time: Oct 25, 2024 at 07:32 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -24,56 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `region_tbl`
+-- Table structure for table `hw_model_tbl`
 --
 
-CREATE TABLE `region_tbl` (
-  `region_id` int(11) NOT NULL,
-  `region_name` varchar(25) NOT NULL
+CREATE TABLE `hw_model_tbl` (
+  `hw_model_id` int(11) NOT NULL,
+  `hw_model_name` varchar(25) NOT NULL,
+  `hw_brand_id` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `region_tbl`
+-- Dumping data for table `hw_model_tbl`
 --
 
-INSERT INTO `region_tbl` (`region_id`, `region_name`) VALUES
-(1, 'NCR'),
-(2, 'Region 1'),
-(3, 'Region 2'),
-(4, 'Region 3'),
-(5, 'Region 4-A'),
-(6, 'Region 4-B'),
-(7, 'Region 5'),
-(8, 'Region 6'),
-(9, 'Region 7'),
-(10, 'Region 8'),
-(11, 'Region 9'),
-(12, 'Region 10'),
-(13, 'Region 11'),
-(14, 'Region 12'),
-(15, 'BARMM'),
-(16, 'CAR'),
-(17, 'CARAGA');
+INSERT INTO `hw_model_tbl` (`hw_model_id`, `hw_model_name`, `hw_brand_id`) VALUES
+(1, 'PRODESK', '1'),
+(2, 'G9', '1'),
+(3, 'Pro3000', '1'),
+(4, 'Elitedesk', '1');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `region_tbl`
+-- Indexes for table `hw_model_tbl`
 --
-ALTER TABLE `region_tbl`
-  ADD PRIMARY KEY (`region_id`);
+ALTER TABLE `hw_model_tbl`
+  ADD PRIMARY KEY (`hw_model_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `region_tbl`
+-- AUTO_INCREMENT for table `hw_model_tbl`
 --
-ALTER TABLE `region_tbl`
-  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+ALTER TABLE `hw_model_tbl`
+  MODIFY `hw_model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

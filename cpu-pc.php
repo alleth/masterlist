@@ -10,6 +10,7 @@ require_once "auth.php";
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Masterfile | Hardware Inventory System</title>
+    <!--<link href="css/spinner/bootstrap.min.css" rel="stylesheet" />-->
     <link href="css/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -177,162 +178,230 @@ require_once "auth.php";
 <!-- Modal Add CPU-PC-->
 <div class="modal modal-lg fade" id="addCPUHardware" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> Add CPU-PC</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="hw_add">
-                    <div class="container">
-                        <div class="row">
-                            <h4>Primary Information</h4>
-                            <div class="col-6">
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Region</div>
-                                    <div id="">
-                                        <select class="form-select" name="region_name" id="viewRegionSelect"></select>
-                                    </div>
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Site Name</div>
-                                    <div>
-                                        <select class="form-select" name="site_name" id="viewSiteSelect" disabled>
-                                            <option>Select Site Name</option>
-                                        </select>
-                                    </div>
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Site Code</div>
-                                    <input type="text" class="form-control" name="site_code" placeholder="Site Code" disabled>
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Brand</div>
-                                    <input type="text" class="form-control" name="brand_name" placeholder="Brand">
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Model</div>
-                                    <input type="text" class="form-control" name="model_name" placeholder="Model">
-                                </dd>
-
+        <from>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> Add CPU-PC</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="hw_add">
+                        <div class="container">
+                            <div id="addMessage"></div>
+                            <div id="addCPUAlert" class="alert alert-danger d-flex align-items-center d-none" role="alert">
+                                <div class="text-center">
+                                    <i class="fas fa-exclamation-triangle"></i> Please fill up all the fields.
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Asset No.:</div>
-                                    <input type="text" class="form-control" name="asset_num" placeholder="Asset Number">
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <div class="sr-only">Serial No.</div>
-                                    <input type="text" class="form-control" name="serial_num" placeholder="Serial Number">
-                                </dd>
-                                <dt class="col-sm-4">Date Acquired:</dt>
-                                <dd class="d-flex col-sm-12">
-                                    <select class="form-select" name="hw_month">
-                                        <option value="01">January</option>
-                                        <option value="02">February</option>
-                                        <option value="03">March</option>
-                                        <option value="04">April</option>
-                                        <option value="05">May</option>
-                                        <option value="06">June</option>
-                                        <option value="07">July</option>
-                                        <option value="08">August</option>
-                                        <option value="09">September</option>
-                                        <option value="10">October</option>
-                                        <option value="11">November</option>
-                                        <option value="12">December</option>
-                                    </select>
-                                    &nbsp;
-                                        <select class="form-select" name="hw_day">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                            <option value="26">26</option>
-                                            <option value="27">27</option>
-                                            <option value="28">28</option>
-                                            <option value="29">29</option>
-                                            <option value="30">30</option>
-                                            <option value="31">31</option>
+
+                            <div id="addCPUSuccess" class="alert alert-success align-items-center alert-dismissible fade show d-none" role="alert">
+                                <div class="text-center">
+                                    <i class="fa fa-check-circle"></i> You successfully added new CPU-PC on the list.
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <h4>Primary Information</h4>
+                                <div class="col-6">
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">Region</div>
+                                        <div id="viewRegionSelect"></div>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Site Name</div>
+                                        <div>
+                                            <select class="form-select" name="site_name" id="viewSiteSelect" onchange="site_name_option()" disabled>
+                                                <option value="" selected disabled>Select Site Name</option>
+                                            </select>
+                                        </div>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Site Code</div>
+                                        <input type="text" class="form-control" name="site_code" id="viewSiteCode" placeholder="Site Code" disabled>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Brand</div>
+                                        <select class="form-select" name="brand_name" onchange="brandName()" id="brand_option"></select>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Model</div>
+                                        <select class="form-select" name="model_name" id="model_option" disabled></select>
+                                    </dd>
+                                </div>
+                                <div class="col-6">
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Asset No.:</div>
+                                        <input type="text" class="form-control" name="asset_num" placeholder="Asset Number" required>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <div class="sr-only">Serial No.</div>
+                                        <input type="text" class="form-control" name="serial_num" placeholder="Serial Number">
+                                    </dd>
+                                    <br>
+                                    <dt class="col-sm-4">Date Acquired:</dt>
+                                    <dd class="d-flex col-sm-12">
+                                        <select class="form-select" name="hw_month">
+                                            <option value="01">January</option>
+                                            <option value="02">February</option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
                                         </select>
-                                    &nbsp;
-                                    <select class="form-select" name="hw_year">
-                                        <option value="1999">1999</option>
-                                        <option value="2000">2000</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2002">2002</option>
-                                        <option value="2003">2003</option>
-                                        <option value="2004">2004</option>
-                                        <option value="2005">2005</option>
-                                        <option value="2006">2006</option>
-                                        <option value="2007">2007</option>
-                                        <option value="2008">2008</option>
-                                        <option value="2009">2009</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
-                                        <option value="2026">2026</option>
-                                        <option value="2027">2027</option>
-                                        <option value="2028">2028</option>
-                                        <option value="2029">2029</option>
-                                        <option value="2030">2030</option>
-                                    </select>
-                                </dd>
-                                <dd class="col-sm-12">
-                                    <select class="form-select" name="status_option">
-                                        <option value="ON SITE">ON SITE</option>
-                                        <option value="ON SITE">DEFECTIVE</option>
-                                        <option value="ON SITE">PULLED OUT</option>
-                                    </select>
-                                </dd>
+                                        &nbsp;
+                                            <select class="form-select" name="hw_day">
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
+                                            </select>
+                                        &nbsp;
+                                        <select class="form-select" name="hw_year">
+                                            <option value="1999">1999</option>
+                                            <option value="2000">2000</option>
+                                            <option value="2001">2001</option>
+                                            <option value="2002">2002</option>
+                                            <option value="2003">2003</option>
+                                            <option value="2004">2004</option>
+                                            <option value="2005">2005</option>
+                                            <option value="2006">2006</option>
+                                            <option value="2007">2007</option>
+                                            <option value="2008">2008</option>
+                                            <option value="2009">2009</option>
+                                            <option value="2010">2010</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                        </select>
+                                    </dd>
+                                    <dd class="col-sm-12">
+                                        <select class="form-select" name="status_option">
+                                            <option value="" selected disabled>Select Status</option>
+                                            <option value="ON SITE">ON SITE</option>
+                                            <option value="ON SITE">DEFECTIVE</option>
+                                            <option value="ON SITE">PULLED OUT</option>
+                                        </select>
+                                    </dd>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <h4>Other Information</h4>
-                        <div class="row" style="background-color: #bcbebf;">
+                        <div class="container">
+                            <hr>
+                            <div class="row">
+                                <h4>Other Information</h4>
+                                <div class="col-6">
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">Hostname</div>
+                                        <div id="">
+                                            <input class="form-control" name="host_name" type="text" placeholder="Hostname">
+                                        </div>
+                                    </dd>
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">IP Address</div>
+                                        <div id="">
+                                            <input class="form-control" name="ip_address" type="text" placeholder="IP Address">
+                                        </div>
+                                    </dd>
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">MAC Address</div>
+                                        <div id="">
+                                            <input class="form-control" name="mac_address" type="text" placeholder="MAC Address">
+                                        </div>
+                                    </dd>
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">User Name</div>
+                                        <div id="">
+                                            <input class="form-control" name="user_name" type="text" placeholder="User Name">
+                                        </div>
+                                    </dd>
+                                    <dd class='col-sm-12'>
+                                        <div class="sr-only">Primary Role</div>
+                                        <div id="">
+                                            <select class="form-select" name="primary_role">
+                                                <option value="" selected disabled>Select Primary Role</option>
+                                                <option value="Evaluator">Evaluator</option>
+                                                <option value="Approving">Approving</option>
+                                                <option value="Input Clerk">Input Clerk</option>
+                                                <option value="Cashier">Cashier</option>
+                                                <option value="Releasing">Releasing</option>
+                                                <option value="Site Support">Site Support</option>
 
+                                            </select>
+                                        </div>
+                                    </dd>
+                                </div>
+                                <div class='col-6'>
+                                        <dd class='col-sm-12'>
+                                            <div class="sr-only">Acquired Value</div>
+                                            <div id="">
+                                                <input class="form-control" type="text" name="acquired_value" placeholder="Acquired Value">
+                                            </div>
+                                        </dd>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="addDetailsCPU">Add CPU-PC</button>
+                    <button type="submit" class="btn btn-primary disabled" id="addDetailsCPULoading">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Adding...
+                    </button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add CPU-PC</button>
-            </div>
-        </div>
+        </from>
     </div>
 </div>
 
@@ -346,5 +415,6 @@ require_once "auth.php";
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
 <script src="js/cpu-pc-script.js" type="text/javascript"></script>
+<!-- <script src="js/spinner/bootstrap.bundle.min.js" type="text/javascript"></script> -->
 </body>
 </html>
