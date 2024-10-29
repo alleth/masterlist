@@ -1,8 +1,47 @@
 $(function(){
 
     $("#addDetailsCPULoading").hide();
+    $("#saveBtn").hide();
+    $("#hw_displayEdit").hide();
     $("#addCPUBtn").click(function(){
         $('#addCPUHardware').modal('show');
+    });
+
+    $("#editBtn").click(function (){
+        var hwValue = $("input[name='dataValue']").val();
+        $("#hw_display").hide();
+        $("#hw_displayEdit").show();
+        $("#editBtn").hide();
+        $("#saveBtn").show();
+
+        var wordObj = {"hwValue" : hwValue};
+        $.ajax({
+            type: "POST",
+            url: "update-hw-data.php",
+            data: wordObj,
+            success: function(data){
+                var obj = JSON.parse(data);
+                $("input[name='hw_idEdit']").val(obj.hw_id);
+                $("input[name='region_nameEdit']").val(obj.region_name);
+                $("input[name='site_nameEdit']").val(obj.site_name);
+                $("input[name='site_codeEdit']").val(obj.site_code);
+                $("input[name='brand_nameEdit']").val(obj.hw_brand_name);
+                $("input[name='model_nameEdit']").val(obj.hw_model);
+                $("input[name='asset_numEdit']").val(obj.hw_asset_num);
+                $("input[name='serial_numEdit']").val(obj.hw_serial_num);
+                $("input[name='date_acqEdit']").val(obj.hw_year_acq);
+                $("input[name='status_nameEdit']").val(obj.hw_status);
+                $("input[name='host_nameEdit']").val(obj.hw_host_name);
+                $("input[name='ip_addEdit']").val(obj.hw_ip_add);
+                $("input[name='mac_addEdit']").val(obj.hw_mac_add);
+                $("input[name='user_nameEdit']").val(obj.hw_user_name);
+                $("input[name='primary_roleEdit']").val(obj.hw_primary_role);
+                $("input[name='acq_valEdit']").val(obj.hw_acq_val);
+            },
+            error: function(){
+                alert(data);
+            }
+        });
     });
 
     $("#addDetailsCPU").click(function (){
@@ -59,7 +98,7 @@ $(function(){
                 success: function(data){
                     var returnValue = data;
                     if(returnValue == "asset number"){
-                        displayMessage.innerHTML = "<div class='alert alert-warning align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Asset number already exist.</div></div>";
+                        displayMessage.innerHTML = "<div class='alert alert-warning align-items-center alert-dismissible fade show shadow p-3 mb-5 bg-white rounded' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Asset number already exist.</div></div>";
                         $("#addDetailsCPULoading").hide();
                         $("#addDetailsCPU").show();
                     }else if(returnValue == "serial number"){
@@ -148,6 +187,10 @@ $(function(){
 });
 
 function viewHWDetails(id){
+    $("#hw_displayEdit").hide();
+    $("#hw_display").show();
+    $("#editBtn").show();
+    $("#saveBtn").hide();
     var wordObj = {"hw_id" : id};
     $.ajax({
         type: "POST",

@@ -1,4 +1,5 @@
 <?php
+require_once "../auth.php";
 include "BaseDAO.php";
 class addCPUDataDAO extends BaseDAO {
     function addCPUData($region_name, $site_name, $site_code, $brand_name, $model_name, $asset_num, $serial_num, $hw_month, $hw_day, $hw_year, $status_option, $host_name, $ip_address, $mac_address, $user_name, $primary_role, $acquired_value) {
