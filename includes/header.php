@@ -10,6 +10,7 @@ require_once "auth.php";
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Masterfile | Hardware Inventory System</title>
+    <!--<link href="css/spinner/bootstrap.min.css" rel="stylesheet" />-->
     <link href="css/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -58,7 +59,6 @@ require_once "auth.php";
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="servers.php">Servers</a>
                             <a class="nav-link" href="cpu-pc.php">CPU-PC</a>
                             <a class="nav-link" href="#">Keyboard</a>
                             <a class="nav-link" href="#">Monitor</a>
@@ -88,16 +88,4 @@ require_once "auth.php";
             </div>
         </nav>
     </div>
-    <script src="js/jquery.main.js" type="text/javascript"></script>
-<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
-<script src="js/chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
-<script src="js/simple-datatables.min.js" crossorigin="anonymous"></script>
-<script src="js/datatables-simple-demo.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
-<script src="js/cpu-pc-script.js" type="text/javascript"></script>
-</body>
-</html>
+    <div id="layoutSidenav_content">
