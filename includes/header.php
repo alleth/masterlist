@@ -11,9 +11,11 @@ require_once "auth.php";
     <meta name="author" content="" />
     <title>Masterfile | Hardware Inventory System</title>
     <!--<link href="css/spinner/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="css/alert-style.css" rel="stylesheet" />
     <script src="js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -59,11 +61,15 @@ require_once "auth.php";
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="servers.php">Server</a>
                             <a class="nav-link" href="cpu-pc.php">CPU-PC</a>
-                            <a class="nav-link" href="#">Keyboard</a>
                             <a class="nav-link" href="#">Monitor</a>
-                            <a class="nav-link" href="#">Mouse</a>
+                            <a class="nav-link" href="#">Switch</a>
+                            <a class="nav-link" href="#">Router</a>
                             <a class="nav-link" href="#">Printers</a>
+                            <a class="nav-link" href="#">Sigpad</a>
+                            <a class="nav-link" href="#">Webcam</a>
+
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
@@ -76,10 +82,9 @@ require_once "auth.php";
                             <a class="nav-link" href="layout-static.html">Cash Drawer</a>
                             <a class="nav-link" href="layout-static.html">LC Display</a>
                             <a class="nav-link" href="layout-static.html">POS Machine</a>
-                            <a class="nav-link" href="layout-static.html">Sigpad</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Webcam</a>
                         </nav>
                     </div>
+                    <div class="sb-sidenav-menu-heading">Transactions</div>
                 </div>
             </div>
             <div class="sb-sidenav-footer">

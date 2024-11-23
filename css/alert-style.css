@@ -1,0 +1,28 @@
+
+/*alert message on top*/
+.alert-top {
+    position: fixed;
+    width: 40%;
+    text-align: center;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Keep it on top */
+    display: none; /* Hidden by default */
+    opacity: 0; /* Transparent initially */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Smooth animation */
+    box-shadow: 0px 20px 45px rgba(0, 0, 0, 0.2); /* Add shadow to the alert */
+    border-radius: 8px; /* Rounded corners for a softer look */
+}
+
+.alert-top.show {
+    display: block;
+    opacity: 1; /* Fully visible */
+    transform: translateX(-50%) translateY(0); /* Slight slide-in effect */
+}
+
+.alert-top.hide {
+    opacity: 0; /* Fade out */
+    transform: translateX(-50%) translateY(-20px); /* Slide up effect */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Smooth fade-out animation */
+}

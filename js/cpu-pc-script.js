@@ -1,10 +1,20 @@
 $(function(){
-
     $("#addDetailsCPULoading").hide();
-    $("#saveBtn").hide();
+    $("#saveEditBtn").hide();
     $("#hw_displayEdit").hide();
     $("#addCPUBtn").click(function(){
         $('#addCPUHardware').modal('show');
+    });
+    $(".button-close").click(function (){
+        $("#saveEditBtn").hide();
+    });
+
+    $("#saveEditBtn").click(function (){
+        const alertMessage = document.getElementById("alertMessage");
+        alertMessage.innerHTML = "<strong>You successfully updated CPU-PC.</strong>";
+        alertMessageSuccess();
+        $("#saveEditBtn").hide();
+
     });
 
     $("#editBtn").click(function (){
@@ -12,7 +22,7 @@ $(function(){
         $("#hw_display").hide();
         $("#hw_displayEdit").show();
         $("#editBtn").hide();
-        $("#saveBtn").show();
+        $("#saveEditBtn").show();
 
         var wordObj = {"hwValue" : hwValue};
         $.ajax({
@@ -21,10 +31,13 @@ $(function(){
             data: wordObj,
             success: function(data){
                 var obj = JSON.parse(data);
+                var displayRegion = document.getElementById('regionEdit');
+                var displaySiteName = document.getElementById('siteNameEdit');
+                var displaySiteCode = document.getElementById('siteCodeEdit');
                 $("input[name='hw_idEdit']").val(obj.hw_id);
-                $("input[name='region_nameEdit']").val(obj.region_name);
-                $("input[name='site_nameEdit']").val(obj.site_name);
-                $("input[name='site_codeEdit']").val(obj.site_code);
+                displayRegion.innerHTML = "<option value='"+obj.region_name+"'>"+obj.region_name+"</option>";
+                displaySiteName.innerHTML = "<option value='"+obj.site_name+"'>"+obj.site_name+"</option>";
+                displaySiteCode.innerHTML = "<option value='"+obj.site_code+"'>"+obj.site_code+"</option>";
                 $("input[name='brand_nameEdit']").val(obj.hw_brand_name);
                 $("input[name='model_nameEdit']").val(obj.hw_model);
                 $("input[name='asset_numEdit']").val(obj.hw_asset_num);
@@ -167,6 +180,7 @@ $(function(){
         url: "view-hw-brand-option.php",
         success: function(data){
             $("#brand_option").html(data);
+            $("#brand_optionUpdate").html(data);
         },
         error: function(){
             alert(data);
@@ -178,6 +192,7 @@ $(function(){
         url: "view-hw-model-option.php",
         success: function(data){
             $("#model_option").html(data);
+            $("#brand_modelUpdate").html(data);
         },
         error: function(){
             alert(data);
@@ -248,4 +263,25 @@ function site_name_option(){
 
 function brandName(){
     document.getElementById('model_option').disabled = false;
+}
+
+function alertMessageSuccess(){
+    const alert = document.getElementById("alertMessage");
+    alert.classList.add("alert-success");
+    alert.innerHTML = "<strong>You successfully updated CPU-PC.</strong>";
+
+    alert.classList.remove("hide");
+    alert.style.display = "block";
+    setTimeout(() => {
+        alert.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+        alert.classList.remove("show");
+        alert.classList.add("hide");
+
+        setTimeout(() => {
+            alert.style.display = "none";
+        }, 500);
+    }, 3000);
 }

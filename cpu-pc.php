@@ -1,5 +1,4 @@
 <?php include("includes/header.php"); ?>
-
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4 display-4">CPU-PC</h1>
@@ -10,6 +9,7 @@
                         <div class="col-auto">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addCPUBtn">Add CPU-PC &nbsp;<i class="fas fa-plus-circle"></i></button>
                         </div>
+                        <div id="alertMessage" class="alert alert-top" role="alert"></div>
                         <div class="col-sm-2">
                             <label class="visually-hidden" for="specificSizeSelect">Select Region</label>
                             <select class="form-select" id="specificSizeSelect">
@@ -52,7 +52,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </main>
 
@@ -63,7 +62,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> &nbsp;Hardware Information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close button-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="hw_display">
@@ -79,23 +78,35 @@
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Region</div>
                                     <input type="hidden" class="form-control" name="hw_idEdit" disabled required>
-                                    <input type="text" class="form-control" name="region_nameEdit" placeholder="Region" disabled required>
+                                    <select id="regionEdit" type="text" class="form-select" name="region_nameEdit" placeholder="Region" disabled required>
+                                        <option value="" selected>Select Region</option>
+                                    </select>
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Site Name</div>
-                                    <input type="text" class="form-control" name="site_nameEdit" placeholder="Site Name" disabled required>
+                                    <input type="hidden" class="form-control-plaintext" name="site_nameEdit" placeholder="Site Name" disabled required>
+                                    <select name="site_nameEdit" id="siteNameEdit" class="form-select" disabled>
+                                        <option value="" selected>Select Site Name</option>
+                                    </select>
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Site Code</div>
-                                    <input type="text" class="form-control" name="site_codeEdit" placeholder="Site Code" disabled required>
+                                    <input type="hidden" class="form-control-plaintext" name="site_codeEdit" placeholder="Site Code" disabled required>
+                                    <select name="site_codeEdit" id="siteCodeEdit" class="form-select" disabled>
+                                        <option value="" selected>Select Site Code</option>
+                                    </select>
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Select Brand</div>
-                                    <input type="text" class="form-control" name="brand_nameEdit" placeholder="Select Brand" required>
+                                    <input type="hidden" class="form-control" name="brand_nameEdit" placeholder="Select Brand" required>
+                                    <div class="sr-only">Brand</div>
+                                    <select class="form-select" name="brand_name" onchange="" id="brand_optionUpdate"></select>
+
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Select Model</div>
-                                    <input type="text" class="form-control" name="model_nameEdit" placeholder="Select Model" required>
+                                    <input type="hidden" class="form-control" name="model_nameEdit" placeholder="Select Model" required>
+                                    <select class="form-select" name="model_name" onchange="" id="brand_modelUpdate"></select>
                                 </dd>
                             </div>
                             <div class="col-6">
@@ -113,7 +124,7 @@
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Select Status</div>
-                                    <input type="text" class="form-control" name="status_nameEdit" placeholder="Select Status" required>
+                                    <input type="text" class="form-control" name="status_nameEdit" placeholder="Select Status" disabled>
                                 </dd>
                             </div>
                             <hr>
@@ -150,9 +161,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary button-close" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="editBtn">Edit Details</button>
-                    <button type="button" class="btn btn-primary" id="saveBtn">Save</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveEditBtn">Save</button>
                 </div>
             </div>
         </div>
@@ -191,7 +202,7 @@
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Brand</div>
-                                            <select class="form-select" name="brand_name" onchange="brandName()" id="brand_option"></select>
+                                            <select class="form-select" name="brand_name" onchange="brandName()" id="brand_option" required></select>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Model</div>
@@ -205,7 +216,7 @@
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Serial No.</div>
-                                            <input type="text" class="form-control" name="serial_num" placeholder="Serial Number">
+                                            <input type="text" class="form-control" name="serial_num" placeholder="Serial Number" required>
                                         </dd>
                                         <br>
                                         <dt class="col-sm-4">Date Acquired:</dt>
@@ -295,7 +306,7 @@
                                             </select>
                                         </dd>
                                         <dd class="col-sm-12">
-                                            <select class="form-select" name="status_option">
+                                            <select class="form-select" name="status_option" required>
                                                 <option value="" selected disabled>Select Status</option>
                                                 <option value="ON SITE">ON SITE</option>
                                                 <option value="ON SITE">DEFECTIVE</option>
