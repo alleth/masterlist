@@ -6,11 +6,12 @@
                     <div class="row">
                         <div class="col-xl-3 col-md-6"><h3>This is a homepage.</h3></div>
                 </div>
-                <div class="container-fluid px-4 d-flex">
-                        <div class="row">
+                <div class="container-fluid px-4">
+                    <div class="d-flex">
+                       
                             <div class="col-md-3 mb-4 mt-2 px-4">
                                 <div class="card card-body p-3" style="width: 18rem;">
-                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">Servers
+                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">Servers</p>
                                         <h5 class="font-weight-bolder mb-0">
                                         <?php
                                             countServers();
@@ -18,11 +19,11 @@
                                         </h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                       
+    
                             <div class="col-md-3 mb-4 mt-2 px-4">
                                 <div class="card card-body p-3" style="width: 18rem;">
-                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">CPU-PC
+                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">CPU-PC</p>
                                         <h5 class="font-weight-bolder mb-0">
                                         <?php
                                             countCPU();
@@ -30,17 +31,16 @@
                                         </h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-md-3 mb-4 mt-2 px-4">
                                 <div class="card card-body p-3" style="width: 18rem;">
-                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">Printers
+                                    <p class="text-sm mb-0 text-capitalizatize font-weight-bold">Printers</p>
                                         <h3 class="font-weight-bolder mb-0">
                                             1234
                                         </h3>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </main>
