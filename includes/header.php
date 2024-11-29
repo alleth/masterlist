@@ -16,6 +16,7 @@ require_once "auth.php";
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="css/alert-style.css" rel="stylesheet" />
+    <link href="icons/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
