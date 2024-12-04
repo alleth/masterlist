@@ -1,5 +1,7 @@
-<?php include("includes/header.php"); 
-        include "countfunctions.php"; ?>
+<?php 
+        include("includes/header.php"); 
+        include("countfunctions.php");
+?>
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4 display-4">Dashboard</h1>
@@ -11,10 +13,8 @@
                         <div class="col-md-3 border-2">
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
-                                    <h3 class="fs-2">
-                                        <?php
-                                            countServers();
-                                        ?>
+                                    <h3 class="fs-2" id="Server">
+                                    
                                     </h3>
                                     <p class="fs-8">Servers</p>
                                 </div>
@@ -26,10 +26,8 @@
                         <div class="col-md-3 border-2">
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
-                                    <h3 class="fs-2">
-                                    <?php
-                                            countCPU();
-                                        ?>
+                                    <h3 class="fs-2" id="cpu-count">
+                                        
                                     </h3>
                                     <p class="fs-8">CPU-PC</p>
                                 </div>

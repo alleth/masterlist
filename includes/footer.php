@@ -16,6 +16,7 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
 <script src="js/cpu-pc-script.js" type="text/javascript"></script>
+<script src="js/dashboard.js" type="text/javascript"></script>
 <!-- <script src="js/spinner/bootstrap.bundle.min.js" type="text/javascript"></script> -->
 </body>
 </html>
