@@ -1,6 +1,5 @@
 <?php 
-        include("includes/header.php"); 
-        include("countfunctions.php");
+        include("includes/header.php");
 ?>
             <main>
                 <div class="container-fluid px-4">

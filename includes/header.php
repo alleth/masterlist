@@ -85,7 +85,15 @@ require_once "auth.php";
                             <a class="nav-link" href="layout-static.html">POS Machine</a>
                         </nav>
                     </div>
-                    <div class="sb-sidenav-menu-heading">Transactions</div>
+                    <div class="sb-sidenav-menu-heading">Set-up</div>
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                        Users
+                    </a>
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fas fa-store-alt"></i></div>
+                        Directory
+                    </a>
                 </div>
             </div>
             <div class="sb-sidenav-footer">
