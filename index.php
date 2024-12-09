@@ -13,8 +13,8 @@
                         <div class="col-md-3 border-2">
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
-                                    <h3 class="fs-2" id="Server">
-                                    
+                                    <h3 class="fs-2" id="888Server">
+                                        0
                                     </h3>
                                     <p class="fs-8">Servers</p>
                                 </div>
@@ -27,7 +27,7 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2" id="cpu-count">
-                                        
+                                        0
                                     </h3>
                                     <p class="fs-8">CPU-PC</p>
                                 </div>
@@ -40,7 +40,7 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2">
-                                        2987
+                                        0
                                     </h3>
                                     <p class="fs-8">Monitor</p>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2">
-                                        786
+                                        0
                                     </h3>
                                     <p class="fs-8">Printer</p>
                                 </div>
@@ -66,33 +66,7 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2">
-                                        310
-                                    </h3>
-                                    <p class="fs-8">Router</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-router-fill fs-1 primary-text rounded-full secondary-bg p-3"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 border-2">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-2">
-                                        351
-                                    </h3>
-                                    <p class="fs-8">Switch</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-ethernet fs-1 primary-text rounded-full secondary-bg p-3"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 border-2">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-2">
-                                        528
+                                        0
                                     </h3>
                                     <p class="fs-8">Webcam</p>
                                 </div>
@@ -105,7 +79,7 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2">
-                                        498
+                                        0
                                     </h3>
                                     <p class="fs-8">Sigpad</p>
                                 </div>
@@ -118,48 +92,9 @@
                             <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <h3 class="fs-2">
-                                        3145
-                                    </h3>
-                                    <p class="fs-8">Keyboard</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-keyboard-fill fs-1 primary-text rounded-full secondary-bg p-3"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 border-2">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-2">
-                                        3122
-                                    </h3>
-                                    <p class="fs-8">Mouse</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-mouse2-fill fs-1 primary-text rounded-full secondary-bg p-3"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 border-2">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-2">
-                                        341
+                                        0
                                     </h3>
                                     <p class="fs-8">UPS-Server</p>
-                                </div>
-                                <div>
-                                    <i class="bi bi-battery-charging fs-1 primary-text rounded-full secondary-bg p-3"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 border-2">
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-2">
-                                        3124
-                                    </h3>
-                                    <p class="fs-8">UPS-PC</p>
                                 </div>
                                 <div>
                                     <i class="bi bi-battery-charging fs-1 primary-text rounded-full secondary-bg p-3"></i>
