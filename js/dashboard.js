@@ -20,5 +20,7 @@ $(function(){
             alert(data);
         }
     });
+
+    innerHTML.text();
 });
 
