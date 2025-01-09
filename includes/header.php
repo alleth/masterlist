@@ -86,7 +86,7 @@ require_once "auth.php";
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Set-up</div>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="user.php">
                         <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
                         Users
                     </a>
