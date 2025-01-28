@@ -106,8 +106,8 @@ $(function(){
                         $("#addUserForm")[0].reset();
                     } else {
                         displayMessage.innerHTML = `
-                        <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
                             <div class='text-center'>
+                        <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
                                 <i class='fa fa-exclamation-circle'></i>&nbsp;${res.message}
                             </div>
                         </div>`;
