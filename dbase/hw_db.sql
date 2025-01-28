@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2024 at 05:04 AM
--- Server version: 10.4.28-MariaDB
+-- Generation Time: Jan 28, 2025 at 06:15 AM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,6 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `hw_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_tbl`
+--
+-- Error reading structure for table hw_db.activity_tbl: #1932 - Table &#039;hw_db.activity_tbl&#039; doesn&#039;t exist in engine
+-- Error reading data for table hw_db.activity_tbl: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `hw_db`.`activity_tbl`&#039; at line 1
 
 -- --------------------------------------------------------
 
@@ -74,6 +82,7 @@ CREATE TABLE `hw_tbl` (
   `region_name` varchar(25) NOT NULL,
   `site_code` varchar(11) NOT NULL,
   `site_name` varchar(25) NOT NULL,
+  `hw_type` varchar(85) DEFAULT NULL,
   `hw_brand_name` varchar(25) NOT NULL,
   `hw_model` varchar(25) NOT NULL,
   `hw_asset_num` varchar(11) NOT NULL,
@@ -95,17 +104,44 @@ CREATE TABLE `hw_tbl` (
 -- Dumping data for table `hw_tbl`
 --
 
-INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `site_name`, `hw_brand_name`, `hw_model`, `hw_asset_num`, `hw_serial_num`, `hw_month_acq`, `hw_day_acq`, `hw_year_acq`, `hw_status`, `hw_host_name`, `hw_ip_add`, `hw_mac_add`, `hw_user_name`, `hw_primary_role`, `hw_acq_val`, `user_id`) VALUES
-(1, 'Region 7', '0732', 'Mandaue DO', 'HP', 'PRODESK', '123456', 'ABCDE12345', '03', '15', '2022', 'ON SITE', '0732W0001_1', '10.7.32.71', '18-60-24-DF-8A-17', 'Arjay P. Enecillo', 'Evaluator', '43,650.00', 0),
-(2, 'Region 7', '0732', 'Mandaue DO', 'HP', 'G9', '54321', 'EDCBA54321', '05', '01', '2024', 'DEFFECTIVE', '0732_W001_2', '10.7.32.72', '18-60-24-DF-8A-18', 'Lea Villaceran', 'Site Support', '56,995.00', 0),
-(6, 'Region 7', '0706', 'Bayawan EO', 'HP', 'Pro3000', 'SDFSDFSD', 'ABCDE12345', '01', '01', '1999', 'ON SITE', 'dasdsad', 'sadsadsa', 'dsadsad', 'asdasdasdas', 'Evaluator', 'dasdasdasda', 0),
-(7, 'Region 7', '0716', 'Cebu City DO', 'HP', 'Elitedesk', 'FSDF', 'ABCDE123456', '01', '01', '1999', 'ON SITE', 'SFSDFSD', 'FSDFSD', 'FSDF', 'SDFSDFSD', 'Site Support', 'SDASDASDA', 0),
-(8, 'Region 3', '0320', 'Baloc DO', 'HP', 'G9', '123456', 'sadasdsadasd', '01', '01', '2020', 'ON SITE', 'fsdfsd', 'fsdfsd', 'fsdfsd', 'fsdfsd', 'Evaluator', 'fsdfsdfds', 0),
-(9, 'Region 7', '0712', 'Carcar DO', 'HP', 'G9', 'sdasdas', 'ABCDE12345', '01', '01', '2011', 'ON SITE', 'DASDAS', 'DSADSADAS', 'DSADAS', 'DASDAS', 'Evaluator', 'DASDSADAS', 0),
-(10, 'Region 7', '0716', 'Cebu City DO', 'HP', 'Pro3000', 'DSADSADSAD', 'EDCBA54321', '01', '01', '1999', 'ON SITE', 'DSADSA', 'DSADSA', 'DASDSA', 'DSADSA', 'Evaluator', 'DASDSADSA', 0),
-(11, 'Region 4-A', '0444', 'Balayan EO', 'HP', 'G9', 'sdfsdfsdf', 'sdfsdfsdfsd', '01', '01', '2013', 'ON SITE', 'fsdfsd', 'fdsf', 'sdfsdf', 'sdfsdfsd', 'Evaluator', 'fdsfdsfds', 0),
-(12, 'Region 2', '0210', 'Aritao Extension Office', 'HP', 'Pro3000', '123456', 'fdsfsd', '01', '01', '1999', 'ON SITE', 'sdfsd', 'fsdfsdfsd', 'fsd', 'sdfdsf', 'Evaluator', 'dsfsdfsd', 0),
-(13, 'Region 2', '0212', 'Basco District Office', 'HP', 'PRODESK', '54321', 'dfdsfsdf', '01', '01', '1999', 'ON SITE', 'fsdf', 'sdfsdf', 'dsfds', 'fdsfdsf', 'Evaluator', 'fsdfdsfsdf', 0);
+INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `site_name`, `hw_type`, `hw_brand_name`, `hw_model`, `hw_asset_num`, `hw_serial_num`, `hw_month_acq`, `hw_day_acq`, `hw_year_acq`, `hw_status`, `hw_host_name`, `hw_ip_add`, `hw_mac_add`, `hw_user_name`, `hw_primary_role`, `hw_acq_val`, `user_id`) VALUES
+(1, '9', '0732', 'Mandaue DO', 'CPU-PC', 'HP', 'PRODESK', '123456', 'ABCDE12345', '03', '15', '2022', 'Onsite', '0732W0001_1', '10.7.32.74', '18-60-24-DF-8A-17', 'Arjay P. Enecillo', 'Approving', '43,650.00', 22),
+(2, '9', '0732', 'Mandaue DO', 'CPU-PC', 'HP', 'G9', '54321', 'EDCBA54321', '05', '01', '2024', 'Pulled out', '0732_W001_2', '10.7.32.72', '18-60-24-DF-8A-18', 'Lea Villaceran', 'Site Support', '56,995.00', 1),
+(7, '9', '0716', 'Cebu City DO', 'CPU-PC', 'HP', 'Elitedesk', 'FSDF', 'ABCDE123456', '01', '01', '1999', 'Pulled out', 'SFSDFSD', 'FSDFSD', 'FSDF', 'SDFSDFSD', 'Site Support', 'SDASDASDA', 1),
+(19, '1', '1306', 'Caloocan LC', 'CPU-PC', 'HP', 'PRODESK', '1234', 'sfsdfdsf123', '01', '01', '2012', 'Pending', 'fsdfsd', 'fsdfdsf', 'sdfdsf', 'fsdfsd', 'Approving', '45,000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_tbl`
+--
+
+CREATE TABLE `log_tbl` (
+  `log_id` int(11) NOT NULL,
+  `log_date` varchar(85) NOT NULL,
+  `log_activity` varchar(65) NOT NULL,
+  `log_user` varchar(11) NOT NULL,
+  `log_status` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `log_tbl`
+--
+
+INSERT INTO `log_tbl` (`log_id`, `log_date`, `log_activity`, `log_user`, `log_status`) VALUES
+(3, '2025-01-22 17:37:30', 'Update hardware details', '22', 'Completed'),
+(4, '2025-01-22 17:52:25', 'Update hardware details', '22', 'Completed'),
+(5, '2025-01-22 17:55:08', 'Update hardware details', '22', 'Completed'),
+(7, '2025-01-23 11:40:49', 'Request hardware pull out', '22', 'Pending'),
+(8, '2025-01-23 12:00:30', 'Request hardware pull out', '1', 'Pending'),
+(9, '2025-01-26 17:41:43', 'Added a user.', '1', 'Completed'),
+(10, '2025-01-26 17:44:07', 'Added a user.', '1', 'Completed'),
+(11, '2025-01-26 17:46:06', 'Deleted a user.', '40', 'Completed'),
+(12, '2025-01-26 17:50:16', 'User Enrollment', '1', 'Completed'),
+(13, '2025-01-26 17:52:52', 'User Enrollment', '1', 'Completed'),
+(14, '2025-01-26 17:56:02', 'User Enrollment', '1', 'Completed'),
+(15, '2025-01-26 17:56:11', 'Deleted a user.', '1', 'Completed'),
+(16, '2025-01-26 17:57:41', 'User Enrollment', '1', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -140,6 +176,28 @@ INSERT INTO `region_tbl` (`region_id`, `region_name`) VALUES
 (15, 'BARMM'),
 (16, 'CAR'),
 (17, 'CARAGA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_tbl`
+--
+
+CREATE TABLE `request_tbl` (
+  `request_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `request_msg` varchar(85) NOT NULL,
+  `hw_id` int(11) NOT NULL,
+  `request_status` varchar(45) NOT NULL,
+  `send_to` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `request_tbl`
+--
+
+INSERT INTO `request_tbl` (`request_id`, `user_id`, `request_msg`, `hw_id`, `request_status`, `send_to`) VALUES
+(1, 22, 'Hardware is in-transit.', 1, 'Pending', '45');
 
 -- --------------------------------------------------------
 
@@ -998,6 +1056,29 @@ INSERT INTO `srvr_tbl` (`srvr_id`, `region`, `itsoi_count`, `site_code`, `site_n
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tracking_tbl`
+--
+
+CREATE TABLE `tracking_tbl` (
+  `tracking_id` int(11) NOT NULL,
+  `tracking_date` varchar(55) DEFAULT NULL,
+  `tracking_num` varchar(11) DEFAULT NULL,
+  `site_code` varchar(11) DEFAULT NULL,
+  `hw_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tracking_tbl`
+--
+
+INSERT INTO `tracking_tbl` (`tracking_id`, `tracking_date`, `tracking_num`, `site_code`, `hw_id`, `user_id`) VALUES
+(1, '2025-01-23 11:40:49', '12345678910', '0732', 1, 22),
+(2, '2025-01-23 12:00:30', '12345678910', '1306', 19, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_tbl`
 --
 
@@ -1005,7 +1086,9 @@ CREATE TABLE `user_tbl` (
   `id` int(11) NOT NULL,
   `fname` varchar(25) DEFAULT NULL,
   `lname` varchar(25) DEFAULT NULL,
+  `region_assigned` varchar(35) DEFAULT NULL,
   `user_type` varchar(25) DEFAULT NULL,
+  `cluster_name` varchar(45) DEFAULT NULL,
   `user_name` varchar(25) DEFAULT NULL,
   `user_pass` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1014,8 +1097,10 @@ CREATE TABLE `user_tbl` (
 -- Dumping data for table `user_tbl`
 --
 
-INSERT INTO `user_tbl` (`id`, `fname`, `lname`, `user_type`, `user_name`, `user_pass`) VALUES
-(1, 'Administrator', 'Administrator', 'Administrator', 'admin', 'admin');
+INSERT INTO `user_tbl` (`id`, `fname`, `lname`, `region_assigned`, `user_type`, `cluster_name`, `user_name`, `user_pass`) VALUES
+(1, 'The', 'Administrator', 'All', 'ADM', 'N/A', 'admin', 'admin'),
+(22, 'Alleth Rey', 'Dazo', '9', 'FSE', 'VisMin', 'amdazo', 'password'),
+(45, 'Pedro', 'Penduko', 'All', 'SPV', 'Luzon', 'penpen', 'password');
 
 --
 -- Indexes for dumped tables
@@ -1040,10 +1125,22 @@ ALTER TABLE `hw_tbl`
   ADD PRIMARY KEY (`hw_id`);
 
 --
+-- Indexes for table `log_tbl`
+--
+ALTER TABLE `log_tbl`
+  ADD PRIMARY KEY (`log_id`);
+
+--
 -- Indexes for table `region_tbl`
 --
 ALTER TABLE `region_tbl`
   ADD PRIMARY KEY (`region_id`);
+
+--
+-- Indexes for table `request_tbl`
+--
+ALTER TABLE `request_tbl`
+  ADD PRIMARY KEY (`request_id`);
 
 --
 -- Indexes for table `site_list_tbl`
@@ -1056,6 +1153,12 @@ ALTER TABLE `site_list_tbl`
 --
 ALTER TABLE `srvr_tbl`
   ADD PRIMARY KEY (`srvr_id`);
+
+--
+-- Indexes for table `tracking_tbl`
+--
+ALTER TABLE `tracking_tbl`
+  ADD PRIMARY KEY (`tracking_id`);
 
 --
 -- Indexes for table `user_tbl`
@@ -1083,13 +1186,25 @@ ALTER TABLE `hw_model_tbl`
 -- AUTO_INCREMENT for table `hw_tbl`
 --
 ALTER TABLE `hw_tbl`
-  MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `log_tbl`
+--
+ALTER TABLE `log_tbl`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `region_tbl`
 --
 ALTER TABLE `region_tbl`
   MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `request_tbl`
+--
+ALTER TABLE `request_tbl`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `site_list_tbl`
@@ -1104,10 +1219,16 @@ ALTER TABLE `srvr_tbl`
   MODIFY `srvr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
+-- AUTO_INCREMENT for table `tracking_tbl`
+--
+ALTER TABLE `tracking_tbl`
+  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

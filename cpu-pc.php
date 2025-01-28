@@ -11,50 +11,33 @@
                         </div>
                         <div id="alertMessage" class="alert alert-top" role="alert"></div>
                         <div class="col-sm-2">
-                            <label class="visually-hidden" for="specificSizeSelect">Select Region</label>
-                            <select class="form-select" id="specificSizeSelect">
-                                <option>Select Region</option>
-                                <option value="NCR">NCR</option>
-                                <option value="Region 2">Region 2</option>
-                                <option value="Region 3">Region 3</option>
-                                <option value="Region 4-A">Region 4-A</option>
-                                <option value="Region 4-B">Region 4-B</option>
-                                <option value="Region 5">Region 5</option>
-                                <option value="Region 6">Region 6</option>
-                                <option value="Region 7">Region 7</option>
-                                <option value="Region 8">Region 8</option>
-                                <option value="Region 9">Region 9</option>
-                                <option value="Region 10">Region 10</option>
-                                <option value="Region 11">Region 11</option>
-                                <option value="Region 12">Region 12</option>
-                                <option value="BARMM">BARMM</option>
-                                <option value="CAR">CAR</option>
-                            </select>
+                            <div id="displayFilter"></div>
                         </div>
                     </div>
                     <div class="container mt-5">
                         <div class="table-responsive">
                             <table id="example" class="table table-hover table-bordered">
                                 <thead>
-                                <tr>
-                                    <th scope="col">Region</th>
-                                    <th scope="col">Site Code</th>
-                                    <th scope="col">Site Name</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Model</th>
-                                    <th scope="col">PE No.</th>
-                                    <th scope="col">Serial No.</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Status</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">Region</th>
+                                        <th scope="col">Site Code</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col">Model</th>
+                                        <th scope="col">PE No.</th>
+                                        <th scope="col">Serial No.</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="tableDisplay"></tbody>
+                                <tbody id="tableDisplay">
+                                    <td id ="rowdisplay" colspan="9" class="text-muted text-center fst-italic">Please select region or site...</td>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
-
 
     <!-- Modal Hardware Info-->
     <div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -97,16 +80,12 @@
                                     </select>
                                 </dd>
                                 <dd class='col-sm-12'>
-                                    <div class="sr-only">Select Brand</div>
-                                    <input type="hidden" class="form-control" name="brand_nameEdit" placeholder="Select Brand" required>
                                     <div class="sr-only">Brand</div>
-                                    <select class="form-select" name="brand_name" onchange="" id="brand_optionUpdate"></select>
-
+                                    <select class="form-select" name="brand_nameEdit" onchange="" id="brand_optionUpdate"></select>
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Select Model</div>
-                                    <input type="hidden" class="form-control" name="model_nameEdit" placeholder="Select Model" required>
-                                    <select class="form-select" name="model_name" onchange="" id="brand_modelUpdate"></select>
+                                    <select class="form-select" name="model_nameEdit" onchange="" id="brand_modelUpdate"></select>
                                 </dd>
                             </div>
                             <div class="col-6">
@@ -123,8 +102,12 @@
                                     <input type="text" class="form-control" name="date_acqEdit" placeholder="Date Acquired" required>
                                 </dd>
                                 <dd class='col-sm-12'>
-                                    <div class="sr-only">Select Status</div>
-                                    <input type="text" class="form-control" name="status_nameEdit" placeholder="Select Status" disabled>
+                                    <div class="sr-only">Status</div>
+                                    <select class="form-select" name="status_nameEdit" placeholder="Status" required>
+                                        <option disabled>Select Harware Status</option>
+                                        <option value="Idle">IDLE</option>
+                                        <option value="Onsite">ONSITE</option>
+                                    </select>
                                 </dd>
                             </div>
                             <hr>
@@ -148,13 +131,22 @@
                                 </dd>
                                 <dd class='col-sm-12'>
                                     <div class="sr-only">Primary Role</div>
-                                    <input type="text" class="form-control" name="primary_roleEdit" placeholder="Primary Role" required>
+                                    <select class="form-select" name="primary_roleEdit" required>
+                                        <option disabled>Select a role</option>
+                                        <option value="Evaluator">Evaluator</option>
+                                        <option value="Data Encoder">Data Encoder</option>
+                                        <option value="PS">Photo & Signature</option>
+                                        <option value="Input Clerk">Input Clerk</option>
+                                        <option value="Approving">Approving Officer</option>
+                                        <option value="Cashier">Cashier</option>
+                                        <option value="Releasing">Releasing</option>
+                                    </select>
                                 </dd>
                             </div>
                             <div class="col-6">
                                 <dd class='col-sm-12'>
-                                    <div class="sr-only">Hostname</div>
-                                    <input type="text" class="form-control" name="acq_valEdit" placeholder="Acquired Value" required>
+                                    <div class="sr-only">Acquired Value</div>
+                                    <input type="text" class="form-control" name="acq_valEdit" placeholder="Acquired Value" disabled>
                                 </dd>
                             </div>
                         </div>
@@ -162,8 +154,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary button-close" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="editBtn">Edit Details</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveEditBtn">Save</button>
+                    <button type="button" class="btn btn-warning" id="editBtn">Edit Details</button>
+                    <button type="button" class="btn btn-danger" id="pulloutBtn">Pull out</button>
+                    <button type="button" class="btn btn-success" id="saveEditBtn">Save Details</button>
                 </div>
             </div>
         </div>
@@ -308,9 +301,9 @@
                                         <dd class="col-sm-12">
                                             <select class="form-select" name="status_option" required>
                                                 <option value="" selected disabled>Select Status</option>
-                                                <option value="ON SITE">ON SITE</option>
-                                                <option value="ON SITE">DEFECTIVE</option>
-                                                <option value="ON SITE">PULLED OUT</option>
+                                                <option value="Onsite">On site</option>
+                                                <option value="Pulled out">Pulled out</option>
+                                                <option value="Idle">Idle</option>
                                             </select>
                                         </dd>
                                     </div>
@@ -374,7 +367,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="addDetailsCPU">Add CPU-PC</button>
+                        <button type="button" class="btn btn-primary" id="addDetailsCPU">Add CPU-PC</button>
                         <button type="submit" class="btn btn-primary disabled" id="addDetailsCPULoading">
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Adding...
@@ -384,6 +377,35 @@
             </form>
         </div>
     </div>
+
+    <div class="modal" id="trackingModal" tabindex="-1" aria-labelledby="trackingModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Action Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="containter">
+                        <div class="row">
+                            <dd class="col-sm-12">
+                                <div class="sr-only">Tracking number:</div>
+                                <input type="hidden" class="form-control" name="hw_id_pullout" disabled required>
+                                    <input type="text" class="form-control" name="tracking_num" placeholder="Add tracking number here..." required>
+                                <div id="tracking_required" class="text-danger"></div>
+                            </dd>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="pullout-button">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--this is a comment-->
     <!-- this is my comment--->
     <!-- this is another comment-->

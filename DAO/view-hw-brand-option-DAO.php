@@ -8,7 +8,7 @@ class viewBrandOptionDAO extends BaseDAO {
 
         echo "<option value='' selected disabled>Select Brand Name</option>";
         while ($row = $stmt->fetch()){
-            echo "<option value='$row[1]'>$row[1]</option>";
+            echo "<option value='".$row[1]."'>$row[1]</option>";
         }
         $this->closeConn();
     }

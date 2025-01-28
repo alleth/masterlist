@@ -21,29 +21,62 @@ require_once "auth.php";
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
-    <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Masterfile</a>
-    <!-- Sidebar Toggle-->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-    <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
+    <!-- Navbar Brand -->
+    <a class="navbar-brand ps-3" href="index.php">Masterfile</a>
 
-        </div>
-    </form>
-    <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    <!-- Sidebar Toggle -->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Content -->
+    <ul class="navbar-nav ms-auto align-items-center">
+        <!-- Greeting for Wide Screens -->
+        <li class="nav-item d-none d-lg-block me-1">
+            <span class="navbar-text text-muted small">
+                Hello,
+                <strong>
+                    <?php
+                    if (isset($_SESSION['sess_fname'])) {
+                        echo htmlspecialchars($_SESSION['sess_fname']); // Escape output for safety
+                    } else {
+                        echo "Guest"; // Fallback message
+                    }
+                    ?>
+                </strong>!
+            </span>
+        </li>
+
+        <!-- User Dropdown -->
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle fa-lg"></i>
+            </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <!-- Greeting for Small Screens -->
+                <li class="dropdown-item d-lg-none">
+                    Hello,
+                    <strong>
+                        <?php
+                        if (isset($_SESSION['sess_fname'])) {
+                            echo htmlspecialchars($_SESSION['sess_fname']); // Escape output for safety
+                        } else {
+                            echo "Guest"; // Fallback message
+                        }
+                        ?>
+                    </strong>!
+                </li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                <!-- Dropdown Links -->
+                <li><a class="dropdown-item" href="#!"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="activity-log.php"><i class="fa fa-history"></i> Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </li>
     </ul>
 </nav>
+
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
@@ -64,32 +97,41 @@ require_once "auth.php";
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="servers.php">Server</a>
                             <a class="nav-link" href="cpu-pc.php">CPU-PC</a>
-                            <a class="nav-link" href="#">Monitor</a>
-                            <a class="nav-link" href="#">Switch</a>
-                            <a class="nav-link" href="#">Router</a>
-                            <a class="nav-link" href="#">Printers</a>
-                            <a class="nav-link" href="#">Sigpad</a>
-                            <a class="nav-link" href="#">Webcam</a>
+                            <a class="nav-link" href="hardware-monitor.php">Monitor</a>
+                            <a class="nav-link" href="hardware-switch.php">Switch</a>
+                            <a class="nav-link" href="hardware-router.php">Router</a>
+                            <a class="nav-link" href="hardware-printer.php">Printers</a>
+                            <a class="nav-link" href="hardware-sigpad.php">Sigpad</a>
+                            <a class="nav-link" href="hardware-webcam.php">Webcam</a>
 
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Peripherals
+                        <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                        Activities
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Cash Drawer</a>
-                            <a class="nav-link" href="layout-static.html">LC Display</a>
-                            <a class="nav-link" href="layout-static.html">POS Machine</a>
+                            <a class="nav-link" href="requests.php">Requests</a>
+                            <a class="nav-link" href="layout-static.html">Pulled Out</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Set-up</div>
-                    <a class="nav-link" href="user.php">
-                        <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
-                        Users
-                    </a>
+
+                    <?php
+                        $user_type = $_SESSION['sess_user_type'];
+                        if($user_type == "ADM" || $user_type == "SPV"){
+                            echo "<a class='nav-link' href='user.php'>
+                                        <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
+                                        Users
+                                    </a>";
+                        }else{
+                            echo "";
+                        }
+
+                    ?>
+
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-store-alt"></i></div>
                         Directory
@@ -98,7 +140,16 @@ require_once "auth.php";
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                Administrator
+                <?php
+                    $user_type = $_SESSION['sess_user_type'];
+                    if ($user_type == "ADM"){
+                        echo "Administrator";
+                    }else if($user_type == "SPV"){
+                        echo "Supervisor";
+                    }else{
+                        echo "FSE";
+                    }
+                ?>
             </div>
         </nav>
     </div>

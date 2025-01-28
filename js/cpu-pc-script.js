@@ -9,12 +9,95 @@ $(function(){
         $("#saveEditBtn").hide();
     });
 
-    $("#saveEditBtn").click(function (){
-        const alertMessage = document.getElementById("alertMessage");
-        alertMessage.innerHTML = "<strong>You successfully updated CPU-PC.</strong>";
-        alertMessageSuccess();
-        $("#saveEditBtn").hide();
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
 
+    $("#pullout-button").click(function (){
+        const tracking_num = $("input[name='tracking_num']").val().trim(); // Trim spaces
+        const track_required = $("#tracking_required");
+        const validPattern = /^[0-9]{11}$/;
+
+        $("input[name='tracking_num']").removeClass("is-invalid");
+        track_required.text("").removeClass("text-danger");
+
+        if (!tracking_num) {
+            track_required.text("Tracking number is required.").addClass("text-danger");
+            $("input[name='tracking_num']").addClass("is-invalid");
+        } else if (!validPattern.test(tracking_num)) {
+            track_required
+                .text("Tracking number must be exactly 11 digits and can only contain numbers.")
+                .addClass("text-danger");
+            $("input[name='tracking_num']").addClass("is-invalid");
+        } else {
+
+            var wordObj = {
+                "tracking_num" : $("input[name='tracking_num']").val(),
+                "hw_id_pullout" : $("input[name='hw_id_pullout']").val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "tracking-number-add.php",
+                data: wordObj,
+                success: function(data){
+                    $("#trackingModal").modal("hide");
+                    const alertMessage = document.getElementById("alertMessage");
+                    alertMessage.innerHTML = "<strong>Hardware successfully sent to SMC</strong>";
+                    alertMessageSuccess();
+                },
+                error: function (data){
+                    alert(data);
+                }
+            });
+
+            $("input[name='tracking_num']").val("").removeClass("is-invalid");
+            track_required.text("");
+        }
+    });
+
+    $("#saveEditBtn").click(function (){
+        $("#staticBackdrop").modal('hide');
+
+        var wordObj = {
+            "hw_id" : $("input[name='hw_idEdit']").val(),
+            "brand_name" : $("select[name='brand_nameEdit']").val(),
+            "model_name" : $("select[name='model_nameEdit']").val(),
+            "asset_num" : $("input[name='asset_numEdit']").val(),
+            "serial_num" : $("input[name='serial_numEdit']").val(),
+            "date_acquired" : $("input[name='date_acqEdit']").val(),
+            "hw_status" : $("select[name='status_nameEdit']").val(),
+            "host_name" : $("input[name='host_nameEdit']").val(),
+            "ip_add" : $("input[name='ip_addEdit']").val(),
+            "mac_add" : $("input[name='mac_addEdit']").val(),
+            "hw_user" : $("input[name='user_nameEdit']").val(),
+            "primary_role" : $("select[name='primary_roleEdit']").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "cpu-edit-details.php",
+            data: wordObj,
+            success: function(data){
+                $("#saveEditBtn").hide();
+                const alertMessage = document.getElementById("alertMessage");
+                alertMessage.innerHTML = "<strong>You successfully updated CPU-PC</strong>";
+                alertMessageSuccess();
+            },
+            error: function (){
+                alert(data);
+            }
+        });
+    });
+
+    $("#pulloutBtn").click(function (){
+        var hw_id = $("input[name='hw_id_pullout']").val();
+        $("#staticBackdrop").modal('hide');
+        $("#trackingModal").modal('show');
+        $("#saveEditBtn").hide();
     });
 
     $("#editBtn").click(function (){
@@ -22,6 +105,7 @@ $(function(){
         $("#hw_display").hide();
         $("#hw_displayEdit").show();
         $("#editBtn").hide();
+        $("#pulloutBtn").hide();
         $("#saveEditBtn").show();
 
         var wordObj = {"hwValue" : hwValue};
@@ -38,17 +122,35 @@ $(function(){
                 displayRegion.innerHTML = "<option value='"+obj.region_name+"'>"+obj.region_name+"</option>";
                 displaySiteName.innerHTML = "<option value='"+obj.site_name+"'>"+obj.site_name+"</option>";
                 displaySiteCode.innerHTML = "<option value='"+obj.site_code+"'>"+obj.site_code+"</option>";
-                $("input[name='brand_nameEdit']").val(obj.hw_brand_name);
-                $("input[name='model_nameEdit']").val(obj.hw_model);
+
+                //brand
+                var brandFetch = obj.hw_brand_name;
+                var brandDropdown = $("select[name='brand_nameEdit']");
+                brandDropdown.val(brandFetch);
+
+                //model
+                var modelNameFetch = obj.hw_model;
+                var modelDropdown = $("select[name='model_nameEdit']");
+                modelDropdown.val(modelNameFetch);
+
                 $("input[name='asset_numEdit']").val(obj.hw_asset_num);
                 $("input[name='serial_numEdit']").val(obj.hw_serial_num);
                 $("input[name='date_acqEdit']").val(obj.hw_year_acq);
-                $("input[name='status_nameEdit']").val(obj.hw_status);
+
+                //status
+                var statusFetch = obj.hw_status;
+                var statusDropdown = $("select[name='status_nameEdit']");
+                statusDropdown.val(statusFetch);
+
                 $("input[name='host_nameEdit']").val(obj.hw_host_name);
                 $("input[name='ip_addEdit']").val(obj.hw_ip_add);
                 $("input[name='mac_addEdit']").val(obj.hw_mac_add);
                 $("input[name='user_nameEdit']").val(obj.hw_user_name);
-                $("input[name='primary_roleEdit']").val(obj.hw_primary_role);
+
+                var roleFetch = obj.hw_primary_role;
+                var roleDropdown = $("select[name='primary_roleEdit']");
+                roleDropdown.val(roleFetch);
+
                 $("input[name='acq_valEdit']").val(obj.hw_acq_val);
             },
             error: function(){
@@ -57,68 +159,62 @@ $(function(){
         });
     });
 
-    $("#addDetailsCPU").click(function (){
-        var displayMessage = document.getElementById('addMessage');
+    $("#addDetailsCPU").click(function () {
+        const displayMessage = document.getElementById('addMessage');
+
+        // Disable buttons and show loading spinner
         $("#addDetailsCPU").hide();
         $("#addDetailsCPULoading").show();
-        var region_name = $("select[name='region_name']").val();
-        var site_name = $("select[name='site_name']").val();
-        var site_code = $("input[name='site_code']").val();
-        var brand_name = $("select[name='brand_name']").val();
-        var model_name = $("select[name='model_name']").val();
-        var asset_num = $("input[name='asset_num']").val();
-        var serial_num = $("input[name='serial_num']").val();
-        var hw_month = $("select[name='hw_month']").val();
-        var hw_day = $("select[name='hw_day']").val();
-        var hw_year = $("select[name='hw_year']").val();
-        var status_option = $("select[name='status_option']").val();
-        var host_name = $("input[name='host_name']").val();
-        var ip_address = $("input[name='ip_address']").val();
-        var mac_address = $("input[name='mac_address']").val();
-        var user_name = $("input[name='user_name']").val();
-        var primary_role = $("select[name='primary_role']").val();
-        var acquired_value = $("input[name='acquired_value']").val();
 
-        if(region_name == "" || site_name == "" || site_code == "" || brand_name == "" || model_name == "" || asset_num == "" || serial_num == "" || hw_month == "" || hw_day == "" || hw_year == "" || status_option == "" || host_name == "" || ip_address == "" || mac_address == "" || user_name == "" || primary_role == "" || acquired_value == ""){
-            displayMessage.innerHTML = "<div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Please fill up all the fields.</div></div>";
+        // Collect input values
+        var data = {
+            region_name: $("select[name='region_name']").val(),
+            site_name: $("select[name='site_name']").val(),
+            site_code: $("input[name='site_code']").val(),
+            brand_name: $("#brand_option").val(),
+            model_name: $("#model_option").val(),
+            asset_num: $("input[name='asset_num']").val(),
+            serial_num: $("input[name='serial_num']").val(),
+            hw_month: $("select[name='hw_month']").val(),
+            hw_day: $("select[name='hw_day']").val(),
+            hw_year: $("select[name='hw_year']").val(),
+            status_option: $("select[name='status_option']").val(),
+            host_name: $("input[name='host_name']").val(),
+            ip_address: $("input[name='ip_address']").val(),
+            mac_address: $("input[name='mac_address']").val(),
+            user_name: $("input[name='user_name']").val(),
+            primary_role: $("select[name='primary_role']").val(),
+            acquired_value: $("input[name='acquired_value']").val()
+        };
+
+        // Check if any field is empty
+        if (Object.values(data).some(value => value === "")) {
+            displayMessage.innerHTML = `
+            <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
+                <div class='text-center'><i class='fa fa-warning'></i>&nbsp;Please fill up all the fields.</div>
+            </div>`;
             $("#addDetailsCPU").show();
             $("#addDetailsCPULoading").hide();
-        }else{
-            $("#addDetailsCPULoading").show();
-            var wordObj = {
-                "region_name" : region_name,
-                "site_name" : site_name,
-                "site_code" : site_code,
-                "brand_name" : brand_name,
-                "model_name" : model_name,
-                "asset_num" : asset_num,
-                "serial_num" : serial_num,
-                "hw_month" : hw_month,
-                "hw_day" : hw_day,
-                "hw_year" : hw_year,
-                "status_option" : status_option,
-                "host_name" : host_name,
-                "ip_address" : ip_address,
-                "mac_address" : mac_address,
-                "user_name" : user_name,
-                "primary_role" : primary_role,
-                "acquired_value" : acquired_value
-            };
-            $.ajax({
-                type: "POST",
-                url: "add-cpu-pc.php",
-                data: wordObj,
-                success: function(data){
-                    var returnValue = data;
-                    if(returnValue == "asset number"){
-                        displayMessage.innerHTML = "<div class='alert alert-warning align-items-center alert-dismissible fade show shadow p-3 mb-5 bg-white rounded' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Asset number already exist.</div></div>";
-                        $("#addDetailsCPULoading").hide();
-                        $("#addDetailsCPU").show();
-                    }else if(returnValue == "serial number"){
-                        displayMessage.innerHTML = "<div class='alert alert-warning align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Serial number already exist.</div></div>";
-                        $("#addDetailsCPULoading").hide();
-                        $("#addDetailsCPU").show();
-                    }else{
+            return;
+        }
+
+        // Send AJAX request to the PHP script
+        $.ajax({
+            type: "POST",
+            url: "add-cpu-pc.php",
+            data: data,
+            success: function (response) {
+                try {
+                    var result = JSON.parse(response);
+
+                    if (result.status === "error") {
+                        // Display error message for asset or serial number conflict
+                        displayMessage.innerHTML = `
+                        <div class='alert alert-warning align-items-center alert-dismissible fade show' role='alert'>
+                            <div class='text-center'><i class='fa fa-warning'></i>&nbsp;${result.message}</div>
+                        </div>`;
+                    } else if (result.status === "success") {
+                        // Clear form fields and display success message
                         $("select[name='region_name']").val("");
                         $("select[name='site_name']").val("");
                         $("input[name='site_code']").val("");
@@ -136,33 +232,37 @@ $(function(){
                         $("input[name='user_name']").val("");
                         $("select[name='primary_role']").val("");
                         $("input[name='acquired_value']").val("");
-                        $("#addDetailsCPULoading").hide();
-                        $("#addDetailsCPU").show();
-                        displayMessage.innerHTML = "<div class='alert alert-success align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-check-circle'></i>&nbsp;You successfully added new CPU-PC on the list.</div></div>";
+
+                        displayMessage.innerHTML = `
+                        <div class='alert alert-success align-items-center alert-dismissible fade show' role='alert'>
+                            <div class='text-center'><i class='fa fa-check-circle'></i>&nbsp;You successfully added a new CPU-PC to the list.</div>
+                        </div>`;
                     }
-                },
-                error: function(){
-                    alert(data);
+                } catch (e) {
+                    alert(response);
+                    // Handle unexpected response
+                    console.error("Invalid JSON response:", response);
+                    displayMessage.innerHTML = `
+                    <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
+                        <div class='text-center'><i class='fa fa-warning'></i>&nbsp;An unexpected error occurred. Please try again.</div>
+                    </div>`;
                 }
-            });
-        }
+            },
+            error: function () {
+                alert(response);
+                displayMessage.innerHTML = `
+                <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
+                    <div class='text-center'><i class='fa fa-warning'></i>&nbsp;Failed to connect to the server. Please try again later.</div>
+                </div>`;
+            },
+            complete: function () {
+                // Re-enable the button and hide loading spinner
+                $("#addDetailsCPU").show();
+                $("#addDetailsCPULoading").hide();
+            }
+        });
     });
 
-    $.ajax({
-        type: "POST",
-        url: "view-data-cpu-pc.php",
-        success: function(data){
-            $("#tableDisplay").html(data);
-            $('#example').DataTable({
-                "paging" : true,
-                "ordering" : true,
-                "searching" : true
-            });
-        },
-        error: function(){
-            alert(data);
-        }
-    });
 
     $.ajax({
         type: "POST",
@@ -199,12 +299,25 @@ $(function(){
         }
     });
 
+    $.ajax({
+        type: "POST",
+        url: "restriction-select.php",
+        success: function(data){
+            $("#displayFilter").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
 });
 
 function viewHWDetails(id){
+    $("input[name='hw_id_pullout']").val(id);
     $("#hw_displayEdit").hide();
     $("#hw_display").show();
     $("#editBtn").show();
+    $("#pulloutBtn").show();
     $("#saveBtn").hide();
     var wordObj = {"hw_id" : id};
     $.ajax({
@@ -228,7 +341,7 @@ function region_option(){
     selectSiteName.innerHTML='';
     $.ajax({
         type: "POST",
-        url: "view-site-list-option.php",
+        url: "region-view.php",
         data: wordObj,
         success: function(data){
             document.getElementById('viewSiteSelect').disabled = false;
@@ -268,7 +381,6 @@ function brandName(){
 function alertMessageSuccess(){
     const alert = document.getElementById("alertMessage");
     alert.classList.add("alert-success");
-    alert.innerHTML = "<strong>You successfully updated CPU-PC.</strong>";
 
     alert.classList.remove("hide");
     alert.style.display = "block";
@@ -284,4 +396,64 @@ function alertMessageSuccess(){
             alert.style.display = "none";
         }, 500);
     }, 3000);
+}
+
+function sortHardware() {
+    var selectElement = document.getElementById("specificSizeSelect");
+    var rowdisplay = document.getElementById("rowdisplay");
+
+    // Get the selected value
+    var selectedValue = selectElement.value;
+
+    // Destroy any existing DataTable instance before making the AJAX request
+    if ($.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable().destroy();
+    }
+
+    if (selectedValue === "all") {
+        $.ajax({
+            type: "POST",
+            url: "view-data-cpu-pc.php",
+            success: function (data) {
+                // Replace the table content
+                $("#tableDisplay").html(data);
+
+                // Reinitialize the DataTable
+                $('#example').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "searching": false
+                });
+            },
+            error: function () {
+                alert("Error occurred while fetching data.");
+            }
+        });
+    } else {
+        var wordObj = { "selectedValue": selectedValue };
+
+        $.ajax({
+            type: "POST",
+            data: wordObj,
+            url: "cpu-pc-sort.php",
+            success: function (data) {
+                // Replace the table content
+                $("#tableDisplay").html(data);
+
+                // Reinitialize the DataTable
+                $('#example').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "searching": false
+                });
+            },
+            error: function () {
+                alert("Error occurred while fetching data.");
+            }
+        });
+    }
+}
+
+function changeStatus(){
+
 }
