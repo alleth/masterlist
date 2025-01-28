@@ -15,7 +15,8 @@ $(function(){
         }
     });
 
-    $("#addDetailsUser").click(function (){
+
+    $("#addDetailsUser").click(function () {
         var displayMessage = document.getElementById('addMessage');
 
         var fname = $("input[name='f_name']").val();
@@ -25,72 +26,103 @@ $(function(){
         var cluster_name = $("select[name='assignmentName']").val();
         var region_name = $("select[name='regionAssignmentName']").val();
 
-        if (user_type == "SPV"){
+        if (user_type === "SPV") {
             region_name = "All";
-        }else if(user_type == "ADM"){
+        } else if (user_type === "ADM") {
             cluster_name = "All";
             region_name = "All";
         }
 
-        if(fname == "" || lname == "" || user_type == "" || user_name == "" || cluster_name == "" || region_name == ""){
-            displayMessage.innerHTML = "<div class='alert alert-warning align-items-center alert-dismissible fade show' role='alert'><div class='text-center'><i class='fa fa-warning'></i>&nbsp;Please fill up all the fields.</div></div>";
+        if (
+            fname === "" ||
+            lname === "" ||
+            user_type === "" ||
+            user_name === "" ||
+            cluster_name === "" ||
+            region_name === ""
+        ) {
+            displayMessage.innerHTML = `
+            <div class='alert alert-warning align-items-center alert-dismissible fade show' role='alert'>
+                <div class='text-center'>
+                    <i class='fa fa-warning'></i>&nbsp;Please fill up all the fields.
+                </div>
+            </div>`;
             return;
-        }else{
+        } else {
             $("#addDetailsUser").hide();
             $("#addDetailsUserLoading").show();
 
-            var wordObj= {
-                "f_name" : fname,
-                "l_name" : lname,
-                "user_type" : user_type,
-                "user_name" : user_name,
-                "clusterName" : cluster_name,
-                "assignmentName" : region_name
+            var wordObj = {
+                "f_name": fname,
+                "l_name": lname,
+                "user_type": user_type,
+                "user_name": user_name,
+                "clusterName": cluster_name,
+                "assignmentName": region_name,
             };
 
             $.ajax({
                 type: "POST",
                 url: "user-enroll.php",
                 data: wordObj,
-                success: function(data){
+                success: function (data) {
                     var res = JSON.parse(data);
 
                     if (res.exists) {
-                        displayMessage.innerHTML =
-                            "<div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>" +
-                            "<div class='text-center'><i class='fa fa-exclamation-circle'></i>&nbsp;" +
-                            res.message +
-                            "</div>" +
-                            "</div>";
-                    }else if (res.success) {
-                        displayMessage.innerHTML =
-                            "<div class='alert alert-success align-items-center alert-dismissible fade show' role='alert'>" +
-                            "<div class='text-center'><i class='fa fa-check-circle'></i>&nbsp;" +
-                            res.message +
-                            "</div>" +
-                            "</div>";
+                        displayMessage.innerHTML = `
+                        <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
+                            <div class='text-center'>
+                                <i class='fa fa-exclamation-circle'></i>&nbsp;${res.message}
+                            </div>
+                        </div>`;
+                    } else if (res.success) {
+                        displayMessage.innerHTML = `
+                        <div class='alert alert-success align-items-center alert-dismissible fade show' role='alert'>
+                            <div class='text-center'>
+                                <i class='fa fa-check-circle'></i>&nbsp;${res.message}
+                            </div>
+                        </div>`;
 
+                        // Add the new user to the table dynamically
+                        $("#userList").append(`
+                        <tr>
+                            <td>${res.new_user.fname}</td>
+                            <td>${res.new_user.lname}</td>
+                            <td>${res.new_user.cluster}</td>
+                            <td>${res.new_user.region}</td>
+                            <td>${res.new_user.user_type}</td>
+                            <td>${res.new_user.user_name}</td>
+                            <td><a type='button' class='btn btn-warning btn-sm'>View Password <i class='fas fa-eye'></i></a></td>
+                            <td>
+                                <a type='button' href='#' data-bs-toggle='tooltip' data-bs-placement='top' title='Edit' class='btn btn-link text-info' onclick='editUser()'><i class='far fa-edit'></i></a>
+                            </td>
+                            <td>
+                                <a type='button' href='#' data-bs-toggle='tooltip' data-bs-placement='top' title='Delete' class='btn btn-link text-danger' onclick='deleteUser($row[0])'><i class='far fa-trash-alt'></i></a>
+                            </td>
+                        </tr>
+                    `);
+
+                        // Clear form fields and reset the modal
                         $("#addUserForm")[0].reset();
-                        $("#addDetailsUser").show();
-                        $("#addDetailsUserLoading").hide();
-                    }else {
-                        displayMessage.innerHTML =
-                            "<div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>" +
-                            "<div class='text-center'><i class='fa fa-exclamation-circle'></i>&nbsp;" +
-                            res.message +
-                            "</div>" +
-                            "</div>";
+                    } else {
+                        displayMessage.innerHTML = `
+                        <div class='alert alert-danger align-items-center alert-dismissible fade show' role='alert'>
+                            <div class='text-center'>
+                                <i class='fa fa-exclamation-circle'></i>&nbsp;${res.message}
+                            </div>
+                        </div>`;
                     }
 
-                    $("#addDetailsUser").modal('hide');
+                    // Hide the modal and reset button states
                     $("#addDetailsUserLoading").hide();
+                    $("#addDetailsUser").show();
                 },
-                error: function(){
-                    alert(data);
-                }
-
+                error: function () {
+                    alert("An error occurred while processing the request.");
+                    $("#addDetailsUserLoading").hide();
+                    $("#addDetailsUser").show();
+                },
             });
-
         }
     });
 

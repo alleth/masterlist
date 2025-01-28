@@ -49,7 +49,7 @@ if ($user_type == "ADM" || $user_type == "SPV") {
                             <tr>
                                 <td colspan="8" class="text-center">
                                     <div class="spinner-grow text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
+                                        <xspan class="sr-only">Loading...</xspan>
                                     </div>
                                 </td>
                             </tr>
