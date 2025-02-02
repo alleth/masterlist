@@ -14,19 +14,19 @@ $user_type = $_SESSION['sess_user_type'];
                 <div class="table-responsive">
                     <table id="activity_tbl" class="table table-striped">
                         <thead class="table-light">
-                        <tr>
-                            <th>No.</th>
-                            <th>User</th>
-                            <th>Message</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>No.</th>
+                                <th>Requested By</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
-                        <tbody id="">
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">You do not have a request...</td>
-                        </tr>
+                        <tbody id="requestList">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">You do not have a request...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

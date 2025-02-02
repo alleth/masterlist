@@ -19,6 +19,7 @@
 <script src="js/dashboard.js" type="text/javascript"></script>
 <script src="js/user-tab.js" type="text/javascript"></script>
 <script src="js/activity-log.js" type="text/javascript"></script>
+<script src="js/request-hw.js" type="text/javascript"></script>
 <!-- <script src="js/spinner/bootstrap.bundle.min.js" type="text/javascript"></script> -->
 </body>
 </html>

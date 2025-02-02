@@ -344,6 +344,7 @@ function region_option(){
         url: "region-view.php",
         data: wordObj,
         success: function(data){
+            alert(data);
             document.getElementById('viewSiteSelect').disabled = false;
             var obj = JSON.parse(data);
             var input = document.createElement('input');

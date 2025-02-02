@@ -1,9 +1,10 @@
 <?php
 include "BaseDAO.php";
 class viewRegionSelectDAO extends BaseDAO {
-    function viewRegionSelect(){
+    function viewRegionSelect($region_id){
         $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM region_tbl");
+        $stmt = $this->dbh->prepare("SELECT * FROM site_list_tbl WHERE region_id = ?");
+        $stmt->bindParam(1, $region_id);
         $stmt->execute();
 
         $numbers = [];

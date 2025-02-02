@@ -114,7 +114,7 @@ require_once "auth.php";
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="requests.php">Requests</a>
-                            <a class="nav-link" href="layout-static.html">Pulled Out</a>
+                            <a class="nav-link" href="pullout-hw.php">Pulled Out</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Set-up</div>

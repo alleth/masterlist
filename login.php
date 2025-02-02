@@ -42,7 +42,7 @@
                                 </form>
                             </div>
                             <div class="card-footer text-center py-3">
-                                <div class="small"><a class="small" href="password.html">Forgot Password?</a></div>
+                                <div class="small"><a class="small" href="#">Having problem with your account?</a></div>
                             </div>
                         </div>
                     </div>

@@ -2,14 +2,13 @@
 include "BaseDAO.php";
 class sortCpuDAO extends BaseDAO{
     function sortCpuView($selectedValue, $user_type){
+        $this->openConn();
         $status = "Onsite";
         if ($user_type == "ADM" || $user_type == "SPV"){
-            $this->openConn();
             $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE region_name = ? AND hw_status = ?");
             $stmt->bindParam(1, $selectedValue);
             $stmt->bindParam(2, $status);
             $stmt->execute();
-            $this->closeConn();
 
             $chk_age = "";
             while ($row = $stmt->fetch()) {
@@ -26,7 +25,16 @@ class sortCpuDAO extends BaseDAO{
                     $chk_age = (date("Y") - $row[11]) . " Years";
                 }
                 echo "<tr onclick='viewHWDetails(" . $row[0] . ")' style='cursor:pointer;'>";
-                echo "<td>" . $row[1] . "</td>";
+
+                $region_name = $this->dbh->prepare("SELECT * FROM region_tbl WHERE region_id = ?");
+                $region_name->bindParam(1, $row[1]);
+                $region_name->execute();
+
+                while ($region_row = $region_name->fetch()){
+                    $getRegion = $region_row[1];
+                }
+
+                echo "<td>" . $getRegion . "</td>";
                 echo "<td>" . $row[2] . "</td>";
                 echo "<td>" . $row[3] . "</td>";
                 echo "<td>" . $row[5] . "</td>";
@@ -38,15 +46,13 @@ class sortCpuDAO extends BaseDAO{
                 echo "</tr>";
             }
         }else{
-            $this->openConn();
-            $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? AND hw_status = ?");
-            $stmt->bindParam(1, $selectedValue);
-            $stmt->bindParam(2, $status);
-            $stmt->execute();
-            $this->closeConn();
+            $stmt2 = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? AND hw_status = ?");
+            $stmt2->bindParam(1, $selectedValue);
+            $stmt2->bindParam(2, $status);
+            $stmt2->execute();
 
             $chk_age = "";
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt2->fetch()) {
 
                 if ($row[11] == date("Y")) {
                     if ($row[9] == date("m")) {
@@ -60,7 +66,16 @@ class sortCpuDAO extends BaseDAO{
                     $chk_age = (date("Y") - $row[11]) . " Years";
                 }
                 echo "<tr onclick='viewHWDetails(" . $row[0] . ")' style='cursor:pointer;'>";
-                echo "<td>" . $row[1] . "</td>";
+
+                $region_name = $this->dbh->prepare("SELECT * FROM region_tbl WHERE region_id = ?");
+                $region_name->bindParam(1, $row[1]);
+                $region_name->execute();
+
+                while ($region_row = $region_name->fetch()){
+                    $getRegion = $region_row[1];
+                }
+
+                echo "<td>" . $getRegion . "</td>";
                 echo "<td>" . $row[2] . "</td>";
                 echo "<td>" . $row[3] . "</td>";
                 echo "<td>" . $row[5] . "</td>";
@@ -72,6 +87,6 @@ class sortCpuDAO extends BaseDAO{
                 echo "</tr>";
             }
         }
-
+        $this->closeConn();
     }
 }
