@@ -6,7 +6,7 @@ $user_type = $_SESSION['sess_user_type'];
 
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4 display-4">Monitors</h1>
+            <h1 class="mt-4 display-4">Printers</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Hardwares</li>
             </ol>
