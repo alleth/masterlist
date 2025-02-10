@@ -21,7 +21,7 @@ class cpuEditDetailsDAO extends BaseDAO{
                                      hw_model = ?, 
                                      hw_asset_num = ?, 
                                      hw_serial_num = ?, 
-                                     hw_year_acq = ?, 
+                                     hw_date_acq = ?, 
                                      hw_status = ?, 
                                      hw_host_name = ?, 
                                      hw_ip_add = ?, 
