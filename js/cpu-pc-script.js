@@ -2,9 +2,43 @@ $(function(){
     $("#addDetailsCPULoading").hide();
     $("#saveEditBtn").hide();
     $("#hw_displayEdit").hide();
+
+    //show hardware brand
+    var currentPageHWBrand = window.location.pathname;
+
+    // Determine AJAX URL based on the page
+    var fetchUrlBrand = "";
+    var sortUrlBrand = "";
+
     $("#addCPUBtn").click(function(){
+
+        if (currentPageHWBrand.includes("cpu-pc.php")) {
+            fetchUrlBrand = "view-hw-brand-option.php";
+        }else if(currentPageHWBrand.includes("hardware-monitor.php")){
+            fetchUrlBrand = "view-monitor-brand-option.php";
+        }else if(currentPageHWBrand.includes("servers.php")){
+            fetchUrlBrand = "view-server-brand-option.php";
+        }else if(currentPageHWBrand.includes("hardware-printer.php")){
+            fetchUrlBrand = "view-printer-brand-option.php";
+        }else if(currentPageHWBrand.includes("hardware-router.php")){
+            fetchUrlBrand = "view-router-brand-option.php";
+        }else if(currentPageHWBrand.includes("hardware-switch.php")){
+            fetchUrlBrand = "view-switch-brand-option.php";
+        }
+        $.ajax({
+            type: "POST",
+            url: fetchUrlBrand,
+            success: function(data){
+                $("#brand_option").html(data);
+            },
+            error: function(){
+                alert(data);
+            }
+        });
+
         $('#addCPUHardware').modal('show');
     });
+
     $(".button-close").click(function (){
         $("#saveEditBtn").hide();
     });
@@ -101,6 +135,7 @@ $(function(){
     });
 
     $("#editBtn").click(function (){
+
         var hwValue = $("input[name='dataValue']").val();
         $("#hw_display").hide();
         $("#hw_displayEdit").show();
@@ -120,8 +155,7 @@ $(function(){
                 var displaySiteCode = document.getElementById('siteCodeEdit');
                 $("input[name='hw_idEdit']").val(obj.hw_id);
                 displayRegion.innerHTML = "<option value='"+obj.region_name+"'>"+obj.region_name+"</option>";
-                displaySiteName.innerHTML = "<option value='"+obj.site_name+"'>"+obj.site_name+"</option>";
-                displaySiteCode.innerHTML = "<option value='"+obj.site_code+"'>"+obj.site_code+"</option>";
+                displaySiteName.innerHTML = "<option value='"+obj.site_code+"'>"+ obj.site_code +" - " +obj.site_name+"</option>";
 
                 //brand
                 var brandFetch = obj.hw_brand_name;
@@ -133,9 +167,17 @@ $(function(){
                 var modelDropdown = $("select[name='model_nameEdit']");
                 modelDropdown.val(modelNameFetch);
 
+                let acqVal = obj.hw_acq_val;
+
+                if (acqVal === "" || acqVal == 0) {
+                    acqVal = "0.00";
+                }
+
+                $("input[name='acq_valEdit']").val(acqVal);
+
                 $("input[name='asset_numEdit']").val(obj.hw_asset_num);
                 $("input[name='serial_numEdit']").val(obj.hw_serial_num);
-                $("input[name='date_acqEdit']").val(obj.hw_year_acq);
+                $("input[name='date_acqEdit']").val(obj.hw_date_acq);
 
                 //status
                 var statusFetch = obj.hw_status;
@@ -145,13 +187,9 @@ $(function(){
                 $("input[name='host_nameEdit']").val(obj.hw_host_name);
                 $("input[name='ip_addEdit']").val(obj.hw_ip_add);
                 $("input[name='mac_addEdit']").val(obj.hw_mac_add);
-                $("input[name='user_nameEdit']").val(obj.hw_user_name);
+                $("input[name='user_nameEdit']").val(obj.hw_user_assigned);
+                $("input[name='primary_roleEdit']").val(obj.hw_role);
 
-                var roleFetch = obj.hw_primary_role;
-                var roleDropdown = $("select[name='primary_roleEdit']");
-                roleDropdown.val(roleFetch);
-
-                $("input[name='acq_valEdit']").val(obj.hw_acq_val);
             },
             error: function(){
                 alert(data);
@@ -170,14 +208,11 @@ $(function(){
         var data = {
             region_name: $("select[name='region_name']").val(),
             site_name: $("select[name='site_name']").val(),
-            site_code: $("input[name='site_code']").val(),
             brand_name: $("#brand_option").val(),
             model_name: $("#model_option").val(),
             asset_num: $("input[name='asset_num']").val(),
             serial_num: $("input[name='serial_num']").val(),
-            hw_month: $("select[name='hw_month']").val(),
-            hw_day: $("select[name='hw_day']").val(),
-            hw_year: $("select[name='hw_year']").val(),
+            date_acquired: $("input[name='date_acquired']").val(),
             status_option: $("select[name='status_option']").val(),
             host_name: $("input[name='host_name']").val(),
             ip_address: $("input[name='ip_address']").val(),
@@ -263,7 +298,6 @@ $(function(){
         });
     });
 
-
     $.ajax({
         type: "POST",
         url: "view-region-select.php",
@@ -275,29 +309,6 @@ $(function(){
         }
     });
 
-    $.ajax({
-        type: "POST",
-        url: "view-hw-brand-option.php",
-        success: function(data){
-            $("#brand_option").html(data);
-            $("#brand_optionUpdate").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "view-hw-model-option.php",
-        success: function(data){
-            $("#model_option").html(data);
-            $("#brand_modelUpdate").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });
 
     $.ajax({
         type: "POST",
@@ -312,7 +323,47 @@ $(function(){
 
 });
 
+function getModelEdit(){
+
+}
+
+function getUrlBrandModalEdit() {
+    var currentPageHWBrand = window.location.pathname;
+
+    // Determine AJAX URL based on the page
+    var fetchUrlBrand = "";
+
+    if (currentPageHWBrand.includes("cpu-pc.php")) {
+        fetchUrlBrand = "brand-modal-edit-cpu.php";
+    }else if(currentPageHWBrand.includes("hardware-monitor.php")){
+        fetchUrlBrand = "brand-modal-edit-monitor.php";
+    }else if(currentPageHWBrand.includes("servers.php")){
+        fetchUrlBrand = "brand-modal-edit-server.php";
+    }else if(currentPageHWBrand.includes("hardware-printer.php")){
+        fetchUrlBrand = "brand-modal-edit-printer.php";
+    }else if(currentPageHWBrand.includes("hardware-router.php")){
+        fetchUrlBrand = "brand-modal-edit-router.php";
+    }else if(currentPageHWBrand.includes("hardware-switch.php")){
+        fetchUrlBrand = "brand-modal-edit-switch.php.php";
+    }
+
+    $.ajax({
+        type: "POST",
+        url: fetchUrlBrand,
+        success: function(data){
+            $("#brand_Update").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
+}
+
 function viewHWDetails(id){
+
+    getUrlBrandModalEdit();
+
     $("input[name='hw_id_pullout']").val(id);
     $("#hw_displayEdit").hide();
     $("#hw_display").show();
@@ -344,14 +395,13 @@ function region_option(){
         url: "region-view.php",
         data: wordObj,
         success: function(data){
-            alert(data);
             document.getElementById('viewSiteSelect').disabled = false;
             var obj = JSON.parse(data);
             var input = document.createElement('input');
             obj.forEach(function (subcategory){
                 var option = document.createElement('option');
-                option.value = subcategory.site_id;
-                option.text = subcategory.site_name;
+                option.value = subcategory.site_code;
+                option.text = subcategory.site_code + " - " + subcategory.site_name;
                 selectSiteName.appendChild(option);
             });
         }
@@ -377,6 +427,35 @@ function site_name_option(){
 
 function brandName(){
     document.getElementById('model_option').disabled = false;
+    var wordObj = {"brand_name" : $("select[name='brand_name']").val()}
+
+    $.ajax({
+        type: "POST",
+        url: "view-hw-model-option.php",
+        data: wordObj,
+        success: function(data){
+            $("#model_option").html(data);
+        }, error: function(){
+                alert(data);
+        }
+    });
+
+}
+
+function brandNameUpdate(){
+    document.getElementById('model_option').disabled = false;
+    var wordObj = {"brand_name" : $("select[name='brand_nameEdit']").val()}
+
+    $.ajax({
+        type: "POST",
+        url: "view-hw-model-option.php",
+        data: wordObj,
+        success: function(data){
+            $("#brand_modelUpdate").html(data);
+        }, error: function(){
+            alert(data);
+        }
+    });
 }
 
 function alertMessageSuccess(){
@@ -399,7 +478,8 @@ function alertMessageSuccess(){
     }, 3000);
 }
 
-function sortHardware() {
+
+function sortServer(){
     var selectElement = document.getElementById("specificSizeSelect");
     var rowdisplay = document.getElementById("rowdisplay");
 
@@ -415,6 +495,65 @@ function sortHardware() {
         $.ajax({
             type: "POST",
             url: "view-data-cpu-pc.php",
+            beforeSend: function () {
+                // Show spinner before request starts
+                $("#tableDisplay").html(`
+            <tr>
+                <td colspan="9" class="text-center">
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+            },
+            success: function (data) {
+                // Replace table content with the fetched data
+                $("#tableDisplay").html(data);
+
+                // Reinitialize DataTable
+                $('#example').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "searching": false
+                });
+            },
+            error: function () {
+                alert("Error occurred while fetching data.");
+            }
+        });
+
+    } else {
+        var wordObj = { "selectedValue": selectedValue };
+
+        $.ajax({
+            type: "POST",
+            data: wordObj,
+            url: "cpu-pc-sort.php",
+            beforeSend: function () {
+                // Show spinner before request starts
+                $("#tableDisplay").html(`
+            <tr>
+                <td colspan="9" class="text-center">
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+            },
             success: function (data) {
                 // Replace the table content
                 $("#tableDisplay").html(data);
@@ -430,13 +569,112 @@ function sortHardware() {
                 alert("Error occurred while fetching data.");
             }
         });
+    }
+}
+
+function sortHardware() {
+    var selectElement = document.getElementById("specificSizeSelect");
+    var rowdisplay = document.getElementById("rowdisplay");
+
+    // Get the selected value
+    var selectedValue = selectElement.value;
+
+    // Destroy any existing DataTable instance before making the AJAX request
+    if ($.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable().destroy();
+    }
+
+    // Get current page URL
+    var currentPage = window.location.pathname;
+
+    // Determine AJAX URL based on the page
+    var fetchUrl = "";
+    var sortUrl = "";
+
+    if (currentPage.includes("cpu-pc.php")) {
+        fetchUrl = "view-data-cpu-pc.php";
+        sortUrl = "cpu-pc-sort.php";
+    } else if (currentPage.includes("servers.php")) {
+        fetchUrl = "view-data-server.php";
+        sortUrl = "server-sort.php";
+    } else if (currentPage.includes("hardware-monitor.php")) {
+        fetchUrl = "view-data-monitor.php";
+        sortUrl = "monitor-sort.php";
+    }else if (currentPage.includes("hardware-printer.php")) {
+        fetchUrl = "view-data-printer.php";
+        sortUrl = "printer-sort.php";
+    }else if (currentPage.includes("hardware-switch.php")) {
+        fetchUrl = "view-data-switch.php";
+        sortUrl = "switch-sort.php";
+    }else if (currentPage.includes("hardware-router.php")) {
+        fetchUrl = "view-data-router.php";
+        sortUrl = "router-sort.php";
+    }
+
+    if (selectedValue === "all") {
+        $.ajax({
+            type: "POST",
+            url: fetchUrl,
+            beforeSend: function () {
+                // Show spinner before request starts
+                $("#tableDisplay").html(`
+            <tr>
+                <td colspan="9" class="text-center">
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+            },
+            success: function (data) {
+
+                // Replace table content with the fetched data
+                $("#tableDisplay").html(data);
+
+                // Reinitialize DataTable
+                $('#example').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "searching": false
+                });
+            },
+            error: function () {
+                alert("Error occurred while fetching data.");
+            }
+        });
+
     } else {
         var wordObj = { "selectedValue": selectedValue };
 
         $.ajax({
             type: "POST",
             data: wordObj,
-            url: "cpu-pc-sort.php",
+            url: sortUrl,
+            beforeSend: function () {
+                // Show spinner before request starts
+                $("#tableDisplay").html(`
+            <tr>
+                <td colspan="9" class="text-center">
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
+            </tr>
+        `);
+            },
             success: function (data) {
                 // Replace the table content
                 $("#tableDisplay").html(data);

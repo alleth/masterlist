@@ -5,14 +5,11 @@ class addCPUDataDAO extends BaseDAO {
     function addCPUData(
         $region_name,
         $site_name,
-        $site_code,
         $brand_name,
         $model_name,
         $asset_num,
         $serial_num,
-        $hw_month,
-        $hw_day,
-        $hw_year,
+        $date_acquired,
         $status_option,
         $host_name,
         $ip_address,
@@ -26,14 +23,11 @@ class addCPUDataDAO extends BaseDAO {
             error_log("Incoming Data: " . print_r([
                     'region_name' => $region_name,
                     'site_name' => $site_name,
-                    'site_code' => $site_code,
                     'brand_name' => $brand_name,
                     'model_name' => $model_name,
                     'asset_num' => $asset_num,
                     'serial_num' => $serial_num,
-                    'hw_month' => $hw_month,
-                    'hw_day' => $hw_day,
-                    'hw_year' => $hw_year,
+                    'hw_date_acq' => $date_acquired,
                     'status_option' => $status_option,
                     'host_name' => $host_name,
                     'ip_address' => $ip_address,
@@ -80,7 +74,7 @@ class addCPUDataDAO extends BaseDAO {
             if (empty($site_name)) {
                 throw new Exception("Site name is required.");
             }
-            $site_details = $this->dbh->prepare("SELECT site_name FROM site_list_tbl WHERE site_id = ?");
+            $site_details = $this->dbh->prepare("SELECT site_name FROM site_list_tbl WHERE site_code = ?");
             $site_details->execute([$site_name]);
             $site = $site_details->fetchColumn();
             if (!$site) {
@@ -95,33 +89,38 @@ class addCPUDataDAO extends BaseDAO {
                 throw new Exception("Model name is required.");
             }
 
+
+
+            $major_type = "Hardware";
+            $sub_major_type = "CPU";
+            $item_desc = "CPU-PC";
             // Insert the Hardware Data
             $stmt_insert = $this->dbh->prepare("
                 INSERT INTO hw_tbl (
-                    region_name, site_code, site_name, hw_brand_name, hw_model, hw_asset_num, 
-                    hw_serial_num, hw_month_acq, hw_day_acq, hw_year_acq, hw_status, 
-                    hw_host_name, hw_ip_add, hw_mac_add, hw_user_name, hw_primary_role, hw_acq_val
+                    region_name, site_code, major_type, sub_major_type, item_desc, hw_brand_name, hw_model, hw_asset_num, 
+                    hw_serial_num, hw_date_acq, hw_acq_val, hw_status, 
+                    hw_host_name, hw_ip_add, hw_mac_add, hw_user_name, hw_primary_role, 
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
 
             $result = $stmt_insert->execute([
-                $region,
-                $site_code,
-                $site,
+                $region_name,
+                $site_name,
+                $major_type,
+                $sub_major_type,
+                $item_desc,
                 $brand_name,
                 $model_name,
                 $asset_num,
                 $serial_num,
-                $hw_month,
-                $hw_day,
-                $hw_year,
+                $date_acquired,
+                $acquired_value,
                 $status_option,
                 $host_name,
                 $ip_address,
                 $mac_address,
                 $user_name,
                 $primary_role,
-                $acquired_value,
             ]);
 
             // Close Database Connection

@@ -1,7 +1,6 @@
 <?php
 
     include "DAO/view-data-cpu-pc-DAO.php";
-    $hw_type = "Switch";
-    $other_type = "Switch";
+    $hw_type = "Network Equipment - Switch";
     $action = new viewDataDAO();
-    $action->displayData($hw_type, $other_type);
+    $action->displayData($hw_type);

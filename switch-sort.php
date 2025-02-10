@@ -4,6 +4,6 @@
     include "auth.php";
     $selectedValue = $_POST["selectedValue"];
     $user_type = $_SESSION['sess_user_type'];
-    $hw_type = "Network Equipment";
+    $hw_type = "Network Equipment - Switch";
     $action = new sortCpuDAO();
     $action->sortCpuView($selectedValue, $user_type, $hw_type);
