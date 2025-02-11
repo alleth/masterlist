@@ -27,7 +27,7 @@
                 <div>
                     <h1>WELCOME</h1>
                     <h6>Masterfile | Hardware Inventory System</h6>
-                    <h3>Core Services Group - Field Services Department</h5>
+                    <h3>Core Services Group - Field Services Department</h3>
                 </div>
             </div>
             <div class="box2">
