@@ -14,10 +14,10 @@
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
         <div class="row mt-5 justify-content-center align-items-center" style="min-height: 70vh;">
-            <div class="col-sm-6 text-center text-lg-start">
+            <div class="col-sm-6 text-center text-lg-start" style="max-width: 1000px;min-width: 400px;">
                 <div>
                     <h1 class="display-1">WELCOME!</h1>
-                    <h1>Masterfile | Hardware Inventory System</h1>
+                    <h1>Masterfile&nbsp;|&nbsp;Hardware Inventory&nbsp;System&nbsp;&nbsp;</h1>
                     <h5>Core Services Group - Field Services Department</h5>
                 </div>
             </div>
