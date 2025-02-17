@@ -16,9 +16,10 @@
         <div class="row mt-5 justify-content-center align-items-center" style="min-height: 70vh;">
             <div class="col-sm-6 text-center text-lg-start" style="max-width: 1000px;min-width: 400px;">
                 <div>
-                    <h1>WELCOME</h1>
-                    <h6>Masterfile | Hardware Inventory System</h6>
-                    <h3>Core Services Group - Field Services Department</h5>
+                    <h1 class="display-1">WELCOME!</h1>
+                    <h1>Masterfile&nbsp;|&nbsp;Hardware Inventory&nbsp;System</h1>
+                    <h4>CSG-Field Services Department</h4>
+
                 </div>
             </div>
             <div class="col-lg-4 d-flex justify-content-center">
