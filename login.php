@@ -9,33 +9,25 @@
     <title>Welcome to Masterfile</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="js/all.js" crossorigin="anonymous"></script>
-    <style>.main-content{ display: flex;
-                        height: 80vh;
-                        justify-content: space-evenly;
-                        align-items: center;
-                        flex-wrap: wrap;}
-           .box2{width: 50vh; padding: 0rem;}
-            h1{font-size: 100px;}
-            h6{font-size: 50px;}
-    </style>
 </head>
 <body>
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
-        <div class="main-content">
-            <div class="box1">
+        <div class="row mt-5 justify-content-center align-items-center" style="min-height: 70vh;">
+            <div class="col-sm-6 text-center text-lg-start" style="max-width: 1000px;min-width: 400px;">
                 <div>
-                    <h1>WELCOME</h1>
-                    <h6>Masterfile | Hardware Inventory System</h6>
-                    <h3>Core Services Group - Field Services Department</h3>
+                    <h1 class="display-1">WELCOME!</h1>
+                    <h1>Masterfile&nbsp;|&nbsp;Hardware Inventory&nbsp;System</h1>
+                    <h4>CSG-Field Services Department</h4>
+
                 </div>
             </div>
-            <div class="box2">
+            <div class="col-lg-4 d-flex justify-content-center">
                 <!--- Main Login -->
                 <main>
                     <div class="container">
                         <div>
-                            <div class="">
+                            <div class="mt-5" style="max-width: 500px;min-width: 400px;">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header bg-primary"><h3 class="text-center font-weight-light my-4 text-light">Login</h3></div>
                                     <div class="card-body">
