@@ -3,6 +3,15 @@ include "BaseDAO.php";
 
 class dataDashboard extends BaseDAO {
     function displayData() {
+        // Read region filter from POST (default to 'all')
+        $region = isset($_POST['region']) ? $_POST['region'] : 'all';
+        $regionCondition = "";
+        $params = [];
+        if ($region !== 'all') {
+            $regionCondition = " AND region_name = :region";
+            $params[':region'] = $region;
+        }
+
         // Map database categories to UI-friendly names
         $deviceMap = [
             'Server' => 'Server',
@@ -21,8 +30,9 @@ class dataDashboard extends BaseDAO {
         $allHardware = [];
 
         $this->openConn();
-        $countDevice = $this->dbh->prepare("SELECT sub_major_type, hw_date_acq FROM hw_tbl WHERE hw_status = 'On Site'");
-        $countDevice->execute();
+        // Update query to include region filtering
+        $countDevice = $this->dbh->prepare("SELECT sub_major_type, hw_date_acq FROM hw_tbl WHERE hw_status = 'On Site' $regionCondition");
+        $countDevice->execute($params);
 
         $ageData = [
             '3 Years below' => 0,
@@ -68,7 +78,7 @@ class dataDashboard extends BaseDAO {
         }
 
         // Fetch data for tables (this remains filtered)
-        $tableData = $this->fetchTableData();
+        $tableData = $this->fetchTableData($regionCondition, $params);
         $filteredTableData = array_filter($tableData, function($item) {
             return !in_array($item['sub_major_type'], ['Server', 'CPU', 'Monitor', 'Network Equipment - Switch', 'Network Equipment - Router ', 'Printer']);
         });
@@ -76,22 +86,23 @@ class dataDashboard extends BaseDAO {
         // Fetch Server Models Count
         $server_model = $this->dbh->prepare("
             SELECT 
-            CASE 
-                WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
-                ELSE hw_model 
-            END AS hw_model,
-            CASE 
-                WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
-                ELSE hw_brand_name 
-            END AS hw_brand_name,
-            COUNT(*) AS count 
+                CASE 
+                    WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
+                    ELSE hw_model 
+                END AS hw_model,
+                CASE 
+                    WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
+                    ELSE hw_brand_name 
+                END AS hw_brand_name,
+                COUNT(*) AS count 
             FROM hw_tbl 
             WHERE sub_major_type = 'Server'
-            AND hw_status = 'On Site'
+              AND hw_status = 'On Site'
+              $regionCondition
             GROUP BY hw_model, hw_brand_name
             ORDER BY count DESC;
         ");
-        $server_model->execute();
+        $server_model->execute($params);
             
         $serverModels = [];
         while ($server_row = $server_model->fetch()) {
@@ -101,23 +112,23 @@ class dataDashboard extends BaseDAO {
         // Fetch Printer Models Count
         $printer_model = $this->dbh->prepare("
             SELECT 
-            CASE 
-                WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
-                ELSE hw_model 
-            END AS hw_model,
-            CASE 
-                WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
-                ELSE hw_brand_name 
-            END AS hw_brand_name,
-            COUNT(*) AS count 
+                CASE 
+                    WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
+                    ELSE hw_model 
+                END AS hw_model,
+                CASE 
+                    WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
+                    ELSE hw_brand_name 
+                END AS hw_brand_name,
+                COUNT(*) AS count 
             FROM hw_tbl 
             WHERE sub_major_type = 'Printer'
-            AND hw_status = 'On Site'
+              AND hw_status = 'On Site'
+              $regionCondition
             GROUP BY hw_model, hw_brand_name
             ORDER BY count DESC;
         ");
-
-        $printer_model->execute();
+        $printer_model->execute($params);
             
         $printerModels = [];
         while ($printer_row = $printer_model->fetch()) {
@@ -125,22 +136,23 @@ class dataDashboard extends BaseDAO {
         }
 
         echo json_encode([
-            "category_name" => array_keys($deviceCategoryCount),
-            "category_count" => array_values($deviceCategoryCount),
-            "age_labels" => array_keys($ageData),
-            "age_data" => array_values($ageData),
-            "hardware" => array_values($filteredTableData), // Filtered table data
-            "all_hardware" => $allHardware, // Now includes ALL hardware for Age Chart filtering
-            "server_models" => $serverModels,
-            "printer_models" => $printerModels // 
+            "category_name"   => array_keys($deviceCategoryCount),
+            "category_count"  => array_values($deviceCategoryCount),
+            "age_labels"      => array_keys($ageData),
+            "age_data"        => array_values($ageData),
+            "hardware"        => array_values($filteredTableData), // Filtered table data
+            "all_hardware"    => $allHardware, // Now includes ALL hardware for Age Chart filtering
+            "server_models"   => $serverModels,
+            "printer_models"  => $printerModels
         ]);
 
         $this->closeConn();
     }
 
-    private function fetchTableData() {
-        $stmt = $this->dbh->prepare("SELECT sub_major_type, item_desc, COUNT(*) as count FROM hw_tbl WHERE hw_status = 'On Site' GROUP BY sub_major_type, item_desc");
-        $stmt->execute();
+    private function fetchTableData($regionCondition = "", $params = []) {
+        $query = "SELECT sub_major_type, item_desc, COUNT(*) as count FROM hw_tbl WHERE hw_status = 'On Site' $regionCondition GROUP BY sub_major_type, item_desc";
+        $stmt = $this->dbh->prepare($query);
+        $stmt->execute($params);
 
         $data = [];
         while ($row = $stmt->fetch()) {
@@ -149,5 +161,6 @@ class dataDashboard extends BaseDAO {
 
         return $data;
     }
-
 }
+
+

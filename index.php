@@ -3,10 +3,39 @@ include("includes/header.php");
 ?>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4 display-6">Dashboard</h1>
-        <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Analytics</li>
-            </ol>
+        <div class="row">
+            <div class="col">        
+                <h1 class="mt-4 display-6">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Analytics</li>
+                </ol>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <br>
+                <br>
+                <select class="form-select form-select-padding-y-lg" name="" id="regionFilter">
+                    <option value="all">All Region</option>
+                    <option value="1">NCR</option>
+                    <option value="2">Region 1</option>
+                    <option value="3">Region 2</option>
+                    <option value="4">Region 3</option>
+                    <option value="5">Region 4-A</option>
+                    <option value="6">Region 4-B</option>
+                    <option value="7">Region 5</option>
+                    <option value="8">Region 6</option>
+                    <option value="9">Region 7</option>
+                    <option value="10">Region 8</option>
+                    <option value="11">Region 9</option>
+                    <option value="12">Region 10</option>
+                    <option value="13">Region 11</option>
+                    <option value="14">Region 12</option>
+                    <option value="15">BARMM</option>
+                    <option value="16">CAR</option>
+                    <option value="17">CARAGA</option>
+                </select>
+            </div>
+        </div>
+
 
         <!-- Main Dashboard -->
         <div class="container-fluid mt-4">
@@ -96,7 +125,7 @@ include("includes/header.php");
                     </div>
                 </div>
 
-                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-6 mb-4">
                     <div class="card border border-dark-subtle shadow-sm">
                         <div class="card-body">
                             <h6 class="card-title">Workstation <span class='badge bg-success'>On Site</span></h6>

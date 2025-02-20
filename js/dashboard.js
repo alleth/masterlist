@@ -1,33 +1,56 @@
 $(function(){
-    let ageChart; // Store chart instance globally
+    let ageChart;       // Global variable for Age (doughnut) chart instance
+    let categoryChart;  // Global variable for Category (bar) chart instance
 
-    $.ajax({
-        type: "POST",
-        url: "dashboard-charts.php",
-        dataType: "json",
-        success: function (data){
-            console.log("Chart Data:", data);
+    // Function to load dashboard data with an optional region filter
+    function loadDashboard(region = "all") {
+        $.ajax({
+            type: "POST",
+            url: "dashboard-charts.php",
+            data: { region: region }, // send region filter value to PHP
+            dataType: "json",
+            success: function (data){
+                console.log("Dashboard Data:", data);
 
-            // Populate Hardware Table
-            populateTable("#hardwareTable", data.hardware);
-            populateServerTable("#serverModelTable", data.server_models); // Display Server Function
-            populatePrinterTable("#printerModelTable", data.printer_models); // Display Printer Function
+                // Populate Tables
+                populateTable("#hardwareTable", data.hardware);
+                populateServerTable("#serverModelTable", data.server_models); // Display Server Table
+                populatePrinterTable("#printerModelTable", data.printer_models); // Display Printer Table
 
-            // Initialize Charts
-            initializeCategoryChart(data);
-            ageChart = initializeAgeChart(data);
+                // Destroy existing charts if they exist to force an immediate redraw with new data
+                if (categoryChart) {
+                    categoryChart.destroy();
+                }
+                if (ageChart) {
+                    ageChart.destroy();
+                }
 
-            // Event Listener for Hardware Filter
-            $("#hardwareFilter").on("change", function() {
-                var selectedHardware = $("select[name='hardwareFilter']").val();
-                filterAgeChart(data, selectedHardware);
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error: ", status, error);
-        }
+                // Initialize Charts with new data
+                categoryChart = initializeCategoryChart(data);
+                ageChart = initializeAgeChart(data);
+
+                // Event Listener for Hardware Filter (if needed)
+                $("#hardwareFilter").off("change").on("change", function() {
+                    var selectedHardware = $("select[name='hardwareFilter']").val();
+                    filterAgeChart(data, selectedHardware);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+            }
+        });
+    }
+
+    // Load dashboard data on page load (with region filter "all")
+    loadDashboard();
+
+    // Event listener for Region Filter dropdown
+    $("#regionFilter").on("change", function() {
+        var selectedRegion = $(this).val();
+        loadDashboard(selectedRegion);
     });
 
+    // Table population functions
     function populateTable(tableId, data) {
         const tableBody = $(tableId).find("tbody");
         tableBody.empty();
@@ -36,6 +59,35 @@ $(function(){
         });
     }
 
+    function populateServerTable(tableId, data) {
+        const tableBody = $(tableId).find("tbody");
+        tableBody.empty();
+        data.forEach(item => {
+            tableBody.append(`
+                <tr>
+                    <td>${item.hw_brand_name}</td>
+                    <td>${item.hw_model}</td>
+                    <td>${item.count}</td>
+                </tr>
+            `);
+        });
+    }
+
+    function populatePrinterTable(tableId, data) {
+        const tableBody = $(tableId).find("tbody");
+        tableBody.empty();
+        data.forEach(item => {
+            tableBody.append(`
+                <tr>
+                    <td>${item.hw_brand_name}</td>
+                    <td>${item.hw_model}</td>
+                    <td>${item.count}</td>
+                </tr>
+            `);
+        });
+    }
+
+    // Chart initialization functions
     function initializeCategoryChart(data) {
         const categoryCanvas = document.getElementById("categoryChart");
         if (!categoryCanvas) {
@@ -43,7 +95,7 @@ $(function(){
             return;
         }
 
-        new Chart(categoryCanvas, {
+        return new Chart(categoryCanvas, {
             type: "bar",
             data: {
                 labels: data.category_name,
@@ -57,6 +109,9 @@ $(function(){
             },
             options: {
                 responsive: true,
+                // Animation and hover settings remain active
+                animation: { duration: 1000 },
+                hover: { animationDuration: 1000 },
                 plugins: {
                     legend: { position: "top" },
                     title: { display: true, text: "Devices by Category" }
@@ -98,6 +153,8 @@ $(function(){
             },
             options: {
                 responsive: true,
+                animation: { duration: 1000 },
+                hover: { animationDuration: 1000 },
                 plugins: {
                     legend: { position: "top" },
                     title: { display: true, text: "Age of Hardware" }
@@ -189,6 +246,8 @@ $(function(){
             },
             options: {
                 responsive: true,
+                animation: { duration: 1000 },
+                hover: { animationDuration: 1000 },
                 plugins: {
                     legend: { position: "top" },
                     title: { display: true, text: "Age of Hardware" }
@@ -197,33 +256,5 @@ $(function(){
         });
 
         console.log("Chart updated!");
-    }
-
-    function populateServerTable(tableId, data) {
-        const tableBody = $(tableId).find("tbody");
-        tableBody.empty();
-        data.forEach(item => {
-            tableBody.append(`
-                <tr>
-                    <td>${item.hw_brand_name}</td>
-                    <td>${item.hw_model}</td>
-                    <td>${item.count}</td>
-                </tr>
-            `);
-        });
-    }
-
-    function populatePrinterTable(tableId, data) {
-        const tableBody = $(tableId).find("tbody");
-        tableBody.empty();
-        data.forEach(item => {
-            tableBody.append(`
-                <tr>
-                    <td>${item.hw_brand_name}</td>
-                    <td>${item.hw_model}</td>
-                    <td>${item.count}</td>
-                </tr>
-            `);
-        });
     }
 });
