@@ -16,6 +16,7 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
 <script src="js/cpu-pc-script.js" type="text/javascript"></script>
+<script src="js/cdn.jsdelivr.js" type="text/javascript"></script>
 <script src="js/chart.min.js"></script>
 <script src="js/dashboard.js" type="text/javascript"></script>
 <script src="js/user-tab.js" type="text/javascript"></script>

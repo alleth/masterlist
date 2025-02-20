@@ -1,47 +1,43 @@
 <?php include("includes/header.php"); ?>
-    <main>
-        <div class="container-fluid px-4">
-<<<<<<< HEAD
-            <h1 class="mt-4 display-4">Printers</h1>
-=======
-            <h1 class="mt-4 display-6">Monitor</h1>
->>>>>>> d4af04eb5d86cf967e1665c3cb89c287d1178426
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Hardwares</li>
-            </ol>
-            <div class="row">
-                <div class="col-auto">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addCPUBtn">Add CPU-PC &nbsp;<i class="fas fa-plus-circle"></i></button>
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4 display-6">Monitors</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Hardwares</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-auto">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addCPUBtn">Add CPU-PC &nbsp;<i class="fas fa-plus-circle"></i></button>
+                        </div>
+                        <div id="alertMessage" class="alert alert-top" role="alert"></div>
+                        <div class="col-sm-2">
+                            <div id="displayFilter"></div>
+                        </div>
+                    </div>
+                    <div class="container mt-5">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-hover table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Region</th>
+                                        <th scope="col">Site Code</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col">Model</th>
+                                        <th scope="col">PE No.</th>
+                                        <th scope="col">Serial No.</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableDisplay">
+                                    <td id ="rowdisplay" colspan="9" class="text-muted text-center fst-italic">Please select region or site...</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div id="alertMessage" class="alert alert-top" role="alert"></div>
-                <div class="col-sm-2">
-                    <div id="displayFilter"></div>
-                </div>
-            </div>
-            <div class="container mt-5">
-                <div class="table-responsive">
-                    <table id="example" class="table table-hover table-bordered">
-                        <thead class="table-light">
-                        <tr>
-                            <th scope="col">Region</th>
-                            <th scope="col">Site Code</th>
-                            <th scope="col">Site Name</th>
-                            <th scope="col">Brand</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">PE No.</th>
-                            <th scope="col">Serial No.</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tableDisplay">
-                        <td id ="rowdisplay" colspan="9" class="text-muted text-center fst-italic">Please select region or site...</td>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </main>
+            </main>
 
     <!-- Modal Edit Hardware Info-->
     <div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -297,7 +293,7 @@
                             <dd class="col-sm-12">
                                 <div class="sr-only">Tracking number:</div>
                                 <input type="hidden" class="form-control" name="hw_id_pullout" disabled required>
-                                <input type="text" class="form-control" name="tracking_num" placeholder="Add tracking number here..." required>
+                                    <input type="text" class="form-control" name="tracking_num" placeholder="Add tracking number here..." required>
                                 <div id="tracking_required" class="text-danger"></div>
                             </dd>
                         </div>

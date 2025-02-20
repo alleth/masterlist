@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2025 at 03:59 PM
+-- Generation Time: Feb 20, 2025 at 02:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,14 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `hw_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `activity_tbl`
---
--- Error reading structure for table hw_db.activity_tbl: #1932 - Table &#039;hw_db.activity_tbl&#039; doesn&#039;t exist in engine
--- Error reading data for table hw_db.activity_tbl: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `hw_db`.`activity_tbl`&#039; at line 1
 
 -- --------------------------------------------------------
 

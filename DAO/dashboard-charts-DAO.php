@@ -14,10 +14,11 @@ class dataDashboard extends BaseDAO {
             'Network Equipment - Router ' => 'Router',
         ];
 
-        // Only keep these categories
+        // Allowed categories for the bar chart and table
         $allowedCategories = ['Server', 'CPU-PC', 'Printer', 'Monitor', 'Switch', 'Router', 'UPS'];
 
         $deviceCategoryCount = [];
+        $allHardware = [];
 
         $this->openConn();
         $countDevice = $this->dbh->prepare("SELECT sub_major_type, hw_date_acq FROM hw_tbl WHERE hw_status = 'On Site'");
@@ -35,7 +36,13 @@ class dataDashboard extends BaseDAO {
             $deviceCategoryName = $row_data['sub_major_type'];
             $uiCategory = isset($deviceMap[$deviceCategoryName]) ? $deviceMap[$deviceCategoryName] : $deviceCategoryName;
 
-            // Ignore categories not in the allowed list
+            // Keep all hardware for Age Chart
+            $allHardware[] = [
+                "sub_major_type" => $uiCategory,
+                "hw_date_acq" => $row_data['hw_date_acq']
+            ];
+
+            // Ignore categories not in the allowed list for bar chart and table
             if (!in_array($uiCategory, $allowedCategories)) {
                 continue;
             }
@@ -60,21 +67,43 @@ class dataDashboard extends BaseDAO {
             }
         }
 
-        // Fetch data for tables
+        // Fetch data for tables (this remains filtered)
         $tableData = $this->fetchTableData();
-
-        // Filter out the specified sub_major_type values for the table only
         $filteredTableData = array_filter($tableData, function($item) {
             return !in_array($item['sub_major_type'], ['Server', 'CPU', 'Monitor', 'Network Equipment - Switch', 'Network Equipment - Router ', 'Printer']);
         });
+
+        // Fetch Server Models Count
+        $server_model = $this->dbh->prepare("
+            SELECT 
+            CASE 
+                WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
+                ELSE hw_model 
+            END AS hw_model,
+            CASE 
+                WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
+                ELSE hw_brand_name 
+            END AS hw_brand_name,
+            COUNT(*) as count 
+            FROM hw_tbl 
+            WHERE sub_major_type = 'Server' 
+            GROUP BY hw_model, hw_brand_name
+        ");
+        $server_model->execute();
+            
+        $serverModels = [];
+        while ($row = $server_model->fetch()) {
+            $serverModels[] = $row;
+        }
 
         echo json_encode([
             "category_name" => array_keys($deviceCategoryCount),
             "category_count" => array_values($deviceCategoryCount),
             "age_labels" => array_keys($ageData),
             "age_data" => array_values($ageData),
-            "hardware" => array_values($filteredTableData), // Re-index the array
-            "all_hardware" => $tableData // Include all hardware data for charts
+            "hardware" => array_values($filteredTableData), // Filtered table data
+            "all_hardware" => $allHardware, // Now includes ALL hardware for Age Chart filtering
+            "server_models" => $serverModels // Include server models in JSON response
         ]);
 
         $this->closeConn();
@@ -91,5 +120,5 @@ class dataDashboard extends BaseDAO {
 
         return $data;
     }
+
 }
-?>
