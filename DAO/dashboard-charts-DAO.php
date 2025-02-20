@@ -84,16 +84,44 @@ class dataDashboard extends BaseDAO {
                 WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
                 ELSE hw_brand_name 
             END AS hw_brand_name,
-            COUNT(*) as count 
+            COUNT(*) AS count 
             FROM hw_tbl 
-            WHERE sub_major_type = 'Server' 
+            WHERE sub_major_type = 'Server'
+            AND hw_status = 'On Site'
             GROUP BY hw_model, hw_brand_name
+            ORDER BY count DESC;
         ");
         $server_model->execute();
             
         $serverModels = [];
-        while ($row = $server_model->fetch()) {
-            $serverModels[] = $row;
+        while ($server_row = $server_model->fetch()) {
+            $serverModels[] = $server_row;
+        }
+
+        // Fetch Printer Models Count
+        $printer_model = $this->dbh->prepare("
+            SELECT 
+            CASE 
+                WHEN TRIM(hw_model) = '' OR hw_model IS NULL THEN 'Unknown Model' 
+                ELSE hw_model 
+            END AS hw_model,
+            CASE 
+                WHEN TRIM(hw_brand_name) = '' OR hw_brand_name IS NULL THEN 'Unknown Brand' 
+                ELSE hw_brand_name 
+            END AS hw_brand_name,
+            COUNT(*) AS count 
+            FROM hw_tbl 
+            WHERE sub_major_type = 'Printer'
+            AND hw_status = 'On Site'
+            GROUP BY hw_model, hw_brand_name
+            ORDER BY count DESC;
+        ");
+
+        $printer_model->execute();
+            
+        $printerModels = [];
+        while ($printer_row = $printer_model->fetch()) {
+            $printerModels[] = $printer_row;
         }
 
         echo json_encode([
@@ -103,7 +131,8 @@ class dataDashboard extends BaseDAO {
             "age_data" => array_values($ageData),
             "hardware" => array_values($filteredTableData), // Filtered table data
             "all_hardware" => $allHardware, // Now includes ALL hardware for Age Chart filtering
-            "server_models" => $serverModels // Include server models in JSON response
+            "server_models" => $serverModels,
+            "printer_models" => $printerModels // 
         ]);
 
         $this->closeConn();

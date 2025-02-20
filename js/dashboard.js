@@ -10,7 +10,8 @@ $(function(){
 
             // Populate Hardware Table
             populateTable("#hardwareTable", data.hardware);
-            populateServerTable("#serverModelTable", data.server_models); // New Function
+            populateServerTable("#serverModelTable", data.server_models); // Display Server Function
+            populatePrinterTable("#printerModelTable", data.printer_models); // Display Printer Function
 
             // Initialize Charts
             initializeCategoryChart(data);
@@ -199,6 +200,20 @@ $(function(){
     }
 
     function populateServerTable(tableId, data) {
+        const tableBody = $(tableId).find("tbody");
+        tableBody.empty();
+        data.forEach(item => {
+            tableBody.append(`
+                <tr>
+                    <td>${item.hw_brand_name}</td>
+                    <td>${item.hw_model}</td>
+                    <td>${item.count}</td>
+                </tr>
+            `);
+        });
+    }
+
+    function populatePrinterTable(tableId, data) {
         const tableBody = $(tableId).find("tbody");
         tableBody.empty();
         data.forEach(item => {
