@@ -14,13 +14,13 @@ class dataDashboard extends BaseDAO {
 
         // Map database categories to UI-friendly names
         $deviceMap = [
-            'SERVER' => 'Server',
-            'CPU-PC' => 'CPU-PC',
-            'Printer' => 'Printer',
-            'UPS-SERVER' => 'UPS-SERVER',
-            'UPS-PC' => 'UPS-PC',
-            'Monitor' => 'Monitor',
-            'Peripherals' => 'Peripherals',
+            'SERVER'            => 'Server',
+            'CPU-PC'            => 'CPU-PC',
+            'Printer'           => 'Printer',
+            'UPS-SERVER'        => 'UPS-SERVER',
+            'UPS-PC'            => 'UPS-PC',
+            'Monitor'           => 'Monitor',
+            'Peripherals'       => 'Peripherals',
             'Network Equipment' => 'Network Equipment'
         ];
 
@@ -35,13 +35,13 @@ class dataDashboard extends BaseDAO {
         $countDevice = $this->dbh->prepare("SELECT sub_major_type, hw_date_acq FROM hw_tbl WHERE hw_status = 'On Site' $regionCondition");
         $countDevice->execute($params);
 
-        // Added 'Unknown Age' key here
+        // Added 'Unidentified Age' key here
         $ageData = [
-            '3 Years below' => 0,
-            '3-5 Years'      => 0,
-            '5-10 Years'     => 0,
-            '10 Years above' => 0,
-            'Unidentified Age'    => 0
+            '3 Years below'  => 0,
+            '3-5 Years'       => 0,
+            '5-10 Years'      => 0,
+            '10 Years above'  => 0,
+            'Unidentified Age'=> 0
         ];
         $currentYear = date("Y");
 
@@ -49,17 +49,18 @@ class dataDashboard extends BaseDAO {
             $deviceCategoryName = $row_data['sub_major_type'];
             $uiCategory = isset($deviceMap[$deviceCategoryName]) ? $deviceMap[$deviceCategoryName] : $deviceCategoryName;
 
-            // Keep all hardware for Age Chart
+            // Process only allowed categories
+            if (!in_array($uiCategory, $allowedCategories)) {
+                continue;
+            }
+
+            // Keep only allowed hardware for Age Chart (for consistency)
             $allHardware[] = [
                 "sub_major_type" => $uiCategory,
                 "hw_date_acq"    => $row_data['hw_date_acq']
             ];
 
-            // Ignore categories not in the allowed list for bar chart and table
-            if (!in_array($uiCategory, $allowedCategories)) {
-                continue;
-            }
-
+            // Build device category count for bar chart
             if (!isset($deviceCategoryCount[$uiCategory])) {
                 $deviceCategoryCount[$uiCategory] = 0;
             }
@@ -176,7 +177,7 @@ class dataDashboard extends BaseDAO {
             "age_labels"      => array_keys($ageData),
             "age_data"        => array_values($ageData),
             "hardware"        => array_values($filteredTableData), // Filtered table data
-            "all_hardware"    => $allHardware, // Now includes ALL hardware for Age Chart filtering
+            "all_hardware"    => $allHardware, // Now includes only allowed hardware for Age Chart filtering
             "server_models"   => $serverModels,
             "printer_models"  => $printerModels,
             "os_type"         => $osType
