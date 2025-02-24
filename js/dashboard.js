@@ -16,6 +16,7 @@ $(function(){
                 populateTable("#hardwareTable", data.hardware);
                 populateServerTable("#serverModelTable", data.server_models); // Display Server Table
                 populatePrinterTable("#printerModelTable", data.printer_models); // Display Printer Table
+                populateOSTypeTable("#osTypeTable", data.os_type); // Display OS Type Table
 
                 // Destroy existing charts if they exist to force an immediate redraw with new data
                 if (categoryChart) {
@@ -87,6 +88,19 @@ $(function(){
         });
     }
 
+    function populateOSTypeTable(tableId, data) {
+        const tableBody = $(tableId).find("tbody");
+        tableBody.empty();
+        data.forEach(item => {
+            tableBody.append(`
+                <tr>
+                    <td>${item.os_type}</td>
+                    <td>${item.count}</td>
+                </tr>
+            `);
+        });
+    }
+
     // Chart initialization functions
     function initializeCategoryChart(data) {
         const categoryCanvas = document.getElementById("categoryChart");
@@ -109,7 +123,6 @@ $(function(){
             },
             options: {
                 responsive: true,
-                // Animation and hover settings remain active
                 animation: { duration: 1000 },
                 hover: { animationDuration: 1000 },
                 plugins: {
@@ -177,26 +190,24 @@ $(function(){
 
         console.log("Filtered Data:", filteredData);
 
+        // Include "Unknown Age" in the age categories
         const ageData = {
             '3 Years below': 0,
             '3-5 Years': 0,
             '5-10 Years': 0,
-            '10 Years above': 0
+            '10 Years above': 0,
+            'Unidentified Age': 0
         };
 
         const currentYear = new Date().getFullYear();
         filteredData.forEach(item => {
-            if (!item.hw_date_acq) {
-                console.warn("Missing acquisition date for item:", item);
+            // If hw_date_acq is missing or invalid, count as Unknown Age
+            if (!item.hw_date_acq || isNaN(new Date(item.hw_date_acq).getFullYear())) {
+                ageData['Unidentified Age']++;
                 return;
             }
 
             let yearAcq = new Date(item.hw_date_acq).getFullYear();
-            if (isNaN(yearAcq)) {
-                console.warn("Invalid acquisition date:", item.hw_date_acq);
-                return;
-            }
-
             const age = currentYear - yearAcq;
 
             if (age <= 3) {
@@ -212,10 +223,10 @@ $(function(){
 
         console.log("Updated Age Data:", ageData);
 
-        // If all values are 0, prevent chart from disappearing by setting dummy data
+        // If all values are 0, set dummy data to prevent chart from disappearing
         if (Object.values(ageData).every(value => value === 0)) {
             console.warn("No data available for selected hardware.");
-            ageData['No Data'] = 1; // Prevents chart from disappearing
+            ageData['No Data'] = 1;
         }
 
         ageChart.destroy();

@@ -1,7 +1,7 @@
 <?php include("includes/header.php"); ?>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4 display-6">Network Equipment</h1>
+            <h1 class="mt-4 display-4">Peripherals</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Hardwares</li>
             </ol>

@@ -107,7 +107,7 @@ class viewSingleDataDAO extends BaseDAO{
             echo "</div>";
 
             $author = $this->dbh->prepare("SELECT * FROM user_tbl WHERE id = ?");
-            $author->bindParam(1, $row[18]);
+            $author->bindParam(1, $row[35]);
             $author->execute();
 
             while($getAuthor = $author->fetch()){

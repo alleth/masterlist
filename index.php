@@ -10,7 +10,7 @@ include("includes/header.php");
                     <li class="breadcrumb-item active">Analytics</li>
                 </ol>
             </div>
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4 mb-6">
                 <br>
                 <br>
                 <select class="form-select form-select-padding-y-lg" name="" id="regionFilter">
@@ -42,20 +42,21 @@ include("includes/header.php");
             <!-- Graphs and Summaries -->
             <div class="row">
                 <!-- Device Categories Chart -->
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-lg-4">
                     <div class="card border border-dark-subtle shadow-sm">
-                        <div class="card-body">
+                        <div class="card-header">
                             <h6 class="card-title">Hardware by Category <span class='badge bg-success'>On Site</span></h6>
-                            
+                        </div>
+                        <div class="card-body">
                             <canvas id="categoryChart" style="height: 300px;"></canvas>
                         </div>
+                        <div class="card-footer text-muted"></div>
                     </div>
                 </div>
-
                 <!-- Age of Hardware Chart -->
                 <div class="col-lg-6 mb-4">
                     <div class="card border border-dark-subtle shadow-sm">
-                        <div class="card-body">
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col-sm">
                                     <h6 class="card-title">Age of Hardware <span class='badge bg-success'>On Site</span></h6>
@@ -66,25 +67,28 @@ include("includes/header.php");
                                         <option value="Server">Server</option>
                                         <option value="CPU-PC">CPU</option>
                                         <option value="Printer">Printer</option>
-                                        <option value="UPS">UPS</option>
+                                        <option value="UPS-PC">UPS-PC</option>
+                                        <option value="UPS-SERVER">UPS-SERVER</option>
                                         <option value="Monitor">Monitor</option>
-                                        <option value="Switch">Switch</option>
-                                        <option value="Router">Router</option>
+                                        <option value="Network Equipment">Network Equipment</option>
+                                        <option value="Peripherals">Peripherals</option>
                                     </select>
                                 </div>
                             </div>
-                            
-                            
-                            
+                        </div>
+                        <div class="card-body">
                             <canvas id="ageChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
+            </div>
 
+
+            <div class="row">
                 <div class="col-lg-6 mb-4">
-                    <div class="card border border-dark-subtle shadow-sm">
+                    <div class="card border border-dark-subtle shadow-sm fixed-card">
                         <div class="card-body">
-                        <h6 class="card-title">Server <span class='badge bg-success'>On Site</span></h6>
+                            <h6 class="card-title">Server <span class='badge bg-success'>On Site</span></h6>
                             <div class="table-responsive">
                                 <table id="serverModelTable" class="table">
                                     <thead class="table-light">
@@ -104,7 +108,7 @@ include("includes/header.php");
                 </div>
 
                 <div class="col-lg-6 mb-4">
-                    <div class="card border border-dark-subtle shadow-sm">
+                    <div class="card border border-dark-subtle shadow-sm fixed-card">
                         <div class="card-body">
                             <h6 class="card-title">Printer <span class='badge bg-success'>On Site</span></h6>
                             <div class="table-responsive">
@@ -125,12 +129,12 @@ include("includes/header.php");
                     </div>
                 </div>
 
-                                <div class="col-lg-6 mb-4">
-                    <div class="card border border-dark-subtle shadow-sm">
+                <div class="col-lg-6 mb-4">
+                    <div class="card border border-dark-subtle shadow-sm fixed-card">
                         <div class="card-body">
                             <h6 class="card-title">Workstation <span class='badge bg-success'>On Site</span></h6>
                             <div class="table-responsive">
-                                <table id="" class="table">
+                                <table id="osTypeTable" class="table">
                                     <thead class="table-light">
                                         <tr>
                                             <th>OS Type</th>

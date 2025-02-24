@@ -100,11 +100,9 @@ require_once "auth.php";
                             <a class="nav-link" href="servers.php">Server</a>
                             <a class="nav-link" href="cpu-pc.php">CPU-PC</a>
                             <a class="nav-link" href="hardware-monitor.php">Monitor</a>
-                            <a class="nav-link" href="hardware-switch.php">Switch</a>
-                            <a class="nav-link" href="hardware-router.php">Router</a>
+                            <a class="nav-link" href="hardware-switch.php">Network Equipment</a>
                             <a class="nav-link" href="hardware-printer.php">Printers</a>
-                            <a class="nav-link" href="hardware-sigpad.php">Sigpad</a>
-                            <a class="nav-link" href="hardware-webcam.php">Webcam</a>
+                            <a class="nav-link" href="hardware-peripherals.php">Pripherals</a>
 
                         </nav>
                     </div>
