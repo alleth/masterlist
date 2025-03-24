@@ -1,8 +1,8 @@
 <?php
 include "BaseDAO.php";
-
 class trackingNumAddDAO extends BaseDAO {
     function trackingNumAdd($tracking_num, $hw_id_pullout, $user_id, $cluster_name){
+        $site_code = "";
         // Basic validation
         if (empty($tracking_num) || empty($hw_id_pullout) || empty($user_id)) {
             throw new Exception("All fields are required.");
@@ -58,7 +58,6 @@ class trackingNumAddDAO extends BaseDAO {
             $this->closeConn();
             throw new Exception("Failed to insert into log_tbl.");
         }
-
         $this->closeConn();
         return true; // Indicate success
     }

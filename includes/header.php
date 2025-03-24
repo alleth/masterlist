@@ -132,7 +132,7 @@ require_once "auth.php";
 
                     ?>
 
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="directory.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-store-alt"></i></div>
                         Directory
                     </a>

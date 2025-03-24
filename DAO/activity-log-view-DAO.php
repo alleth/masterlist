@@ -45,5 +45,3 @@ class activityLogDAO extends BaseDAO {
         $this->closeConn();
     }
 }
-
-

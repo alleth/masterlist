@@ -1,158 +1,145 @@
 <?php include("includes/header.php"); ?>
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4 display-6">Servers</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Hardwares</li>
-            </ol>
-            <div class="row">
-                <div class="col-auto">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#addCPUHardware" id="addCPUBtn">Add CPU-PC &nbsp;<i class="fas fa-plus-circle"></i></button>
+            <h6 class="mt-2 display-6">Servers</h6>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                <div class="col">
+                    <div class="card border-left-primary shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                </div>
+                                <i class="fas fa-database fa-2x text-gray-300"></i> <!-- Database icon for total -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="alertMessage" class="alert alert-top" role="alert"></div>
-                <div class="col-sm-2">
-                    <div id="displayFilter"></div>
+
+                <div class="col">
+                    <div class="card border-left-primary shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Virtual Machine</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                </div>
+                                <i class="fas fa-cloud fa-2x text-gray-300"></i> <!-- Cloud icon for Virtual Machine -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card border-left-primary shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Physical Server</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                </div>
+                                <i class="fas fa-server fa-2x text-gray-300"></i> <!-- Server icon for Physical Server -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card border-left-primary shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Down Server</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                </div>
+                                <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i> <!-- Warning icon for Down Server -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container mt-5">
-                <div class="table-responsive">
-                    <table id="example" class="table table-hover table-bordered">
-                        <thead class="table-light">
-                        <tr>
-                            <th scope="col">Region</th>
-                            <th scope="col">Site Code</th>
-                            <th scope="col">Site Name</th>
-                            <th scope="col">Brand</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">PE No.</th>
-                            <th scope="col">Serial No.</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tableDisplay">
-                        <td id ="rowdisplay" colspan="9" class="text-muted text-center fst-italic">Please select region or site...</td>
-                        </tbody>
-                    </table>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border border-dark-subtle shadow-sm">
+                        <div class="card-body">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-2">
+                                    <div id="displayRegionServer"></div>
+                                </div>
+                                <div class="col-md-2 col-6">
+                                    <select class="form-select" name="server_type" onchange="directory_site_name()" id="viewTypeServer" disabled>
+                                        <option value="all_server" selected>All server type</option>
+                                        <option value="VM">VM - Virtual Machine</option>
+                                        <option value="Xitrix">Xitrix</option>
+                                        <option value="IBM">IBM</option>
+                                        <option value="HP">HP</option>
+                                        <option value="Dell">Dell</option>
+                                        <option value="Lenovo">Lenovo</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 col-6">
+                                    <button class="btn btn-primary w-100" id="showServerType" disabled>
+                                        <i class="fas fa-search"></i> Show
+                                    </button>
+                                </div>
+                                <div class="col-md-7 col-12 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0">
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#serverModalInput" id="addServerBtn"><i class="fas fa-plus-circle"></i> Add Server</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="card border border-dark-subtle shadow-sm">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="serverTable" class="table table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Region</th>
+                                            <th scope="col">Site Code</th>
+                                            <th scope="col">Site Name</th>
+                                            <th scope="col">Brand</th>
+                                            <th scope="col">Model</th>
+                                            <th scope="col">Asset No.</th>
+                                            <th scope="col">Serial No.</th>
+                                            <th scope="col">Age</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="serverDisplay">
+                                        <td id ="rowdisplay" colspan="10" class="text-muted text-center fst-italic">Please select region or site...</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container mt-5">
+
             </div>
         </div>
     </main>
 
-    <!-- Modal Edit Hardware Info-->
-    <div class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> &nbsp;Hardware Information</h1>
-                    <button type="button" class="btn-close button-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="hw_display">
-                        <div class="spinner-grow text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <div id="hw_displayEdit">
-                        <div class="row">
-                            <div id="updateMessage"></div>
-                            <h4>Primary Information</h4>
-                            <div class="col-6">
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Region</div>
-                                    <input type="hidden" class="form-control" name="hw_idEdit" disabled required>
-                                    <select id="regionEdit" type="text" class="form-select" name="region_nameEdit" placeholder="Region" disabled required>
-                                        <option value="" selected>Select Region</option>
-                                    </select>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Site Name</div>
-                                    <input type="hidden" class="form-control-plaintext" name="site_nameEdit" placeholder="Site Name" disabled required>
-                                    <select name="site_nameEdit" id="siteNameEdit" class="form-select" disabled>
-                                        <option value="" selected>Select Site Name</option>
-                                    </select>
-                                </dd>
-                                <div id="brand_Update"></div>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Acquired Value</div>
-                                    <input type="text" class="form-control" name="acq_valEdit" placeholder="Acquired Value" disabled>
-                                </dd>
-                            </div>
-                            <div class="col-6">
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Asset Number</div>
-                                    <input type="text" class="form-control" name="asset_numEdit" placeholder="Asset Number" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Serial Number</div>
-                                    <input type="text" class="form-control" name="serial_numEdit" placeholder="Serial Number" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Date Acquired</div>
-                                    <input type="text" id="datepicker" class="form-control datepicker-input" name="date_acqEdit" placeholder="Date Acquired" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Status</div>
-                                    <select class="form-select" name="status_nameEdit" placeholder="Status" required>
-                                        <option disabled>Select Harware Status</option>
-                                        <option value="Idle">IDLE</option>
-                                        <option value="On Site">ONSITE</option>
-                                    </select>
-                                </dd>
-                            </div>
-                            <hr>
-                            <h4>Other Information</h4>
-                            <div class="col-6">
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Hostname</div>
-                                    <input type="text" class="form-control" name="host_nameEdit" placeholder="Hostname" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">IP Address</div>
-                                    <input type="text" class="form-control" name="ip_addEdit" placeholder="IP Address" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">MAC Address</div>
-                                    <input type="text" class="form-control" name="mac_addEdit" placeholder="MAC Address" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">User name</div>
-                                    <input type="text" class="form-control" name="user_nameEdit" placeholder="User Name" required>
-                                </dd>
-                                <dd class='col-sm-12'>
-                                    <div class="sr-only">Primary Role</div>
-                                    <select class="form-select" name="primary_roleEdit" required>
-                                        <option vallue="" disabled selected>Select a role</option>
-                                        <option value="Evaluator">Evaluator</option>
-                                        <option value="Data Encoder">Data Encoder</option>
-                                        <option value="PS">Photo & Signature</option>
-                                        <option value="Input Clerk">Input Clerk</option>
-                                        <option value="Approving">Approving Officer</option>
-                                        <option value="Cashier">Cashier</option>
-                                        <option value="Releasing">Releasing</option>
-                                    </select>
-                                </dd>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary button-close" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" id="editBtn">Edit Details</button>
-                    <button type="button" class="btn btn-danger" id="pulloutBtn">Pull out</button>
-                    <button type="button" class="btn btn-success" id="saveEditBtn">Save Details</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Add CPU-PC-->
-    <div class="modal modal-lg fade" id="addCPUHardware" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
+    <!-- Modal Add CPU-PC -->
+    <div class="modal modal-lg fade" id="serverModalInput" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fas fa-info-circle"></i> Add CPU-PC</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -168,15 +155,20 @@
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Site Name</div>
-                                            <div>
-                                                <select class="form-select" name="site_name" id="viewSiteSelect" onchange="site_name_option()" disabled>
-                                                    <option value="" selected disabled>Select Site Name</option>
-                                                </select>
-                                            </div>
+                                            <select class="form-select" name="site_name" id="viewSiteSelect" onchange="site_name_option()" disabled>
+                                                <option value="" selected disabled>Select Site Name</option>
+                                            </select>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Brand</div>
-                                            <select class="form-select" name="brand_name" onchange="brandName()" id="brand_option" required></select>
+                                            <select class="form-select" name="brand_name" id="brand_option" required>
+                                                <option value="" selected disabled>Select brand name </option>
+                                                <option value="Xitrix">Xitrix</option>
+                                                <option value="IBM">IBM</option>
+                                                <option value="HP">HP</option>
+                                                <option value="Dell">Dell</option>
+                                                <option value="Lenovo">Lenovo</option>
+                                            </select>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Model</div>
@@ -211,100 +203,34 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Other Information Section -->
                             <div class="container">
                                 <hr>
                                 <div class="row">
                                     <h4>Other Information</h4>
-                                    <div class="col-6">
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">Hostname</div>
-                                            <div id="">
-                                                <input class="form-control" name="host_name" type="text" placeholder="Hostname">
-                                            </div>
-                                        </dd>
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">IP Address</div>
-                                            <div id="">
-                                                <input class="form-control" name="ip_address" type="text" placeholder="IP Address">
-                                            </div>
-                                        </dd>
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">MAC Address</div>
-                                            <div id="">
-                                                <input class="form-control" name="mac_address" type="text" placeholder="MAC Address">
-                                            </div>
-                                        </dd>
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">User Name</div>
-                                            <div id="">
-                                                <input class="form-control" name="user_name" type="text" placeholder="User Name">
-                                            </div>
-                                        </dd>
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">Primary Role</div>
-                                            <div id="">
-                                                <select class="form-select" name="primary_role">
-                                                    <option value="" selected disabled>Select Primary Role</option>
-                                                    <option value="Evaluator">Evaluator</option>
-                                                    <option value="Approving">Approving</option>
-                                                    <option value="Input Clerk">Input Clerk</option>
-                                                    <option value="Cashier">Cashier</option>
-                                                    <option value="Releasing">Releasing</option>
-                                                    <option value="Site Support">Site Support</option>
-                                                </select>
-                                            </div>
-                                        </dd>
-                                    </div>
-                                    <div class='col-6'>
-                                        <dd class='col-sm-12'>
-                                            <div class="sr-only">Acquired Value</div>
-                                            <div id="">
-                                                <input class="form-control" type="text" name="acquired_value" placeholder="Acquired Value">
-                                            </div>
-                                        </dd>
+                                    <div class="col-12">
+                                        <div class="card border-dashed p-4 text-center">
+                                            <button type="button" class="btn btn-outline-primary col-5 center-align" disabled><i class="fas fa-plus-circle"></i> Add Other Information</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Other Information Section -->
+
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="addDetailsCPU">Add CPU-PC</button>
+                        <button type="button" class="btn btn-primary" id="saveServerBtn">Save</button>
+                        <button type="button" class="btn btn-warning" id="updateServerBtn">Update</button>
                         <button type="submit" class="btn btn-primary disabled" id="addDetailsCPULoading">
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Adding...
+                            Saving...
                         </button>
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <div class="modal" id="trackingModal" tabindex="-1" aria-labelledby="trackingModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Action Required</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="containter">
-                        <div class="row">
-                            <dd class="col-sm-12">
-                                <div class="sr-only">Tracking number:</div>
-                                <input type="hidden" class="form-control" name="hw_id_pullout" disabled required>
-                                <input type="text" class="form-control" name="tracking_num" placeholder="Add tracking number here..." required>
-                                <div id="tracking_required" class="text-danger"></div>
-                            </dd>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" id="pullout-button">Proceed</button>
-                </div>
-            </div>
         </div>
     </div>
 

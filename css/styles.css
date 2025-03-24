@@ -11356,3 +11356,19 @@ body {
   flex: 1 1 auto;
   overflow-y: auto;
 }
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+.border-left-success {
+   border-left: 0.25rem solid #198754 !important;
+ }
+
+.border-dashed {
+  border: 1px dashed #6c757d; /* Bootstrap gray */
+  box-shadow: none !important;
+  border-radius: 8px;
+}
+
+.center-align{
+  margin: auto;
+}

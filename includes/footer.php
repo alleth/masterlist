@@ -23,6 +23,8 @@
 <script src="js/activity-log.js" type="text/javascript"></script>
 <script src="js/request-hw.js" type="text/javascript"></script>
 <script src="js/datepicker.min.js" type="text/javascript"></script>
+<script src="js/directory.js" type="text/javascript"></script>
+<script src="js/server.js" type="text/javascript"></script>
 <!-- <script src="js/spinner/bootstrap.bundle.min.js" type="text/javascript"></script> -->
 </body>
 </html>
