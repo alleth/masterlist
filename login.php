@@ -16,8 +16,8 @@
         <div class="row mt-5 justify-content-center align-items-center" style="min-height: 70vh;">
             <div class="col-sm-6 text-center text-lg-start" style="max-width: 1000px;min-width: 400px;">
                 <div>
-                    <h1 class="display-1">WELCOME!</h1>
-                    <h1>Masterfile&nbsp;|&nbsp;Hardware Inventory&nbsp;System</h1>
+                    <h3 class="display-3">Masterfile</h3>
+                    <h2>Hardware Inventory System</h2>
                     <h4>CSG-Field Services Department</h4>
 
                 </div>
