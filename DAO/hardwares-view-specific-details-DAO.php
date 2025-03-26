@@ -4,7 +4,7 @@
  class viewSpecificDetailsDAO extends BaseDAO {
      function viewSpecificDetails($site_name, $hw_type){
          $this->openConn();
-         $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? AND item_desc = ? AND hw_status = 'On Site'");
+         $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? AND sub_major_type = ? AND hw_status = 'On Site'");
          $stmt->bindParam(1, $site_name);
          $stmt->bindParam(2, $hw_type);
          $stmt->execute();
