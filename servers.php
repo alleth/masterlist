@@ -66,14 +66,14 @@
                     <div class="card border border-dark-subtle shadow-sm">
                         <div class="card-body">
                             <div class="row g-2 align-items-center">
-                                <div class="col-2">
+                                <div class="col-md-2">
                                     <div id="displayRegionServer"></div>
                                 </div>
                                 <div class="col-md-2 col-6">
                                     <select class="form-select" name="server_type" onchange="directory_site_name()" id="viewTypeServer" disabled>
                                         <option value="all_server" selected>All server type</option>
                                         <option value="VM">VM - Virtual Machine</option>
-                                        <option value="Xitrix">Xitrix</option>
+                                        <option value="XITRIX">XITRIX</option>
                                         <option value="IBM">IBM</option>
                                         <option value="HP">HP</option>
                                         <option value="Dell">Dell</option>
@@ -150,20 +150,19 @@
                                     <h4>Primary Information</h4>
                                     <div class="col-6">
                                         <dd class='col-sm-12'>
+                                            <input name="server_id" type="hidden" disabled>
                                             <div class="sr-only">Region</div>
-                                            <div id="viewRegionSelect"></div>
+                                            <div id="regionRegionModal"></div>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Site Name</div>
-                                            <select class="form-select" name="site_name" id="viewSiteSelect" onchange="site_name_option()" disabled>
-                                                <option value="" selected disabled>Select Site Name</option>
-                                            </select>
+                                            <input class="form-control" name="site_name_input" id="viewSiteSelect" disabled>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="sr-only">Brand</div>
                                             <select class="form-select" name="brand_name" id="brand_option" required>
                                                 <option value="" selected disabled>Select brand name </option>
-                                                <option value="Xitrix">Xitrix</option>
+                                                <option value="XITRIX">XITRIX</option>
                                                 <option value="IBM">IBM</option>
                                                 <option value="HP">HP</option>
                                                 <option value="Dell">Dell</option>

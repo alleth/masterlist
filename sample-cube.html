@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Welcome to Masterfile</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="js/all.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: white;
+        }
+        .scene {
+            perspective: 800px;
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+        }
+        .cube {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 3s ease-in-out infinite;
+        }
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .front  { transform: translateZ(50px); }
+        .back   { transform: rotateY(180deg) translateZ(50px); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); }
+        .right  { transform: rotateY(90deg) translateZ(50px); }
+        .top    { transform: rotateX(90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        .shadow {
+            position: absolute;
+            width: 120px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.78);
+            border-radius: 50%;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(8px);
+            animation: shadowScale 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(25deg) rotateY(25deg); }
+            50% { transform: translateY(-30px) rotateX(25deg) rotateY(25deg); }
+        }
+
+        @keyframes shadowScale {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
+            50% { transform: translateX(-50%) scale(0.8); opacity: 0.1; }
+        }
+    </style>
+</head>
+<body>
+<div class="scene">
+    <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+    <div class="shadow"></div>
+</div>
+</body>
+</html>

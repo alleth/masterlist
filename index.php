@@ -79,8 +79,10 @@
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <h6 class="card-title">Server <span class='badge bg-success'>On Site</span></h6>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="serverModelTable" class="table">
                                         <thead class="table-light">
@@ -99,8 +101,10 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <h6 class="card-title">Printer <span class='badge bg-success'>On Site</span></h6>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="printerModelTable" class="table">
                                         <thead class="table-light">
@@ -119,8 +123,10 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-body">
+                            <div class="card-header">
                                 <h6 class="card-title">Workstation <span class='badge bg-success'>On Site</span></h6>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="osTypeTable" class="table">
                                         <thead class="table-light">

@@ -11,6 +11,16 @@ $(function(){
             alert(data);
         }
     });
+    $.ajax({
+        type: "POST",
+        url: "server-region-modal.php",
+        success: function(data){
+            $("#regionRegionModal").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
 
     $("#showServerType").click(function (){
         // Destroy any existing DataTable instance before making the AJAX request
@@ -149,6 +159,7 @@ $(function(){
     $("#addServerBtn").click(function (){
         $("#saveServerBtn").show();
         $("#updateServerBtn").hide();
+        $("#updateServerRegion").hide();
         $("#serverModalInput").modal('show');
         $("#staticBackdropLabel").html(`
             <i class="fas fa-info-circle"></i> Add Server
@@ -165,8 +176,25 @@ function server_site_option(){
 function serverUpdate(id){
     $("#saveServerBtn").hide();
     $("#updateServerBtn").show();
+    $("#updateServerRegion").show();
     $("#serverModalInput").modal('show');
     $("#staticBackdropLabel").html(`
             <i class="fas fa-info-circle"></i> Update server details
         `);
+    document.getElementById('region_server_modal').disabled = true;
+
+    var wordObj = {"id" : id};
+
+    $.ajax({
+        type: "POST",
+        url: "server-update-details.php",
+        data: wordObj,
+        success: function(data){
+            var obj = JSON.parse(data);
+            $("input[name='regionNameModal']").val(obj.server_id);
+            $("select[name='server_region_name_modal']").val(obj.region_id);
+            $("input[name='site_name_input']").val(obj.site_code+" - "+obj.site_name);
+            $("select[name='brand_name']").val(obj.brand_name);
+        }
+    });
 }
