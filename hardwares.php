@@ -27,7 +27,7 @@
                                     <option value="Keyboard" >Keyboard</option>
                                     <option value="Mouse" >Mouse</option>
                                     <option value="Printer" >Printer</option>
-                                    <option value="Laserjet" >Laserjet</option>
+                                    <option value="LaserJet" >LaserJet</option>
                                     <option value="Webcam" >Webcam</option>
                                     <option value="Sigpad" >Sigpad</option>
                                     <option value="Router" >Router</option>
