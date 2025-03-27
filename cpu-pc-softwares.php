@@ -1,66 +1,8 @@
 <?php include("includes/header.php"); ?>
     <main>
         <div class="container-fluid px-4">
-            <h6 class="mt-2 display-6">Servers Software</h6>
-            <!--
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
-                <div class="col">
-                    <div class="card border-left-primary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                </div>
-                                <i class="fas fa-database fa-2x text-gray-300"></i> Database icon for total
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h6 class="mt-2 display-6">CPU-PC Softwares</h6>
 
-                <div class="col">
-                    <div class="card border-left-primary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Virtual Machine</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                </div>
-                                <i class="fas fa-cloud fa-2x text-gray-300"></i> Cloud icon for Virtual Machine
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card border-left-primary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Physical Server</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                </div>
-                                <i class="fas fa-server fa-2x text-gray-300"></i> Server icon for Physical Server
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card border-left-primary shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Down Server</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                </div>
-                                <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i> Warning icon for Down Server
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card border border-dark-subtle shadow-sm">
@@ -81,7 +23,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-1 col-6">
-                                    <button class="btn btn-primary w-100" id="showServerType" disabled>
+                                    <button class="btn btn-primary w-100" id="showCpuPCTye" disabled><!-- id="showServerType" -->
                                         <i class="fas fa-search"></i> Show
                                     </button>
                                 </div>
@@ -101,17 +43,17 @@
                     <div class="card border border-dark-subtle shadow-sm">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="serverTable" class="table table-striped">
+                                <table id="CpuPCTable" class="table table-striped">
                                     <thead class="table-dark">
                                         <tr>
                                             <th scope="col">Region</th>
                                             <th scope="col">Site Code</th>
                                             <th scope="col">Site Name</th>
-                                            <th scope="col">Asset</th>
+                                            <th scope="col">Asset No.</th>
                                             <th scope="col">Serial</th>
-                                            <th scope="col">OS</th>
                                             <th scope="col">Hostname</th>
-                                            <th scope="col">Ip</th>
+                                            <th scope="col">Ip Address</th>
+                                            <th scope="col">Mac Address</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
