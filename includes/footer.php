@@ -26,6 +26,7 @@
 <script src="js/directory.js" type="text/javascript"></script>
 <script src="js/server.js" type="text/javascript"></script>
 <script src="js/hardware.js" type="text/javascript"></script>
+<script src="js/cpu-pc-software.js" type="text/javascript"></script>
 <!-- <script src="js/spinner/bootstrap.bundle.min.js" type="text/javascript"></script> -->
 </body>
 </html>

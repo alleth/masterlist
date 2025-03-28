@@ -33,10 +33,10 @@ class viewServerSpecificRegionDAO extends BaseDAO {
             echo "<td>" . (!empty($region_data) ? $region_data : "Unidentified") . "</td>";
             echo "<td>" . (!empty($row[2]) ? $row[2] : "Unidentified") . "</td>";
             echo "<td>" . (!empty($site_data) ? $site_data : "Unidentified") . "</td>";
+            echo "<td>" . (!empty($row[6]) ? $row[6] : "Unidentified") . "</td>";
+            echo "<td>" . (!empty($row[7]) ? $row[7] : "Unidentified") . "</td>";
             echo "<td>" . (!empty($row[8]) ? $row[8] : "Unidentified") . "</td>";
             echo "<td>" . (!empty($row[9]) ? $row[9] : "Unidentified") . "</td>";
-            echo "<td>" . (!empty($row[22]) ? $row[22] : "Unidentified") . "</td>";
-            echo "<td>" . (!empty($row[13]) ? $row[13] : "Unidentified") . "</td>";
 
             $purchase_date = $row['10']; // Retrieve date from database
 
