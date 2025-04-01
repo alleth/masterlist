@@ -22,6 +22,7 @@ $(function(){
         }
     });
 
+
     $("#showServerType").click(function (){
         // Destroy any existing DataTable instance before making the AJAX request
         if ($.fn.DataTable.isDataTable('#serverTable')) {

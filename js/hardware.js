@@ -1,9 +1,58 @@
-$(function(){
+
+    $(function(){
     $.ajax({
         type: "POST",
         url: "hardwares-view-region.php",
         success: function(data){
             $("#displayRegionHW").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
+    // for modal select on region
+    $.ajax({
+        type: "POST",
+        url: "hardware-region-modal.php",
+        success: function(data){
+            $("#hardwareRegionModal").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
+    // for modal select of description
+    $.ajax({
+        type: "POST",
+        url: "hardware-item-description-modal.php",
+        success: function(data){
+            $("#itemDescription").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });
+
+    /* //for modal select of brand 
+    $.ajax({
+        type: "POST",
+        url: "hardware-brand-modal.php",
+        success: function(data){
+            $("#itemBrand").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    });*/
+    
+    // for modal select of Model
+    $.ajax({
+        type: "POST",
+        url: "hardware-model-modal.php",
+        success: function(data){
+            $("#itemModel").html(data);
         },
         error: function(){
             alert(data);
@@ -56,16 +105,16 @@ $(function(){
                         "paging": true,
                         "ordering": false,
                         "searching": true
-                    });
-                },
+                        });
+                    },
                 error: function(){
                     alert(data);
-                }
-            });
-        }
-    });
+                    }
+                });
+            }
+        });
 
-});
+    });
 
 function hardware_site_option(){
 
@@ -83,4 +132,26 @@ function hardware_site_option(){
             $("#viewSiteOption").html(data);
         }
     });
+
+}
+
+function hardware_brand_option(){
+
+    var item_name = $("select[name='itemSelect']").val();
+    document.getElementById('itemBrand').disabled = false;
+
+    var wordObj = {"item_name" : item_name};
+
+    $.ajax({
+        type: "POST",
+        url: "hardware-brand-modal.phpp",
+        data: wordObj,
+        success: function(data){
+            $("#itemBrand").html(data);
+        },
+        error: function(data){
+            alert(item_name);
+        }
+    });
+
 }
