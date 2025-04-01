@@ -1,4 +1,7 @@
-<?php include("includes/header.php"); ?>
+<?php 
+    include("includes/header.php"); 
+    
+?>
     <main>
         <div class="container-fluid px-4">
             <h6 class="mt-2 display-6">Servers Software</h6>
@@ -85,11 +88,11 @@
                                         <i class="fas fa-search"></i> Show
                                     </button>
                                 </div>
-                                <!--
+                                
                                 <div class="col-md-7 col-12 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0">
                                     <button class="btn btn-success" data-toggle="modal" data-target="#serverModalInput" id="addServerBtn"><i class="fas fa-plus-circle"></i> Add Server</button>
                                 </div>
-                                -->
+                                
                             </div>
                         </div>
                     </div>

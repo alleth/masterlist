@@ -29,8 +29,11 @@ include("includes/header.php");
                                     <option value="Keyboard" >Keyboard</option>
                                     <option value="Mouse" >Mouse</option>
                                     <option value="Printer" >Printer</option>
-                                    <option value="Peripherals" >Peripherals</option>
-                                    <option value="Network Equipment" >Network Equipment</option>
+                                    <option value="LaserJet" >LaserJet</option>
+                                    <option value="Webcam" >Webcam</option>
+                                    <option value="Sigpad" >Sigpad</option>
+                                    <option value="Router" >Router</option>
+                                    <option value="Switch" >Switch</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -40,11 +43,7 @@ include("includes/header.php");
                             </div>
                             <!-- Added wrapper div to push button to the right -->
                             <div class="col-md-4 d-flex justify-content-md-end justify-content-center">
-<<<<<<< HEAD
-                                <button class="btn btn-success justify-content-center align-items-center" data-toggle="modal" data-target="#serverModalInput" id="addHardwareBtn">
-=======
                                 <button class="btn btn-success justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#AddHardwareModal" id="addHardwareBtn">
->>>>>>> 90dc05113c607c270da5e869c0a3ead195c9bbcf
                                     <i class="fas fa-plus-circle"></i>&nbsp;Add Hardware
                                 </button>
                             </div>
@@ -73,7 +72,7 @@ include("includes/header.php");
                                 </tr>
                                 </thead>
                                 <tbody id="hardwareDisplay">
-                                    <td id="rowdisplay" colspan="8" class="text-muted text-center fst-italic">Please select region and site...</td>
+                                <td id="rowdisplay" colspan="8" class="text-muted text-center fst-italic">Please select region and site...</td>
                                 </tbody>
                             </table>
                         </div>
@@ -197,82 +196,5 @@ include("includes/header.php");
 
 </main>
 
-
-<!---Modal---->
-
-<div class="modal fade" id="hardwareModalInput" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="staticBackdropLabel">
-                        <i class="fa fa-info-circle"></i> Update Details
-                    </h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="hw_add">
-                        <div class="container">
-                            <div id="addMessage"></div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <dd class='col-sm-12'>
-                                        <input name="hw_id" type="hidden" disabled>
-                                        <div class="sr-only">Region</div>
-                                        <input type="text" readonly class="form-control-plaintext" name="hw_region_name">
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Site Name</div>
-                                        <input class="form-control-plaintext" readonly name="site_name_input" id="viewSiteSelect" disabled>
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Brand</div>
-                                        <select class="form-select" name="brand_name" onchange="showHardwareModel()" id="brandSelect"></select>
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Model</div>
-                                        <select class="form-select" name="model_name" id="model_option"></select>
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Acquired Value</div>
-                                        <input class="form-control" type="text" name="acquired_value" placeholder="Acquired Value">
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Asset No.:</div>
-                                        <input type="text" class="form-control" name="asset_num" placeholder="Asset Number" required>
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <div class="sr-only">Serial No.</div>
-                                        <input type="text" class="form-control" name="serial_num" placeholder="Serial Number" required>
-                                    </dd>
-                                    <dt class="sr-only">Date Acquired:</dt>
-                                    <dd class="d-flex col-sm-12">
-                                        <input type="text" id="datepicker" class="form-control datepicker-input" name="date_acquired" placeholder="Date Acquired" readonly required>
-                                    </dd>
-                                    <dd class="col-sm-12">
-                                        <select class="form-select" name="status_option" required>
-                                            <option value="" selected disabled>Select Status</option>
-                                            <option value="On Site">On Site</option>
-                                            <option value="Pulled Out">Pulled out</option>
-                                        </select>
-                                    </dd>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveHardwareBtn">Save</button>
-                    <button type="button" class="btn btn-warning" id="updateHardwareBtn">Save Update</button>
-                    <button type="submit" class="btn btn-primary disabled" id="addDetailsCPULoading">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Saving...
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <?php include("includes/footer.php"); ?>

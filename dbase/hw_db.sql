@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 06:45 AM
+-- Generation Time: Apr 01, 2025 at 03:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -14017,6 +14017,134 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_brand`
+--
+
+CREATE TABLE `item_brand` (
+  `id` int(11) NOT NULL,
+  `item_desc` varchar(25) NOT NULL,
+  `brand` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item_brand`
+--
+
+INSERT INTO `item_brand` (`id`, `item_desc`, `brand`) VALUES
+(2, 'CPU-PC', 'HP'),
+(3, 'CPU-PC', 'Dell'),
+(4, 'CPU-Server', 'HP'),
+(5, 'CPU-Server', 'IBM'),
+(6, 'CPU-Server', 'Lenovo'),
+(7, 'CPU-Server', 'Xitrix'),
+(8, 'Monitor-LCD', 'HP'),
+(9, 'Monitor-LCD', 'Phillips'),
+(10, 'UPS-PC', 'Eaton'),
+(11, 'UPS-PC', 'Powerware'),
+(12, 'UPS-PC', 'Powercom'),
+(13, 'Keyboard', 'HP'),
+(14, 'Keyboard', 'A4Tech'),
+(15, 'Mouse', 'HP'),
+(16, 'Mouse', 'A4Tech'),
+(17, 'UPS-Server', 'Leibert'),
+(18, 'UPS-Server', 'Powerware'),
+(19, 'UPS-Server', 'Powercom'),
+(20, 'Printer-LaserJet', 'HP'),
+(21, 'Printer-LaserJet', 'Samsung'),
+(22, 'Printer-InkJet', 'Epson'),
+(23, 'Printer-Dotmatrix', 'Epson'),
+(24, 'SDWAN', 'Fortinet'),
+(25, 'Webcam', 'Logitech'),
+(26, 'Sigpad', 'Wacom'),
+(27, 'Switch', 'Cisco'),
+(28, 'Data Cabinet', 'N/A'),
+(29, 'Table', 'N/A'),
+(30, 'Router', 'Cisco');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_description`
+--
+
+CREATE TABLE `item_description` (
+  `item_id` int(11) NOT NULL,
+  `item_desc` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item_description`
+--
+
+INSERT INTO `item_description` (`item_id`, `item_desc`) VALUES
+(1, 'CPU-PC'),
+(2, 'CPU-Server'),
+(3, 'Monitor-LCD'),
+(4, 'UPS-PC'),
+(5, 'Keyboard'),
+(6, 'Mouse'),
+(8, 'UPS-Server'),
+(9, 'Printer-LaserJet'),
+(10, 'Printer-InkJet'),
+(13, 'Printer-Dotmatrix'),
+(14, 'SDWAN'),
+(15, 'Webcam'),
+(16, 'Sigpad'),
+(17, 'Switch'),
+(18, 'Data Cabinet'),
+(19, 'Table'),
+(20, 'Router');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_models`
+--
+
+CREATE TABLE `item_models` (
+  `id` int(11) NOT NULL,
+  `item_desc` varchar(25) NOT NULL,
+  `brand` varchar(25) NOT NULL,
+  `model` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `item_models`
+--
+
+INSERT INTO `item_models` (`id`, `item_desc`, `brand`, `model`) VALUES
+(1, 'CPU-PC', 'HP', 'DX2710'),
+(2, 'CPU-PC', 'HP', 'DX2810'),
+(3, 'CPU-PC', 'HP', 'Prodesk G9'),
+(4, 'CPU-PC', 'HP', 'Prodesk G4'),
+(5, 'CPU-PC', 'HP', 'Elitedesk G7'),
+(6, 'CPU-Server', 'HP', 'ML110 Gen10'),
+(7, 'CPU-Server', 'HP', 'ML110 Gen9'),
+(8, 'CPU-Server', 'IBM', 'X3200'),
+(9, 'Monitor-LCD', 'HP', '19.5\"'),
+(10, 'Monitor-LCD', 'HP', '19\"'),
+(11, 'Keyboard', 'HP', 'N/A'),
+(12, 'Mouse', 'N/A', 'N/A'),
+(13, 'Printer-InkJet', 'Epson', 'L310'),
+(14, 'Printer-Dotmatrix', 'Epson', 'LX310'),
+(15, 'Printer-LaserJet', 'HP', 'M507n'),
+(16, 'Printer-LaserJet', 'HP', '4003dn'),
+(17, 'Printer-LaserJet', 'HP', 'M401'),
+(18, 'Printer-LaserJet', 'HP', 'M402'),
+(19, 'Printer-LaserJet', 'HP', '2015'),
+(20, 'Printer-LaserJet', 'HP', '4100'),
+(21, 'Switch', 'Cisco', 'Catalyst 2960'),
+(22, 'Switch', 'Cisco', 'Catalyst 2924'),
+(23, 'CPU-PC', 'Others', 'Others'),
+(24, 'Data Cabinet', 'N/A', 'N/A'),
+(25, 'SDWAN', 'Fortinet', '40F'),
+(26, 'Webcam', 'Logitec', 'C922'),
+(27, 'Router', 'CIsco', 'C1111'),
+(28, 'SDWAN', 'Fortinet', '60F');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `log_tbl`
 --
 
@@ -14401,28 +14529,28 @@ INSERT INTO `site_list_tbl` (`site_id`, `site_code`, `site_name`, `site_address`
 (370, '0761', 'Tagbilaran DO LEO', 'Alturas Mall, Tagbilaran City, Bohol', '9', NULL, NULL),
 (371, '9007', 'E-Patrol', '', '9', NULL, NULL),
 (372, '0749', 'DLRO Island City Mall Bohol', '', '9', NULL, NULL),
-(373, '0800', 'Regional Office ', 'Government Center, Barangay Candahug, Palo, Leyte', '10', NULL, NULL),
-(374, '0801', 'New Registration Unit', 'Government Center, Barangay Candahug, Palo, Leyte', '10', NULL, NULL),
-(375, '0802', 'Baybay DO', 'Government Center Magsaysay Ave., Zone 23, Baybay City, Leyte', '10', NULL, NULL),
-(376, '0804', 'Borongan DO', 'Brgy. Bato, Borongan, Eastern Samar ', '10', NULL, NULL),
-(377, '0808', 'Calbayog DO', 'Pido St., Calbayog City, Western Samar ', '10', NULL, NULL),
-(378, '0812', 'Carigara DO', 'Sitio Bariis, Brgy. Visoria West Carigara, Leyte', '10', NULL, NULL),
-(379, '0816', 'Catarman DO', 'Brgy. Dalakit, Catarman, Northern Samar', '10', NULL, NULL),
-(380, '0820', 'Catbalogan DO', 'Capitol Ground, Rizal Ave., Ext. Catbalogan, Western Samar', '10', NULL, NULL),
-(381, '0822', 'Guiuan EO', 'Barangay 6, Guiuan Eastern Samar', '10', NULL, NULL),
-(382, '0824', 'Maasin DO', 'Brgy. Agbao, Maasin City, Southern Leyte', '10', NULL, NULL),
-(383, '0827', 'Javier EO', 'Brgy. Picas Norte, Maharlika Highway, Javier, Leyte', '10', NULL, NULL),
-(384, '0828', 'Naval DO', 'Sitio Bliss, Calumpang, Naval, Biliran', '10', NULL, NULL),
-(385, '0831', 'Burauen EO', 'Ground Floor, Burauen LGU, Sto.Niño Street Pob. 7, Burauen Leyte', '10', NULL, NULL),
-(386, '0832', 'Ormoc DO', 'Anubing St., Brgy Cogon, Ormoc City, Leyte', '10', NULL, NULL),
-(387, '0835', 'Mercedes EO', 'LTO Mercedes EO, Mercedes, Eastern Samar', '10', NULL, NULL),
-(388, '0836', 'Palompon DO', 'LTO Heights, Guiwan I, Palompon, Leyte ', '10', NULL, NULL),
-(389, '0840', 'San Juan DO', 'Carillo St., San Juan, Southern Leyte', '10', NULL, NULL),
-(390, '0841', 'Sogod EO', 'Zone IV, Sogod Southern Leyte', '10', NULL, NULL),
-(391, '0844', 'Tacloban DO', 'Old Army Road, Tacloban City, Leyte', '10', NULL, NULL),
-(392, '0846', 'Tacloban EO', 'Old Army Road, Tacloban City, Leyte', '10', NULL, NULL),
-(393, '0848', 'Tacloban City LC', 'Old Army Road, Tacloban City, Leyte', '10', NULL, NULL),
-(394, '0826', 'Laoang DO', '', '10', NULL, NULL),
+(373, '0800', 'Regional Office ', 'Government Center, Barangay Candahug, Palo, Leyte', '10', 'Regional Office', 'Government'),
+(374, '0801', 'New Registration Unit', 'Government Center, Barangay Candahug, Palo, Leyte', '10', 'NRU', 'Government'),
+(375, '0802', 'Baybay DO', 'Government Center Magsaysay Ave., Zone 23, Baybay City, Leyte', '10', 'District Office', 'Government'),
+(376, '0804', 'Borongan DO', 'Brgy. Bato, Borongan, Eastern Samar ', '10', 'District Office', ''),
+(377, '0808', 'Calbayog DO', 'Pido St., Calbayog City, Western Samar ', '10', 'District Office', ''),
+(378, '0812', 'Carigara DO', 'Sitio Bariis, Brgy. Visoria West Carigara, Leyte', '10', 'District Office', ''),
+(379, '0816', 'Catarman DO', 'Brgy. Dalakit, Catarman, Northern Samar', '10', 'District Office', ''),
+(380, '0820', 'Catbalogan DO', 'Capitol Ground, Rizal Ave., Ext. Catbalogan, Western Samar', '10', 'District Office', ''),
+(381, '0822', 'Guiuan EO', 'Barangay 6, Guiuan Eastern Samar', '10', 'Extension Office', ''),
+(382, '0824', 'Maasin DO', 'Brgy. Agbao, Maasin City, Southern Leyte', '10', 'District Office', ''),
+(383, '0827', 'Javier DO', 'Brgy. Picas Norte, Maharlika Highway, Javier, Leyte', '10', 'District Office', ''),
+(384, '0828', 'Naval DO', 'Sitio Bliss, Calumpang, Naval, Biliran', '10', 'District Office', ''),
+(385, '0831', 'Burauen EO', 'Ground Floor, Burauen LGU, Sto.Niño Street Pob. 7, Burauen Leyte', '10', 'Extension Office', ''),
+(386, '0832', 'Ormoc DO', 'Anubing St., Brgy Cogon, Ormoc City, Leyte', '10', 'District Office', ''),
+(387, '0835', 'Mercedes EO', 'LTO Mercedes EO, Mercedes, Eastern Samar', '10', 'Extension Office', ''),
+(388, '0836', 'Palompon DO', 'LTO Heights, Guiwan I, Palompon, Leyte ', '10', 'District Office', ''),
+(389, '0840', 'San Juan DO', 'Carillo St., San Juan, Southern Leyte', '10', 'District Office', ''),
+(390, '0841', 'Sogod EO', 'Zone IV, Sogod Southern Leyte', '10', 'Extension Office', ''),
+(391, '0844', 'Tacloban DO', 'Old Army Road, Tacloban City, Leyte', '10', 'District Office', ''),
+(392, '0846', 'Tacloban EO', 'Old Army Road, Tacloban City, Leyte', '10', 'Extension Office', ''),
+(393, '0848', 'Tacloban City LC', 'Old Army Road, Tacloban City, Leyte', '10', 'Licensing Center', ''),
+(394, '0826', 'Laoang DO', 'Laoang, Northern Samar', '10', 'District Office', ''),
 (395, '9008', 'E-Patrol', 'Cojibas PMVIC COmpound, Ormoc City, Leyte', '10', NULL, NULL),
 (407, '0900', 'Regional Office ', 'Veterans Avenue,Sta Barbara,Zamboanga City', '11', NULL, NULL),
 (408, '0901', 'New Registration Unit', 'Ecozone Main Office Bldg. San Ramon,Zamboanga City', '11', NULL, NULL),
@@ -15071,6 +15199,24 @@ ALTER TABLE `hw_tbl`
   ADD PRIMARY KEY (`hw_id`);
 
 --
+-- Indexes for table `item_brand`
+--
+ALTER TABLE `item_brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `item_description`
+--
+ALTER TABLE `item_description`
+  ADD PRIMARY KEY (`item_id`);
+
+--
+-- Indexes for table `item_models`
+--
+ALTER TABLE `item_models`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `log_tbl`
 --
 ALTER TABLE `log_tbl`
@@ -15139,6 +15285,24 @@ ALTER TABLE `hw_other_info`
 --
 ALTER TABLE `hw_tbl`
   MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13802;
+
+--
+-- AUTO_INCREMENT for table `item_brand`
+--
+ALTER TABLE `item_brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `item_description`
+--
+ALTER TABLE `item_description`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `item_models`
+--
+ALTER TABLE `item_models`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `log_tbl`
