@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 $(function(){
     $("#updateHardwareBtn").hide();
-=======
 
-    $(function(){
->>>>>>> 90dc05113c607c270da5e869c0a3ead195c9bbcf
     $.ajax({
         type: "POST",
         url: "hardwares-view-region.php",
@@ -39,20 +35,6 @@ $(function(){
             alert(data);
         }
     });
-
-    /* //for modal select of brand 
-    $.ajax({
-        type: "POST",
-        url: "hardware-brand-modal.php",
-        success: function(data){
-            $("#itemBrand").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });*/
-    
-    // for modal select of Model
     $.ajax({
         type: "POST",
         url: "hardware-model-modal.php",
@@ -65,7 +47,6 @@ $(function(){
     });
 
     $("#showHwButton").click(function(){
-        $("#updateHardwareBtn").show();
         $("#updateHardwareBtn").show();
         // Destroy any existing DataTable instance before making the AJAX request
         if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
@@ -118,11 +99,11 @@ $(function(){
                 }
             });
         }else{
-            var wordObj = {"site_name" : site_name};
+            var wordObj1 = {"site_name" : site_name};
             $.ajax({
                 type: "POST",
                 url: "hardwares-view-details.php",
-                data: wordObj,
+                data: wordObj1,
                 beforeSend: function () {
                     // Show spinner before request starts
                     $("#rowdisplay").html(`
@@ -157,7 +138,6 @@ $(function(){
             }
         });
 
-<<<<<<< HEAD
     $("#addHardwareBtn").click(function (){
         $("#updateHardwareBtn").hide();
         $("#saveHardwareBtn").show();
@@ -228,14 +208,13 @@ $(function(){
                     beforeSend: function () {
                         // Show spinner before request starts
                         $("#displayValidation").html(`
-                        <button class="btn btn-warning" type="button" disabled>
-                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                          Loading...
-                        </button>
-                    `);
+                            <button class="btn btn-warning" type="button" disabled>
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Loading...
+                            </button>
+                        `);
                     },
                     success: function(data){
-                        alert(data);
                         $(document.getElementById(wordObj.hw_id)).html(data);
                         $("input[name='hw_id']").val("");
                         $("select[name='brand_name']").val("");
@@ -257,9 +236,6 @@ $(function(){
 
     });
 });
-=======
-    });
->>>>>>> 90dc05113c607c270da5e869c0a3ead195c9bbcf
 
 function hardware_site_option(){
 
@@ -364,22 +340,21 @@ function showHardwareModel(){
 
 }
 
-function hardware_brand_option(){
-
+function hardware_brand_option() {
     var item_name = $("select[name='itemSelect']").val();
     document.getElementById('itemBrand').disabled = false;
 
-    var wordObj = {"item_name" : item_name};
+    var wordObj = {"item_name": item_name};
 
     $.ajax({
         type: "POST",
-        url: "hardware-brand-modal.phpp",
+        url: "hardware-brand-modal.php",
         data: wordObj,
-        success: function(data){
+        success: function (data) {
             $("#itemBrand").html(data);
         },
-        error: function(data){
-            alert(item_name);
+        error: function (data) {
+            alert(data);
         }
     });
 

@@ -40,11 +40,7 @@ include("includes/header.php");
                             </div>
                             <!-- Added wrapper div to push button to the right -->
                             <div class="col-md-4 d-flex justify-content-md-end justify-content-center">
-<<<<<<< HEAD
-                                <button class="btn btn-success justify-content-center align-items-center" data-toggle="modal" data-target="#serverModalInput" id="addHardwareBtn">
-=======
-                                <button class="btn btn-success justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#AddHardwareModal" id="addHardwareBtn">
->>>>>>> 90dc05113c607c270da5e869c0a3ead195c9bbcf
+                                <button class="btn btn-success justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#AddHardwareModal" id="">
                                     <i class="fas fa-plus-circle"></i>&nbsp;Add Hardware
                                 </button>
                             </div>
@@ -131,11 +127,6 @@ include("includes/header.php");
                                             <select class="form-select" name="itemBrand" id="itemBrand" disabled>
                                                 <option value="" selected>Select Brand</option>
                                             </select>
-                                            <!--
-                                            <div>
-                                                <div id="itemBrand"></div>
-                                            </div>
-                                            -->
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="">Model</div>
