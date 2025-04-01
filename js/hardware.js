@@ -1,4 +1,5 @@
 $(function(){
+    $("#updateHardwareBtn").hide();
     $.ajax({
         type: "POST",
         url: "hardwares-view-region.php",
@@ -11,6 +12,8 @@ $(function(){
     });
 
     $("#showHwButton").click(function(){
+        $("#updateHardwareBtn").show();
+        $("#updateHardwareBtn").show();
         // Destroy any existing DataTable instance before making the AJAX request
         if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
             $('#hardwarePerSite').DataTable().destroy();
@@ -30,6 +33,24 @@ $(function(){
                 type: "POST",
                 url: "hardwares-view-specific-details.php",
                 data: wordObj,
+                beforeSend: function () {
+                    // Show spinner before request starts
+                    $("#rowdisplay").html(`
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        `);
+                },
                 success: function(data){
                     $("#hardwareDisplay").html(data);
 
@@ -49,6 +70,24 @@ $(function(){
                 type: "POST",
                 url: "hardwares-view-details.php",
                 data: wordObj,
+                beforeSend: function () {
+                    // Show spinner before request starts
+                    $("#rowdisplay").html(`
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        `);
+                },
                 success: function(data){
                     $("#hardwareDisplay").html(data);
 
@@ -65,6 +104,104 @@ $(function(){
         }
     });
 
+    $("#addHardwareBtn").click(function (){
+        $("#updateHardwareBtn").hide();
+        $("#saveHardwareBtn").show();
+        $("#hardwareModalInput").modal('show');
+    });
+
+    $(document).on("click", "#updateHardwareBtn", function(){
+        $("input[name='hw_id'], select[name='brand_name'], select[name='model_name'], input[name='asset_num'], input[name='serial_num']").removeClass('is-invalid');
+        var hw_id = $("input[name='hw_id']").val();
+        var brand_name = $("select[name='brand_name']").val();
+        var model_name = $("select[name='model_name']").val();
+        var acquired_value = $("input[name='acquired_value']").val();
+        var asset_num = $("input[name='asset_num']").val();
+        var serial_num = $("input[name='serial_num']").val();
+        var date_acquired = $("input[name='date_acquired']").val();
+        var hardwareStatus = $("select[name='status_option']").val();
+
+        // Check for empty required fields and mark them
+        var hasEmptyFields = false;
+        if (hw_id === "") {
+            $("input[name='hw_id']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (brand_name === "") {
+            $("select[name='brand_name']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (model_name === "") {
+            $("select[name='model_name']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (asset_num === "") {
+            $("input[name='asset_num']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (serial_num === "") {
+            $("input[name='serial_num']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+
+        if (hasEmptyFields) {
+            $("#addMessage").html(
+                "<div class='alert alert-warning alert-dismissible fade show' role='alert'>" +
+                "<strong>Warning!</strong> You should check in on some of those fields below" +
+                "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+                "</div>"
+            );
+        } else {
+            $("input[name='hw_id'], select[name='brand_name'], select[name='model_name'], input[name='asset_num'], input[name='serial_num']").removeClass('is-invalid');
+            $("#addMessage").html("");
+            if(hardwareStatus === "Pulled Out"){
+                alert("Pullout");
+            }else{
+                var wordObj = {
+                  "hw_id" : hw_id,
+                  "brand_name" : brand_name,
+                  "model_name" : model_name,
+                  "acquired_value" : acquired_value,
+                  "asset_num" : asset_num,
+                  "serial_num" : serial_num,
+                  "date_acquired" : date_acquired
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "hardwares-save-details.php",
+                    data: wordObj,
+                    beforeSend: function () {
+                        // Show spinner before request starts
+                        $("#displayValidation").html(`
+                        <button class="btn btn-warning" type="button" disabled>
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Loading...
+                        </button>
+                    `);
+                    },
+                    success: function(data){
+                        alert(data);
+                        $(document.getElementById(wordObj.hw_id)).html(data);
+                        $("input[name='hw_id']").val("");
+                        $("select[name='brand_name']").val("");
+                        $("input[name='model_name']").val("");
+                        $("input[name='acquired_value']").val("");
+                        $("select[name='asset_num']").val("");
+                        $("input[name='serial_num']").val("");
+                        $("select[name='date_acquired']").val("");
+                        $("#addMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Updated Successfully!</strong> You updated hardware information.");
+                        $("#displayValidation").html(`
+                            <button type="button" class="btn btn-warning" id="updateOfficeButton">Save Update</button>
+                        `);
+                    },error: function(data){
+                        alert(data);
+                    }
+                });
+            }
+        }
+
+    });
 });
 
 function hardware_site_option(){
@@ -81,6 +218,90 @@ function hardware_site_option(){
         data: wordObj,
         success: function(data){
             $("#viewSiteOption").html(data);
+        },error: function(data){
+            alert(data);
+        }
+    });
+}
+
+function hardwareUpdate(id){
+    $("#addMessage").html("");
+    $("#saveHardwareBtn").hide();
+    $("#updateHardwareBtn").show();
+    $("#hardwareModalInput").modal('show');
+    $("input[name='hw_id'], select[name='brand_name'], select[name='model_name'], input[name='asset_num'], input[name='serial_num']").removeClass('is-invalid');
+
+    var wordObj = {"hw_id" : id};
+    $.ajax({
+        type: "POST",
+        url: "hardware-update-details.php",
+        data: wordObj,
+        success: function(data){
+            var obj = JSON.parse(data);
+            $("input[name='hw_id']").val(obj.hw_id);
+            $("input[name='hw_region_name']").val(obj.region_name);
+            $("input[name='site_name_input']").val(obj.site_code + " - " + obj.site_name);
+            // Populate the select dropdown
+            var brandDropdown = $("#brandSelect");
+            brandDropdown.empty(); // Clear existing options
+            brandDropdown.append('<option value="" disabled>Select Brand</option>'); // Default option
+
+            $.each(obj.brands, function (index, brand) {
+                brandDropdown.append('<option value="' + brand + '">' + brand + '</option>');
+            });
+            // Auto-select the correct brand
+            if (obj.selected_brand) {
+                brandDropdown.val(obj.selected_brand);
+            }
+            // Populate the select dropdown
+            var modelDropdown = $("#model_option");
+            modelDropdown.empty(); // Clear existing options
+            modelDropdown.append('<option value="" disabled>Select model</option>'); // Default option
+
+            $.each(obj.hw_model, function (index, model) {
+                modelDropdown.append('<option value="' + model.model_name + '">' + model.model_name + '</option>');
+            });
+            // Auto-select the correct brand
+            if (obj.selected_model) {
+                modelDropdown.val(obj.selected_model);
+            }
+            $("input[name='acquired_value']").val(obj.acq_val);
+            $("input[name='asset_num']").val(obj.asset_num);
+            $("input[name='serial_num']").val(obj.serial_num);
+            $("input[name='date_acquired']").val(obj.date_acq);
+            $("select[name='status_option']").val(obj.hw_status);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error: " + error);
+        }
+    });
+}
+
+function showHardwareModel(){
+    var hw_id = $("input[name='hw_id']").val();
+    var brand_name = $("select[name='brand_name']").val();
+    var wordObj = {
+        "hw_id" : hw_id,
+        "brand_name" : brand_name
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "hardwares-change-model.php",
+        data: wordObj,
+        success: function(data){
+            var obj = JSON.parse(data);
+            // Populate the select dropdown
+            var modelDropdown = $("#model_option");
+            modelDropdown.empty(); // Clear existing options
+            modelDropdown.append('<option value="" disabled>Select model</option>'); // Default option
+
+            $.each(obj.hw_model, function (index, model) {
+                modelDropdown.append('<option value="' + model.model_name + '">' + model.model_name + '</option>');
+            });
+        },
+        error: function(){
+            alert(data);
         }
     });
 }

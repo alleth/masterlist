@@ -22,7 +22,7 @@
 
                $get_site = $site_name->fetch();
 
-                echo "<tr>";
+                echo "<tr id='$row[0]'>";
                 echo "<td>".$get_region['region_name']."</td>";
                 echo "<td>$row[2] &ndash; ".$get_site['site_name']."</td>";
                 echo "<td>$row[5]</td>";
