@@ -35,6 +35,8 @@ $(function(){
             alert(data);
         }
     });
+
+    /* for modal select of model
     $.ajax({
         type: "POST",
         url: "hardware-model-modal.php",
@@ -44,7 +46,7 @@ $(function(){
         error: function(){
             alert(data);
         }
-    });
+    }); */
 
     $("#showHwButton").click(function(){
         $("#updateHardwareBtn").show();
@@ -340,6 +342,25 @@ function showHardwareModel(){
 
 }
 
+function hardware_site_select(){
+
+    var site_name = $("select[name='RegionSelect']").val();
+    document.getElementById('hardwareSiteModal').disabled = false;
+
+    var wordObj = {"site_name" : site_name};
+
+    $.ajax({
+        type: "POST",
+        url: "hardwares-site-modal.php",
+        data: wordObj,
+        success: function(data){
+            $("#hardwareSiteModal").html(data);
+        },error: function(data){
+            alert(data);
+        }
+    });
+}
+
 function hardware_brand_option() {
     var item_name = $("select[name='itemSelect']").val();
     document.getElementById('itemBrand').disabled = false;
@@ -359,3 +380,35 @@ function hardware_brand_option() {
     });
 
 }
+
+function hardware_model_option() {
+    var item_name = $("select[name='itemSelect']").val();
+    document.getElementById('itemModel').disabled = false;
+
+    var wordObj = {"item_name": item_name};
+
+    $.ajax({
+        type: "POST",
+        url: "hardware-model-modal.php",
+        data: wordObj,
+        success: function (data) {
+            $("#itemModel").html(data);
+        },
+        error: function (data) {
+            alert(data);
+        }
+    });
+
+}
+
+/* for modal select of model
+    $.ajax({
+        type: "POST",
+        url: "hardware-model-modal.php",
+        success: function(data){
+            $("#itemModel").html(data);
+        },
+        error: function(){
+            alert(data);
+        }
+    }); */

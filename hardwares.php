@@ -104,16 +104,11 @@ include("includes/header.php");
                                             <div>
                                                 <div id="hardwareRegionModal"></div>
                                             </div>
-                                        <dd class="col-sm-12">
-                                            <div class="">Site Code</div>
-                                            <select class="form-select" name="SelectCode" id="SelectCode" required>
-                                                <option value="" selected> </option>
-                                            </select>
-                                        </dd>
+
                                         <dd class="col-sm-12">
                                             <div class="">Site Name</div>
-                                            <select class="form-select" name="SelectSite" id="SelectSite" required>
-                                                <option value="" selected> </option>
+                                            <select class="form-select" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
+                                                <option value="" selected>Select Site</option>
                                             </select>
                                         </dd>
                                         <dd class="col-sm-12">
@@ -130,9 +125,9 @@ include("includes/header.php");
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="">Model</div>
-                                            <div>
-                                                <div id="itemModel"></div>
-                                            </div>
+                                            <select class="form-select" name="itemModel" id="itemModel" disabled>
+                                                <option value="" selected>Select Model</option>
+                                            </select>
                                         </dd>
                                     </div>
                                     <div class="col-6">
