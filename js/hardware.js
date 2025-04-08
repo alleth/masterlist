@@ -37,18 +37,6 @@ $(function(){
         }
     });
 
-    /* for modal select of model
-    $.ajax({
-        type: "POST",
-        url: "hardware-model-modal.php",
-        success: function(data){
-            $("#itemModel").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    }); */
-
     $("#showHwButton").click(function(){
         $("#updateHardwareBtn").show();
         // Destroy any existing DataTable instance before making the AJAX request
@@ -423,6 +411,7 @@ function hardware_site_select(){
 function hardware_brand_option() {
     var item_name = $("select[name='itemSelect']").val();
     document.getElementById('itemBrand').disabled = false;
+    document.getElementById('itemModel').disabled = false;
 
     var wordObj = {"item_name": item_name};
 
@@ -441,10 +430,9 @@ function hardware_brand_option() {
 }
 
 function hardware_model_option() {
-    var item_name = $("select[name='itemSelect']").val();
-    document.getElementById('itemModel').disabled = false;
+    var model_item_name = $("select[name='itemSelect']").val();
 
-    var wordObj = {"item_name": item_name};
+    var wordObj = {"model_item_name": model_item_name};
 
     $.ajax({
         type: "POST",
@@ -459,7 +447,33 @@ function hardware_model_option() {
     });
 
 }
+$(document).ready(function(){
+// for Add hardware Save Button---------------------------
+        $("#addNewHardwareBtn").click(function(){
+        
+        var RegionSelect = $('#RegionSelect').val();
+        var hardwareSiteModal = $('#hardwareSiteModal').val();
+        var itemSelect = $('#itemSelect').val();
+        var itemBrand = $('#itemBrand').val();
+        var itemModel = $('#itemModel').val();
+        var asset_num = $('#asset_num').val();
+        var serial_num = $('#serial_num').val();
+        var date = $('#date').val();
+        var acquired_value = $('#acquired_value').val();
+    
+            var wordObj = {
+                    RegionSelect :RegionSelect,
+                    hardwareSiteModal :hardwareSiteModal,
+                    itemSelect :itemSelect,
+                    itemBrand :itemBrand,
+                    itemModel :itemModel,
+                    asset_num :asset_num,
+                    serial_num :serial_num,
+                    date :date,
+                    acquired_value :acquired_value
+            };
 
+<<<<<<< HEAD
 function saveUpdateHardware(){
 
 }
@@ -476,3 +490,32 @@ function saveUpdateHardware(){
             alert(data);
         }
     }); */
+=======
+            if (RegionSelect === '' || hardwareSiteModal === '' || itemSelect === '' || itemBrand === '' || itemModel === '' || asset_num === '' || serial_num === '' || date === '' || acquired_value === '') {
+                $("#addHWMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>All Fields Reqired!</strong>");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "hardware-add-details.php",
+                    data: wordObj,
+                    success: function(response){
+                        $('#response').html(response);
+                        $("#addHWMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added hardware to inventory.");
+                        $("select[name='RegionSelect']").val("");
+                        $("select[name='hardwareSiteModal']").val("");
+                        $("select[name='itemSelect']").val("");
+                        $("select[name='itemBrand']").val("");
+                        $("select[name='itemModel']").val("");
+                        $("input[name='asset_num']").val("");
+                        $("input[name='date']").val("");
+                        $("input[name='acquired_value']").val("");
+                    },
+                    error: function() {
+                        $('#response').html('<p> AN error occured while saving the data');
+
+                    }
+                });
+            }
+        });
+    });
+>>>>>>> e9e8ccbf80331d443d525f9d2b221b556f6e8fde

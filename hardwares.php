@@ -83,7 +83,7 @@ include("includes/header.php");
     <!--- Add Hardware Modal ------------->
     <div class="modal modal-lg fade" id="AddHardwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="AddHardwareModal" aria-hidden="true">
         <div class="modal-dialog">
-                <form action="addHardware.php" method="POST" class="row g-3 needs-validation">
+                <form method="POST" class="row g-3 needs-validation">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">
@@ -97,17 +97,17 @@ include("includes/header.php");
                             <div class="container">
                                 <div class="row">
                                     <h4>Primary Information</h4>
+                                    <div id="addHWMessage"></div>
                                     <div class="col-6">
                                         <dd class='col-sm-12'>
                                             <div class="">Region</div>
                                             <div>
                                                 <div id="hardwareRegionModal"></div>
                                             </div>
-
                                         <dd class="col-sm-12">
                                             <div class="">Site Name</div>
                                             <select class="form-select" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
-                                                <option value="" selected>Select Site</option>
+                                                <option value="" selected></option>
                                             </select>
                                         </dd>
                                         <dd class="col-sm-12">
@@ -119,38 +119,39 @@ include("includes/header.php");
                                         <dd class="col-sm-12">
                                             <div class="">Brand</div>
                                             <select class="form-select" name="itemBrand" id="itemBrand" disabled>
-                                                <option value="" selected>Select Brand</option>
+                                                <option value="" selected></option>
                                             </select>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="">Model</div>
                                             <select class="form-select" name="itemModel" id="itemModel" disabled>
-                                                <option value="" selected>Select Model</option>
+                                                <option value="" selected></option>
                                             </select>
                                         </dd>
                                     </div>
                                     <div class="col-6">
                                         <dd class="col-sm-12">
                                             <div class="">Asset No.:</div>
-                                            <input type="text" class="form-control" name="asset_num" placeholder="" required>
+                                            <input type="text" class="form-control" name="asset_num" id="asset_num" required>
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="">Serial No.</div>
-                                            <input type="text" class="form-control" name="serial_num" placeholder="" required>
+                                            <input type="text" class="form-control" name="serial_num" id="serial_num" required>
                                         </dd>
                                         <dt class="">Date Deployed:</dt>
                                         <dd class="d-flex col-sm-12">
-                                            <input type="text" id="datepicker" class="form-control datepicker-input" name="date_acquired" placeholder="" readonly required>
+                                            <input class="form-control" type="date" id="date" name="date" required>
+                                            <!-- <input type="date" class="form-control datepicker-input" name="date_acquired" id="datepicker" placeholder="" readonly required> -->
                                         </dd>
                                         <dd class="col-sm-12">
                                             <div class="">Acquired Value</div>
-                                            <input class="form-control" type="text" name="acquired_value" placeholder="">
+                                            <input class="form-control" type="text" name="acquired_value" id="acquired_value" placeholder="">
                                         </dd>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Other Information Section -->
+                            <!-- Other Information Section 
                             <div class="container">
                                 <hr>
                                 <div class="row">
@@ -162,14 +163,13 @@ include("includes/header.php");
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Other Information Section -->
+                             End Other Information Section -->
 
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="saveServerBtn">Save</button>
-                        <!--<button type="button" class="btn btn-warning" id="updateServerBtn">Update</button>-->
+                        <button type="button" class="btn btn-primary" id="addNewHardwareBtn">Save</button>
                         <!--<button type="submit" class="btn btn-primary disabled" id="addDetailsCPULoading">
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Saving...

@@ -1,36 +1,17 @@
 <?php
 include "BaseDAO.php";
 
-class hardwareModelDAO extends BaseDAO {
-    function hardwareModel(){
+class hardwareModelDAO extends BaseDAO{
+    function hardwareModel($model_item_name){
         $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM item_models");
+        $stmt = $this->dbh->prepare("SELECT * FROM item_models WHERE item_desc = ? ORDER BY model");
+        $stmt->bindParam(1, $model_item_name);
         $stmt->execute();
 
-        echo "<select id='modelSelect' class='form-select' name='modelSelect' onchange='hardware_site_option()' required>";
-        echo "<option value='' selected></option>";
-        while ($row4 = $stmt->fetch()){
-            echo "<option value='".$row4[3]."' onchange=''>".$row4[3]."</option>";
+        while ($row6 = $stmt->fetch()){
+            echo "<option value='".$row6[3]."' onchange=''>".$row6[3]."</option>";
         }
-        echo "</select>";
-        $this->closeConn();
     }
 }
 
-/*
-class hardwareModelDAO extends BaseDAO {
-    function hardwareModel(){
-        $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM item_models");
-        $stmt->execute();
-
-        echo "<select id='modelSelect' class='form-select' name='modelSelect' onchange='hardware_site_option()' required>";
-        echo "<option value='' selected></option>";
-        while ($row4 = $stmt->fetch()){
-            echo "<option value='".$row4[3]."' onchange=''>".$row4[3]."</option>";
-        }
-        echo "</select>";
-        $this->closeConn();
-    }
-}*/
 ?>
