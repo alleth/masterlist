@@ -50,49 +50,6 @@ $(function(){
         });
     });
 
-    $("#pullout-button").click(function (){
-        const tracking_num = $("input[name='tracking_num']").val().trim(); // Trim spaces
-        const track_required = $("#tracking_required");
-        const validPattern = /^[0-9]{11}$/;
-
-        $("input[name='tracking_num']").removeClass("is-invalid");
-        track_required.text("").removeClass("text-danger");
-
-        if (!tracking_num) {
-            track_required.text("Tracking number is required.").addClass("text-danger");
-            $("input[name='tracking_num']").addClass("is-invalid");
-        } else if (!validPattern.test(tracking_num)) {
-            track_required
-                .text("Tracking number must be exactly 11 digits and can only contain numbers.")
-                .addClass("text-danger");
-            $("input[name='tracking_num']").addClass("is-invalid");
-        } else {
-
-            var wordObj = {
-                "tracking_num" : $("input[name='tracking_num']").val(),
-                "hw_id_pullout" : $("input[name='hw_id_pullout']").val()
-            }
-
-            $.ajax({
-                type: "POST",
-                url: "tracking-number-add.php",
-                data: wordObj,
-                success: function(data){
-                    $("#trackingModal").modal("hide");
-                    const alertMessage = document.getElementById("alertMessage");
-                    alertMessage.innerHTML = "<strong>Hardware successfully sent to SMC</strong>";
-                    alertMessageSuccess();
-                },
-                error: function (data){
-                    alert(data);
-                }
-            });
-
-            $("input[name='tracking_num']").val("").removeClass("is-invalid");
-            track_required.text("");
-        }
-    });
-
     $("#saveEditBtn").click(function (){
         $("#staticBackdrop").modal('hide');
 

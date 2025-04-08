@@ -183,7 +183,7 @@ include("includes/header.php");
 </main>
 
 
-<!---Modal---->
+<!---Edit Modal---->
 
 <div class="modal fade" id="hardwareModalInput" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -204,11 +204,11 @@ include("includes/header.php");
                                     <dd class='col-sm-12'>
                                         <input name="edit_hw_id" type="hidden" disabled>
                                         <div class="sr-only">Region</div>
-                                        <input type="text" readonly class="form-control-plaintext" name="edit_hw_region_name">
+                                        <input type="text" class="form-control" name="edit_hw_region_name" disabled>
                                     </dd>
                                     <dd class="col-sm-12">
                                         <div class="sr-only">Site Name</div>
-                                        <input class="form-control-plaintext" readonly name="edit_site_name_input" id="viewSiteSelect" disabled>
+                                        <input class="form-control" name="edit_site_name_input" id="viewSiteSelect" disabled>
                                     </dd>
                                     <dd class="col-sm-12">
                                         <div class="sr-only">Brand</div>
@@ -235,10 +235,10 @@ include("includes/header.php");
                                         <input type="text" id="datepicker" class="form-control datepicker-input" name="edit_date_acquired" placeholder="Date Acquired" readonly required>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <select class="form-select" name="status_option" required>
+                                        <select class="form-select" name="hardware_status_option" required>
                                             <option value="" selected disabled>Select Status</option>
                                             <option value="On Site">On Site</option>
-                                            <option value="Pulled Out">Pulled out</option>
+                                            <option value="Pull Out">Pull out</option>
                                         </select>
                                     </dd>
                                 </div>
@@ -249,7 +249,7 @@ include("includes/header.php");
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-warning" id="updateHardwareBtn">Save Update</button>
-                    <button type="submit" class="btn btn-warning disabled" id="displayValidation">
+                    <button type="submit" class="btn btn-warning disabled" id="displayHardwareValidation">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Saving...
                     </button>
@@ -258,5 +258,45 @@ include("includes/header.php");
         </form>
     </div>
 </div>
+
+
+<!--Tracking Modal-->
+<div class="modal" id="trackingModal" tabindex="-1" aria-labelledby="trackingModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Action Required</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="containter">
+                    <div class="row">
+                        <dd class="col-sm-12">
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert' id='warning-pullout'></div>
+                        </dd>
+                        <dd class="col-sm-12">
+
+                            <div class="sr-only">Date pulled out:</div>
+                            <input type="text" id="datepicker" class="form-control datepicker-input" name="edit_date_pullout" placeholder="Date pulled out" readonly required>
+                            <div id="date_required" class="text-danger"></div>
+                        </dd>
+                        <dd class="col-sm-12">
+                            <div class="sr-only">Tracking number:</div>
+                            <input type="hidden" class="form-control" name="hw_id_pullout" disabled required>
+                            <input type="text" class="form-control" name="tracking_num" placeholder="Add tracking number here..." required>
+                            <div id="tracking_required" class="text-danger"></div>
+                        </dd>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="pullout-button">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php include("includes/footer.php"); ?>
