@@ -1,7 +1,8 @@
 <?php
     include "BaseDAO.php";
     class requestsViewDAO extends BaseDAO{
-        function requestView($user_id){
+
+        function requestView($user_id, $getCluster){
             $this->openConn();
             $stmt = $this->dbh->prepare("SELECT * FROM request_tbl WHERE send_to = ?");
             $stmt->bindParam(1, $user_id);
@@ -26,16 +27,10 @@
                 echo "<td>$row[2]</td>";
                 echo "<td>$row[3]</td>";
 
-                if($row[5] == "Pending"){
-
-                }
-
-
                 echo "<td><span class='badge bg-warning'>$row[5]</span></td>";
-                echo "<td><button class='btn btn-outline-danger btn-sm'>Reject</button> &nbsp; <button class='btn btn-outline-primary btn-sm'>Approve</button></td>";
+                echo "<td><button title='Reject' class='btn btn-outline-danger btn-sm'><span class='fas fa-minus-circle'></span></button> &nbsp; <button title='Approve' class='btn btn-outline-success btn-sm'><strong><span class='fa fa-check'></span></strong></button></td>";
                 echo "</tr>";
             }
             $this->closeConn();
-
         }
     }

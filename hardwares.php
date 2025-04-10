@@ -57,16 +57,16 @@ include("includes/header.php");
                         <div class="table-responsive">
                             <table id="hardwarePerSite" class="table table-striped">
                                 <thead class="table-dark">
-                                <tr>
-                                    <th scope="col">Region</th>
-                                    <th scope="col">Site</th>
-                                    <th scope="col">Item Description</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Model</th>
-                                    <th scope="col">Asset No.</th>
-                                    <th scope="col">Serial No.</th>
-                                    <th scope="col">Action</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">Region</th>
+                                        <th scope="col">Site</th>
+                                        <th scope="col">Item Description</th>
+                                        <th scope="col">Brand</th>
+                                        <th scope="col">Model</th>
+                                        <th scope="col">Asset No.</th>
+                                        <th scope="col">Serial No.</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="hardwareDisplay">
                                     <td id="rowdisplay" colspan="8" class="text-muted text-center fst-italic">Please select region and site...</td>
@@ -150,21 +150,6 @@ include("includes/header.php");
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Other Information Section 
-                            <div class="container">
-                                <hr>
-                                <div class="row">
-                                    <h4>Other Information</h4>
-                                    <div class="col-12">
-                                        <div class="card border-dashed p-4 text-center">
-                                            <button type="button" class="btn btn-outline-primary col-5 center-align" disabled><i class="fas fa-plus-circle"></i> Add Other Information</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                             End Other Information Section -->
-
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -234,13 +219,20 @@ include("includes/header.php");
                                     <dd class="d-flex col-sm-12">
                                         <input type="text" id="datepicker" class="form-control datepicker-input" name="edit_date_acquired" placeholder="Date Acquired" readonly required>
                                     </dd>
-                                    <dd class="col-sm-12">
-                                        <select class="form-select" name="hardware_status_option" required>
-                                            <option value="" selected disabled>Select Status</option>
-                                            <option value="On Site">On Site</option>
-                                            <option value="Pull Out">Pull out</option>
-                                        </select>
-                                    </dd>
+                                    <?php
+                                        $user_type = $_SESSION['sess_user_type'];
+                                        if($user_type == "ADM" || $user_type == "SPV"){
+                                            echo "";
+                                        }else{
+                                            echo "<dd class='col-sm-12'>
+                                                        <select class='form-select' name='hardware_status_option'>
+                                                            <option value='' selected disabled>Select Status</option>
+                                                            <option value='On Site'>On Site</option>
+                                                            <option value='Pull Out'>Pull out</option>
+                                                        </select>
+                                                    </dd>";
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>

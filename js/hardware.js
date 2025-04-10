@@ -235,7 +235,7 @@ $(function(){
     $("#pullout-button").click(function (){
         const tracking_num = $("input[name='tracking_num']").val().trim(); // Trim spaces
         const track_required = $("#tracking_required");
-        const validPattern = /^[0-9]{11}$/;
+        const validPattern = /^[0-9]{12}$/;
         const datePullout = $("input[name='edit_date_pullout']").val();
         const date_required = $("#date_required");
 
@@ -257,7 +257,7 @@ $(function(){
             $("input[name='tracking_num']").addClass("is-invalid");
         } else if (!validPattern.test(tracking_num)) {
             track_required
-                .text("Tracking number must be exactly 11 digits and can only contain numbers.")
+                .text("Tracking number must be exactly 12 digits and can only contain numbers.")
                 .addClass("text-danger");
             $("input[name='tracking_num']").addClass("is-invalid");
         }else if(datePullout == ""){
@@ -266,7 +266,7 @@ $(function(){
         } else {
             var wordObj = {
                 "tracking_num" : $("input[name='tracking_num']").val(),
-                "hw_id_pullout" : $("input[name='hw_id_pullout']").val(),
+                "hw_id_pullout" : $("input[name='edit_hw_id']").val(),
                 "datePullout" : $("input[name='edit_date_pullout']").val()
             }
 
@@ -276,6 +276,7 @@ $(function(){
                 data: wordObj,
                 success: function(data){
                     $("#trackingModal").modal("hide");
+                    alert(data);
                 },
                 error: function (data){
                     alert(data);
@@ -288,6 +289,56 @@ $(function(){
     });
 
 
+    // for Add hardware Save Button---------------------------
+    $("#addNewHardwareBtn").click(function(){
+
+        var RegionSelect = $('#RegionSelect').val();
+        var hardwareSiteModal = $('#hardwareSiteModal').val();
+        var itemSelect = $('#itemSelect').val();
+        var itemBrand = $('#itemBrand').val();
+        var itemModel = $('#itemModel').val();
+        var asset_num = $('#asset_num').val();
+        var serial_num = $('#serial_num').val();
+        var date = $('#date').val();
+        var acquired_value = $('#acquired_value').val();
+
+        var wordObj = {
+            RegionSelect :RegionSelect,
+            hardwareSiteModal :hardwareSiteModal,
+            itemSelect :itemSelect,
+            itemBrand :itemBrand,
+            itemModel :itemModel,
+            asset_num :asset_num,
+            serial_num :serial_num,
+            date :date,
+            acquired_value :acquired_value
+        };
+        if (RegionSelect === '' || hardwareSiteModal === '' || itemSelect === '' || itemBrand === '' || itemModel === '' || asset_num === '' || serial_num === '' || date === '' || acquired_value === '') {
+            $("#addHWMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>All Fields Reqired!</strong>");
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "hardware-add-details.php",
+                data: wordObj,
+                success: function(response){
+                    $('#response').html(response);
+                    $("#addHWMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added hardware to inventory.");
+                    $("select[name='RegionSelect']").val("");
+                    $("select[name='hardwareSiteModal']").val("");
+                    $("select[name='itemSelect']").val("");
+                    $("select[name='itemBrand']").val("");
+                    $("select[name='itemModel']").val("");
+                    $("input[name='asset_num']").val("");
+                    $("input[name='date']").val("");
+                    $("input[name='acquired_value']").val("");
+                },
+                error: function() {
+                    $('#response').html('<p> AN error occured while saving the data');
+
+                }
+            });
+        }
+    });
 });
 
 function hardware_site_option(){
@@ -448,74 +499,4 @@ function hardware_model_option() {
 
 }
 $(document).ready(function(){
-// for Add hardware Save Button---------------------------
-        $("#addNewHardwareBtn").click(function(){
-        
-        var RegionSelect = $('#RegionSelect').val();
-        var hardwareSiteModal = $('#hardwareSiteModal').val();
-        var itemSelect = $('#itemSelect').val();
-        var itemBrand = $('#itemBrand').val();
-        var itemModel = $('#itemModel').val();
-        var asset_num = $('#asset_num').val();
-        var serial_num = $('#serial_num').val();
-        var date = $('#date').val();
-        var acquired_value = $('#acquired_value').val();
-    
-            var wordObj = {
-                    RegionSelect :RegionSelect,
-                    hardwareSiteModal :hardwareSiteModal,
-                    itemSelect :itemSelect,
-                    itemBrand :itemBrand,
-                    itemModel :itemModel,
-                    asset_num :asset_num,
-                    serial_num :serial_num,
-                    date :date,
-                    acquired_value :acquired_value
-            };
-
-<<<<<<< HEAD
-function saveUpdateHardware(){
-
-}
-
-
-/* for modal select of model
-    $.ajax({
-        type: "POST",
-        url: "hardware-model-modal.php",
-        success: function(data){
-            $("#itemModel").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    }); */
-=======
-            if (RegionSelect === '' || hardwareSiteModal === '' || itemSelect === '' || itemBrand === '' || itemModel === '' || asset_num === '' || serial_num === '' || date === '' || acquired_value === '') {
-                $("#addHWMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>All Fields Reqired!</strong>");
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "hardware-add-details.php",
-                    data: wordObj,
-                    success: function(response){
-                        $('#response').html(response);
-                        $("#addHWMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added hardware to inventory.");
-                        $("select[name='RegionSelect']").val("");
-                        $("select[name='hardwareSiteModal']").val("");
-                        $("select[name='itemSelect']").val("");
-                        $("select[name='itemBrand']").val("");
-                        $("select[name='itemModel']").val("");
-                        $("input[name='asset_num']").val("");
-                        $("input[name='date']").val("");
-                        $("input[name='acquired_value']").val("");
-                    },
-                    error: function() {
-                        $('#response').html('<p> AN error occured while saving the data');
-
-                    }
-                });
-            }
-        });
-    });
->>>>>>> e9e8ccbf80331d443d525f9d2b221b556f6e8fde
+});
