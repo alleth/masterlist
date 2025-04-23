@@ -13,15 +13,28 @@ class trackingNumAddDAO extends BaseDAO {
             $siteCode = $site_code_row[2];
         }
 
-        $pullout_status = "In-transit";
+        $get_user_details = $this->dbh->prepare("SELECT * FROM user_tbl WHERE id = ?");
+        $get_user_details->bindParam(1, $user_id);
+        $get_user_details->execute();
 
-        $stmt = $this->dbh->prepare("INSERT INTO tracking_tbl (trxn_date, tracking_num, site_code, hw_id, user_id, pullout_date, pullout_status) VALUES (NOW(), ?, ?, ?, ?, ?, ?)");
+        while($user_row = $get_user_details->fetch()){
+            $user_cluster = $user_row[5];
+        }
+
+        $pullout_status = "In-transit";
+        $request_type = "Pull out";
+        $request_status = "1";
+
+        $stmt = $this->dbh->prepare("INSERT INTO tracking_tbl (trxn_date, tracking_num, site_code, hw_id, user_id, pullout_date, pullout_status, request_type, cluster_name, request_status) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?,?)");
         $stmt->bindParam(1, $tracking_num);
         $stmt->bindParam(2, $siteCode);
         $stmt->bindParam(3, $hw_id_pullout);
         $stmt->bindParam(4, $user_id);
         $stmt->bindParam(5, $datePullout);
         $stmt->bindParam(6, $pullout_status);
+        $stmt->bindParam(7, $request_type);
+        $stmt->bindParam(8, $user_cluster);
+        $stmt->bindParam(9, $request_status);
         $stmt->execute();
 
         echo "Success";

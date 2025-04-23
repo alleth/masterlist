@@ -11372,3 +11372,8 @@ body {
 .center-align{
   margin: auto;
 }
+
+.btn[disabled], .btn.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

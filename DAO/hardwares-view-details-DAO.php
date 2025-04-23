@@ -4,7 +4,7 @@
     class viewHardwareDetailsDAO extends BaseDAO {
         function viewHardwareDetails($site_name){
             $this->openConn();
-            $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? ORDER BY item_desc");
+            $stmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE site_code = ? AND hw_status = 'On Site' ORDER BY item_desc");
             $stmt->bindParam(1, $site_name);
             $stmt->execute();
 

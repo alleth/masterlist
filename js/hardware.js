@@ -276,7 +276,7 @@ $(function(){
                 data: wordObj,
                 success: function(data){
                     $("#trackingModal").modal("hide");
-                    alert(data);
+                    window.location.href = "requests.php";
                 },
                 error: function (data){
                     alert(data);
