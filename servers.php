@@ -88,11 +88,11 @@
                                         <i class="fas fa-search"></i> Show
                                     </button>
                                 </div>
-                                
+                                <!--
                                 <div class="col-md-7 col-12 d-flex justify-content-md-end justify-content-center mt-2 mt-md-0">
                                     <button class="btn btn-success" data-toggle="modal" data-target="#serverModalInput" id="addServerBtn"><i class="fas fa-plus-circle"></i> Add Server</button>
                                 </div>
-                                
+                                -->
                             </div>
                         </div>
                     </div>

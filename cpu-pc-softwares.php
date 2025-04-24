@@ -13,13 +13,7 @@
                                 </div>
                                 <div class="col-md-2 col-6">
                                     <select class="form-select" name="server_type" onchange="directory_site_name()" id="viewTypeServer" disabled>
-                                        <option value="all_server" selected>All server type</option>
-                                        <option value="VM">VM - Virtual Machine</option>
-                                        <option value="XITRIX">XITRIX</option>
-                                        <option value="IBM">IBM</option>
-                                        <option value="HP">HP</option>
-                                        <option value="Dell">Dell</option>
-                                        <option value="Lenovo">Lenovo</option>
+                                        <option value="all_server" selected>All Site</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1 col-6">

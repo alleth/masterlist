@@ -144,8 +144,8 @@ include("includes/header.php");
                                             <!-- <input type="date" class="form-control datepicker-input" name="date_acquired" id="datepicker" placeholder="" readonly required> -->
                                         </dd>
                                         <dd class="col-sm-12">
-                                            <div class="">Acquired Value</div>
-                                            <input class="form-control" type="text" name="acquired_value" id="acquired_value" placeholder="">
+                                            <div class="" hidden>Acquired Value</div>
+                                            <input class="form-control" type="text" name="acquired_value" id="acquired_value" placeholder="" value="-" hidden>
                                         </dd>
                                     </div>
                                 </div>

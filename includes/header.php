@@ -126,6 +126,10 @@ require_once "auth.php";
                                         <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
                                         Users
                                     </a>";
+                            echo "<a class='nav-link' href='hardware-management.php'>
+                                    <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
+                                    Reference
+                                    </a>";
                         }else{
                             echo "";
                         }
