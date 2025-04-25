@@ -3,41 +3,43 @@ include_once 'BaseDAO.php';
 include "../auth.php";
 class UserDAO extends BaseDAO {
     public function getAllUsers() {
-        $getUserType = "ADM";
-        $userTypeDisplay = "";
+        $getUserType = $_SESSION['sess_user_type'];
         $this->openConn();
-        $stmt = $this->dbh->query("SELECT * FROM user_tbl");
+
+        // Fetch users with region name via JOIN
+        $sql = "SELECT u.*, r.region_name 
+            FROM user_tbl u 
+            LEFT JOIN region_tbl r ON u.region_assigned = r.region_id";
+        $stmt = $this->dbh->query($sql);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $this->closeConn();
 
         foreach ($users as $user) {
-            $user_type = "{$user['user_type']}";
+            // Display user type badge
+            $userTypeDisplay = match($user['user_type']) {
+                'ADM' => "<span class='badge bg-danger'>Administrator</span>",
+                'SPV' => "<span class='badge bg-warning text-dark'>Supervisor</span>",
+                default => "<span class='badge bg-primary'>FSE</span>",
+            };
 
-            if($user_type == "ADM"){
-                $userTypeDisplay = "<span class='badge bg-danger'>Administrator</span>";
-            }else if($user_type == "SPV"){
-                $userTypeDisplay = "<span class='badge bg-warning'>Supervisor</span>";
-            }else{
-                $userTypeDisplay = "<span class='badge bg-primary'>FSE</span>";
-            }
-            if($user_type == $getUserType){
-                $displayButton = "";
-            }else{
-                $displayButton = "<button class='btn btn-sm btn-info edit-btn' data-id='{$user['id']}'>Edit</button>
-                        <button class='btn btn-sm btn-danger delete-btn' data-id='{$user['id']}'>Delete</button>";
-            }
+            // Display action buttons only for admin
+            $displayButton = $getUserType === "ADM"
+                ? "<button class='btn btn-sm btn-info edit-btn' data-id='{$user['id']}'>Edit</button>
+               <button class='btn btn-sm btn-danger delete-btn' data-id='{$user['id']}'>Delete</button>"
+                : "<span class='badge bg-warning text-dark fa fa-lock'></span>";
+
             echo "<tr>
-                    <td>{$user['fname']} {$user['lname']}</td>
-                    <td>{$user['region_assigned']}</td>
-                    <td>{$user['cluster_name']}</td>
-                    <td>$userTypeDisplay</td>
-                    <td>{$user['user_name']}</td>
-                    <td>
-                        $displayButton
-                    </td>
-                  </tr>";
+                <td>{$user['fname']} {$user['lname']}</td>
+                <td>{$user['region_name']}</td>
+                <td>{$user['cluster_name']}</td>
+                <td>{$userTypeDisplay}</td>
+                <td>{$user['user_name']}</td>
+                <td>{$displayButton}</td>
+              </tr>";
         }
     }
+
 
     public function getUser($id) {
         $this->openConn();

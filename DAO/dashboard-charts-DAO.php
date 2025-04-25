@@ -3,11 +3,51 @@ include "BaseDAO.php";
 
 class dataDashboard extends BaseDAO {
     function displayData() {
+        // ✅ New conditional block for hardware_deployment filtering
+        if (isset($_POST['action']) && $_POST['action'] === 'hardware_deployment') {
+            $hardware = isset($_POST['hardware']) ? $_POST['hardware'] : 'all';
+            $params = [];
+            $hardwareCondition = "";
+
+            if ($hardware !== 'all') {
+                $hardwareCondition = "AND sub_major_type = :hardware";
+                $params[':hardware'] = $hardware;
+            }
+
+            $this->openConn();
+            $stmt = $this->dbh->prepare("
+                SELECT 
+                    COALESCE(r.region_name, 'Unknown') AS region,
+                    COUNT(*) AS deployment_count
+                FROM hw_tbl h
+                LEFT JOIN region_tbl r ON h.region_name = r.region_id
+                WHERE h.hw_status = 'On Site' $hardwareCondition
+                GROUP BY r.region_name
+                ORDER BY LENGTH(r.region_name), r.region_name
+            ");
+            $stmt->execute($params);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->closeConn();
+
+            $labels = [];
+            $counts = [];
+            foreach ($result as $row) {
+                $labels[] = $row['region'];
+                $counts[] = (int)$row['deployment_count'];
+            }
+
+            echo json_encode([
+                "labels" => $labels,
+                "data" => $counts
+            ]);
+            exit;
+        }
+
+        // 🔽 Original logic continues here...
         $region = isset($_POST['region']) ? $_POST['region'] : 'all';
         $params = [];
         $regionCondition = "";
 
-        // Map region filter values (adjust based on actual hw_tbl.region_name values)
         $regionMap = [
             '1' => '1', '2' => '2', '3' => '3', '4' => '4',
             '5' => '5', '6' => '6', '7' => '7', '8' => '8',
@@ -15,12 +55,11 @@ class dataDashboard extends BaseDAO {
             '13' => '13', '14' => '14', '15' => '15', '16' => '16',
             '17' => '17'
         ];
+
         if ($region !== 'all') {
-            // Try mapping first; if hw_tbl uses numeric IDs, adjust below
             $mappedRegion = isset($regionMap[$region]) ? $regionMap[$region] : $region;
             $regionCondition = " AND region_name = :region";
             $params[':region'] = $mappedRegion;
-            error_log("Filtering by region_name: $mappedRegion");
         }
 
         $deviceMap = [
@@ -35,9 +74,7 @@ class dataDashboard extends BaseDAO {
         $countDevice = $this->dbh->prepare("SELECT sub_major_type, hw_date_acq FROM hw_tbl WHERE hw_status = 'On Site' $regionCondition");
         $countDevice->execute($params);
         $hardwareRows = $countDevice->fetchAll(PDO::FETCH_ASSOC);
-        error_log("Region: $region, Rows Returned: " . count($hardwareRows));
 
-        $deviceCategoryCount = [];
         $allHardware = [];
         $ageData = [
             '3 Years below' => 0, '3-5 Years' => 0, '5-10 Years' => 0,
@@ -46,20 +83,12 @@ class dataDashboard extends BaseDAO {
         $currentYear = date("Y");
 
         foreach ($hardwareRows as $row_data) {
-            $deviceCategoryName = $row_data['sub_major_type'];
-            $uiCategory = isset($deviceMap[$deviceCategoryName]) ? $deviceMap[$deviceCategoryName] : $deviceCategoryName;
+            $uiCategory = isset($deviceMap[$row_data['sub_major_type']]) ? $deviceMap[$row_data['sub_major_type']] : $row_data['sub_major_type'];
 
             $allHardware[] = [
                 "sub_major_type" => $uiCategory,
                 "hw_date_acq" => $row_data['hw_date_acq']
             ];
-
-            if (!in_array($uiCategory, $allowedCategories)) continue;
-
-            if (!isset($deviceCategoryCount[$uiCategory])) {
-                $deviceCategoryCount[$uiCategory] = 0;
-            }
-            $deviceCategoryCount[$uiCategory]++;
 
             if (empty($row_data['hw_date_acq']) || strtotime($row_data['hw_date_acq']) === false) {
                 $ageData['Unidentified Age']++;
@@ -117,11 +146,31 @@ class dataDashboard extends BaseDAO {
         $os_type->execute($params);
         $osType = $os_type->fetchAll(PDO::FETCH_ASSOC);
 
+        $deploymentQuery = $this->dbh->prepare("
+            SELECT 
+                COALESCE(r.region_name, 'Unknown') AS region,
+                COUNT(*) AS deployment_count
+            FROM hw_tbl h
+            LEFT JOIN region_tbl r ON h.region_name = r.region_id
+            WHERE h.hw_status = 'On Site'
+            GROUP BY r.region_name
+            ORDER BY r.region_id
+        ");
+        $deploymentQuery->execute();
+        $deploymentResults = $deploymentQuery->fetchAll(PDO::FETCH_ASSOC);
+
+        $regionLabels = [];
+        $regionCounts = [];
+        foreach ($deploymentResults as $row) {
+            $regionLabels[] = $row['region'];
+            $regionCounts[] = $row['deployment_count'];
+        }
+
         $this->closeConn();
 
         $response = [
-            "category_name" => array_keys($deviceCategoryCount),
-            "category_count" => array_values($deviceCategoryCount),
+            "category_name" => $regionLabels,
+            "category_count" => $regionCounts,
             "age_labels" => array_keys($ageData),
             "age_data" => array_values($ageData),
             "hardware" => array_values($filteredTableData),
@@ -130,6 +179,7 @@ class dataDashboard extends BaseDAO {
             "printer_models" => $printerModels,
             "os_type" => $osType
         ];
+
         echo json_encode($response);
     }
 
@@ -143,3 +193,4 @@ class dataDashboard extends BaseDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+?>

@@ -39,7 +39,24 @@
                     <div class="col-lg-6 mb-lg-4">
                         <div class="card border border-dark-subtle shadow-sm">
                             <div class="card-header">
-                                <h6 class="card-title">Hardware by Category <span class='badge bg-success'>On Site</span></h6>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <h6 class="card-title">Hardware Deployment per Region <span class='badge bg-success'>On Site</span></h6>
+                                    </div>
+                                    <div class="col-sm">
+                                        <select id="deploymentFilter" name="deploymentFilter" class="form-select form-select-sm mb-2">
+                                            <option value="all">All</option>
+                                            <option value="Server">Server</option>
+                                            <option value="CPU-PC">CPU-PC</option>
+                                            <option value="Printer">Printer</option>
+                                            <option value="UPS-PC">UPS-PC</option>
+                                            <option value="UPS-SERVER">UPS-SERVER</option>
+                                            <option value="Monitor">Monitor</option>
+                                            <option value="Network Equipment">Network Equipment</option>
+                                            <option value="Peripherals">Peripherals</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <canvas id="categoryChart" style="max-height: 300px;"></canvas>
@@ -72,6 +89,7 @@
                             <div class="card-body">
                                 <canvas id="ageChart" style="max-height: 300px;"></canvas>
                             </div>
+                            <div class="card-footer text-muted"></div>
                         </div>
                     </div>
                 </div>

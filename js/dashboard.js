@@ -18,17 +18,14 @@ $(function() {
                     return;
                 }
 
-                // Log data specifics
                 console.log("Hardware Count:", data.all_hardware ? data.all_hardware.length : 0);
                 console.log("Categories:", data.category_name);
 
-                // Populate Tables
                 populateTable("#hardwareTable", data.hardware || []);
                 populateServerTable("#serverModelTable", data.server_models || []);
                 populatePrinterTable("#printerModelTable", data.printer_models || []);
                 populateOSTypeTable("#osTypeTable", data.os_type || []);
 
-                // Initialize Charts
                 if (categoryChart) categoryChart.destroy();
                 if (ageChart) ageChart.destroy();
 

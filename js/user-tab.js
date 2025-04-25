@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Initialize DataTable once after fetch
     let dataTable;
 
     function fetchUsers() {
@@ -10,7 +9,6 @@ $(document).ready(function () {
             success: function (response) {
                 $('#userTable tbody').html(response);
 
-                // Re-initialize DataTable
                 if ($.fn.DataTable.isDataTable('#userTable')) {
                     dataTable.destroy();
                 }
@@ -23,17 +21,26 @@ $(document).ready(function () {
         });
     }
 
+    // Initial fetch
     fetchUsers();
 
+    // Clear form and set modal for "Add"
+    $('[data-bs-target="#userModal"]').click(function () {
+        $('#userForm')[0].reset();
+        $('#userId').val('');
+        $('#userModalLabel').text('Add New User');
+    });
+
+    // Save (Add or Update)
     $('#saveUser').click(function (e) {
         e.preventDefault();
-        let formData = $('#userForm').serialize() + '&action=save';
+        const formData = $('#userForm').serialize() + '&action=save';
 
         $.ajax({
             url: 'DAO/user-actions.php',
             type: 'POST',
             data: formData,
-            success: function (response) {
+            success: function () {
                 $('#userModal').modal('hide');
                 $('#userForm')[0].reset();
                 fetchUsers();
@@ -44,6 +51,7 @@ $(document).ready(function () {
     // Edit User
     $(document).on('click', '.edit-btn', function () {
         const userId = $(this).data('id');
+
         $.ajax({
             url: 'DAO/user-actions.php',
             type: 'POST',
@@ -58,6 +66,8 @@ $(document).ready(function () {
                 $('#user_type').val(data.user_type);
                 $('#username').val(data.user_name);
                 $('#password').val(data.user_pass);
+
+                $('#userModalLabel').text('Edit User');
                 $('#userModal').modal('show');
             }
         });
@@ -67,14 +77,22 @@ $(document).ready(function () {
     $(document).on('click', '.delete-btn', function () {
         if (confirm('Are you sure you want to delete this user?')) {
             const userId = $(this).data('id');
+
             $.ajax({
                 url: 'DAO/user-actions.php',
                 type: 'POST',
                 data: { action: 'delete', id: userId },
-                success: function (response) {
+                success: function () {
                     fetchUsers();
                 }
             });
         }
+    });
+
+    // Clear modal fields when closed (to prevent stale data)
+    $('#userModal').on('hidden.bs.modal', function () {
+        $('#userForm')[0].reset();
+        $('#userModalLabel').text('Add New User');
+        $('#userId').val('');
     });
 });

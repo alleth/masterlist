@@ -40,9 +40,18 @@ include("includes/header.php");
                             </div>
                             <!-- Added wrapper div to push button to the right -->
                             <div class="col-md-4 d-flex justify-content-md-end justify-content-center">
-                                <button class="btn btn-success justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#AddHardwareModal" id="">
-                                    <i class="fas fa-plus-circle"></i>&nbsp;Add Hardware
-                                </button>
+                                <?php
+                                    $user_type = $_SESSION['sess_user_type'];
+                                    if($user_type == "ADM" || $user_type == "SPV"){
+                                        echo "<button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' id=''>
+                                                <i class='fas fa-plus-circle'></i> Deploy Hardware
+                                                </button>";
+                                    }else{
+                                        echo "<button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id=''>
+                                                <i class='fas fa-plus-circle'></i>&nbsp;Add Hardware
+                                                </button>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
