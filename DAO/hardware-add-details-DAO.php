@@ -46,7 +46,6 @@ class addHardwareDAO extends BaseDAO {
                 $serialData = $serialDataStmt->fetch(PDO::FETCH_ASSOC);
                 echo "Serial Number Already Exist on site ";
                 echo "" . htmlspecialchars($serialData['site_code']) . "";
-                echo "" . htmlspecialchars($serialData['site_code']) . "";
             }
         //} 
         else {
