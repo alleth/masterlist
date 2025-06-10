@@ -197,34 +197,34 @@ include("includes/header.php");
                                 <div class="col-12">
                                     <dd class='col-sm-12'>
                                         <input name="edit_hw_id" type="hidden" disabled>
-                                        <div class="sr-only">Region</div>
+                                        <div class="">Region</div>
                                         <input type="text" class="form-control" name="edit_hw_region_name" disabled>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Site Name</div>
+                                        <div class="">Site Name</div>
                                         <input class="form-control" name="edit_site_name_input" id="viewSiteSelect" disabled>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Brand</div>
+                                        <div class="">Brand</div>
                                         <select class="form-select" name="edit_brand_name" onchange="showHardwareModel()" id="edit_brandSelect"></select>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Model</div>
+                                        <div class="">Model</div>
                                         <select class="form-select" name="edit_model_name" id="edit_model_option"></select>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Acquired Value</div>
+                                        <div class="">Acquired Value</div>
                                         <input class="form-control" type="text" name="edit_acquired_value" placeholder="Acquired Value">
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Asset No.:</div>
+                                        <div class="">Asset No.:</div>
                                         <input type="text" class="form-control" name="edit_asset_num" placeholder="Asset Number" required>
                                     </dd>
                                     <dd class="col-sm-12">
-                                        <div class="sr-only">Serial No.</div>
+                                        <div class="">Serial No.</div>
                                         <input type="text" class="form-control" name="edit_serial_num" placeholder="Serial Number" required>
                                     </dd>
-                                    <dt class="sr-only">Date Acquired:</dt>
+                                    <dt class="">Date Acquired:</dt>
                                     <dd class="d-flex col-sm-12">
                                         <input type="text" id="datepicker" class="form-control datepicker-input" name="edit_date_acquired" placeholder="Date Acquired" readonly required>
                                     </dd>

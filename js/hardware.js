@@ -290,54 +290,71 @@ $(function(){
 
 
     // for Add hardware Save Button---------------------------
-    $("#addNewHardwareBtn").click(function(){
+    $("#addNewHardwareBtn").click(function() {
+    var RegionSelect = $('#RegionSelect').val();
+    var hardwareSiteModal = $('#hardwareSiteModal').val();
+    var itemSelect = $('#itemSelect').val();
+    var itemBrand = $('#itemBrand').val();
+    var itemModel = $('#itemModel').val();
+    var asset_num = $('#asset_num').val();
+    var serial_num = $('#serial_num').val();
+    var date = $('#date').val();
+    var acquired_value = $('#acquired_value').val();
 
-        var RegionSelect = $('#RegionSelect').val();
-        var hardwareSiteModal = $('#hardwareSiteModal').val();
-        var itemSelect = $('#itemSelect').val();
-        var itemBrand = $('#itemBrand').val();
-        var itemModel = $('#itemModel').val();
-        var asset_num = $('#asset_num').val();
-        var serial_num = $('#serial_num').val();
-        var date = $('#date').val();
-        var acquired_value = $('#acquired_value').val();
+    var wordObj = {
+        RegionSelect : RegionSelect,
+        hardwareSiteModal : hardwareSiteModal,
+        itemSelect : itemSelect,
+        itemBrand : itemBrand,
+        itemModel : itemModel,
+        asset_num : asset_num,
+        serial_num : serial_num,
+        date : date,
+        acquired_value : acquired_value
+    };
 
-        var wordObj = {
-            RegionSelect :RegionSelect,
-            hardwareSiteModal :hardwareSiteModal,
-            itemSelect :itemSelect,
-            itemBrand :itemBrand,
-            itemModel :itemModel,
-            asset_num :asset_num,
-            serial_num :serial_num,
-            date :date,
-            acquired_value :acquired_value
-        };
-        if (RegionSelect === '' || hardwareSiteModal === '' || itemSelect === '' || itemBrand === '' || itemModel === '' || asset_num === '' || serial_num === '' || date === '' || acquired_value === '') {
-            $("#addHWMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>All Fields Reqired!</strong>");
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "hardware-add-details.php",
-                data: wordObj,
-                success: function(response){
-                    $('#response').html(response);
-                    $("#addHWMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added hardware to inventory.");
-                    $("select[name='RegionSelect']").val("");
-                    $("select[name='hardwareSiteModal']").val("");
-                    $("select[name='itemSelect']").val("");
-                    $("select[name='itemBrand']").val("");
-                    $("select[name='itemModel']").val("");
-                    $("input[name='asset_num']").val("");
-                    $("input[name='date']").val("");
-                    $("input[name='acquired_value']").val("");
-                },
-                error: function() {
-                    $('#response').html('<p> AN error occured while saving the data');
+    if (!RegionSelect || !hardwareSiteModal || !itemSelect || !itemBrand || !itemModel || !asset_num || !serial_num || !date || !acquired_value) {
+        $("#addHWMessage").html("<div class='alert alert-warning'>All Fields Required!</div>");
+        return;
+    }
+                $.ajax({
+                    type: "POST",
+                    url: "hardware-add-details.php",
+                    data: wordObj,
+                    success: function(saveResponse) {
+                    if (saveResponse.includes("Asset Number Already Exist on site")) {
+                        // Show error alert for duplicate site code
+                        $("#addHWMessage").html(`
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                                <strong></strong> ${saveResponse}<br>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`);
+                    } else if (saveResponse.includes("Serial Number Already Exist on site")) {
+                        // Show error alert for duplicate site code
+                        $("#addHWMessage").html(`
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                                <strong></strong> ${saveResponse}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`);
+                    } else if (saveResponse.includes("Asset Number and Serial Number Already Exist on site")) {
+                        // Show error alert for duplicate site code
+                        $("#addHWMessage").html(`
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                                <strong></strong> ${saveResponse}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`);
+                    } else {
 
-                }
-            });
-        }
+                        $('#response').html(saveResponse);
+                        $("#addHWMessage").html("<div class='alert alert-success'>Added Successfully!</div>");
+                        // Clear the fields
+                        $('select, input').val('');
+                        }
+                    },
+                    error: function() {
+                        $('#response').html('<div class="alert alert-danger">An error occurred while saving the data.</div>');
+                    }
+                });
     });
 });
 
