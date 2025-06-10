@@ -1,187 +1,272 @@
-<?php include("includes/header.php"); ?>
-    <main>
-        <div class="container-fluid px-4">
+<?php include 'includes/header.php'; ?>
+
+<style>
+    body {
+        background-color: #faf9f9;
+        font-family: system-ui, -apple-system, sans-serif;
+        margin: 0; /* Ensure no default margin interferes */
+    }
+    .spinner-container {
+        min-height: 60px;
+    }
+    .accordion-button {
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 0.75rem 1.25rem;
+        background-color: #e9ecef;
+        color: #343a40;
+    }
+    .accordion-button:not(.collapsed) {
+        background-color: #dee2e6;
+        color: #343a40;
+    }
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: #dee2e6;
+    }
+    .accordion-item {
+        border: none;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        background-color: #fff;
+    }
+    .accordion-body {
+        padding: 1rem 1.25rem;
+    }
+    .table {
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+    .table th, .table td {
+        padding: 0.75rem;
+        vertical-align: middle;
+        border-color: #dee2e6;
+    }
+    .table thead th {
+        background-color: #343a40;
+        color: #fff;
+        border: none;
+    }
+    .table tbody tr:hover {
+        background-color: #f1f3f5;
+    }
+    .count-column {
+        width: 150px;
+        text-align: center;
+    }
+    .card {
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+    }
+    .card-body {
+        padding: 1.5rem;
+    }
+    .form-select, .form-label {
+        display: block;
+        font-size: 0.875rem;
+    }
+    h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 1.5rem;
+    }
+    h5 {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #343a40;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    /* Fixed Filter Section */
+    .filter-fixed {
+        position: fixed;
+        top: 8rem;
+        right: calc(1rem + 15px); /* Align with container padding + half gutter */
+        width: calc(33.3333% - 30px); /* Matches col-md-3 minus full gutter */
+        max-width: 300px; /* Prevent overly wide filter */
+        z-index: 1000;
+    }
+    /* Ensure container supports scrolling */
+    .dashboard-container {
+        min-height: 100vh;
+        overflow-y: auto; /* Allow vertical scrolling */
+        position: relative; /* Context for positioning */
+    }
+    /* Prevent overlap with fixed filter */
+    .main-content {
+        margin-right: 0; /* Default for mobile */
+        box-sizing: border-box;
+    }
+    /* Media query for medium and larger screens */
+    @media (min-width: 768px) {
+        .main-content {
+            margin-right: calc(33.3333% + 2rem); /* Initial margin for filter */
+            max-width: calc(100% - 330px); /* Account for filter width (300px + 30px gutter) */
+        }
+    }
+    /* Media query for mobile view */
+    @media (max-width: 767.98px) {
+        .filter-fixed {
+            position: static; /* Disable fixed positioning on mobile */
+            width: 100%; /* Full width on mobile */
+            max-width: none; /* Remove max-width constraint */
+            top: auto; /* Reset top */
+            right: auto; /* Reset right */
+        }
+        .main-content {
+            margin-right: 0; /* No margin needed on mobile */
+            max-width: 100%; /* Full width on mobile */
+        }
+        .filter-card {
+            margin-top: 1rem; /* Add spacing between sections on mobile */
+        }
+        .dashboard-container {
+            padding-top: 0; /* Ensure no extra padding pushes content */
+        }
+    }
+    /* Fine-tune for 1000–1175px to prevent overlap */
+    @media (min-width: 1000px) and (max-width: 1175px) {
+        .filter-fixed {
+            width: 300px; /* Match max-width for consistency */
+            right: calc(1rem + 15px); /* Align with container edge */
+        }
+        .main-content {
+            margin-right: 330px; /* Match filter width (300px + 30px gutter) */
+            max-width: calc(100% - 330px); /* Prevent overlap */
+        }
+    }
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        display: none; /* Hidden by default */
+        padding: 0.75rem 1rem;
+        background-color: #343a40;
+        color: #fff;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 0.875rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: opacity 0.3s ease;
+    }
+    .back-to-top:hover {
+        background-color: #495057;
+    }
+    .back-to-top.visible {
+        display: block;
+        opacity: 1;
+    }
+    /* Hide button on mobile */
+    @media (max-width: 767.98px) {
+        .back-to-top {
+            display: none !important; /* Always hidden on mobile */
+        }
+    }
+</style>
+
+<div class="container-fluid px-4 my-4 dashboard-container">
+    <div class="row">
+        <div class="col-12">
+            <h4>Dashboard</h4>
+
             <div class="row">
-                <div class="col">
-                    <h1 class="mt-4 display-6">Dashboard</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Analytics</li>
-                    </ol>
-                </div>
-                <div class="col-lg-4 mb-6">
-                    <br>
-                    <br>
-                    <select class="form-select form-select-padding-y-lg" name="regionFilter" id="regionFilter">
-                        <option value="all">All Region</option>
-                        <option value="1">NCR</option>
-                        <option value="2">Region 1</option>
-                        <option value="3">Region 2</option>
-                        <option value="4">Region 3</option>
-                        <option value="5">Region 4-A</option>
-                        <option value="6">Region 4-B</option>
-                        <option value="7">Region 5</option>
-                        <option value="8">Region 6</option>
-                        <option value="9">Region 7</option>
-                        <option value="10">Region 8</option>
-                        <option value="11">Region 9</option>
-                        <option value="12">Region 10</option>
-                        <option value="13">Region 11</option>
-                        <option value="14">Region 12</option>
-                        <option value="15">BARMM</option>
-                        <option value="16">CAR</option>
-                        <option value="17">CARAGA</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="container-fluid mt-4">
-                <div class="row">
-                    <div class="col-lg-6 mb-lg-4">
-                        <div class="card border border-dark-subtle shadow-sm">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h6 class="card-title">Hardware Deployment per Region <span class='badge bg-success'>On Site</span></h6>
+                <!-- Main Content (Hardware Accordion) -->
+                <div class="col-12 col-md-12 order-1 main-content">
+                    <!-- Hardware Accordion -->
+                    <div class="card mb-4" id="hardware-section">
+                        <div class="card-body">
+                            <div class="accordion" id="hardwareAccordion">
+                                <div class="spinner-container d-flex justify-content-center align-items-center text-center">
+                                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
                                     </div>
-                                    <div class="col-sm">
-                                        <select id="deploymentFilter" name="deploymentFilter" class="form-select form-select-sm mb-2">
-                                            <option value="all">All</option>
-                                            <option value="Server">Server</option>
-                                            <option value="CPU-PC">CPU-PC</option>
-                                            <option value="Printer">Printer</option>
-                                            <option value="UPS-PC">UPS-PC</option>
-                                            <option value="UPS-SERVER">UPS-SERVER</option>
-                                            <option value="Monitor">Monitor</option>
-                                            <option value="Network Equipment">Network Equipment</option>
-                                            <option value="Peripherals">Peripherals</option>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Section (Fixed on Medium+, Below on Mobile) -->
+                <div class="col-12 col-md-3 order-2 filter-fixed">
+                    <div class="card mb-4 filter-card">
+                        <div class="card-body">
+                            <form id="deviceForm">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="regionFilter" class="form-label">Region</label>
+                                        <select class="form-select" id="regionSelect">
+                                            <option value="">All Region</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="siteFilter" class="form-label">Site</label>
+                                        <select class="form-select" id="siteSelect" disabled>
+                                            <option value="0">All Site</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="categoryChart" style="max-height: 300px;"></canvas>
-                            </div>
-                            <div class="card-footer text-muted"></div>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card border border-dark-subtle shadow-sm">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <h6 class="card-title">Age of Hardware <span class='badge bg-success'>On Site</span></h6>
-                                    </div>
-                                    <div class="col-sm">
-                                        <select id="hardwareFilter" name="hardwareFilter" class="form-select form-select-sm mb-3">
-                                            <option value="all">All</option>
-                                            <option value="Server">Server</option>
-                                            <option value="CPU-PC">CPU-PC</option> <!-- Fixed from "CPU" -->
-                                            <option value="Printer">Printer</option>
-                                            <option value="UPS-PC">UPS-PC</option>
-                                            <option value="UPS-SERVER">UPS-SERVER</option>
-                                            <option value="Monitor">Monitor</option>
-                                            <option value="Network Equipment">Network Equipment</option>
-                                            <option value="Peripherals">Peripherals</option>
-                                        </select>
-                                    </div>
+
+                    <div class="card mb-4 counts-card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label text-muted">Total Number of Sites</label>
+                                    <p class="text-dark">Loading...</p>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="ageChart" style="max-height: 300px;"></canvas>
-                            </div>
-                            <div class="card-footer text-muted"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-header">
-                                <h6 class="card-title">Server <span class='badge bg-success'>On Site</span></h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="serverModelTable" class="table">
-                                        <thead class="table-light">
-                                        <tr>
-                                            <th>Brand</th>
-                                            <th>Model</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
+                                <div class="col-12">
+                                    <label class="form-label text-muted">Total Number of Proponent-Owned</label>
+                                    <p class="text-dark">Loading...</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-header">
-                                <h6 class="card-title">Printer <span class='badge bg-success'>On Site</span></h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="printerModelTable" class="table">
-                                        <thead class="table-light">
-                                        <tr>
-                                            <th>Brand</th>
-                                            <th>Model</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
+                                <div class="col-12">
+                                    <label class="form-label text-muted">Total Number of Government-Owned</label>
+                                    <p class="text-dark">Loading...</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <div class="card border border-dark-subtle shadow-sm fixed-card">
-                            <div class="card-header">
-                                <h6 class="card-title">Workstation <span class='badge bg-success'>On Site</span></h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="osTypeTable" class="table">
-                                        <thead class="table-light">
-                                        <tr>
-                                            <th>OS Type</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row"></div>
-
-                <div class="row">
-                    <div class="col-lg-12 mb-4">
-                        <div class="card border border-dark-subtle shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Other Hardwares</h5>
-                                <table class="table table-striped" id="hardwareTable">
-                                    <thead class="table-dark">
-                                    <tr>
-                                        <th>Hardwares</th>
-                                        <th>Item Description</th>
-                                        <th>Total Count</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    </main>
-<?php include("includes/footer.php"); ?>
+
+        </div>
+    </div>
+</div>
+
+<!-- Back to Top Button -->
+<button title="Back To Top" class="back-to-top" id="backToTop"><span class="fas fa-angle-up"></span></button>
+
+<script>
+    // Back to Top Button Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const backToTopButton = document.getElementById('backToTop');
+
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll to top on click
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+<?php include 'includes/components.php'; ?>
+    <script src="js/dashboardv2.js"></script>
+<?php include 'includes/footer.php'; ?>

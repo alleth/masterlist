@@ -125,7 +125,6 @@ include("includes/header.php");
     </div>
 </main>
 
-<?php
-include("includes/footer.php");
-
-?>
+<?php include 'includes/components.php'; ?>
+    <script src="js/user-tab.js" type="text/javascript"></script>
+<?php include 'includes/footer.php'; ?>

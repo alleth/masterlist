@@ -1,0 +1,625 @@
+[10-Jun-2025 07:41:41 Europe/Berlin] API request: action=getHardwareCounts, params={"action":"getHardwareCounts","region_id":"2"}
+[10-Jun-2025 07:41:41 Europe/Berlin] API request: action=getSiteCounts, params={"action":"getSiteCounts","region_id":"2"}
+[10-Jun-2025 07:41:41 Europe/Berlin] getHardwareCounts params: {"region_id":"2"}
+[10-Jun-2025 07:41:41 Europe/Berlin] API request: action=getSites, params={"action":"getSites","region_id":"2"}
+[10-Jun-2025 07:41:41 Europe/Berlin] getSiteCounts params: {"region_id":"2"}
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing getSites query for region_id=2
+[10-Jun-2025 07:41:41 Europe/Berlin] Applying region filter: region_id=2
+[10-Jun-2025 07:41:41 Europe/Berlin] Applying region filter: region_id=2
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing total sites query: SELECT COUNT(DISTINCT site_code) as total_sites 
+                      FROM site_list_tbl WHERE 1=1 AND region_id = ? with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Total sites result: 23
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing proponent count query: SELECT COUNT(DISTINCT site_code) as count 
+                      FROM site_list_tbl WHERE 1=1 AND region_id = ? AND site_partnership = 'Proponent' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Proponent count result: 0
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing government count query: SELECT COUNT(DISTINCT site_code) as count 
+                      FROM site_list_tbl WHERE 1=1 AND region_id = ? AND site_partnership = 'Government' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] hw_tbl data: [{"region_name":"1","site_code":"1308","hw_status":"On Site"},{"region_name":"1","site_code":"1312","hw_status":"On Site"},{"region_name":"1","site_code":"1316","hw_status":"On Site"},{"region_name":"1","site_code":"1320","hw_status":"On Site"},{"region_name":"1","site_code":"1336","hw_status":"On Site"},{"region_name":"1","site_code":"1356","hw_status":"On Site"},{"region_name":"1","site_code":"1364","hw_status":"On Site"},{"region_name":"1","site_code":"1377","hw_status":"On Site"},{"region_name":"1","site_code":"1380","hw_status":"On Site"},{"region_name":"1","site_code":"1384","hw_status":"On Site"},{"region_name":"1","site_code":"1391","hw_status":"On Site"},{"region_name":"1","site_code":"1396","hw_status":"On Site"},{"region_name":"1","site_code":"1800","hw_status":"On Site"},{"region_name":"1","site_code":"1300","hw_status":"On Site"},{"region_name":"1","site_code":"1301","hw_status":"On Site"},{"region_name":"1","site_code":"1303","hw_status":"On Site"},{"region_name":"1","site_code":"1304","hw_status":"On Site"},{"region_name":"1","site_code":"1306","hw_status":"On Site"},{"region_name":"1","site_code":"1328","hw_status":"On Site"},{"region_name":"1","site_code":"1329","hw_status":"On Site"},{"region_name":"1","site_code":"1332","hw_status":"On Site"},{"region_name":"1","site_code":"1340","hw_status":"On Site"},{"region_name":"1","site_code":"1344","hw_status":"On Site"},{"region_name":"1","site_code":"1352","hw_status":"On Site"},{"region_name":"1","site_code":"1358","hw_status":"On Site"},{"region_name":"1","site_code":"1366","hw_status":"On Site"},{"region_name":"1","site_code":"1367","hw_status":"On Site"},{"region_name":"1","site_code":"1378","hw_status":"On Site"},{"region_name":"1","site_code":"1388","hw_status":"On Site"},{"region_name":"1","site_code":"1392","hw_status":"On Site"},{"region_name":"1","site_code":"1393","hw_status":"On Site"},{"region_name":"1","site_code":"1360","hw_status":"On Site"},{"region_name":"1","site_code":"1376","hw_status":"On Site"},{"region_name":"1","site_code":"1372","hw_status":"On Site"},{"region_name":"1","site_code":"1368","hw_status":"On Site"},{"region_name":"1","site_code":"1324","hw_status":"On Site"},{"region_name":"1","site_code":"1390","hw_status":"On Site"},{"region_name":"1","site_code":"1348","hw_status":"On Site"},{"region_name":"1","site_code":"1337","hw_status":"On Site"},{"region_name":"2","site_code":"0100","hw_status":"On Site"},{"region_name":"2","site_code":"0101","hw_status":"On Site"},{"region_name":"2","site_code":"0104","hw_status":"On Site"},{"region_name":"2","site_code":"0108","hw_status":"On Site"},{"region_name":"2","site_code":"0110","hw_status":"On Site"},{"region_name":"2","site_code":"0112","hw_status":"On Site"},{"region_name":"2","site_code":"0116","hw_status":"On Site"},{"region_name":"2","site_code":"0120","hw_status":"On Site"},{"region_name":"2","site_code":"0122","hw_status":"On Site"},{"region_name":"2","site_code":"0124","hw_status":"On Site"},{"region_name":"2","site_code":"0128","hw_status":"On Site"},{"region_name":"2","site_code":"0130","hw_status":"On Site"},{"region_name":"2","site_code":"0132","hw_status":"On Site"},{"region_name":"2","site_code":"0134","hw_status":"On Site"},{"region_name":"2","site_code":"0136","hw_status":"On Site"},{"region_name":"2","site_code":"0138","hw_status":"On Site"},{"region_name":"2","site_code":"0140","hw_status":"On Site"},{"region_name":"2","site_code":"0142","hw_status":"On Site"},{"region_name":"2","site_code":"0144","hw_status":"On Site"},{"region_name":"2","site_code":"0146","hw_status":"On Site"},{"region_name":"3","site_code":"0200","hw_status":"On Site"},{"region_name":"3","site_code":"0201","hw_status":"On Site"},{"region_name":"3","site_code":"0204","hw_status":"On Site"},{"region_name":"3","site_code":"0205","hw_status":"On Site"},{"region_name":"3","site_code":"0206","hw_status":"On Site"},{"region_name":"3","site_code":"0207","hw_status":"On Site"},{"region_name":"3","site_code":"0210","hw_status":"On Site"},{"region_name":"3","site_code":"0212","hw_status":"On Site"},{"region_name":"3","site_code":"0216","hw_status":"On Site"},{"region_name":"3","site_code":"0218","hw_status":"On Site"},{"region_name":"3","site_code":"0220","hw_status":"On Site"},{"region_name":"3","site_code":"0224","hw_status":"On Site"},{"region_name":"3","site_code":"0226","hw_status":"On Site"},{"region_name":"3","site_code":"0228","hw_status":"On Site"},{"region_name":"3","site_code":"0231","hw_status":"On Site"},{"region_name":"3","site_code":"0232","hw_status":"On Site"},{"region_name":"3","site_code":"0236","hw_status":"On Site"},{"region_name":"3","site_code":"0240","hw_status":"On Site"},{"region_name":"3","site_code":"0242","hw_status":"On Site"},{"region_name":"3","site_code":"0244","hw_status":"On Site"},{"region_name":"3","site_code":"0248","hw_status":"On Site"},{"region_name":"3","site_code":"0227","hw_status":"On Site"},{"region_name":"4","site_code":"0300","hw_status":"On Site"},{"region_name":"4","site_code":"0301","hw_status":"On Site"},{"region_name":"4","site_code":"0304","hw_status":"On Site"},{"region_name":"4","site_code":"0306","hw_status":"On Site"},{"region_name":"4","site_code":"0308","hw_status":"On Site"},{"region_name":"4","site_code":"0312","hw_status":"On Site"},{"region_name":"4","site_code":"0316","hw_status":"On Site"},{"region_name":"4","site_code":"0320","hw_status":"On Site"},{"region_name":"4","site_code":"0324","hw_status":"On Site"},{"region_name":"4","site_code":"0328","hw_status":"On Site"},{"region_name":"4","site_code":"0332","hw_status":"On Site"},{"region_name":"4","site_code":"0368","hw_status":"On Site"},{"region_name":"4","site_code":"0336","hw_status":"On Site"},{"region_name":"4","site_code":"0340","hw_status":"On Site"},{"region_name":"4","site_code":"0344","hw_status":"On Site"},{"region_name":"4","site_code":"0348","hw_status":"On Site"},{"region_name":"4","site_code":"0352","hw_status":"On Site"},{"region_name":"4","site_code":"0353","hw_status":"On Site"},{"region_name":"4","site_code":"0356","hw_status":"On Site"},{"region_name":"4","site_code":"0360","hw_status":"On Site"},{"region_name":"4","site_code":"0364","hw_status":"On Site"},{"region_name":"4","site_code":"0372","hw_status":"On Site"},{"region_name":"4","site_code":"0376","hw_status":"On Site"},{"region_name":"4","site_code":"0380","hw_status":"On Site"},{"region_name":"4","site_code":"0382","hw_status":"On Site"},{"region_name":"4","site_code":"0384","hw_status":"On Site"},{"region_name":"4","site_code":"0385","hw_status":"On Site"},{"region_name":"4","site_code":"0386","hw_status":"On Site"},{"region_name":"4","site_code":"0387","hw_status":"On Site"},{"region_name":"4","site_code":"0388","hw_status":"On Site"},{"region_name":"4","site_code":"0389","hw_status":"On Site"},{"region_name":"4","site_code":"0390","hw_status":"On Site"},{"region_name":"4","site_code":"0392","hw_status":"On Site"},{"region_name":"4","site_code":"0399","hw_status":"On Site"},{"region_name":"5","site_code":"0400","hw_status":"On Site"},{"region_name":"5","site_code":"0401","hw_status":"On Site"},{"region_name":"5","site_code":"0404","hw_status":"On Site"},{"region_name":"5","site_code":"0408","hw_status":"On Site"},{"region_name":"5","site_code":"0412","hw_status":"On Site"},{"region_name":"5","site_code":"0414","hw_status":"On Site"},{"region_name":"5","site_code":"0415","hw_status":"On Site"},{"region_name":"5","site_code":"0444","hw_status":"On Site"},{"region_name":"5","site_code":"0420","hw_status":"On Site"},{"region_name":"5","site_code":"0410","hw_status":"On Site"},{"region_name":"5","site_code":"0436","hw_status":"On Site"},{"region_name":"5","site_code":"0438","hw_status":"On Site"},{"region_name":"5","site_code":"0440","hw_status":"On Site"},{"region_name":"5","site_code":"0448","hw_status":"On Site"},{"region_name":"5","site_code":"0452","hw_status":"On Site"},{"region_name":"5","site_code":"0454","hw_status":"On Site"},{"region_name":"5","site_code":"0457","hw_status":"On Site"},{"region_name":"5","site_code":"0464","hw_status":"On Site"},{"region_name":"5","site_code":"0480","hw_status":"On Site"},{"region_name":"5","site_code":"0492","hw_status":"On Site"},{"region_name":"5","site_code":"0489","hw_status":"On Site"},{"region_name":"5","site_code":"0430","hw_status":"On Site"},{"region_name":"5","site_code":"0422","hw_status":"On Site"},{"region_name":"5","site_code":"0428","hw_status":"On Site"},{"region_name":"5","site_code":"0432","hw_status":"On Site"},{"region_name":"5","site_code":"0471","hw_status":"On Site"},{"region_name":"5","site_code":"0472","hw_status":"On Site"},{"region_name":"5","site_code":"0478","hw_status":"On Site"},{"region_name":"5","site_code":"0476","hw_status":"On Site"},{"region_name":"5","site_code":"0488","hw_status":"On Site"},{"region_name":"5","site_code":"0484","hw_status":"On Site"},{"region_name":"5","site_code":"0431","hw_status":"On Site"},{"region_name":"5","site_code":"0421","hw_status":"On Site"},{"region_name":"5","site_code":"0482","hw_status":"On Site"},{"region_name":"5","site_code":"0435","hw_status":"On Site"},{"region_name":"6","site_code":"0402","hw_status":"On Site"},{"region_name":"6","site_code":"0403","hw_status":"On Site"},{"region_name":"6","site_code":"0416","hw_status":"On Site"},{"region_name":"6","site_code":"0424","hw_status":"On Site"},{"region_name":"6","site_code":"0461","hw_status":"On Site"},{"region_name":"6","site_code":"0466","hw_status":"On Site"},{"region_name":"6","site_code":"0468","hw_status":"On Site"},{"region_name":"6","site_code":"0470","hw_status":"On Site"},{"region_name":"6","site_code":"0460","hw_status":"On Site"},{"region_name":"6","site_code":"0465","hw_status":"On Site"},{"region_name":"6","site_code":"0456","hw_status":"On Site"},{"region_name":"6","site_code":"0462","hw_status":"On Site"},{"region_name":"6","site_code":"0469","hw_status":"On Site"},{"region_name":"6","site_code":"0434","hw_status":"On Site"},{"region_name":"6","site_code":"0458","hw_status":"On Site"},{"region_name":"7","site_code":"0540","hw_status":"On Site"},{"region_name":"7","site_code":"0504","hw_status":"On Site"},{"region_name":"7","site_code":"0512","hw_status":"On Site"},{"region_name":"7","site_code":"0516","hw_status":"On Site"},{"region_name":"7","site_code":"0528","hw_status":"On Site"},{"region_name":"7","site_code":"0544","hw_status":"On Site"},{"region_name":"7","site_code":"0508","hw_status":"On Site"},{"region_name":"7","site_code":"0532","hw_status":"On Site"},{"region_name":"7","site_code":"0534","hw_status":"On Site"},{"region_name":"7","site_code":"0536","hw_status":"On Site"},{"region_name":"7","site_code":"0500","hw_status":"On Site"},{"region_name":"7","site_code":"0501","hw_status":"On Site"},{"region_name":"7","site_code":"0524","hw_status":"On Site"},{"region_name":"","site_code":"","hw_status":"On Site"},{"region_name":"8","site_code":"0619","hw_status":"On Site"},{"region_name":"8","site_code":"0620","hw_status":"On Site"},{"region_name":"8","site_code":"0604","hw_status":"On Site"},{"region_name":"8","site_code":"0606","hw_status":"On Site"},{"region_name":"8","site_code":"0635","hw_status":"On Site"},{"region_name":"8","site_code":"0608","hw_status":"On Site"},{"region_name":"8","site_code":"0644","hw_status":"On Site"},{"region_name":"8","site_code":"0636","hw_status":"On Site"},{"region_name":"8","site_code":"0600","hw_status":"On Site"},{"region_name":"8","site_code":"0616","hw_status":"On Site"},{"region_name":"8","site_code":"0618","hw_status":"On Site"},{"region_name":"8","site_code":"0640","hw_status":"On Site"},{"region_name":"8","site_code":"0612","hw_status":"On Site"},{"region_name":"8","site_code":"0601","hw_status":"On Site"},{"region_name":"8","site_code":"0624","hw_status":"On Site"},{"region_name":"8","site_code":"0610","hw_status":"On Site"},{"region_name":"8","site_code":"0650","hw_status":"On Site"},{"region_name":"8","site_code":"0628","hw_status":"On Site"},{"region_name":"8","site_code":"0634","hw_status":"On Site"},{"region_name":"8","site_code":"0630","hw_status":"On Site"},{"region_name":"8","site_code":"0632","hw_status":"On Site"},{"region_name":"8","site_code":"0652","hw_status":"On Site"},{"region_name":"8","site_code":"0623","hw_status":"On Site"},{"region_name":"8","site_code":"0621","hw_status":"On Site"},{"region_name":"9","site_code":"0748","hw_status":"On Site"},{"region_name":"9","site_code":"0744","hw_status":"On Site"},{"region_name":"9","site_code":"0743","hw_status":"On Site"},{"region_name":"9","site_code":"0738","hw_status":"On Site"},{"region_name":"9","site_code":"0732","hw_status":"On Site"},{"region_name":"9","site_code":"0733","hw_status":"On Site"},{"region_name":"9","site_code":"0736","hw_status":"On Site"},{"region_name":"9","site_code":"0730","hw_status":"On Site"},{"region_name":"9","site_code":"0724","hw_status":"On Site"},{"region_name":"9","site_code":"0728","hw_status":"On Site"},{"region_name":"9","site_code":"0753","hw_status":"On Site"},{"region_name":"9","site_code":"0700","hw_status":"On Site"},{"region_name":"9","site_code":"0700","hw_status":"Pull out"},{"region_name":"9","site_code":"0702","hw_status":"On Site"},{"region_name":"9","site_code":"0719","hw_status":"On Site"},{"region_name":"9","site_code":"0751","hw_status":"On Site"},{"region_name":"9","site_code":"0760","hw_status":"On Site"},{"region_name":"9","site_code":"0720","hw_status":"On Site"},{"region_name":"9","site_code":"0739","hw_status":"On Site"},{"region_name":"9","site_code":"0706","hw_status":"On Site"},{"region_name":"9","site_code":"0741","hw_status":"On Site"},{"region_name":"9","site_code":"0742","hw_status":"On Site"},{"region_name":"9","site_code":"0703","hw_status":"On Site"},{"region_name":"9","site_code":"0701","hw_status":"On Site"},{"region_name":"9","site_code":"0712","hw_status":"On Site"},{"region_name":"9","site_code":"0704","hw_status":"On Site"},{"region_name":"9","site_code":"0752","hw_status":"On Site"},{"region_name":"9","site_code":"0716","hw_status":"On Site"},{"region_name":"10","site_code":"0802","hw_status":"On Site"},{"region_name":"10","site_code":"0804","hw_status":"On Site"},{"region_name":"10","site_code":"0808","hw_status":"On Site"},{"region_name":"10","site_code":"0816","hw_status":"On Site"},{"region_name":"10","site_code":"0822","hw_status":"On Site"},{"region_name":"10","site_code":"0824","hw_status":"On Site"},{"region_name":"10","site_code":"0831","hw_status":"On Site"},{"region_name":"10","site_code":"0832","hw_status":"On Site"},{"region_name":"10","site_code":"0835","hw_status":"On Site"},{"region_name":"10","site_code":"0836","hw_status":"On Site"},{"region_name":"10","site_code":"0840","hw_status":"On Site"},{"region_name":"10","site_code":"0841","hw_status":"On Site"},{"region_name":"10","site_code":"0842","hw_status":"On Site"},{"region_name":"10","site_code":"0844","hw_status":"On Site"},{"region_name":"10","site_code":"0828","hw_status":"On Site"},{"region_name":"10","site_code":"0812","hw_status":"On Site"},{"region_name":"10","site_code":"0820","hw_status":"On Site"},{"region_name":"10","site_code":"0801","hw_status":"On Site"},{"region_name":"10","site_code":"0800","hw_status":"On Site"},{"region_name":"10","site_code":"0848","hw_status":"On Site"},{"region_name":"10","site_code":"0826","hw_status":"On Site"},{"region_name":"11","site_code":"0900","hw_status":"On Site"},{"region_name":"11","site_code":"0901","hw_status":"On Site"},{"region_name":"11","site_code":"0904","hw_status":"On Site"},{"region_name":"11","site_code":"0907","hw_status":"On Site"},{"region_name":"11","site_code":"0908","hw_status":"On Site"},{"region_name":"11","site_code":"0909","hw_status":"On Site"},{"region_name":"11","site_code":"0912","hw_status":"On Site"},{"region_name":"11","site_code":"0920","hw_status":"On Site"},{"region_name":"11","site_code":"0922","hw_status":"On Site"},{"region_name":"11","site_code":"0926","hw_status":"On Site"},{"region_name":"11","site_code":"0928","hw_status":"On Site"},{"region_name":"11","site_code":"0929","hw_status":"On Site"},{"region_name":"11","site_code":"0930","hw_status":"On Site"},{"region_name":"11","site_code":"0931","hw_status":"On Site"},{"region_name":"11","site_code":"0932","hw_status":"On Site"},{"region_name":"11","site_code":"0933","hw_status":"On Site"},{"region_name":"11","site_code":"0936","hw_status":"On Site"},{"region_name":"12","site_code":"1020","hw_status":"On Site"},{"region_name":"12","site_code":"1005","hw_status":"On Site"},{"region_name":"12","site_code":"1046","hw_status":"On Site"},{"region_name":"12","site_code":"1036","hw_status":"On Site"},{"region_name":"12","site_code":"1028","hw_status":"On Site"},{"region_name":"12","site_code":"1048","hw_status":"On Site"},{"region_name":"12","site_code":"1016","hw_status":"On Site"},{"region_name":"12","site_code":"1018","hw_status":"On Site"},{"region_name":"12","site_code":"1044","hw_status":"On Site"},{"region_name":"12","site_code":"1024","hw_status":"On Site"},{"region_name":"12","site_code":"1014","hw_status":"On Site"},{"region_name":"12","site_code":"1012","hw_status":"On Site"},{"region_name":"12","site_code":"1017","hw_status":"On Site"},{"region_name":"12","site_code":"1006","hw_status":"On Site"},{"region_name":"12","site_code":"1008","hw_status":"On Site"},{"region_name":"12","site_code":"1001","hw_status":"On Site"},{"region_name":"12","site_code":"1009","hw_status":"On Site"},{"region_name":"12","site_code":"1000","hw_status":"On Site"},{"region_name":"12","site_code":"1032","hw_status":"On Site"},{"region_name":"12","site_code":"1021","hw_status":"On Site"},{"region_name":"13","site_code":"1100","hw_status":"On Site"},{"region_name":"13","site_code":"1101","hw_status":"On Site"},{"region_name":"13","site_code":"1108","hw_status":"On Site"},{"region_name":"13","site_code":"1110","hw_status":"On Site"},{"region_name":"13","site_code":"1112","hw_status":"On Site"},{"region_name":"13","site_code":"1116","hw_status":"On Site"},{"region_name":"13","site_code":"1126","hw_status":"On Site"},{"region_name":"13","site_code":"1128","hw_status":"On Site"},{"region_name":"13","site_code":"1131","hw_status":"On Site"},{"region_name":"13","site_code":"1135","hw_status":"On Site"},{"region_name":"13","site_code":"1136","hw_status":"On Site"},{"region_name":"14","site_code":"1200","hw_status":"On Site"},{"region_name":"14","site_code":"1201","hw_status":"On Site"},{"region_name":"14","site_code":"1241","hw_status":"On Site"},{"region_name":"14","site_code":"1243","hw_status":"On Site"},{"region_name":"14","site_code":"1225","hw_status":"On Site"},{"region_name":"14","site_code":"1226","hw_status":"On Site"},{"region_name":"14","site_code":"1210","hw_status":"On Site"},{"region_name":"14","site_code":"1211","hw_status":"On Site"},{"region_name":"14","site_code":"1242","hw_status":"On Site"},{"region_name":"14","site_code":"1244","hw_status":"On Site"},{"region_name":"14","site_code":"1230","hw_status":"On Site"},{"region_name":"14","site_code":"1236","hw_status":"On Site"},{"region_name":"14","site_code":"1248","hw_status":"On Site"},{"region_name":"14","site_code":"1220","hw_status":"On Site"},{"region_name":"14","site_code":"1218","hw_status":"On Site"},{"region_name":"14","site_code":"1238","hw_status":"On Site"},{"region_name":"15","site_code":"2004","hw_status":"On Site"},{"region_name":"15","site_code":"2005","hw_status":"On Site"},{"region_name":"15","site_code":"2002","hw_status":"On Site"},{"region_name":"15","site_code":"2003","hw_status":"On Site"},{"region_name":"15","site_code":"1240","hw_status":"On Site"},{"region_name":"15","site_code":"1232","hw_status":"On Site"},{"region_name":"16","site_code":"1400","hw_status":"On Site"},{"region_name":"16","site_code":"1401","hw_status":"On Site"},{"region_name":"16","site_code":"1404","hw_status":"On Site"},{"region_name":"16","site_code":"1406","hw_status":"On Site"},{"region_name":"16","site_code":"1408","hw_status":"On Site"},{"region_name":"16","site_code":"1412","hw_status":"On Site"},{"region_name":"16","site_code":"1414","hw_status":"On Site"},{"region_name":"16","site_code":"1416","hw_status":"On Site"},{"region_name":"16","site_code":"1420","hw_status":"On Site"},{"region_name":"16","site_code":"1424","hw_status":"On Site"},{"region_name":"16","site_code":"1428","hw_status":"On Site"},{"region_name":"17","site_code":"1512","hw_status":"On Site"},{"region_name":"17","site_code":"1520","hw_status":"On Site"},{"region_name":"17","site_code":"1510","hw_status":"On Site"},{"region_name":"17","site_code":"1507","hw_status":"On Site"},{"region_name":"17","site_code":"1508","hw_status":"On Site"},{"region_name":"17","site_code":"1524","hw_status":"On Site"},{"region_name":"17","site_code":"1504","hw_status":"On Site"},{"region_name":"17","site_code":"1526","hw_status":"On Site"},{"region_name":"17","site_code":"1516","hw_status":"On Site"},{"region_name":"17","site_code":"1500","hw_status":"On Site"},{"region_name":"17","site_code":"1501","hw_status":"On Site"},{"region_name":"2","site_code":"0123","hw_status":"On Site"},{"region_name":"2","site_code":"0143","hw_status":"On Site"},{"region_name":"2","site_code":"9001","hw_status":"On Site"},{"region_name":"1","site_code":"1338","hw_status":"On Site"},{"region_name":"1","site_code":"1357","hw_status":"On Site"},{"region_name":"1","site_code":"1359","hw_status":"On Site"},{"region_name":"1","site_code":"1362","hw_status":"On Site"},{"region_name":"1","site_code":"1363","hw_status":"On Site"},{"region_name":"1","site_code":"1365","hw_status":"On Site"},{"region_name":"1","site_code":"1374","hw_status":"On Site"},{"region_name":"1","site_code":"1379","hw_status":"On Site"},{"region_name":"1","site_code":"1381","hw_status":"On Site"},{"region_name":"1","site_code":"1383","hw_status":"On Site"},{"region_name":"1","site_code":"1386","hw_status":"On Site"},{"region_name":"1","site_code":"1395","hw_status":"On Site"},{"region_name":"1","site_code":"1397","hw_status":"On Site"},{"region_name":"1","site_code":"1801","hw_status":"On Site"},{"region_name":"1","site_code":"1806","hw_status":"On Site"},{"region_name":"1","site_code":"9000","hw_status":"On Site"},{"region_name":"1","site_code":"1345","hw_status":"On Site"},{"region_name":"1","site_code":"1805","hw_status":"On Site"},{"region_name":"1","site_code":"1361","hw_status":"On Site"},{"region_name":"1","site_code":"1803","hw_status":"On Site"},{"region_name":"1","site_code":"1804","hw_status":"On Site"},{"region_name":"1","site_code":"1807","hw_status":"On Site"},{"region_name":"1","site_code":"1302","hw_status":"On Site"},{"region_name":"1","site_code":"1305","hw_status":"On Site"},{"region_name":"1","site_code":"1309","hw_status":"On Site"},{"region_name":"1","site_code":"1323","hw_status":"On Site"},{"region_name":"1","site_code":"1325","hw_status":"On Site"},{"region_name":"1","site_code":"1330","hw_status":"On Site"},{"region_name":"1","site_code":"1331","hw_status":"On Site"},{"region_name":"1","site_code":"1346","hw_status":"On Site"},{"region_name":"1","site_code":"1350","hw_status":"On Site"},{"region_name":"1","site_code":"1369","hw_status":"On Site"},{"region_name":"1","site_code":"1371","hw_status":"On Site"},{"region_name":"1","site_code":"1385","hw_status":"On Site"},{"region_name":"1","site_code":"1387","hw_status":"On Site"},{"region_name":"1","site_code":"9020","hw_status":"On Site"},{"region_name":"1","site_code":"1327","hw_status":"On Site"},{"region_name":"1","site_code":"1326","hw_status":"On Site"},{"region_name":"1","site_code":"1315","hw_status":"On Site"},{"region_name":"1","site_code":"1354","hw_status":"On Site"},{"region_name":"1","site_code":"1307","hw_status":"On Site"},{"region_name":"1","site_code":"1339","hw_status":"On Site"},{"region_name":"4","site_code":"0310","hw_status":"On Site"},{"region_name":"4","site_code":"0335","hw_status":"On Site"},{"region_name":"4","site_code":"0354","hw_status":"On Site"},{"region_name":"4","site_code":"0357","hw_status":"On Site"},{"region_name":"4","site_code":"0358","hw_status":"On Site"},{"region_name":"4","site_code":"0369","hw_status":"On Site"},{"region_name":"4","site_code":"0377","hw_status":"On Site"},{"region_name":"4","site_code":"0381","hw_status":"On Site"},{"region_name":"4","site_code":"0383","hw_status":"On Site"},{"region_name":"4","site_code":"0397","hw_status":"On Site"},{"region_name":"4","site_code":"0398","hw_status":"On Site"},{"region_name":"4","site_code":"9003","hw_status":"On Site"},{"region_name":"4","site_code":"0309","hw_status":"On Site"},{"region_name":"4","site_code":"0317","hw_status":"On Site"},{"region_name":"4","site_code":"0359","hw_status":"On Site"},{"region_name":"4","site_code":"0366","hw_status":"On Site"},{"region_name":"4","site_code":"0329","hw_status":"On Site"},{"region_name":"4","site_code":"0361","hw_status":"On Site"},{"region_name":"4","site_code":"0370","hw_status":"On Site"},{"region_name":"4","site_code":"0355","hw_status":"On Site"},{"region_name":"4","site_code":"9022","hw_status":"On Site"},{"region_name":"5","site_code":"0411","hw_status":"On Site"},{"region_name":"5","site_code":"0413","hw_status":"On Site"},{"region_name":"5","site_code":"0417","hw_status":"On Site"},{"region_name":"5","site_code":"0418","hw_status":"On Site"},{"region_name":"5","site_code":"0423","hw_status":"On Site"},{"region_name":"5","site_code":"0429","hw_status":"On Site"},{"region_name":"5","site_code":"0441","hw_status":"On Site"},{"region_name":"5","site_code":"0442","hw_status":"On Site"},{"region_name":"5","site_code":"0446","hw_status":"On Site"},{"region_name":"5","site_code":"0477","hw_status":"On Site"},{"region_name":"5","site_code":"0479","hw_status":"On Site"},{"region_name":"5","site_code":"0491","hw_status":"On Site"},{"region_name":"5","site_code":"9004","hw_status":"On Site"},{"region_name":"5","site_code":"0499","hw_status":"On Site"},{"region_name":"5","site_code":"0498","hw_status":"On Site"},{"region_name":"5","site_code":"0493","hw_status":"On Site"},{"region_name":"5","site_code":"0453","hw_status":"On Site"},{"region_name":"5","site_code":"0490","hw_status":"On Site"},{"region_name":"5","site_code":"0419","hw_status":"On Site"},{"region_name":"5","site_code":"0406","hw_status":"On Site"},{"region_name":"5","site_code":"0426","hw_status":"On Site"},{"region_name":"5","site_code":"0487","hw_status":"On Site"},{"region_name":"5","site_code":"0443","hw_status":"On Site"},{"region_name":"5","site_code":"9042","hw_status":"On Site"},{"region_name":"5","site_code":"0425","hw_status":"On Site"},{"region_name":"6","site_code":"0445","hw_status":"On Site"},{"region_name":"6","site_code":"9041","hw_status":"On Site"},{"region_name":"6","site_code":"0463","hw_status":"On Site"},{"region_name":"7","site_code":"0518","hw_status":"On Site"},{"region_name":"7","site_code":"0535","hw_status":"On Site"},{"region_name":"7","site_code":"0537","hw_status":"On Site"},{"region_name":"7","site_code":"0539","hw_status":"On Site"},{"region_name":"7","site_code":"9005","hw_status":"On Site"},{"region_name":"7","site_code":"0531","hw_status":"On Site"},{"region_name":"8","site_code":"0605","hw_status":"On Site"},{"region_name":"8","site_code":"0617","hw_status":"On Site"},{"region_name":"8","site_code":"0626","hw_status":"On Site"},{"region_name":"8","site_code":"0627","hw_status":"On Site"},{"region_name":"8","site_code":"0631","hw_status":"On Site"},{"region_name":"8","site_code":"0643","hw_status":"On Site"},{"region_name":"8","site_code":"0629","hw_status":"On Site"},{"region_name":"9","site_code":"0713","hw_status":"On Site"},{"region_name":"9","site_code":"0714","hw_status":"On Site"},{"region_name":"9","site_code":"0717","hw_status":"On Site"},{"region_name":"9","site_code":"0722","hw_status":"On Site"},{"region_name":"9","site_code":"0727","hw_status":"On Site"},{"region_name":"9","site_code":"0761","hw_status":"On Site"},{"region_name":"9","site_code":"9007","hw_status":"On Site"},{"region_name":"9","site_code":"0749","hw_status":"On Site"},{"region_name":"9","site_code":"0734","hw_status":"On Site"},{"region_name":"9","site_code":"0754","hw_status":"On Site"},{"region_name":"9","site_code":"0705\t","hw_status":"On Site"},{"region_name":"9","site_code":"0762","hw_status":"On Site"},{"region_name":"9","site_code":"0711","hw_status":"On Site"},{"region_name":"10","site_code":"0827","hw_status":"On Site"},{"region_name":"10","site_code":"0846","hw_status":"On Site"},{"region_name":"10","site_code":"9008","hw_status":"On Site"},{"region_name":"11","site_code":"0910","hw_status":"On Site"},{"region_name":"11","site_code":"0913","hw_status":"On Site"},{"region_name":"11","site_code":"0927","hw_status":"On Site"},{"region_name":"11","site_code":"9009","hw_status":"On Site"},{"region_name":"11","site_code":"0925","hw_status":"On Site"},{"region_name":"11","site_code":"0911","hw_status":"On Site"},{"region_name":"11","site_code":"0935","hw_status":"On Site"},{"region_name":"12","site_code":"1007","hw_status":"On Site"},{"region_name":"12","site_code":"1038","hw_status":"On Site"},{"region_name":"12","site_code":"9010","hw_status":"On Site"},{"region_name":"13","site_code":"1114","hw_status":"On Site"},{"region_name":"13","site_code":"1118","hw_status":"On Site"},{"region_name":"13","site_code":"1137","hw_status":"On Site"},{"region_name":"13","site_code":"1138","hw_status":"On Site"},{"region_name":"13","site_code":"1139","hw_status":"On Site"},{"region_name":"13","site_code":"9011","hw_status":"On Site"},{"region_name":"13","site_code":"9018","hw_status":"On Site"},{"region_name":"14","site_code":"1207","hw_status":"On Site"},{"region_name":"14","site_code":"1209","hw_status":"On Site"},{"region_name":"14","site_code":"1222","hw_status":"On Site"},{"region_name":"14","site_code":"1227","hw_status":"On Site"},{"region_name":"14","site_code":"9012","hw_status":"On Site"},{"region_name":"14","site_code":"1213","hw_status":"On Site"},{"region_name":"15","site_code":"2009","hw_status":"On Site"},{"region_name":"16","site_code":"1426","hw_status":"On Site"},{"region_name":"17","site_code":"1506","hw_status":"On Site"},{"region_name":"17","site_code":"1523","hw_status":"On Site"},{"region_name":"6","site_code":"0405","hw_status":"On Site"},{"region_name":"9","site_code":"0799","hw_status":"On Site"},{"region_name":"","site_code":"","hw_status":""},{"region_name":"17","site_code":"1514","hw_status":"On Site"},{"region_name":"17","site_code":"1515","hw_status":"On Site"},{"region_name":"15","site_code":"2000","hw_status":"On Site"},{"region_name":"2","site_code":"0140 & 0142","hw_status":"On Site"},{"region_name":"11","site_code":"0902","hw_status":"On Site"},{"region_name":"12","site_code":"1037","hw_status":"On Site"},{"region_name":"12","site_code":"1510","hw_status":"On Site"},{"region_name":"17","site_code":"1000","hw_status":"On Site"},{"region_name":"17","site_code":"1005","hw_status":"On Site"}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing total count query: SELECT COUNT(*) as total FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Government count result: 0
+[10-Jun-2025 07:41:41 Europe/Berlin] Returning site counts: {"total_sites":23,"proponent_count":0,"government_count":0}
+[10-Jun-2025 07:41:41 Europe/Berlin] Total count result: 792
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing server total query: SELECT COUNT(*) as total FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND (LOWER(h.sub_major_type) LIKE 'server' OR LOWER(h.item_desc) LIKE 'server') with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Server total result: 23
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing server brands query: SELECT h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND (LOWER(h.sub_major_type) LIKE 'server' OR LOWER(h.item_desc) LIKE 'server') 
+                      GROUP BY h.hw_brand_name, h.hw_model, h.os_type 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Server brands result: [{"brand":"HP","model":"HP Proliant ML110 Gen9","count":5},{"brand":"HP","model":"HP Proliant Ml110 Gen11","count":4},{"brand":"HP","model":"HP Proliant Ml110 Gen10","count":3},{"brand":"Dell","model":"Dell PowerEdge T440 ","count":2},{"brand":"IBM","model":"IBM x3200","count":2},{"brand":"HP","model":"HP Proliant Ml110 Gen10","count":2},{"brand":"HP","model":"HP Proliant ML110 Gen9","count":1},{"brand":"VM","model":"IBM x3200","count":1},{"brand":"","model":"","count":1},{"brand":"LENOVO","model":"IBM x3500 m5","count":1},{"brand":"HP","model":"HP Proliant Ml110 Gen10","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing server OS query: SELECT h.os_type as name, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND (LOWER(h.sub_major_type) LIKE 'server' OR LOWER(h.item_desc) LIKE 'server') 
+                      GROUP BY h.os_type 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Server OS result: [{"name":"Windows Server 2012","count":11},{"name":"Windows Server 2003","count":9},{"name":"Windows Server 2016","count":2},{"name":"","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing workstation total query: SELECT COUNT(*) as total FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE 'CPU-PC' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] getSites: Found 23 sites for region_id=2: [{"site_code":"0100","site_name":"Regional Office "},{"site_code":"0101","site_name":"New Registration Unit"},{"site_code":"0104","site_name":"Agoo DO"},{"site_code":"0108","site_name":"Alaminos DO"},{"site_code":"0110","site_name":"Burgos EO"},{"site_code":"0112","site_name":"Batac DO"},{"site_code":"0116","site_name":"Candon DO"},{"site_code":"0120","site_name":"Dagupan DO"},{"site_code":"0122","site_name":"Dagupan LC"},{"site_code":"0123","site_name":"DLRO BHF Plaza Mall"},{"site_code":"0124","site_name":"Laoag DO"},{"site_code":"0128","site_name":"Lingayen DO"},{"site_code":"0130","site_name":"Naguillan EO"},{"site_code":"0132","site_name":"San Carlos DO"},{"site_code":"0134","site_name":"San Fernando LC"},{"site_code":"0136","site_name":"San Fernando DO"},{"site_code":"0138","site_name":"Rosales DO"},{"site_code":"0140","site_name":"Urdaneta DO"},{"site_code":"0142","site_name":"Urdaneta LC"},{"site_code":"0143","site_name":"DLRO CB Mall Pangasinan"},{"site_code":"0144","site_name":"San Ildefonso DO | Vigan DO"},{"site_code":"0146","site_name":"Bayambang EO"},{"site_code":"9001","site_name":"Bayambang kiosk"}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Workstation total result: 174
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing workstation brands query: SELECT h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE 'CPU-PC' 
+                      GROUP BY h.hw_brand_name, h.hw_model 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Workstation brands result: [{"brand":"HP","model":"HP DeskPro 400 G4","count":55},{"brand":"HP","model":"Pro3000","count":52},{"brand":"HP","model":"DX2810","count":34},{"brand":"HP","model":"HP Elitedesk 705","count":12},{"brand":"HP","model":"PRODESK 400 G9","count":7},{"brand":"HP","model":"G9","count":6},{"brand":"HP","model":"DX2710","count":3},{"brand":"HP","model":"HP Pro SSF 400 G9","count":2},{"brand":"DELL","model":"Dell optiplex 360\/330","count":2},{"brand":"HP","model":"HP Elitedesk","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing workstation OS query: SELECT h.os_type as name, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE 'CPU-PC' 
+                      GROUP BY h.os_type 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Workstation OS result: [{"name":"Windows XP","count":90},{"name":"Windows 10 32Bit","count":69},{"name":"Windows 11 64Bit","count":10},{"name":"Windows 10 64 Bit","count":5}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing printer total query: SELECT COUNT(*) as total FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE '%printer%' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Printer total result: 66
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing printer brands query: SELECT h.hw_brand_name as brand, h.hw_model as model, h.item_desc as printer_type, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE '%printer%' 
+                      GROUP BY h.hw_brand_name, h.hw_model, h.item_desc 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Printer brands result: [{"brand":"HP","model":"HP 4003dn","printer_type":"LaserJet","count":26},{"brand":"HP","model":"HP M402n","printer_type":"LaserJet","count":16},{"brand":"Epson","model":"Inkjet L310","printer_type":"InkJet","count":7},{"brand":"Epson","model":"LX310","printer_type":"Dot Matrix","count":6},{"brand":"Epson","model":"LX300","printer_type":"Dot Matrix","count":5},{"brand":"HP","model":"HP 4100","printer_type":"LaserJet","count":3},{"brand":"HP","model":"HP M401","printer_type":"LaserJet","count":2},{"brand":"","model":"HP 4003dn","printer_type":"LaserJet","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing network equipment total query: SELECT COUNT(*) as total 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) 
+                      AND LOWER(h.sub_major_type) IN ('Network Equipment') with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Network equipment total result: 63
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing network equipment categories query: SELECT h.item_desc as category, h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) 
+                      AND LOWER(h.sub_major_type) IN ('Network Equipment')
+                      GROUP BY h.item_desc, h.hw_brand_name, h.hw_model
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Network equipment categories result: [{"category":"Switch","brand":"CISCO","model":"CBS 350 16T","count":5},{"category":"Modem","brand":"","model":"","count":5},{"category":"Switch","brand":"","model":"","count":4},{"category":"Router","brand":"","model":"","count":4},{"category":"Switch","brand":"CISCO","model":"CATALYST 2950","count":3},{"category":"Switch","brand":"CISCO","model":"","count":3},{"category":"Switch","brand":"CISCO","model":"1800 Series","count":3},{"category":"Router","brand":"FORTINET","model":"40F","count":3},{"category":"Switch","brand":"Cisco","model":"SF350-24","count":2},{"category":"Router","brand":"CISCO ","model":"2960 SERIES","count":2},{"category":"Router","brand":"Cisco","model":"Cisco 1921","count":2},{"category":"Modem","brand":"PLDT ","model":"FIBER","count":2},{"category":"Switch","brand":"ALCATEL","model":"OS6450-P24L","count":2},{"category":"Modem","brand":"PLDT","model":"","count":2},{"category":"Router","brand":"CISCO","model":"1900 SERIES","count":1},{"category":"Switch","brand":"ALCATEL","model":"2950","count":1},{"category":"Switch","brand":"D-Link","model":"","count":1},{"category":"Modem","brand":"huawei","model":"","count":1},{"category":"Switch","brand":"CISCO","model":"CISCO","count":1},{"category":"Router","brand":"Cisco","model":"Cisco 1800","count":1},{"category":"Modem","brand":"","model":"HUAWEI","count":1},{"category":"Switch","brand":"CISCO","model":"Cisco2960","count":1},{"category":"Modem","brand":"CONVERGE","model":"","count":1},{"category":"Switch","brand":"CISCO","model":"Catalyst 2960","count":1},{"category":"Router","brand":"CISCO","model":"Cisco 800 Series","count":1},{"category":"Router","brand":"CISCO","model":"Cisco 1800 series","count":1},{"category":"Router","brand":"CATALYST","model":"2960 Series","count":1},{"category":"Router","brand":"CISCO","model":"Cisco 1900 Series","count":1},{"category":"Switch","brand":"D-LINK","model":"DES-1008A","count":1},{"category":"Switch","brand":"CISCO","model":"CBS350-16T-26","count":1},{"category":"Modem","brand":"SMART HOME WIFI BROADBAND","model":"","count":1},{"category":"Router","brand":"CISCO","model":"1841","count":1},{"category":"Router","brand":"CISCO","model":"","count":1},{"category":"Switch","brand":"CISCO","model":"CBS350 16T 25","count":1},{"category":"Router","brand":"CISCO","model":"CISCO 1922","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing ups total query: SELECT COUNT(*) as total 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) 
+                      AND LOWER(h.sub_major_type) LIKE '%UPS%' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] UPS total result: 59
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing UPS categories query: SELECT h.item_desc as category, h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) 
+                      AND LOWER(h.sub_major_type) LIKE '%UPS%'
+                      GROUP BY h.item_desc, h.hw_brand_name, h.hw_model
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] UPS categories result: [{"category":"UPS-PC","brand":"EATON","model":"","count":18},{"category":"UPS-PC","brand":"Others","model":"","count":13},{"category":"UPS-PC","brand":"","model":"","count":11},{"category":"UPS-PC","brand":"EATON","model":"5E850i-USBC","count":6},{"category":"UPS-PC","brand":"POWERWARE","model":"","count":5},{"category":"UPS-SERVER","brand":"Liebert","model":"","count":1},{"category":"UPS-SERVER","brand":"Others","model":"","count":1},{"category":"UPS-PC","brand":"APC","model":"","count":1},{"category":"UPS-PC","brand":"POWERCOM","model":"N\/A","count":1},{"category":"UPS-SERVER","brand":"","model":"","count":1},{"category":"UPS-PC","brand":"N\/A","model":"N\/A","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing peripheral total query: SELECT COUNT(*) as total 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) 
+                      AND LOWER(h.sub_major_type) LIKE '%Peripherals%' with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Peripheral total result: 52
+[10-Jun-2025 07:41:41 Europe/Berlin] Executing webcam brands query: SELECT item_desc as model, COUNT(*) as count 
+                      FROM hw_tbl h WHERE h.hw_status = 'On Site' AND h.region_name = (SELECT region_id FROM region_tbl WHERE region_id = ?) AND LOWER(h.sub_major_type) LIKE 'Peripherals' 
+                      GROUP BY h.item_desc 
+                      ORDER BY count DESC with params: ["2"]
+[10-Jun-2025 07:41:41 Europe/Berlin] Webcam brands result: [{"model":"Webcam","count":16},{"model":"Sigpad","count":16},{"model":"Scanner","count":12},{"model":"LCD Display","count":5},{"model":"Biometric 4500 ","count":2},{"model":"Cash Drawer","count":1}]
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] PHP Warning:  Undefined array key "brand" in C:\xampp\htdocs\masterlist\DAO\HardwareDAO.php on line 513
+[10-Jun-2025 07:41:41 Europe/Berlin] Returning hardware data: {
+    "total": 792,
+    "servers": {
+        "total": 23,
+        "brands": [
+            {
+                "brand": "HP",
+                "models": [
+                    {
+                        "model": "HP Proliant ML110 Gen9",
+                        "count": 5
+                    },
+                    {
+                        "model": "HP Proliant Ml110 Gen11",
+                        "count": 4
+                    },
+                    {
+                        "model": "HP Proliant Ml110 Gen10",
+                        "count": 3
+                    },
+                    {
+                        "model": "HP Proliant Ml110 Gen10",
+                        "count": 2
+                    },
+                    {
+                        "model": "HP Proliant ML110 Gen9",
+                        "count": 1
+                    },
+                    {
+                        "model": "HP Proliant Ml110 Gen10",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "brand": "Dell",
+                "models": [
+                    {
+                        "model": "Dell PowerEdge T440 ",
+                        "count": 2
+                    }
+                ]
+            },
+            {
+                "brand": "IBM",
+                "models": [
+                    {
+                        "model": "IBM x3200",
+                        "count": 2
+                    }
+                ]
+            },
+            {
+                "brand": "VM",
+                "models": [
+                    {
+                        "model": "IBM x3200",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "brand": "Unknown",
+                "models": [
+                    {
+                        "model": null,
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "brand": "LENOVO",
+                "models": [
+                    {
+                        "model": "IBM x3500 m5",
+                        "count": 1
+                    }
+                ]
+            }
+        ],
+        "os": [
+            {
+                "name": "Windows Server 2012",
+                "count": 11
+            },
+            {
+                "name": "Windows Server 2003",
+                "count": 9
+            },
+            {
+                "name": "Windows Server 2016",
+                "count": 2
+            },
+            {
+                "name": null,
+                "count": 1
+            }
+        ]
+    },
+    "workstations": {
+        "total": 174,
+        "brands": [
+            {
+                "brand": "HP",
+                "models": [
+                    {
+                        "model": "HP DeskPro 400 G4",
+                        "count": 55
+                    },
+                    {
+                        "model": "Pro3000",
+                        "count": 52
+                    },
+                    {
+                        "model": "DX2810",
+                        "count": 34
+                    },
+                    {
+                        "model": "HP Elitedesk 705",
+                        "count": 12
+                    },
+                    {
+                        "model": "PRODESK 400 G9",
+                        "count": 7
+                    },
+                    {
+                        "model": "G9",
+                        "count": 6
+                    },
+                    {
+                        "model": "DX2710",
+                        "count": 3
+                    },
+                    {
+                        "model": "HP Pro SSF 400 G9",
+                        "count": 2
+                    },
+                    {
+                        "model": "HP Elitedesk",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "brand": "DELL",
+                "models": [
+                    {
+                        "model": "Dell optiplex 360\/330",
+                        "count": 2
+                    }
+                ]
+            }
+        ],
+        "os": [
+            {
+                "name": "Windows XP",
+                "count": 90
+            },
+            {
+                "name": "Windows 10 32Bit",
+                "count": 69
+            },
+            {
+                "name": "Windows 11 64Bit",
+                "count": 10
+            },
+            {
+                "name": "Windows 10 64 Bit",
+                "count": 5
+            }
+        ]
+    },
+    "printers": {
+        "total": 66,
+        "brands": [
+            {
+                "brand": "HP",
+                "models": [
+                    {
+                        "model": "HP 4003dn",
+                        "printer_type": "LaserJet",
+                        "count": 26
+                    },
+                    {
+                        "model": "HP M402n",
+                        "printer_type": "LaserJet",
+                        "count": 16
+                    },
+                    {
+                        "model": "HP 4100",
+                        "printer_type": "LaserJet",
+                        "count": 3
+                    },
+                    {
+                        "model": "HP M401",
+                        "printer_type": "LaserJet",
+                        "count": 2
+                    }
+                ]
+            },
+            {
+                "brand": "Epson",
+                "models": [
+                    {
+                        "model": "Inkjet L310",
+                        "printer_type": "InkJet",
+                        "count": 7
+                    },
+                    {
+                        "model": "LX310",
+                        "printer_type": "Dot Matrix",
+                        "count": 6
+                    },
+                    {
+                        "model": "LX300",
+                        "printer_type": "Dot Matrix",
+                        "count": 5
+                    }
+                ]
+            },
+            {
+                "brand": "Unknown",
+                "models": [
+                    {
+                        "model": "HP 4003dn",
+                        "printer_type": "LaserJet",
+                        "count": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "peripherals": {
+        "total": 52,
+        "categories": [],
+        "webcam_brands": [
+            {
+                "brand": "Unknown",
+                "models": [
+                    {
+                        "model": "Webcam",
+                        "count": 16
+                    },
+                    {
+                        "model": "Sigpad",
+                        "count": 16
+                    },
+                    {
+                        "model": "Scanner",
+                        "count": 12
+                    },
+                    {
+                        "model": "LCD Display",
+                        "count": 5
+                    },
+                    {
+                        "model": "Biometric 4500 ",
+                        "count": 2
+                    },
+                    {
+                        "model": "Cash Drawer",
+                        "count": 1
+                    }
+                ]
+            }
+        ],
+        "sigpad_brands": [],
+        "pos_brands": [],
+        "lcd_brands": [],
+        "cashdrawer_brands": []
+    },
+    "network_equipment": {
+        "total": 63,
+        "categories": [
+            {
+                "name": "Switch",
+                "items": [
+                    {
+                        "brand": "CISCO",
+                        "model": "CBS 350 16T",
+                        "count": 5
+                    },
+                    {
+                        "brand": "Unknown",
+                        "model": null,
+                        "count": 4
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "CATALYST 2950",
+                        "count": 3
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": null,
+                        "count": 3
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "1800 Series",
+                        "count": 3
+                    },
+                    {
+                        "brand": "Cisco",
+                        "model": "SF350-24",
+                        "count": 2
+                    },
+                    {
+                        "brand": "ALCATEL",
+                        "model": "OS6450-P24L",
+                        "count": 2
+                    },
+                    {
+                        "brand": "ALCATEL",
+                        "model": "2950",
+                        "count": 1
+                    },
+                    {
+                        "brand": "D-Link",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "CISCO",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "Cisco2960",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "Catalyst 2960",
+                        "count": 1
+                    },
+                    {
+                        "brand": "D-LINK",
+                        "model": "DES-1008A",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "CBS350-16T-26",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "CBS350 16T 25",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "name": "Modem",
+                "items": [
+                    {
+                        "brand": "Unknown",
+                        "model": null,
+                        "count": 5
+                    },
+                    {
+                        "brand": "PLDT ",
+                        "model": "FIBER",
+                        "count": 2
+                    },
+                    {
+                        "brand": "PLDT",
+                        "model": null,
+                        "count": 2
+                    },
+                    {
+                        "brand": "huawei",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "Unknown",
+                        "model": "HUAWEI",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CONVERGE",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "SMART HOME WIFI BROADBAND",
+                        "model": null,
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "name": "Router",
+                "items": [
+                    {
+                        "brand": "Unknown",
+                        "model": null,
+                        "count": 4
+                    },
+                    {
+                        "brand": "FORTINET",
+                        "model": "40F",
+                        "count": 3
+                    },
+                    {
+                        "brand": "CISCO ",
+                        "model": "2960 SERIES",
+                        "count": 2
+                    },
+                    {
+                        "brand": "Cisco",
+                        "model": "Cisco 1921",
+                        "count": 2
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "1900 SERIES",
+                        "count": 1
+                    },
+                    {
+                        "brand": "Cisco",
+                        "model": "Cisco 1800",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "Cisco 800 Series",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "Cisco 1800 series",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CATALYST",
+                        "model": "2960 Series",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "Cisco 1900 Series",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "1841",
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "CISCO",
+                        "model": "CISCO 1922",
+                        "count": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "ups": {
+        "total": 59,
+        "categories": [
+            {
+                "name": "UPS-PC",
+                "items": [
+                    {
+                        "brand": "EATON",
+                        "model": null,
+                        "count": 18
+                    },
+                    {
+                        "brand": "Others",
+                        "model": null,
+                        "count": 13
+                    },
+                    {
+                        "brand": "Unknown",
+                        "model": null,
+                        "count": 11
+                    },
+                    {
+                        "brand": "EATON",
+                        "model": "5E850i-USBC",
+                        "count": 6
+                    },
+                    {
+                        "brand": "POWERWARE",
+                        "model": null,
+                        "count": 5
+                    },
+                    {
+                        "brand": "APC",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "POWERCOM",
+                        "model": "N\/A",
+                        "count": 1
+                    },
+                    {
+                        "brand": "N\/A",
+                        "model": "N\/A",
+                        "count": 1
+                    }
+                ]
+            },
+            {
+                "name": "UPS-SERVER",
+                "items": [
+                    {
+                        "brand": "Liebert",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "Others",
+                        "model": null,
+                        "count": 1
+                    },
+                    {
+                        "brand": "Unknown",
+                        "model": null,
+                        "count": 1
+                    }
+                ]
+            }
+        ]
+    }
+}

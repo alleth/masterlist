@@ -13,7 +13,8 @@ class loginUserDAO extends BaseDAO {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                if ($user_password == $row['user_pass']) {
+                // Use password_verify to check hashed password
+                if (password_verify($user_password, $row['user_pass'])) {
                     $_SESSION['sess_id'] = $row['id'];
                     $_SESSION['sess_fname'] = $row['fname'];
                     $_SESSION['sess_lname'] = $row['lname'];
@@ -24,7 +25,7 @@ class loginUserDAO extends BaseDAO {
                     return 1;
                 } else {
                     $this->closeConn();
-                    return 0;
+                    return 0; // Password mismatch
                 }
             } else {
                 $this->closeConn();

@@ -208,4 +208,6 @@
     </div>
 </div>
 <br>
-<?php include("includes/footer.php"); ?>
+<?php include 'includes/components.php'; ?>
+<script src="js/directory.js" type="text/javascript"></script>
+<?php include 'includes/footer.php'; ?>
