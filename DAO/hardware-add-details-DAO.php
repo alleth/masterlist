@@ -30,6 +30,7 @@ class addHardwareDAO extends BaseDAO {
                 $assetDataStmt->bindParam(1, $asset_num);
                 $assetDataStmt->execute();
                 $assetData = $assetDataStmt->fetch(PDO::FETCH_ASSOC);
+
                 echo "Asset Number and Serial Number Already Exist on site ";
                 echo "" . htmlspecialchars($assetData['site_code']) . "";
             } else if (($assetRecord > 0) && !$allowOverride) {
@@ -45,7 +46,6 @@ class addHardwareDAO extends BaseDAO {
                 $serialDataStmt->execute();
                 $serialData = $serialDataStmt->fetch(PDO::FETCH_ASSOC);
                 echo "Serial Number Already Exist on site ";
-                echo "" . htmlspecialchars($serialData['site_code']) . "";
                 echo "" . htmlspecialchars($serialData['site_code']) . "";
             }
         //} 
