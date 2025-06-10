@@ -435,7 +435,7 @@ function hardwareUpdate(id){
             brandDropdown.append('<option value="" disabled>Select Brand</option>');
 
             $.each(obj.brands, function (index, brand) {
-                brandDropdown.append('<option value="' + brand + '">' + brand + '</option>');
+                brandDropdown.html('<option value="' + brand + '">' + brand + '</option>');
             });
             if (obj.selected_brand) {
                 brandDropdown.val(obj.selected_brand);
