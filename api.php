@@ -1,12 +1,13 @@
 <?php
+// api.php
+
 // Disable error display
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 
-// Log errors
-ini_set('log_errors', 1);
-ini_set('error_log', 'php_errors.log');
+// Disable error logging
+ini_set('log_errors', 0);
 
 ob_start();
 header('Content-Type: application/json');
@@ -16,7 +17,7 @@ try {
     $hardwareDAOPath = 'DAO\HardwareDAO.php';
     $baseDAOPath = 'DAO\BaseDAO.php';
 
-    // Check file existence with detailed logging
+    // Check file existence
     $missingFiles = [];
     if (!file_exists($hardwareDAOPath)) {
         $missingFiles[] = $hardwareDAOPath;
@@ -26,7 +27,6 @@ try {
     }
 
     if (!empty($missingFiles)) {
-        error_log('Missing required files: ' . implode(', ', $missingFiles));
         echo json_encode(['error' => 'Server configuration error: Missing files - ' . implode(', ', $missingFiles)]);
         exit;
     }
@@ -35,7 +35,6 @@ try {
     require_once $baseDAOPath;
 
     $action = $_GET['action'] ?? '';
-    error_log("API request: action=$action, params=" . json_encode($_GET));
 
     $dao = new HardwareDAO();
 
@@ -47,7 +46,6 @@ try {
         if (isset($_GET['site_code']) && $_GET['site_code'] !== '' && $_GET['site_code'] !== '0') {
             $params['site_code'] = $_GET['site_code'];
         }
-        error_log("getHardwareCounts params: " . json_encode($params));
         $result = $dao->getHardwareCounts($params);
         echo json_encode($result);
     } elseif ($action === 'getRegions') {
@@ -65,15 +63,12 @@ try {
         if (isset($_GET['site_code']) && $_GET['site_code'] !== '' && $_GET['site_code'] !== '0') {
             $params['site_code'] = $_GET['site_code'];
         }
-        error_log("getSiteCounts params: " . json_encode($params));
         $result = $dao->getSiteCounts($params);
         echo json_encode($result);
     } else {
-        error_log("Invalid action: $action");
         echo json_encode(['error' => 'Invalid action']);
     }
 } catch (Exception $e) {
-    error_log("API error: " . $e->getMessage());
     echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
 }
 
