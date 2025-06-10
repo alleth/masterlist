@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2025 at 04:38 PM
+-- Generation Time: Jun 10, 2025 at 02:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,9 @@ CREATE TABLE `tracking_tbl` (
 INSERT INTO `tracking_tbl` (`tracking_id`, `trxn_date`, `tracking_num`, `site_code`, `hw_id`, `user_id`, `pullout_date`, `pullout_status`, `request_type`, `cluster_name`, `request_status`) VALUES
 (8, '2025-04-11 11:26:30', '123456789102', '0700', 6737, 52, '04/10/2025', 'Declined', 'Pull out', 'VisMin', 0),
 (12, '2025-04-13 16:25:50', '123456789010', '0748', 11647, 22, '04/04/2025', 'Declined', 'Pull out', 'VisMin', 0),
-(15, '2025-04-19 22:30:28', '123456789101', '0748', 11647, 22, '03/27/2025', 'Received', 'Pull out', 'VisMin', 0);
+(15, '2025-04-19 22:30:28', '123456789101', '0748', 11647, 22, '03/27/2025', 'Received', 'Pull out', 'VisMin', 0),
+(16, '2025-05-28 15:11:32', '012345678910', '0700', 6737, 57, '05/01/2025', 'Received', 'Pull out', 'VisMin', 0),
+(17, '2025-06-04 21:47:49', '123456789011', '0700', 6738, 57, '06/05/2025', 'Received', 'Pull out', 'VisMin', 0);
 
 --
 -- Indexes for dumped tables
@@ -68,7 +70,7 @@ ALTER TABLE `tracking_tbl`
 -- AUTO_INCREMENT for table `tracking_tbl`
 --
 ALTER TABLE `tracking_tbl`
-  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
