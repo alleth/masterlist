@@ -94,7 +94,6 @@ require_once "auth.php";
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         Hardwares
                     </a>
-                    <!--
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Other Inventory
@@ -107,7 +106,6 @@ require_once "auth.php";
                             <a class="nav-link" href="hardware-switch.php">Network Equipment</a>
                         </nav>
                     </div>
-                    -->
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                         Hardware Status
