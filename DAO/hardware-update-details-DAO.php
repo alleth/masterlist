@@ -48,12 +48,10 @@
             $model_stmt->bindParam(1, $model_row['hw_brand_id']);
             $model_stmt->execute();
 
-
             $hw_model = [];
             while($model_loop = $model_stmt->fetch()){
                 $hw_model[] = ["model_id" => $model_loop[0], "model_name"=>$model_loop[1]];
             }
-
 
             $count = array(
                 "hw_id"=>$record[0],

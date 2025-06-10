@@ -161,7 +161,7 @@ class HardwareDAO extends BaseDAO
             $response['total'] = $total;
 
             // Servers
-            $query = "SELECT COUNT(*) as total FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'server' OR LOWER(h.item_desc) LIKE 'server')";
+            $query = "SELECT COUNT(*) as total FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'server')";
             $stmt = $conn->prepare($query);
             $stmt->execute($whereParams);
             $total = (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -169,8 +169,8 @@ class HardwareDAO extends BaseDAO
 
             // Server Brands
             $query = "SELECT h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
-                      FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'server' OR LOWER(h.item_desc) LIKE 'server') 
-                      GROUP BY h.hw_brand_name, h.hw_model, h.os_type 
+                      FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'servers' OR LOWER(h.item_desc) LIKE 'server') 
+                      GROUP BY h.hw_brand_name, h.hw_model
                       ORDER BY count DESC";
             $stmt = $conn->prepare($query);
             $stmt->execute($whereParams);
