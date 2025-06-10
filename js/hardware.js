@@ -300,6 +300,8 @@ $(function(){
     var serial_num = $('#serial_num').val();
     var date = $('#date').val();
     var acquired_value = $('#acquired_value').val();
+    var hw_status = "On Site";
+
 
     var wordObj = {
         RegionSelect : RegionSelect,
@@ -310,7 +312,9 @@ $(function(){
         asset_num : asset_num,
         serial_num : serial_num,
         date : date,
-        acquired_value : acquired_value
+        acquired_value : acquired_value,
+        hw_status : hw_status
+
     };
 
     if (!RegionSelect || !hardwareSiteModal || !itemSelect || !itemBrand || !itemModel || !asset_num || !serial_num || !date || !acquired_value) {

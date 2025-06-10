@@ -3,7 +3,7 @@
 include "BaseDAO.php";
 
 class addHardwareDAO extends BaseDAO {
-    function addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value) {
+    function addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $hw_status) {
         $this->openConn();
 
         // Check if serial number already exists
@@ -50,7 +50,7 @@ class addHardwareDAO extends BaseDAO {
         //} 
         else {
             // Proceed with insertion
-            $stmt = $this->dbh->prepare("INSERT INTO hw_tbl (region_name, site_code, item_desc, hw_brand_name, hw_model, hw_asset_num, hw_serial_num, hw_date_acq, hw_acq_val) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $this->dbh->prepare("INSERT INTO hw_tbl (region_name, site_code, item_desc, hw_brand_name, hw_model, hw_asset_num, hw_serial_num, hw_date_acq, hw_acq_val, hw_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bindParam(1, $RegionSelect);
             $stmt->bindParam(2, $hardwareSiteModal);
             $stmt->bindParam(3, $itemSelect);
@@ -60,6 +60,8 @@ class addHardwareDAO extends BaseDAO {
             $stmt->bindParam(7, $serial_num);
             $stmt->bindParam(8, $date);
             $stmt->bindParam(9, $acquired_value);
+            $stmt->bindParam(10, $hw_status);
+
             $stmt->execute();
 
             echo "Added Successfully";

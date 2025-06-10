@@ -11,6 +11,9 @@
     $date = $_POST['date'];
     $acquired_value = $_POST['acquired_value'];
 
+    $hw_status = $_POST['hw_status'];
+
+
     $action = new addHardwareDAO();
-    $action->addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value);
+    $action->addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $hw_status);
 
