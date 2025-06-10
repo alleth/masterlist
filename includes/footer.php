@@ -9,11 +9,9 @@
 </div>
 
 <!--
-<script src="js/scripts.js"></script>
-<script src="js/dashboard.js" type="text/javascript"></script>
 
+<script src="js/dashboard.js" type="text/javascript"></script>
 <script src="js/activity-log.js" type="text/javascript"></script>
-<script src="js/datepicker.min.js" type="text/javascript"></script>
 <script src="js/server.js" type="text/javascript"></script>
 <script src="js/cpu-pc-software.js" type="text/javascript"></script>
 <script src="js/hardware-management.js" type="text/javascript"></script>

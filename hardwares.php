@@ -299,5 +299,7 @@ include("includes/header.php");
 
 
 <?php include 'includes/components.php'; ?>
+<script src="js/scripts.js"></script>
+<script src="js/datepicker.min.js" type="text/javascript"></script>
 <script src="js/hardware.js" type="text/javascript"></script>
 <?php include 'includes/footer.php'; ?>
