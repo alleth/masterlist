@@ -24,15 +24,27 @@ class addHardwareDAO extends BaseDAO {
 
         $allowOverride = ($normalizedAsset === 'unreadable' || $normalizedAsset === 'n/a' || $normalizedSerial === 'unreadable' || $normalizedSerial === 'n/a');
 
-        //if (($assetRecord > 0 || $serialRecord > 0) && !$allowOverride) {
+
+        //if (($assetRecord > 0 || $serialRecord > 0) && !$allowOverride) {   backup query -> SELECT * FROM hw_tbl WHERE hw_asset_num = ?
             if ($assetRecord > 0 && $serialRecord > 0) {
-                $assetDataStmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE hw_asset_num = ?");
-                $assetDataStmt->bindParam(1, $asset_num);
+                $assetDataStmt = $this->dbh->prepare("SELECT * FROM hw_tbl JOIN site_list_tbl
+                                                      ON hw_tbl.site_code = site_list_tbl.site_name 
+                                                      WHERE hw_tbl.site_code = ? 
+                                                      and hw_tbl.hw_asset_num = ?");
+                $assetDataStmt->bindParam(1, $hardwareSiteModal);
+                $assetDataStmt->bindParam(2, $asset_num);
                 $assetDataStmt->execute();
                 $assetData = $assetDataStmt->fetch(PDO::FETCH_ASSOC);
-
-                echo "Asset Number and Serial Number Already Exist on site ";
-                echo "" . htmlspecialchars($assetData['site_code']) . "";
+                if ($assetData !== false) {
+                    // Data found, proceed with displaying the site code
+                     echo "Asset Number and Serial Number Already Exist on site ";
+                    echo htmlspecialchars($assetData['site_code']);
+                } else {
+                    // No data found, handle the error
+                echo "Asset Number and Serial Number exist, but no matching site found.";
+                }
+                //echo "Asset Number and Serial Number Already Exist on site ";
+                //echo htmlspecialchars($assetData['site_code']);
             } else if (($assetRecord > 0) && !$allowOverride) {
                 $assetDataStmt = $this->dbh->prepare("SELECT * FROM hw_tbl WHERE hw_asset_num = ?");
                 $assetDataStmt->bindParam(1, $asset_num);
