@@ -3,7 +3,7 @@ include("includes/header.php");
 ?>
     <main>
         <div class="container-fluid px-4">
-            <h6 class="mt-2 display-6">Hardwares</h6>
+            <h6 class="mt-2 display-6">Hardware</h6>
 
             <div class="row mt-4">
                 <div class="col-12">
