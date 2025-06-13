@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2025 at 03:52 PM
+-- Generation Time: Jun 13, 2025 at 03:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -6689,12 +6689,12 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6507, '8', '0621', '', 'UPS-SERVER', 'UPS-SERVER', 'Liebert', 'GXT4', 'PE40396', '1734100325AFC03', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0),
 (6508, '8', '0621', '', 'UPS-PC', 'UPS-PC', 'Eaton', '900I', 'PE49258', 'GM33P24071', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0),
 (6509, '8', '0621', '', 'UPS-PC', 'UPS-PC', 'Eaton', '900I', 'PE49259', 'GM33P24195', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0),
-(6510, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41259', 'SGH808QNJK', '', '', 'On Site', '0748W003_1', '10.7.48.42', '', 'Angelica Mae Mawi - JO', 'DL - Evaluator', '4GB', '500GB', '356GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6511, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41260', 'SGH808QNJX', '', '', 'On Site', '0748W002_1', '10.7.48.17', '', 'Sonia G. Calulo', 'DL Examiner', '4GB', '500GB', '355GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6512, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41261', 'SGH808QNK4', '', '', 'On Site', '0748w011_1', '10.7.48.96', '', 'Gycnn Joyce Palma', 'CASHIER', '4GB', '500GB', '345GB', '0.96', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6513, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41263', 'SGH808QHM', '', '', 'On Site', '0748W009_1', '10.7.48.42', '', 'Yvonne T. Auza', 'Approving', '4GB', '500GB', '344GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6514, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41264', 'SGH808QNFY', '', '', 'On Site', '0748W008_1', '', '', 'Wilmer Ebonia -JO', 'MV -Evaluator', '4GB', '500GB', '367GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6515, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '41265', 'SGH808QNG6', '', '', 'On Site', '0748W005_1', '10.7.48.96', '', 'Ruel Gonzaga', 'Releasing Officer', '4GB', '500GB', '378GB', '0.97', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6510, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41259', 'SGH808QNJK', '', '', 'On Site', '0748W003_1', '10.7.48.42', '', 'Angelica Mae Mawi - JO', 'DL - Evaluator', '4GB', '500GB', '356GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6511, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41260', 'SGH808QNJX', '', '', 'On Site', '0748W002_1', '10.7.48.17', '', 'Sonia G. Calulo', 'DL Examiner', '4GB', '500GB', '355GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6512, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41261', 'SGH808QNK4', '', '', 'On Site', '0748w011_1', '10.7.48.96', '', 'Gycnn Joyce Palma', 'CASHIER', '4GB', '500GB', '345GB', '0.96', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6513, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41263', 'SGH808QHM', '', '', 'On Site', '0748W009_1', '10.7.48.42', '', 'Yvonne T. Auza', 'Approving', '4GB', '500GB', '344GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6514, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41264', 'SGH808QNFY', '', '', 'On Site', '0748W008_1', '', '', 'Wilmer Ebonia -JO', 'MV -Evaluator', '4GB', '500GB', '367GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6515, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '41265', 'SGH808QNG6', '', '', 'On Site', '0748W005_1', '10.7.48.96', '', 'Ruel Gonzaga', 'Releasing Officer', '4GB', '500GB', '378GB', '0.97', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6516, '9', '0748', '', 'Monitor', 'Monitor', 'HP', 'Others', '34231', 'CNC927NYV4', '', '', 'On Site', '', '', '', 'Richie R. Prima', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6517, '9', '0748', '', 'Monitor', 'Monitor', 'HP', 'Others', '35768', 'CNK03209RF', '', '', 'On Site', '', '', '', 'Angelica Mae Mawi - JO', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6518, '9', '0748', '', 'Monitor', 'Monitor', 'HP', 'Others', '35831', 'CNK0320B91', '', '', 'On Site', '', '', '', 'Sonia G. Calulo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -6782,14 +6782,14 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6599, '9', '0738', '', 'UPS-PC', 'UPS-PC', 'Powerware', 'Others', '14235', 'unreadable', '', '', 'On Site', '', '', '', 'Romeo Soliva', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6600, '9', '0738', '', 'UPS-PC', 'UPS-PC', 'Powerware', 'Others', '13272', 'B26249', '', '', 'On Site', '', '', '', 'Chitta M. Negapatan', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6601, '9', '0738', '', 'CPU-PC', 'CPU-PC', 'HP', 'G9', '50882', '4CE411BYN6', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 11 64Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(6602, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39743', 'SGH741P4KD', '', '', 'On Site', '0732W0012_19', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '354GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6603, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39744', 'SGH741P4LC', '', '', 'On Site', '0732W0008_1', '', '', 'LEA V CALZADA', 'SITE SUPPORT', '4GB', '500GB', '333GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6604, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39745', 'SGH741P4TO', '', '', 'On Site', '0732W0005_1', '', '', 'GINACHIE BAYARCAL', 'Cashier', '4GB', '500GB', '354GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6605, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39746', 'SGH741P4QW', '', '', 'On Site', '0732W0022_5', '', '', 'CHRISTIAN LOYD NAYON', 'Releasing', '4GB', '500GB', '258GB', '0.98', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6606, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39747', 'SGH741P4M9', '', '', 'On Site', '0732W002_2', '', '', 'ENGR EUGENE L GADOR', 'Approving Officer', '4GB', '500GB', '333GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6607, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39748', 'SGH741PVX', '', '', 'On Site', '0732W0004_1', '', '', 'MARLYN LARITA', 'MV-Evaluator', '4GB', '500GB', '328GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6608, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39749', 'SGH741P4WP', '', '', 'On Site', '', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '287GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6609, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39750', 'SGH741P4P7', '', '', 'On Site', '', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '266GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6602, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39743', 'SGH741P4KD', '', '', 'On Site', '0732W0012_19', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '354GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6603, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39744', 'SGH741P4LC', '', '', 'On Site', '0732W0008_1', '', '', 'LEA V CALZADA', 'SITE SUPPORT', '4GB', '500GB', '333GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6604, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39745', 'SGH741P4TO', '', '', 'On Site', '0732W0005_1', '', '', 'GINACHIE BAYARCAL', 'Cashier', '4GB', '500GB', '354GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6605, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39746', 'SGH741P4QW', '', '', 'On Site', '0732W0022_5', '', '', 'CHRISTIAN LOYD NAYON', 'Releasing', '4GB', '500GB', '258GB', '0.98', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6606, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39747', 'SGH741P4M9', '', '', 'On Site', '0732W002_2', '', '', 'ENGR EUGENE L GADOR', 'Approving Officer', '4GB', '500GB', '333GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6607, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39748', 'SGH741PVX', '', '', 'On Site', '0732W0004_1', '', '', 'MARLYN LARITA', 'MV-Evaluator', '4GB', '500GB', '328GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6608, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39749', 'SGH741P4WP', '', '', 'On Site', '', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '287GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6609, '9', '0732', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39750', 'SGH741P4P7', '', '', 'On Site', '', '', '', 'JO EMPLOYEE - FOR RENEWAL', 'MV-Evaluator', '4GB', '500GB', '266GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6610, '9', '0732', '', 'Monitor', 'Monitor', 'HP', 'Others', '40143', '3CQ7392M7J', '', '', 'On Site', '', '', '', 'JO EMPLOYEE - FOR RENEWAL', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6611, '9', '0732', '', 'Monitor', 'Monitor', 'HP', 'Others', '40144', '3CQ7392LR8', '', '', 'On Site', '', '', '', 'LEA V CALZADA', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6612, '9', '0732', '', 'Monitor', 'Monitor', 'HP', 'Others', '40145', '3CQ7392M7B', '', '', 'On Site', '', '', '', 'GINACHIE BAYARCAL', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -6849,13 +6849,13 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6666, '9', '0724', '', 'Monitor', 'Monitor', 'HP', 'Others', '42425', '3CQ8042F44', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6667, '9', '0724', '', 'UPS-PC', 'UPS-PC', 'APC', 'Others', '42282', '1813900168AFC03', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6668, '9', '0724', '', 'UPS-PC', 'UPS-PC', 'POWERCOM', 'Others', '12564', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(6669, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '43434', 'ICZ936037P', '', '', 'On Site', '0724W003_1', '10.7.24.73', '', 'NEIL CESAR C. NOEL', 'APPROVING', '4GB', '500GB', '355GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6670, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'Hp', 'HP Elitedesk ', '43430', 'ICZ9360381', '', '', 'On Site', '0724W002_1', '10.7.24.78', '', 'NEIL CESAR C. NOEL', 'APPROVING/RELEASING', '4GB', '500GB', '365GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6671, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'Hp', 'HP Elitedesk ', '43429', 'ICZ9360383', '', '', 'On Site', '0724W002_01', '10.7.24.75', '', '', 'EVALUATOR', '4GB', '500GB', '344GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6669, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '43434', 'ICZ936037P', '', '', 'On Site', '0724W003_1', '10.7.24.73', '', 'NEIL CESAR C. NOEL', 'APPROVING', '4GB', '500GB', '355GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6670, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '43430', 'ICZ9360381', '', '', 'On Site', '0724W002_1', '10.7.24.78', '', 'NEIL CESAR C. NOEL', 'APPROVING/RELEASING', '4GB', '500GB', '365GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6671, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '43429', 'ICZ9360383', '', '', 'On Site', '0724W002_01', '10.7.24.75', '', '', 'EVALUATOR', '4GB', '500GB', '344GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6672, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '35158', 'SGH029T25Y', '', '', 'On Site', '0724W0022_1', '10.7.24.81', '', 'VINCENT RALPH D. DURANO', 'EVALUATOR', '4GB', '500GB', '378GB', '0.98', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6673, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'Hp', 'HP Elitedesk ', '43432', '1CZ936038C', '', '', 'On Site', '0724W004_1', '10.7.24.72', '', 'LYKA MARIE C. MATA', 'CASHIER', '4GB', '500GB', '344GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6674, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'Hp', 'HP Elitedesk ', '33242', 'UNREADABLE', '', '', 'On Site', '0724W0025_1', '10.7.24.85', '', 'DENNIS NOEL DINO', 'EVALUATOR', '4GB', '500GB', '321GB', '0.97', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6675, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'Hp', 'HP Elitedesk ', '33279', 'UNREADABLE', '', '', 'On Site', '0724W0028_02', '10.7.24.86', '', 'LESLIE D. SONS', 'EVALUATOR/SUPPLY OFFICER', '4GB', '500GB', '320GB', '0.96', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6673, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '43432', '1CZ936038C', '', '', 'On Site', '0724W004_1', '10.7.24.72', '', 'LYKA MARIE C. MATA', 'CASHIER', '4GB', '500GB', '344GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6674, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '33242', 'UNREADABLE', '', '', 'On Site', '0724W0025_1', '10.7.24.85', '', 'DENNIS NOEL DINO', 'EVALUATOR', '4GB', '500GB', '321GB', '0.97', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6675, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '33279', 'UNREADABLE', '', '', 'On Site', '0724W0028_02', '10.7.24.86', '', 'LESLIE D. SONS', 'EVALUATOR/SUPPLY OFFICER', '4GB', '500GB', '320GB', '0.96', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6676, '9', '0724', '', 'Monitor', 'Monitor', 'Hp', 'Others', '43486', '3CQ928222D', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6677, '9', '0724', '', 'Monitor', 'Monitor', 'Hp', 'Others', '32737', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6678, '9', '0724', '', 'Monitor', 'Monitor', 'Hp', 'Others', '32743', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -6912,18 +6912,18 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6729, '9', '0753', '', 'Monitor', 'Monitor', 'HP', 'Others', '25365', 'CNC927NYSQ', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6730, '9', '0753', '', 'Monitor', 'Monitor', 'HP', 'Others', '25366', 'CNC927NYT2', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6731, '9', '0753', '', 'Monitor', 'Monitor', 'HP', 'Others', '35834', 'CNK0320B9V', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(6732, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '34813', 'SGH029T20S', '', '', 'On Site', '0700W2010FIN_10', '', '', 'Rafael Dominico C. Cortes / Kath', 'Evaluator', '4GB', '180GB', '199.30 GB', '0.98', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6732, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'Compaq', 'EXD', '34813', 'SGH029T20S', '', '', 'On Site', '0700W2010FIN_10', '', '', 'Rafael Dominico C. Cortes / Kath', 'Evaluator', '4GB', '180GB', '199.30 GB', '0.98', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6733, '9', '0700', '', 'UPS-PC', 'UPS-PC', 'Powerware', 'PW-9110', '12025', 'B26394', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6734, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '25336', 'SGH029T1ZM', '', '', 'On Site', '0700w2010_090', '', '', 'Rachelle Nable', 'Evaluator', '4GB', '180GB', '92.99 GB', '0.96', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6735, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '34819', 'SGH029T1ZR', '', '', 'On Site', '0700w2010_050', '', '', 'Ronan Abad', 'Evaluator', '4GB', '180GB', '385.97 GB', '0.98', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6736, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '34821', 'SGH029T22L', '', '', 'On Site', '0700w2019_008', '', '', 'Aviama Jacaba', 'Cashier', '4GB', '500GB', '335.16 GB', '0.99', 'Windows XP', 'OR/CR', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6737, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33286', 'SGH9350P7G', '', '', 'On Site', '0700w2017_20', '', '', 'Nelson G. Jayme', 'Adjudication', '4GB', '180GB', '41.13 GB', '0.96', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6738, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33223', 'SGH9130LX6', '', '', 'On Site', '0700w001_10', '', '', 'Froilan Suarez', 'Adjudication', '4GB', '180GB', '115.99 GB', '0.97', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6738, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33223', 'SGH9130LX6', '', '', 'Pull out', '0700w001_10', '', '', 'Froilan Suarez', 'Adjudication', '4GB', '180GB', '115.99 GB', '0.97', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6739, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '34816', 'SGH029T21T', '', '', 'On Site', '0700WDIY_03', '', '', 'Niñoval C. Cultura', 'Supply Officer', '4GB', '180GB', '107.96 GB', '0.98', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6740, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39756', 'SGH741P4J2', '', '', 'On Site', '0700WDIY_04', '', '', 'Kathleen May Ponce', 'Approving (CSR)', '4GB', '180GB', '112.12GB', '0.97', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6740, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39756', 'SGH741P4J2', '', '', 'On Site', '0700WDIY_04', '', '', 'Kathleen May Ponce', 'Approving (CSR)', '4GB', '180GB', '112.12GB', '0.97', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6741, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '41266', 'SGH808QNB3', '', '', 'On Site', '0700WDIY_05', '', '', 'Maylen Recto', 'Evaluator (CSR)', '4GB', '180GB', '121GB', '0.99', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6742, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '34827', 'SGH029T202', '', '', 'On Site', '0700WDIY_06', '', '', 'Aden Belza', 'Approbing', '4GB', '180GB', '123.11GB', '0.97', 'Windows XP', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6743, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39758', 'SGH741P4MX', '', '', 'On Site', '0700w0022_2', '', '', 'Jovy Cagadas', 'Records Officer', '4GB', '500GB', '410.19 GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6743, '9', '0700', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39758', 'SGH741P4MX', '', '', 'On Site', '0700w0022_2', '', '', 'Jovy Cagadas', 'Records Officer', '4GB', '500GB', '410.19 GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '1', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
 (6744, '9', '0700', '', 'Monitor', 'Monitor', 'Philips', 'Others', '', 'CX000115827601', '', '', 'On Site', '', '', '', 'Server', 'Server', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6745, '9', '0700', '', 'Monitor', 'Monitor', 'HP', 'Others', '36162', 'CNK03401SN6', '', '', 'On Site', '', '', '', 'Rafael Dominico C. Cortes / Kath', 'Evaluator', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6746, '9', '0700', '', 'Monitor', 'Monitor', 'HP', 'Others', '25336', 'CNC927NYWT', '', '', 'On Site', '', '', '', 'Rachelle Nable', 'Evaluator', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -7074,7 +7074,7 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6890, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '30365', 'SGH8470089', '', '', 'On Site', '0741_W006', '', '', 'SANDE PADRIGA', 'APPROVING', '4GB', '180GB', '54GB', '0.98', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6891, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '30382', 'SGH84701', '', '', 'On Site', '0741W005_1', '', '', 'JUN MAGUDADATO', 'MV-Evaluator', '4GB', '250GB', '76GB', '0.98', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6892, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '31979', 'SGH8470D9N', '', '', 'On Site', '0741W002_1', '', '', 'MARIO DY', 'RELEASING', '4GB', '180GB', '87GB', '0.98', 'Windows XP', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6893, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33557', 'SGH9350P8T', '', '', 'On Site', '0741W003_1', '', '', 'GELLA BALLOVAR', 'CASHIER', '4GB', '180GB', '85GB', '0.98', 'Windows XP', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6893, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'Compaq DX2810', '33557', 'SGH9350P8T', '', '', 'On Site', '0741W003_1', '', '', 'GELLA BALLOVAR', 'CASHIER', '4GB', '180GB', '85GB', '0.98', 'Windows XP', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6894, '9', '0741', '', 'Monitor', 'Monitor', 'HP', 'Others', '32576', 'CNC906D0D16', '', '', 'On Site', '', '', '', 'MARIO DY', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6895, '9', '0741', '', 'Monitor', 'Monitor', 'HP', 'Others', '33667', 'CNC927P06C', '', '', 'On Site', '', '', '', 'GELLA BALLOVAR', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6896, '9', '0741', '', 'Monitor', 'Monitor', 'HP', 'Others', '35606', 'CNK0260PZ7Y', '', '', 'On Site', '', '', '', 'JUN MAGUDADATO', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -7121,22 +7121,22 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (6937, '9', '0703', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '31574', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6938, '9', '0703', '', 'Mouse', 'Mouse', 'HP', 'Others', '31607', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6939, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33232', 'SGH9350P6F', '', '', 'On Site', '0703WDIY_1', '10.7.101.168', '', 'SITE SUPPORT LEA AND CARL', '', '4GB', '500GB', '354GB', '0.98', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6940, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Pro SSF 400 G9', '47845', 'S4CE323DRPN', '', '', 'On Site', '0724W004_2', '', '', 'IDLE', '', '4GB', '500GB', '376GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6941, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '43428', '1CZ936038C', '', '', 'On Site', '0724W003_6', '', '', 'ARD OFFICE', '', '4GB', '500GB', '376GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6940, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro SSF 400 G9', '47845', 'S4CE323DRPN', '', '', 'On Site', '0724W004_2', '', '', 'IDLE', '', '4GB', '500GB', '376GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6941, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '43428', '1CZ936038C', '', '', 'On Site', '0724W003_6', '', '', 'ARD OFFICE', '', '4GB', '500GB', '376GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6942, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '43433', '3CQ9282217', '', '', 'On Site', '0724W003_7', '', '', 'IDLE', '', '4GB', '500GB', '356GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6943, '9', '0701', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2710', '33250', 'UNREADABLE', '', '', 'On Site', '0724W004_2', '', '', 'IDLE', '', '4GB', '500GB', '377GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6944, '9', '0701', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '27829', 'UNREADABLE', '', '', 'On Site', '', '', '', 'ARD OFFICE', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6945, '9', '0701', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '27777', 'UNREADABLE', '', '', 'On Site', '', '', '', 'IDLE', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6946, '9', '0701', '', 'Mouse', 'Mouse', 'HP', 'Others', '27829', 'UNREADABLE', '', '', 'On Site', '', '', '', 'ARD OFFICE', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6947, '9', '0701', '', 'Mouse', 'Mouse', 'HP', 'Others', '27832', 'UNREADABLE', '', '', 'On Site', '', '', '', 'IDLE', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(6948, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42916', 'SGH838XSX4', '', '', 'On Site', '0712w002_1', '', '', 'Sonny Balasabas', 'Releasing', '4GB', '500GB', '387GB', '0.97', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6949, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42923', 'SGH838XSXS', '', '', 'On Site', '0712W009_1', '', '', 'Edgardo M. Egos', 'Cashier', '4GB', '500GB', '199.7 GB', '0.98', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6950, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42919', 'SGH838XSX7', '', '', 'On Site', '0712w004_1', '', '', 'Roel T. Getaruelas', 'Site Support', '4GB', '500GB', '244GB', '0.99', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6951, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42921', 'SGH838XSX8', '', '', 'On Site', '0712W003_1', '', '', 'Florian Gutierrez', 'Evalauator', '4GB', '500GB', '355GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6952, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42920', 'SGH838XSX9', '', '', 'On Site', '0712W006_1', '', '', 'Rays Janro Z. Sararaña', 'Evalauator', '4GB', '500GB', '354GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6953, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42918', 'SGH838XSX10', '', '', 'On Site', '0712w008_1', '', '', 'Adela A. Ybañez', 'Approving', '4GB', '500GB', '288GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(6954, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42917', 'SGH838XSX12', '', '', 'On Site', '0712W010_1', '', '', 'Fritz Sereño', 'Evalauator', '4GB', '500GB', '321GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(6955, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42916', 'SGH838XSX13', '', '', 'On Site', '0712w001_1', '', '', 'John Bryan Gabatan', 'Input Clerk', '4GB', '500GB', '311GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6948, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42916', 'SGH838XSX4', '', '', 'On Site', '0712w002_1', '', '', 'Sonny Balasabas', 'Releasing', '4GB', '500GB', '387GB', '0.97', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6949, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42923', 'SGH838XSXS', '', '', 'On Site', '0712W009_1', '', '', 'Edgardo M. Egos', 'Cashier', '4GB', '500GB', '199.7 GB', '0.98', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6950, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42919', 'SGH838XSX7', '', '', 'On Site', '0712w004_1', '', '', 'Roel T. Getaruelas', 'Site Support', '4GB', '500GB', '244GB', '0.99', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6951, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42921', 'SGH838XSX8', '', '', 'On Site', '0712W003_1', '', '', 'Florian Gutierrez', 'Evalauator', '4GB', '500GB', '355GB', '0.96', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6952, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42920', 'SGH838XSX9', '', '', 'On Site', '0712W006_1', '', '', 'Rays Janro Z. Sararaña', 'Evalauator', '4GB', '500GB', '354GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6953, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42918', 'SGH838XSX10', '', '', 'On Site', '0712w008_1', '', '', 'Adela A. Ybañez', 'Approving', '4GB', '500GB', '288GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(6954, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42917', 'SGH838XSX12', '', '', 'On Site', '0712W010_1', '', '', 'Fritz Sereño', 'Evalauator', '4GB', '500GB', '321GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(6955, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42916', 'SGH838XSX13', '', '', 'On Site', '0712w001_1', '', '', 'John Bryan Gabatan', 'Input Clerk', '4GB', '500GB', '311GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (6956, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '35741', 'SGH033QT93', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows XP', 'DL DEMERIT', '', '', '', '', '', '', '4', 'eScan', '', '', '', 1),
 (6957, '9', '0712', '', 'Monitor', 'Monitor', 'HP', 'Others', '42406', 'SGH838XSX14', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (6958, '9', '0712', '', 'Monitor', 'Monitor', 'Others', 'Others', '43071', 'SGH838XSX15', '', '', 'On Site', '', '', '', 'Edgardo M. Egos', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -7205,17 +7205,17 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (7021, '9', '0752', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '18340', 'BAUJQ0HVBYXMUR', '', '', 'On Site', '', '', '', 'Daniella Louis Vibar', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7022, '9', '0752', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '17776', 'BAUJQ0GCPZ8HI6', '', '', 'On Site', '', '', '', 'Atty. Vicente L. Gador Jr.', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7023, '9', '0752', '', 'Keyboard', 'Keyboard', 'HP', 'Others', '9954', 'UNREADABLE', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7024, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39751', 'SGH741P4LP', '', '', 'On Site', '0716W0002_06', '10.7.16.55', '', 'JOEL T. MALOLOY-ON', 'Approving Officer', '4GB', '500 GB', '354GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1);
+(7024, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39751', 'SGH741P4LP', '', '', 'On Site', '0716W0002_06', '10.7.16.55', '', 'JOEL T. MALOLOY-ON', 'Approving Officer', '4GB', '500 GB', '354GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1);
 INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_major_type`, `item_desc`, `hw_brand_name`, `hw_model`, `hw_asset_num`, `hw_serial_num`, `hw_date_acq`, `hw_acq_val`, `hw_status`, `hw_host_name`, `hw_ip_add`, `hw_mac_add`, `hw_user_name`, `hw_primary_role`, `hw_memory`, `hdd_capacity`, `hdd_free_space`, `hdd_health`, `os_type`, `core_buid`, `rsu_fac`, `mv_dto`, `mv_maint`, `ims_aiu`, `dl_dto`, `dl_maint`, `dotnet`, `hw_antivi`, `ports_num`, `ports_working`, `ports_deffect`, `user_id`) VALUES
-(7025, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39752', 'SGH741P4W0', '', '', 'On Site', '0716W0005_19', '10.7.16.90', '', 'FLORAMAE A. WALOG', 'Input Clerk', '4GB', '500 GB', '333GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7026, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39753', 'SGH741P4XB', '', '', 'On Site', '0716W0011_2', '10.7.16.50', '', 'FLORENTINAA Y. OPRIL', 'Cashier', '4GB', '500 GB', '354GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7027, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39754', 'SGH741P4JJ', '', '', 'On Site', '0716W0012_15', '10.7.16.85', '', 'EMILY G. ACERO', 'Input Clerk', '4GB', '500 GB', '258GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7028, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39755', 'SGH741P4QS', '', '', 'On Site', '0716W0008_19', '', '', 'MA. KIMBERLY E. POGOY', 'ASST Approving Officer', '4GB', '500 GB', '333GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
-(7029, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39756', 'SGH741P4J2', '', '', 'On Site', '0716W0004_6', '', '', 'MARY ROSE B. RAMOS', 'MV-Evaluator', '4GB', '500 GB', '328GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7030, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39757', 'SGH741P4W3', '', '', 'On Site', '0716W0010_12', '10.7.16.53', '', 'EDUARDO S. CATALYA', 'MV-Evaluator', '4GB', '500 GB', '287GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7031, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39758', 'SGH741P4MX', '', '', 'On Site', '0716W0004_9', '', '', 'JESETH GRACE T. MACACHOR', 'MV-Evaluator', '4GB', '500 GB', '266GB', '0.99', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7032, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39759', 'SGH741P4', '', '', 'On Site', '0716W0003_2', '10.7.16.54', '', 'SANNILYN B. SABAY (JO)', 'Releasing', '4GB', '500 GB', '258GB', '0.96', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
-(7033, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP DeskPro 400 G4', '39760', 'SGH741P4', '', '', 'On Site', '0716W0007_5', '10.7.16.199', '', 'idle', '', '4GB', '500 GB', '258GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7025, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39752', 'SGH741P4W0', '', '', 'On Site', '0716W0005_19', '10.7.16.90', '', 'FLORAMAE A. WALOG', 'Input Clerk', '4GB', '500 GB', '333GB', '0.97', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7026, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39753', 'SGH741P4XB', '', '', 'On Site', '0716W0011_2', '10.7.16.50', '', 'FLORENTINAA Y. OPRIL', 'Cashier', '4GB', '500 GB', '354GB', '0.99', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7027, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39754', 'SGH741P4JJ', '', '', 'On Site', '0716W0012_15', '10.7.16.85', '', 'EMILY G. ACERO', 'Input Clerk', '4GB', '500 GB', '258GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7028, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39755', 'SGH741P4QS', '', '', 'On Site', '0716W0008_19', '', '', 'MA. KIMBERLY E. POGOY', 'ASST Approving Officer', '4GB', '500 GB', '333GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '1', '1', '0', '0', '4', 'eScan', '', '', '', 1),
+(7029, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39756', 'SGH741P4J2', '', '', 'On Site', '0716W0004_6', '', '', 'MARY ROSE B. RAMOS', 'MV-Evaluator', '4GB', '500 GB', '328GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7030, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39757', 'SGH741P4W3', '', '', 'On Site', '0716W0010_12', '10.7.16.53', '', 'EDUARDO S. CATALYA', 'MV-Evaluator', '4GB', '500 GB', '287GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7031, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39758', 'SGH741P4MX', '', '', 'On Site', '0716W0004_9', '', '', 'JESETH GRACE T. MACACHOR', 'MV-Evaluator', '4GB', '500 GB', '266GB', '0.99', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7032, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39759', 'SGH741P4', '', '', 'On Site', '0716W0003_2', '10.7.16.54', '', 'SANNILYN B. SABAY (JO)', 'Releasing', '4GB', '500 GB', '258GB', '0.96', 'Windows 10 32Bit', 'OR/CR', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
+(7033, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '39760', 'SGH741P4', '', '', 'On Site', '0716W0007_5', '10.7.16.199', '', 'idle', '', '4GB', '500 GB', '258GB', '0.98', 'Windows 10 32Bit', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (7034, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33218', 'SGH9130LZY', '', '', 'On Site', '0703W0022_10', '', '', 'idle', '', '4GB', '160GB', '113GB', '0.97', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (7035, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33225', 'SGH9130M02', '', '', 'On Site', '0701120716', '', '', 'idle', '', '4GB', '160GB', '113GB', '0.97', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
 (7036, '9', '0716', '', 'CPU-PC', 'CPU-PC', 'HP', 'Pro3000', '35161', 'SGH029T26P', '', '', 'On Site', '0701W0034_1', '', '', 'idle', '', '4GB', '160GB', '113GB', '0.97', 'Windows XP', 'DL DEMERIT', '0', '0', '0', '0', '0', '0', '4', 'eScan', '', '', '', 1),
@@ -7269,8 +7269,8 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (7084, '9', '0704', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '49049', '4CE336D7H0', '2024', '', 'On Site', '', '', 'ATS', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', 'eScan', '', '', '', 1),
 (7085, '9', '0704', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '47348', '3CQ2400X8L', '2023', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7086, '9', '0704', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '48618', '3cq3060b53', '2024', '', 'On Site', '', '', 'ATS', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7087, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'HP Elitedesk ', '42915', '1CZ91303N1', '2019', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 32Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7088, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '33236', '', '2023', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows XP', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7087, '9', '0712', '', 'CPU-PC', 'CPU-PC', 'HP', 'Elite desk', '42915', '1CZ91303N1', '2019', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 32Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7088, '9', '0741', '', 'CPU-PC', 'CPU-PC', 'HP', 'Compaq DX2810', '33236', 'SGH9350P4Q', '2023', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows XP', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7089, '9', '0741', '', 'Monitor', 'Monitor', 'HP', 'L1910', '32179', 'CNK90406M5', '2019', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7090, '9', '0702', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '49045', '4CE336D7GV', '2024', '', 'On Site', '', '', 'ATS', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7091, '9', '0702', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '48635', '3CQ3060B4D', '2024', '', 'On Site', '', '', 'ATS', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -7284,8 +7284,8 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (7099, '9', '0739', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '48637', '3CQ3060B5F', '2024', '', 'On Site', '', '', 'ATS', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7100, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'HP', 'DX2810', '48637', 'SGH9350P84', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows XP', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7101, '9', '0724', '', 'CPU-PC', 'CPU-PC', 'DELL', 'Dell optiplex 360/330', '03637', '941VSIS', '2007', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows XP', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7102, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G4', '41266', 'SGH808QNB3', '2018', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7103, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G4', '41262', 'SGH808QNNL', '2018', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7102, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '41266', 'SGH808QNB3', '2018', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7103, '9', '0748', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G4', '41262', 'SGH808QNNL', '2018', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7104, '9', '0751', '', 'Monitor', 'Monitor', 'HP', '18.5\"', '40141', '3CQ7392LYX', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7105, '9', '0751', '', 'Monitor', 'Monitor', 'HP', '18.5\"', '40136', '3CQ7392M05', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7106, '9', '0751', '', 'Monitor', 'Monitor', 'HP', '18.5\"', '40135', '3CQ7392LZG', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -7294,9 +7294,9 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (7109, '9', '0742', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '49028', 'VNM0216510', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7110, '9', '0742', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '48652', '3CQ3060B2N', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7111, '9', '0742', '', 'Monitor', 'Monitor', 'HP', '19.5\"', '48651', '3CQ3060B5M', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7112, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '49017', '4CE336D7G6', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7113, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '48733', '4CE336BRBW', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(7114, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '48718', '4CE336BRF4', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7112, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G9', '49017', '4CE336D7G6', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7113, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G9', '48733', '4CE336BRBW', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7114, '9', '0706', '', 'CPU-PC', 'CPU-PC', 'HP', 'Prodesk 400 G9', '48718', '4CE336BRF4', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7115, '9', '0744', '', 'Monitor', 'Monitor', 'HP', '18.5\"', '46160', '3CQ0370DHG', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7116, '9', '0752', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '49016', '4CE336D7H8', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (7117, '9', '0752', '', 'CPU-PC', 'CPU-PC', 'HP', 'PRODESK 400 G9', '48723', '4CE336BR8Q', '', '', 'On Site', '', '', '', '', '', '', '', '', '', 'Windows 10 64 Bit', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -11009,7 +11009,7 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (10808, '8', '0643', '', 'Server', 'Server', '', '', 'LTMS', '', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (10809, '8', '0629', '', 'Server', 'Server', '', '', 'LTMS', '', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (10810, '8', '0623', '', 'Server', 'Server', 'Xitrix', '', '1', '', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(10811, '9', '0700', '', 'Server', 'Server', 'IBM', 'IBM x3200', '30836', '4362IRS-99A5549', '', '', 'On Site', '', '', '', '', '', '3gig', '', '', '', 'Windows Server 2003', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(10811, '9', '0700', '', 'Server', 'Server', 'IBM', 'XSERIES 3200', '30836', '4362IRS-99A5549', '', '', 'On Site', '', '', '', '', '', '3gig', '', '', '', 'Windows Server 2003', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (10812, '9', '0701', '', 'Server', 'Server', 'HP', 'HP Proliant Ml110 Gen10', '1', '1', '', '', 'On Site', '', '', '', '', '', '16GB', '', '', '', 'Windows Server 2012', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (10813, '9', '0702', '', 'Server', 'Server', 'HP', 'HP Proliant Ml110 Gen10', '1', '1', '', '', 'On Site', '', '', '', '', '', '16GB', '', '', '', 'Windows Server 2012', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (10814, '9', '0703', '', 'Server', 'Server', 'HP', 'HP Proliant Ml110 Gen10', '3883', '1', '', '', 'On Site', '', '', '', '', '', '16GB', '', '', '', 'Windows Server 2012', '', '', '', '', '', '', '', '', '', '', '', '', 1),
@@ -14012,7 +14012,10 @@ INSERT INTO `hw_tbl` (`hw_id`, `region_name`, `site_code`, `major_type`, `sub_ma
 (13798, '17', '1526', '', 'Network Equipment', 'Fortigate', 'Fortinet', '40F', '50031', 'FGT40FTK24042624', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
 (13799, '17', '1000', '', 'Network Equipment', 'Switch', 'D-Link', '8-port', '20792', '12168408705', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '16', ' ', ' ', 1),
 (13800, '17', '1005', '', 'Network Equipment', 'Switch', 'Cisco', 'CBS 350 16T', '47759', 'FOC2644YCDQ', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '16', ' ', ' ', 1),
-(13801, '17', '1510', '', 'Network Equipment', 'Switch', 'Cisco', 'SF350-24', '46351', 'DNI225101DQ', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1);
+(13801, '17', '1510', '', 'Network Equipment', 'Switch', 'Cisco', 'SF350-24', '46351', 'DNI225101DQ', '', '', 'On Site', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(13802, '9', '0700', NULL, NULL, 'CPU-PC', 'HP', 'Prodesk G4', '1111', '1111', '2025-06-10', '-', 'On Site', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(13803, '9', '0700', NULL, NULL, 'CPU-PC', 'HP', 'Prodesk G4', '2222', '2222', '2025-06-12', '', 'On Site', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(13804, '10', '0800', NULL, NULL, 'CPU-PC', 'HP', 'Prodesk G4', '3333', '3333', '2025-06-12', '', 'On Site', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -14244,6 +14247,27 @@ INSERT INTO `region_tbl` (`region_id`, `region_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `remarks_tbl`
+--
+
+CREATE TABLE `remarks_tbl` (
+  `remarks_id` int(11) NOT NULL,
+  `tracking_id` varchar(11) NOT NULL,
+  `message` varchar(61) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `remarks_tbl`
+--
+
+INSERT INTO `remarks_tbl` (`remarks_id`, `tracking_id`, `message`, `user_id`) VALUES
+(16, '8', 'Tracking number not found.', 45),
+(17, '12', 'Tracking not found', 45);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `request_tbl`
 --
 
@@ -14256,13 +14280,6 @@ CREATE TABLE `request_tbl` (
   `request_status` varchar(45) NOT NULL,
   `send_to` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `request_tbl`
---
-
-INSERT INTO `request_tbl` (`request_id`, `user_id`, `request_msg`, `request_date`, `hw_id`, `request_status`, `send_to`) VALUES
-(1, 22, 'Hardware Pullout', '01/27/2025', 1, 'In-transit', '45');
 
 -- --------------------------------------------------------
 
@@ -14285,7 +14302,7 @@ CREATE TABLE `site_list_tbl` (
 --
 
 INSERT INTO `site_list_tbl` (`site_id`, `site_code`, `site_name`, `site_address`, `region_id`, `office_type`, `site_partnership`) VALUES
-(7, '0100', 'Regional Office ', 'Aguila Road, San Fernando City, La Union', '2', NULL, NULL),
+(7, '0100', 'Regional Office ', 'Aguila Road, San Fernando City, La Union', '2', 'Regional Office', 'Government'),
 (8, '0101', 'New Registration Unit', 'Aguila Road, San Fernando City, La Union', '2', NULL, NULL),
 (9, '0104', 'Agoo DO', 'San Jose Sur, Agoo, La Union', '2', NULL, NULL),
 (10, '0108', 'Alaminos DO', 'Tanaytay, Alaminos City, Pangasinan', '2', NULL, NULL),
@@ -14516,9 +14533,9 @@ INSERT INTO `site_list_tbl` (`site_id`, `site_code`, `site_name`, `site_address`
 (357, '0730', 'Jagna EO', 'West Canayaon, Garcia Hernandez, Bohol', '9', 'District Office', 'Government'),
 (358, '0732', 'Mandaue DO', 'City Timesquare 2 Mandaue City, Cebu', '9', 'District Office', 'Proponent'),
 (359, '0736', 'Mandaue City LC', 'City Timesquare 2 Mandaue City, Cebu', '9', 'Licensing Center', 'Proponent'),
-(360, '0738', 'Medellin EO', 'New Medellin Public Market, Medellin, Cebu', '9', NULL, NULL),
-(361, '0739', 'Camotes Island EO', 'Eastern Poblacion Poro, Cebu', '9', NULL, NULL),
-(362, '0741', 'La Libertad DO', 'South Poblacion, La Libertad Neg. Oriental', '9', NULL, NULL),
+(360, '0738', 'Medellin EO', 'New Medellin Public Market, Medellin, Cebu', '9', 'District Office', 'Government'),
+(361, '0739', 'Camotes Island EO', 'Eastern Poblacion Poro, Cebu', '9', 'Extension Office', 'Proponent'),
+(362, '0741', 'La Libertad DO', 'South Poblacion, La Libertad Neg. Oriental', '9', 'District Office', 'Government'),
 (363, '0742', 'Bantayan EO', 'Santa Fe, Bantayan island, Cebu', '9', NULL, NULL),
 (364, '0743', 'Ronda DO', 'Poblacion, Municipality of Ronda, Cebu Province', '9', NULL, NULL),
 (365, '0744', 'Siquijor DO', 'Caipilan, Siquijor, Siquijor', '9', NULL, NULL),
@@ -14740,7 +14757,11 @@ INSERT INTO `site_list_tbl` (`site_id`, `site_code`, `site_name`, `site_address`
 (631, '2002', 'Cotabato DO', 'ARMM Compound, Cotabato City, Cotabato', '15', NULL, NULL),
 (632, '2003', 'Cotabato LC', 'ARMM Compound, Cotabato City, Cotabato', '15', NULL, NULL),
 (633, '2004', 'Bongao EO', 'Capitol Hills Road, Bongao, Tawi-Tawi', '15', NULL, NULL),
-(634, '2005', 'Jolo DO', 'Capitol Site, Bangkal Patikul, Jolo, Sulu', '15', NULL, NULL);
+(634, '2005', 'Jolo DO', 'Capitol Site, Bangkal Patikul, Jolo, Sulu', '15', NULL, NULL),
+(636, '0734', 'Liloan EO', 'Brgy. Cogon, 2nd Floor, Pier 88, Liloan, Cebu', '9', 'Extension Office', 'Proponent'),
+(637, '0762', 'Consolacion EO', '2nd Floor, SM City Consolacion, Sampaguita St, Consolacion, Cebu', '9', 'Extension Office', 'Proponent'),
+(640, '0711', 'Tubigon EO', 'LTO TUBIGON EXTENSION OFFICE  BRGY. CAHAYAG, TUBIGON, BOHOL', '9', 'Extension Office', 'Proponent'),
+(641, '0869', 'Boss Coffee DO', 'Palo, Leyte', '10', 'District Office', 'Proponent');
 
 -- --------------------------------------------------------
 
@@ -15128,20 +15149,28 @@ INSERT INTO `srvr_tbl` (`srvr_id`, `region`, `itsoi_count`, `site_code`, `site_n
 
 CREATE TABLE `tracking_tbl` (
   `tracking_id` int(11) NOT NULL,
-  `tracking_date` varchar(55) DEFAULT NULL,
-  `tracking_num` varchar(11) DEFAULT NULL,
+  `trxn_date` varchar(55) DEFAULT NULL,
+  `tracking_num` varchar(12) DEFAULT NULL,
   `site_code` varchar(11) DEFAULT NULL,
   `hw_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `pullout_date` varchar(45) DEFAULT NULL,
+  `pullout_status` varchar(75) DEFAULT NULL,
+  `request_type` varchar(45) DEFAULT NULL,
+  `cluster_name` varchar(45) DEFAULT NULL,
+  `request_status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tracking_tbl`
 --
 
-INSERT INTO `tracking_tbl` (`tracking_id`, `tracking_date`, `tracking_num`, `site_code`, `hw_id`, `user_id`) VALUES
-(1, '2025-01-23 11:40:49', '12345678910', '0732', 1, 22),
-(2, '2025-01-23 12:00:30', '12345678910', '1306', 19, 1);
+INSERT INTO `tracking_tbl` (`tracking_id`, `trxn_date`, `tracking_num`, `site_code`, `hw_id`, `user_id`, `pullout_date`, `pullout_status`, `request_type`, `cluster_name`, `request_status`) VALUES
+(8, '2025-04-11 11:26:30', '123456789102', '0700', 6737, 52, '04/10/2025', 'Declined', 'Pull out', 'VisMin', 0),
+(12, '2025-04-13 16:25:50', '123456789010', '0748', 11647, 22, '04/04/2025', 'Declined', 'Pull out', 'VisMin', 0),
+(15, '2025-04-19 22:30:28', '123456789101', '0748', 11647, 22, '03/27/2025', 'Received', 'Pull out', 'VisMin', 0),
+(16, '2025-05-28 15:11:32', '012345678910', '0700', 6737, 57, '05/01/2025', 'Received', 'Pull out', 'VisMin', 0),
+(17, '2025-06-04 21:47:49', '123456789011', '0700', 6738, 57, '06/05/2025', 'Received', 'Pull out', 'VisMin', 0);
 
 -- --------------------------------------------------------
 
@@ -15157,7 +15186,7 @@ CREATE TABLE `user_tbl` (
   `user_type` varchar(25) DEFAULT NULL,
   `cluster_name` varchar(45) DEFAULT NULL,
   `user_name` varchar(25) DEFAULT NULL,
-  `user_pass` varchar(25) DEFAULT NULL
+  `user_pass` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -15166,9 +15195,10 @@ CREATE TABLE `user_tbl` (
 
 INSERT INTO `user_tbl` (`id`, `fname`, `lname`, `region_assigned`, `user_type`, `cluster_name`, `user_name`, `user_pass`) VALUES
 (1, 'The', 'Administrator', 'All', 'ADM', 'All', 'admin', 'admin'),
-(22, 'Alleth Rey', 'Dazo', '9', 'FSE', 'VisMin', 'amdazo', 'password'),
-(45, 'Pedro', 'Penduko', 'All', 'SPV', 'Luzon', 'penpen', 'password'),
-(52, 'Dina', 'Naliligo', '10', 'FSE', 'VisMin', 'dindin', 'password');
+(57, 'Alleth Rey', 'Dazo', '9', 'FSE', 'VisMin', 'amdazo', '$2y$10$Z0iDvXu04fW4LsgOaO3j4unFVTOKGybhkmf8Xh7suG4ZoJubIHP3q'),
+(58, 'Edward Chris', 'Avila', '10', 'FSE', 'VisMin', 'ebavila', '$2y$10$qZSgMJzGbkF6YKcY/19Ec.B7Ok128DeIlhe1ZJ6huDao5SIe7B8Fy'),
+(59, 'Dina', 'Naliligo', '2', 'FSE', 'Luzon', 'dindin', '$2y$10$Sx7JS15Cfbza3A.WgDwaQenE4AzjrZ9NjtQU8JRvwWHdhB..E1AEC'),
+(60, 'Pedro', 'Penduko', '9', 'SPV', 'VisMin', 'penpen', '$2y$10$QA3U74RGTDQ21.ien/CAMueExmVjTzpMUsUzsVQrh.F/3X1XjFgmO');
 
 --
 -- Indexes for dumped tables
@@ -15229,6 +15259,12 @@ ALTER TABLE `region_tbl`
   ADD PRIMARY KEY (`region_id`);
 
 --
+-- Indexes for table `remarks_tbl`
+--
+ALTER TABLE `remarks_tbl`
+  ADD PRIMARY KEY (`remarks_id`);
+
+--
 -- Indexes for table `request_tbl`
 --
 ALTER TABLE `request_tbl`
@@ -15284,7 +15320,7 @@ ALTER TABLE `hw_other_info`
 -- AUTO_INCREMENT for table `hw_tbl`
 --
 ALTER TABLE `hw_tbl`
-  MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13802;
+  MODIFY `hw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13805;
 
 --
 -- AUTO_INCREMENT for table `item_brand`
@@ -15317,6 +15353,12 @@ ALTER TABLE `region_tbl`
   MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `remarks_tbl`
+--
+ALTER TABLE `remarks_tbl`
+  MODIFY `remarks_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `request_tbl`
 --
 ALTER TABLE `request_tbl`
@@ -15326,7 +15368,7 @@ ALTER TABLE `request_tbl`
 -- AUTO_INCREMENT for table `site_list_tbl`
 --
 ALTER TABLE `site_list_tbl`
-  MODIFY `site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=636;
+  MODIFY `site_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=642;
 
 --
 -- AUTO_INCREMENT for table `srvr_tbl`
@@ -15338,13 +15380,13 @@ ALTER TABLE `srvr_tbl`
 -- AUTO_INCREMENT for table `tracking_tbl`
 --
 ALTER TABLE `tracking_tbl`
-  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_tbl`
 --
 ALTER TABLE `user_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
