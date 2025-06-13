@@ -1,3 +1,7 @@
+
+function timestamp() {
+    return new Date().toLocaleString("en-US", { timeZone: "UTC" });
+}
 $(function(){
     console.log("=== hardware.js loaded successfully at %s ===", timestamp());
 
@@ -9,38 +13,36 @@ $(function(){
         return new Date().toLocaleString("en-US", { timeZone: "UTC" });
     }
 
-    $(document).ready(function () {
-        $(".datepicker-input").datepicker({
-            dateFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true,
-            showAnim: "fadeIn",
-            autoclose: true,
-            beforeShow: function (input, inst) {
-                setTimeout(function () {
-                    inst.dpDiv.css({
-                        position: "absolute",
-                        top: $(input).offset().top + $(input).outerHeight(),
-                        left: $(input).offset().left,
-                        zIndex: 99999
-                    });
-                }, 100);
-            }
-        });
+    $(".datepicker-input").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        showAnim: "fadeIn",
+        autoclose: true,
+        beforeShow: function (input, inst) {
+            setTimeout(function () {
+                inst.dpDiv.css({
+                    position: "absolute",
+                    top: $(input).offset().top + $(input).outerHeight(),
+                    left: $(input).offset().left,
+                    zIndex: 99999
+                });
+            }, 100);
+        }
+    });
 
-        $(document).on("focus", ".datepicker-input", function () {
-            $(".ui-datepicker").css("z-index", 99999);
-        });
+    $(document).on("focus", ".datepicker-input", function () {
+        $(".ui-datepicker").css("z-index", 99999);
+    });
 
-        $(".modal").on("shown.bs.modal", function () {
-            $(".ui-datepicker").css("z-index", parseInt($(this).css("z-index")) + 1);
-        });
+    $(".modal").on("shown.bs.modal", function () {
+        $(".ui-datepicker").css("z-index", parseInt($(this).css("z-index")) + 1);
+    });
 
-        // Bind brand dropdown change event
-        $(document).on("change", "#edit_brandSelect", function() {
-            console.log("Brand dropdown changed to: %s at %s", $(this).val(), timestamp());
-            showHardwareModel();
-        });
+    // Bind brand dropdown change event
+    $(document).on("change", "#edit_brandSelect", function() {
+        console.log("Brand dropdown changed to: %s at %s", $(this).val(), timestamp());
+        showHardwareModel();
     });
 
     // Load region dropdown
@@ -100,56 +102,7 @@ $(function(){
         hardwareUpdate(id);
     });
 
-    function updateHardwareTable() {
-        if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
-            $('#hardwarePerSite').DataTable().destroy();
-            console.log("DataTable destroyed at %s", timestamp());
-        }
-        document.getElementById('viewHwType').disabled = false;
-
-        var site_name = $("select[name='site_name']").val();
-        var hw_type = $("select[name='hw_type']").val();
-
-        console.log("Updating hardware table: site_name=%s, hw_type=%s at %s", site_name, hw_type, timestamp());
-
-        var url = hw_type !== 'all_hw' ? "hardwares-view-specific-details.php" : "hardwares-view-details.php";
-        var data = hw_type !== 'all_hw' ? { site_name, hw_type } : { site_name };
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: data,
-            beforeSend: function() {
-                $("#rowdisplay").html(`
-                    <tr>
-                        <td colspan="8" class="text-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
-                        </td>
-                    </tr>
-                `);
-                console.log("Loading hardware table at %s", timestamp());
-            },
-            success: function(data) {
-                $("#hardwareDisplay").html(data);
-                $('#hardwarePerSite').DataTable({
-                    "paging": true,
-                    "ordering": false,
-                    "searching": true
-                });
-                console.log("Hardware table loaded at %s", timestamp());
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX Error loading hardware table:", { status, error, response: xhr.responseText });
-                alert("Error loading hardware data.");
-            }
-        });
-    }
-
-    $("#addNewHardwareBtn").on("click", function() {
+    $("#addNewHardwareBtn").click(function() {
         var RegionSelect = $('#RegionSelect').val();
         var hardwareSiteModal = $('#hardwareSiteModal').val();
         var itemSelect = $('#itemSelect').val();
@@ -176,7 +129,7 @@ $(function(){
             hw_status
         };
 
-        if (!RegionSelect || !hardwareSiteModal || !itemSelect || !itemBrand || !itemModel || !asset_num || !serial_num || !date || !acquired_value) {
+        if (!RegionSelect || !hardwareSiteModal || !itemSelect || !itemBrand || !itemModel || !asset_num || !serial_num || !date) {
             $("#addHWMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'>All fields are required!</div>");
             console.log("Add hardware failed: missing fields at %s", timestamp());
             return;
@@ -209,8 +162,9 @@ $(function(){
                         </div>
                     `);
                 } else {
+                    $("#AddHardwareModal").modal('hide');
                     $('#response').html(saveResponse);
-                    $("#addHWMessage").html("<div class='alert alert-success alert-dismissible fade show' role='alert'>Added Successfully!</div>");
+                    alertMessageSuccess(`<strong>Hardware successfully save!</strong>`);
                     $('select, input').val('');
                     console.log("Hardware added successfully at %s", timestamp());
                 }
@@ -383,6 +337,62 @@ $(function(){
         }
     });
 
+    $("#addHardwareButton").click(function (){
+        $(".addHardwareForm").val("");
+        $("#addHWMessage").html("");
+    });
+
+});
+
+function updateHardwareTable() {
+    if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
+        $('#hardwarePerSite').DataTable().destroy();
+        console.log("DataTable destroyed at %s", timestamp());
+    }
+    document.getElementById('viewHwType').disabled = false;
+
+    var site_name = $("select[name='site_name']").val();
+    var hw_type = $("select[name='hw_type']").val();
+
+    console.log("Updating hardware table: site_name=%s, hw_type=%s at %s", site_name, hw_type, timestamp());
+
+    var url = hw_type !== 'all_hw' ? "hardwares-view-specific-details.php" : "hardwares-view-details.php";
+    var data = hw_type !== 'all_hw' ? { site_name, hw_type } : { site_name };
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        beforeSend: function() {
+            $("#rowdisplay").html(`
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
+                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
+                        </td>
+                    </tr>
+                `);
+            console.log("Loading hardware table at %s", timestamp());
+        },
+        success: function(data) {
+            $("#hardwareDisplay").html(data);
+            $('#hardwarePerSite').DataTable({
+                "paging": true,
+                "ordering": false,
+                "searching": true
+            });
+            console.log("Hardware table loaded at %s", timestamp());
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading hardware table:", { status, error, response: xhr.responseText });
+            alert("Error loading hardware data.");
+        }
+    });
+}
+
     function hardware_site_option() {
         var region_name = $("select[name='hw_region_name']").val();
         document.getElementById('viewSiteOption').disabled = false;
@@ -508,12 +518,12 @@ $(function(){
     }
 
     function hardware_site_select() {
-        var site_name = $("select[name='RegionSelect']").val();
+        var region_name = $("select[name='RegionSelect']").val();
         document.getElementById('hardwareSiteModal').disabled = false;
 
-        console.log("hardware_site_select called with site_name: %s at %s", site_name, timestamp());
+        console.log("hardware_site_select called with site_name: %s at %s", region_name, timestamp());
 
-        var wordObj = { site_name };
+        var wordObj = { region_name };
 
         $.ajax({
             type: "POST",
@@ -576,9 +586,27 @@ $(function(){
         });
     }
 
-    // Temporary workaround for inline event handlers
-    window.hardware_site_option = hardware_site_option;
-    window.hardwareUpdate = hardwareUpdate;
-    window.showHardwareModel = showHardwareModel;
-    console.log("Global workaround applied for hardware_site_option, hardwareUpdate, and showHardwareModel at %s", timestamp());
-});
+    function alertMessageSuccess(messageHTML) {
+        const alert = document.getElementById("alertMessage");
+
+        // Set message
+        alert.innerHTML = messageHTML;
+
+        // Reset display and classes
+        alert.style.display = "block";
+        alert.classList.remove("fade-out");
+        void alert.offsetWidth; // Force reflow
+
+        // Fade in
+        alert.classList.add("fade-in");
+
+        // Fade out after 3 seconds
+        setTimeout(() => {
+            alert.classList.remove("fade-in");
+            alert.classList.add("fade-out");
+
+            setTimeout(() => {
+                alert.style.display = "none";
+            }, 500); // Match transition duration
+        }, 3000);
+    }

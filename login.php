@@ -43,7 +43,6 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 text-center text-lg-start mb-4">
-                    <h3 class="display-4">Masterfile</h3>
                     <h2 class="fw-bold">Hardware Inventory System</h2>
                     <h4 class="text-muted">CSG-Field Services Department</h4>
                 </div>
