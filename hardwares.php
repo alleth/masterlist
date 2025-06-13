@@ -14,12 +14,12 @@ include("includes/header.php");
                                     <div id="displayRegionHW"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select" name="site_name" onchange="updateHardwareTable()" id="viewSiteOption" disabled>
+                                    <select class="form-select" name="site_name" onchange="" id="viewSiteOption" disabled>
                                         <option value="all_site" selected>Select Site</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select" name="hw_type" onchange="updateHardwareTable()" id="viewHwType" disabled>
+                                    <select class="form-select" name="hw_type"" id="viewHwType" disabled>
                                         <option value="all_hw" selected>All hardware</option>
                                         <option value="Server" >Server</option>
                                         <option value="UPS-Server" >UPS-Server</option>
@@ -44,7 +44,7 @@ include("includes/header.php");
                                     if($user_type == "ADM" || $user_type == "SPV"){
                                         echo "";
                                     }else{
-                                        echo "<button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id=''>
+                                        echo "<button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id='addHardwareButton'>
                                                 <i class='fas fa-plus-circle'></i> Add Hardware
                                                 </button>";
                                     }
@@ -101,7 +101,6 @@ include("includes/header.php");
                             <div id="hw_add">
                                 <div class="container">
                                     <div class="row">
-                                        <h4>Primary Information</h4>
                                         <div id="addHWMessage"></div>
                                         <div class="col-6">
                                             <dd class='col-sm-12'>
@@ -111,7 +110,7 @@ include("includes/header.php");
                                                 </div>
                                             <dd class="col-sm-12">
                                                 <div class="">Site Name</div>
-                                                <select class="form-select" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
+                                                <select class="form-select addHardwareForm" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
                                                     <option value="" selected></option>
                                                 </select>
                                             </dd>
@@ -123,13 +122,13 @@ include("includes/header.php");
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Brand</div>
-                                                <select class="form-select" name="itemBrand" id="itemBrand" disabled>
+                                                <select class="form-select addHardwareForm" name="itemBrand" id="itemBrand" disabled>
                                                     <option value="" selected></option>
                                                 </select>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Model</div>
-                                                <select class="form-select" name="itemModel" id="itemModel" disabled>
+                                                <select class="form-select addHardwareForm" name="itemModel" id="itemModel" disabled>
                                                     <option value="" selected></option>
                                                 </select>
                                             </dd>
@@ -137,19 +136,19 @@ include("includes/header.php");
                                         <div class="col-6">
                                             <dd class="col-sm-12">
                                                 <div class="">Asset No.:</div>
-                                                <input type="text" class="form-control" name="asset_num" id="asset_num" required>
+                                                <input type="text" class="form-control addHardwareForm" name="asset_num" id="asset_num" required>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Serial No.</div>
-                                                <input type="text" class="form-control" name="serial_num" id="serial_num" required>
+                                                <input type="text" class="form-control addHardwareForm" name="serial_num" id="serial_num" required>
                                             </dd>
                                             <dt class="">Date Deployed:</dt>
                                             <dd class="d-flex col-sm-12">
-                                                <input class="form-control" type="date" id="date" name="date" required>
+                                                <input class="form-control addHardwareForm" type="date" id="date" name="date" required>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="" hidden>Acquired Value</div>
-                                                <input class="form-control" type="text" name="acquired_value" id="acquired_value" placeholder="" value="-" hidden>
+                                                <input class="form-control addHardwareForm" type="text" name="acquired_value" id="acquired_value" placeholder="" value="-" hidden>
                                             </dd>
                                         </div>
                                     </div>
@@ -283,7 +282,9 @@ include("includes/header.php");
         </div>
     </div>
 
+
+    <div id="alertMessage" class="alert alert-success floating-alert" style="display: none;"></div>
 <?php include 'includes/components.php'; ?>
-    <script src="js/datepicker.min.js" type="text/javascript"></script>
-    <script src="js/hardware.js" type="text/javascript"></script>
+    <script src="js/hardware.js?v=<?= time() ?>" type="text/javascript"></script>
+    <script src="js/datepicker.min.js?v=<?= time() ?>" type="text/javascript"></script>
 <?php include 'includes/footer.php'; ?>

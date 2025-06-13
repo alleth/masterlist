@@ -24,7 +24,7 @@ class addSiteDetailsDAO extends BaseDAO {
             $stmt->bindParam(6, $site_partnership);
             $stmt->execute();
 
-            echo "Added Successfully";
+            echo "New site added successfully!";
         }
 
         $this->closeConn();

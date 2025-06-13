@@ -11377,3 +11377,31 @@ body {
   cursor: not-allowed;
   pointer-events: none;
 }
+
+/* alert message success */
+.floating-alert {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px); /* horizontally center + start above */
+  z-index: 1055;
+  min-width: 300px;
+  max-width: 500px;
+  opacity: 2;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Fade in */
+.floating-alert.fade-in {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* slide down to position */
+}
+
+/* Fade out */
+.floating-alert.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-20px); /* slide up to hide */
+}

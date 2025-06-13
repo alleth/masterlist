@@ -1,7 +1,7 @@
 <?php
     include "DAO/hardwares-site-modal-DAO.php";
 
-    $site_name = $_POST["site_name"];
+    $region_name = $_POST["region_name"];
 
     $action = new hardwareSelectSiteDAO();
-    $action->hardwaresSelectSite($site_name);
+    $action->hardwaresSelectSite($region_name);

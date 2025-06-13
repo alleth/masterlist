@@ -5,8 +5,8 @@
 ?>
 <main>
     <div class="container-fluid px-4">
-        <h6 class="mt-2 display-6">Directory</h6>
-        <!-- Dashboard Cards Row
+        <h4 class="mt-4">Directory</h4>
+        <!-- Dashboard Cards Row -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             <div class="col">
                 <div class="card border-left-primary shadow-sm h-100">
@@ -64,49 +64,7 @@
                 </div>
             </div>
         </div>
-        -->
 
-        <!-- Filters and Actions
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <div class="card border border-dark-subtle shadow-sm">
-                    <div class="card-body">
-                        <div class="row g-2 align-items-center">
-                            <div class="col-md-2">
-                                <div id="displayRegionFilter"></div>
-                            </div>
-                            <div class="col-md-2">
-                                <select class="form-select" name="office_type" onchange="directory_site_name()" id="viewSiteDirectory" disabled>
-                                    <option value="all_office" selected>All type of Office</option>
-                                    <option value="District Office">District Office</option>
-                                    <option value="Extension Office">Extension Office</option>
-                                    <option value="DLRO">DLRO - Driver's License Regional Office</option>
-                                    <option value="Regional Office">Regional Office</option>
-                                    <option value="Operations Division">Operations Division</option>
-                                    <option value="NRU"><strong>NRU</strong> - New Registration Unit</option>
-                                    <option value="MAIDRS">MAIDRs - Manufacturers, Assemblers, Importers, Rebuilders, and Delears</option>
-                                    <option value="Licensing Center">Licensing Center</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4 d-flex justify-content-md-end justify-content-center">
-                                <button class="btn btn-primary justify-content-center align-items-center" id="showDirectory" disabled>
-                                    <i class="fas fa-search"></i> Show
-                                </button>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <button class="btn btn-success" id="btnAddOffice">
-                                    <i class="fas fa-plus-circle"></i> Add Site
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-            -->
 
 
         <div class="row mt-4">
@@ -249,6 +207,9 @@
     </div>
 </div>
 <br>
+
+<div id="alertMessage" class="alert alert-success floating-alert" style="display: none;"></div>
+
 <?php include 'includes/components.php'; ?>
-<script src="js/directory.js" type="text/javascript"></script>
+<script src="js/directory.js?v=<?= time() ?>" type="text/javascript"></script>
 <?php include 'includes/footer.php'; ?>

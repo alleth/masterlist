@@ -178,7 +178,6 @@ $(function (){
     });
 
     $("#addOfficeButton").click(function(){
-        var site_id = $("input[name='site_id_val']").val();
         var region_name = $("select[name='region_modal']").val();
         var site_code = $("input[name='site_code']").val();
         var site_name = $("input[name='site_name']").val();
@@ -190,7 +189,6 @@ $(function (){
             $("#addMessage").html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Warning!</strong> You should check in on some of those fields below");
         }else{
             var wordObj = {
-                "site_id" : site_id,
                 "region_name" : region_name,
                 "site_code" : site_code,
                 "site_name" : site_name,
@@ -217,7 +215,7 @@ $(function (){
                         `);
                         $("#addOfficeButton").show();
                     } else {
-                        alert(data);
+                        $("#addOfficeModal").modal('hide');
                         // If no duplicate, proceed with success
                         $("input[name='site_id_val']").val("");
                         $("select[name='region_modal']").val("");
@@ -227,12 +225,7 @@ $(function (){
                         $("input[name='site_address']").val("");
                         $("select[name='site_partnership']").val("");
 
-                        $("#addMessage").html(`
-                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                <strong>${data}!</strong> You added a new LTO Site.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        `);
+                        alertMessageSuccess(`<strong>${data}</strong>`);
 
                         $("#addOfficeButton").show();
                     }
@@ -342,3 +335,29 @@ function siteFunction(id){
         }
     });
 }
+
+function alertMessageSuccess(messageHTML) {
+    const alert = document.getElementById("alertMessage");
+
+    // Set message
+    alert.innerHTML = messageHTML;
+
+    // Reset display and classes
+    alert.style.display = "block";
+    alert.classList.remove("fade-out");
+    void alert.offsetWidth; // Force reflow
+
+    // Fade in
+    alert.classList.add("fade-in");
+
+    // Fade out after 3 seconds
+    setTimeout(() => {
+        alert.classList.remove("fade-in");
+        alert.classList.add("fade-out");
+
+        setTimeout(() => {
+            alert.style.display = "none";
+        }, 500); // Match transition duration
+    }, 3000);
+}
+

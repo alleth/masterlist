@@ -268,5 +268,5 @@
 </script>
 
 <?php include 'includes/components.php'; ?>
-    <script src="js/dashboardv2.js"></script>
+    <script src="js/dashboardv2.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>
