@@ -21,7 +21,7 @@ include("includes/header.php");
                         </thead>
                         <tbody id="viewLogs">
                         <tr>
-                            <td colspan="4" class="text-center text-muted">You do not have any activity yet.</td>
+                            <td colspan="5" class="text-center text-muted">You do not have any activity yet.</td>
                         </tr>
                         <!--<tr>
                             <td>2025-01-10</td>

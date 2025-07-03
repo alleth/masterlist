@@ -1,5 +1,24 @@
-// dashboardv2.js
+// Back to Top Button Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopButton = document.getElementById('backToTop');
 
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+
+    // Smooth scroll to top on click
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
 // Dynamically adjust main-content margin based on filter width
 function adjustMainContentMargin() {
     const filter = document.querySelector('.filter-fixed');
@@ -185,6 +204,11 @@ function updateSiteCard(data) {
             <div class="col-12">
                 <label class="form-label text-muted">Ownership</label>
                 <h6 class="text-dark">${data.site_partnership}</h6>
+            </div>
+            
+            <div class="col-12">
+                <label class="form-label text-muted">Transaction Catered</label>
+                <h6 class="text-dark">${data.trxn_catered}</h6>
             </div>
             
             <div class="col-12">

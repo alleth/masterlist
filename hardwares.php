@@ -3,7 +3,7 @@ include("includes/header.php");
 ?>
     <main>
         <div class="container-fluid px-4">
-            <h6 class="mt-2 display-6">Hardware</h6>
+            <h4 class="mt-4">Hardware</h4>
 
             <div class="row mt-4">
                 <div class="col-12">
@@ -15,11 +15,11 @@ include("includes/header.php");
                                 </div>
                                 <div class="col-md-2">
                                     <select class="form-select" name="site_name" onchange="" id="viewSiteOption" disabled>
-                                        <option value="all_site" selected>Select Site</option>
+                                        <option value="all_sites" selected>All Sites</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select" name="hw_type"" id="viewHwType" disabled>
+                                    <select class="form-select" name="hw_type" id="viewHwType">
                                         <option value="all_hw" selected>All hardware</option>
                                         <option value="Server" >Server</option>
                                         <option value="UPS-Server" >UPS-Server</option>
@@ -28,13 +28,21 @@ include("includes/header.php");
                                         <option value="UPS-PC" >UPS-PC</option>
                                         <option value="Keyboard" >Keyboard</option>
                                         <option value="Mouse" >Mouse</option>
-                                        <option value="Printer" >Printer</option>
-                                        <option value="Peripherals" >Peripherals</option>
-                                        <option value="Network Equipment" >Network Equipment</option>
+                                        <option value="Sigpad" >Signature Pad</option>
+                                        <option value="Webcam" >Webcam</option>
+                                        <option class="text-muted" disabled>*** Printers ***</option>
+                                        <option value="Laserjet">Laserjet</option>
+                                        <option value="Inkjet">Inkjet</option>
+                                        <option value="Dot Matrix">Dotmatrix</option>
+                                        <option value="Deskjet">Deskjet</option>
+                                        <option class="text-muted" disabled>*** Network Equipment ***</option>
+                                        <option value="Router">Router</option>
+                                        <option value="Switch">Switch</option>
+                                        <option value="Modem">Modem</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-primary d-flex justify-content-center align-items-center" id="showHwButton" disabled>
+                                    <button class="btn btn-primary d-flex justify-content-center align-items-center" id="showHwButton">
                                         <i class="fas fa-search"></i> <span class="ms-1">Show</span>
                                     </button>
                                 </div>
@@ -75,7 +83,7 @@ include("includes/header.php");
                                     </tr>
                                     </thead>
                                     <tbody id="hardwareDisplay">
-                                    <td id="rowdisplay" colspan="8" class="text-muted text-center fst-italic">Please select region and site...</td>
+                                        <td id="rowdisplay" colspan="8" class="text-muted text-center fst-italic">Please select region and site...</td>
                                     </tbody>
                                 </table>
                             </div>

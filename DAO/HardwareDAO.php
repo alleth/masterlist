@@ -1,5 +1,4 @@
 <?php
-// HardwareDAO.php
 
 require_once 'BaseDAO.php';
 
@@ -62,7 +61,7 @@ class HardwareDAO extends BaseDAO
 
             // Site filter
             if (!empty($params['site_code']) && $params['site_code'] !== '0') {
-                $query = "SELECT office_type, site_partnership 
+                $query = "SELECT office_type, site_partnership, trxn_catered
                           FROM site_list_tbl 
                           WHERE site_code = ? AND region_id = ?";
                 $whereParams = [$params['site_code'], $params['region_id']];
@@ -72,17 +71,23 @@ class HardwareDAO extends BaseDAO
                 $this->closeConn();
                 return [
                     'office_type' => $result['office_type'] ?: 'Unknown',
-                    'site_partnership' => $result['site_partnership'] ?: 'Unknown'
+                    'site_partnership' => $result['site_partnership'] ?: 'Unknown',
+                    'trxn_catered' => $result['trxn_catered'] ?: 'Unknown'
                 ];
             }
 
-            // Total sites
-            $query = "SELECT COUNT(DISTINCT site_code) as total_sites 
-                      FROM site_list_tbl $where";
+            // Total unique site_name + office_type combinations
+            $query = "SELECT COUNT(DISTINCT CONCAT(
+                    TRIM(REGEXP_REPLACE(site_name, '\\\\s+', ' ')),
+                    '|',
+                    office_type
+              )) as total_sites
+             FROM site_list_tbl $where";
             $stmt = $conn->prepare($query);
             $stmt->execute($whereParams);
             $totalSites = (int)$stmt->fetch(PDO::FETCH_ASSOC)['total_sites'];
             $response['total_sites'] = $totalSites;
+
 
             // Proponent count
             $query = "SELECT COUNT(DISTINCT site_code) as count 

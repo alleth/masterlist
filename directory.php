@@ -86,6 +86,7 @@
                                     <option value="NRU"><strong>NRU</strong> - New Registration Unit</option>
                                     <option value="MAIDRS">MAIDRs - Manufacturers, Assemblers, Importers, Rebuilders, and Delears</option>
                                     <option value="Licensing Center">Licensing Center</option>
+                                    <option value="E-Patrol">E-Patrol</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -175,8 +176,43 @@
                                     <option value="NRU"><strong>NRU</strong> - New Registration Unit</option>
                                     <option value="MAIDRS">MAIDRs - Manufacturers, Assemblers, Importers, Rebuilders, and Delears</option>
                                     <option value="Licensing Center">Licensing Center</option>
+                                    <option value="E-Patrol">E-Patrol</option>
                                 </select>
                             </div>
+                            <div class="col-12">
+                                <div class="multi-select-container mb-3">
+                                    <div class="form-select d-flex justify-content-between align-items-center" onclick="toggleDropdown()" role="button" aria-expanded="false">
+                                        <span id="selected-text" class="text-muted">Select transaction catered</span>
+                                    </div>
+                                    <div id="multi-select-dropdown" class="dropdown-menu w-100" style="display: none; max-height: 200px; overflow-y: auto;">
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('MV')" style="font-weight: 400; cursor: pointer;" data-value="MV">
+                                            MV Registration
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('DL')" style="font-weight: 400; cursor: pointer;" data-value="DL">
+                                            Driver's License
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('LETAS')" style="font-weight: 400; cursor: pointer;" data-value="LETAS">
+                                            LETAS
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('MAIDRS')" style="font-weight: 400; cursor: pointer;" data-value="MAIDRS">
+                                            MAIDRS
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('NRU')" style="font-weight: 400; cursor: pointer;" data-value="NRU">
+                                            MV New Registration
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                        <div class="dropdown-item d-flex align-items-center" onclick="toggleSelection('None')" style="font-weight: 400; cursor: pointer;" data-value="None">
+                                            None
+                                            <span class="checkmark text-primary ms-auto fa fa-check" style="display: none; font-weight: 400;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <input class="form-control mb-3" name="site_address" type="text" placeholder="Address" required>
                             </div>
@@ -207,6 +243,25 @@
     </div>
 </div>
 <br>
+
+<div class="modal" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Dual server set-up</h6>
+                System found that the site name and office type already exist. By proceeding, you agree that this office has a dual server setup.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="confirmDecline">Decline</button>
+                <button type="button" class="btn btn-primary" id="confirmProceed">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="alertMessage" class="alert alert-success floating-alert" style="display: none;"></div>
 

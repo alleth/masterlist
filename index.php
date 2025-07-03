@@ -240,32 +240,9 @@
     </div>
 </div>
 
-<!-- Back to Top Button -->
+
 <button title="Back To Top" class="back-to-top" id="backToTop"><span class="fas fa-angle-up"></span></button>
 
-<script>
-    // Back to Top Button Functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        const backToTopButton = document.getElementById('backToTop');
-
-        // Show/hide button based on scroll position
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-
-        // Smooth scroll to top on click
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    });
-</script>
 
 <?php include 'includes/components.php'; ?>
     <script src="js/dashboardv2.js?v=<?= time() ?>"></script>

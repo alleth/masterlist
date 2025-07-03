@@ -8,6 +8,7 @@
     <meta name="author" content="" />
     <title>Welcome to Masterfile</title>
     <link href="css/styles.css" rel="stylesheet" />
+    <link rel="icon" href="icons/cube.png" type="image/x-icon">
     <script src="js/all.js" crossorigin="anonymous"></script>
     <style>
         * {
