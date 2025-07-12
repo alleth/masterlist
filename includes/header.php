@@ -71,7 +71,7 @@ require_once "auth.php";
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <!-- Dropdown Links -->
-                <li><a class="dropdown-item" href="#!"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a class="dropdown-item" href="activity-log.php"><i class="fa fa-history"></i> Activity Log</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>

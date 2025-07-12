@@ -4,7 +4,6 @@ include("includes/header.php");
     <main>
         <div class="container-fluid px-4">
             <h4 class="mt-4">Hardware</h4>
-
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card border border-dark-subtle shadow-sm">

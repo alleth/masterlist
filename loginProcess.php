@@ -13,6 +13,15 @@ if (isset($_POST["user_name"]) && isset($_POST["user_pass"])) {
     if ($userExist == 1) {
         header("Location: index.php");
         exit;
+    } elseif ($userExist == -1) {
+        $error = "Account locked due to too many failed attempts.";
+        $lockout_until = $action->getLockoutUntil($user_name);
+        if ($lockout_until !== null) {
+            header("Location: login.php?error=" . urlencode($error) . "&lockout=1&lockout_until=" . $lockout_until);
+        } else {
+            header("Location: login.php?error=" . urlencode("System error. Please try again later."));
+        }
+        exit;
     } else {
         $error = "Incorrect username or password.";
         header("Location: login.php?error=" . urlencode($error));

@@ -57,6 +57,31 @@ include("includes/header.php");
                                             <label for="lname" class="form-label">Last Name</label>
                                             <input type="text" class="form-control form-control-sm" id="lname" name="lname" required>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="user_type" class="form-label">User Type</label>
+                                            <select class="form-select form-select-sm" id="user_type" name="user_type" required>
+                                                <option value="" selected disabled>Select User Type</option>
+                                                <?php
+                                                $user_type = $_SESSION['sess_user_type'];
+                                                if($user_type != "FSE" || $user_type != "SPV"){
+                                                    echo `<option value="ADM">Administrator</option>`;
+                                                }else{
+                                                    echo "";
+                                                }
+                                                ?>
+                                                <option value="SPV">Supervisor</option>
+                                                <option value="FSE">FSE</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cluster" class="form-label">Assign Cluster</label>
+                                            <select class="form-select form-select-sm" id="cluster" name="cluster_name" required>
+                                                <option value="" selected disabled>Select Cluster</option>
+                                                <option value="NCR">NCR</option>
+                                                <option value="Luzon">Luzon</option>
+                                                <option value="VisMin">Vismin</option>
+                                            </select>
+                                        </div>
 
                                         <div class="col-md-6">
                                             <label for="region" class="form-label">Region Assigned</label>
@@ -79,25 +104,6 @@ include("includes/header.php");
                                                 <option value="15">BARMM</option>
                                                 <option value="16">CAR</option>
                                                 <option value="17">CARAGA</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="cluster" class="form-label">Assign Cluster</label>
-                                            <select class="form-select form-select-sm" id="cluster" name="cluster_name" required>
-                                                <option value="" selected disabled>Select Cluster</option>
-                                                <option value="NCR">NCR</option>
-                                                <option value="Luzon">Luzon</option>
-                                                <option value="VisMin">Vismin</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="user_type" class="form-label">User Type</label>
-                                            <select class="form-select form-select-sm" id="user_type" name="user_type" required>
-                                                <option value="" selected disabled>Select User Type</option>
-                                                <option value="ADM">Administrator</option>
-                                                <option value="SPV">Supervisor</option>
-                                                <option value="FSE">FSE</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
