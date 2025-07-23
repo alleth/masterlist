@@ -2,58 +2,62 @@
 include "BaseDAO.php";
 
 class addUserDAO extends BaseDAO {
-    function addUserData($f_name, $l_name, $region_name, $clusterName, $user_type, $user_name, $user_id) {
-        $this->openConn();
+    function addUserData($data) {
+        try {
+            $this->openConn();
 
-        // Check if the user already exists
-        $stmt = $this->dbh->prepare("SELECT * FROM user_tbl WHERE fname = ? AND lname = ? AND user_name = ?");
-        $stmt->bindParam(1, $f_name);
-        $stmt->bindParam(2, $l_name);
-        $stmt->bindParam(3, $user_name);
-        $stmt->execute();
-        $existingUser = $stmt->fetch();
+            $username = trim(strtolower($data['user_name']));
+            $passwordInput = isset($data['user_pass']) ? trim($data['user_pass']) : '';
 
-        if ($existingUser) {
-            // User already exists
-            $response = [
-                "exists" => true,
-                "message" => "This user already exists in the system."
-            ];
-        } else {
-            // Insert new user into the database
-            $user_pass = "password"; // Default password
-            $stmt2 = $this->dbh->prepare("
-                INSERT INTO user_tbl (fname, lname, region_assigned, user_type, cluster_name, user_name, user_pass) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+            // Check if the user already exists
+            $check = $this->dbh->prepare("SELECT COUNT(*) FROM user_tbl WHERE LOWER(user_name) = ?");
+            $check->execute([$username]);
+            if ($check->fetchColumn() > 0) {
+                echo json_encode(['error' => 'Username already exists.']);
+                $this->closeConn();
+                return;
+            }
+
+            // Use hashed password
+            $defaultPassword = $passwordInput !== '' ? password_hash($passwordInput, PASSWORD_DEFAULT) : password_hash('password', PASSWORD_DEFAULT);
+
+            // Insert new user
+            $stmt = $this->dbh->prepare("
+                INSERT INTO user_tbl (fname, lname, region_assigned, user_type, cluster_name, user_name, user_pass, profile_picture) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            $stmt2->bindParam(1, $f_name);
-            $stmt2->bindParam(2, $l_name);
-            $stmt2->bindParam(3, $region_name);
-            $stmt2->bindParam(4, $user_type);
-            $stmt2->bindParam(5, $clusterName);
-            $stmt2->bindParam(6, $user_name);
-            $stmt2->bindParam(7, $user_pass);
-            $stmt2->execute();
+            $result = $stmt->execute([
+                $data['fname'],
+                $data['lname'],
+                $data['region_assigned'] ?: null,
+                $data['user_type'],
+                $data['cluster_name'] ?: null,
+                $username,
+                $defaultPassword,
+                'assets/img/avatar.png'
+            ]);
 
-            // Log the activity
+            if (!$result) {
+                throw new Exception('Insert failed: ' . implode(', ', $stmt->errorInfo()));
+            }
+
+            // Log the activity (use session user_id if available)
+            $user_id = isset($_SESSION['sess_id']) ? $_SESSION['sess_id'] : 'unknown';
             $insert_activity = "User Enrollment";
             $activity_status = "Completed";
             $insert_log = $this->dbh->prepare("
                 INSERT INTO log_tbl (log_date, log_activity, log_user, log_status) 
                 VALUES (NOW(), ?, ?, ?)
             ");
-            $insert_log->bindParam(1, $insert_activity);
-            $insert_log->bindParam(2, $user_id);
-            $insert_log->bindParam(3, $activity_status);
-            $insert_log->execute();
+            $insert_log->execute([$insert_activity, $user_id, $activity_status]);
 
-
-            $region_fetch = $this->dbh->prepare("SELECT * FROM region_tbl WHERE region_id = ?");
-            $region_fetch->bindParam(1, $region_name);
-            $region_fetch->execute();
-
-            while($region_row = $region_fetch->fetch()){
-                $region_get = $region_row[1];
+            // Fetch region name for response
+            $region_get = 'All Region';
+            if ($data['region_assigned']) {
+                $region_fetch = $this->dbh->prepare("SELECT region_name FROM region_tbl WHERE region_id = ?");
+                $region_fetch->execute([$data['region_assigned']]);
+                $region_row = $region_fetch->fetch();
+                $region_get = $region_row ? $region_row['region_name'] : 'Unknown';
             }
 
             // Prepare the success response
@@ -61,20 +65,28 @@ class addUserDAO extends BaseDAO {
                 "success" => true,
                 "message" => "User enrolled successfully!",
                 "new_user" => [
-                    "fname" => $f_name,
-                    "lname" => $l_name,
+                    "fname" => $data['fname'],
+                    "lname" => $data['lname'],
                     "region" => $region_get,
-                    "user_type" => $user_type,
-                    "cluster" => $clusterName,
-                    "user_name" => $user_name
+                    "user_type" => $data['user_type'],
+                    "cluster" => $data['cluster_name'] ?: 'All Cluster',
+                    "user_name" => $username
                 ]
             ];
+
+            echo json_encode($response);
+        } catch (Exception $e) {
+            error_log("addUserDAO::addUserData error: " . $e->getMessage() . " | Data: " . json_encode($data), 3, 'user_errors.log');
+            echo json_encode(['error' => 'Failed to enroll user: ' . $e->getMessage()]);
+        } finally {
+            $this->closeConn();
         }
-
-        // Encode response as JSON and send it back
-        $json_string = json_encode($response);
-        echo $json_string;
-
-        $this->closeConn();
     }
 }
+
+// Handle request
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save') {
+    $dao = new addUserDAO();
+    $dao->addUserData($_POST);
+}
+?>

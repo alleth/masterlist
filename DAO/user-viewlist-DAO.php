@@ -2,8 +2,12 @@
 include "BaseDAO.php";
 class viewUserDAO extends BaseDAO {
     function displayUserData (){
+
+        $assigned_cluster = $_SESSION['sess_cluster'];
+
         $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM user_tbl");
+        $stmt = $this->dbh->prepare("SELECT * FROM user_tbl WHERE cluster_name = ?");
+        $stmt->bindParam(1, $assigned_cluster);
         $stmt->execute();
 
         $assignedRegion ="";

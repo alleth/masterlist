@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchRegions() {
     console.log('Fetching regions via jQuery');
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: { action: 'getRegions' },
         dataType: 'json',
@@ -108,7 +108,7 @@ function fetchRegions() {
 function fetchSites(regionId) {
     console.log('Fetching sites for region:', regionId);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: { action: 'getSites', region_id: regionId },
         dataType: 'json',
@@ -138,7 +138,7 @@ function fetchHardwareData(params) {
     showSpinners();
     const data = Object.assign({ action: 'getHardwareCounts' }, params);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: data,
         dataType: 'json',
@@ -168,7 +168,7 @@ function updateHardwareData() {
 function fetchSiteCounts(params) {
     console.log('Fetching site counts with params:', params);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: Object.assign({ action: 'getSiteCounts' }, params),
         dataType: 'json',
