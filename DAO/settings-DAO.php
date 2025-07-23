@@ -27,15 +27,16 @@ class UserDAO extends BaseDAO {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$row || !password_verify($currentPassword, $row['user_pass'])) {
-                return false;
+                return ['success' => false, 'error' => 'Current password is incorrect'];
             }
 
             $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
             $updateStmt = $this->dbh->prepare("UPDATE user_tbl SET user_pass = ? WHERE id = ?");
-            return $updateStmt->execute([$hashed, $userId]);
+            $success = $updateStmt->execute([$hashed, $userId]);
+            return ['success' => $success, 'error' => $success ? null : 'Failed to update password'];
         } catch (PDOException $e) {
             error_log('Change password error: ' . $e->getMessage());
-            return false;
+            return ['success' => false, 'error' => 'Database error: ' . $e->getMessage()];
         }
     }
 

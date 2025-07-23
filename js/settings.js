@@ -9,7 +9,7 @@ $(function() {
     function showToast(message, type = 'error') {
         const toastContainer = $('#toastContainer');
         const toastId = 'toast-' + new Date().getTime();
-        const toastClass = type === 'success' ? 'toast-success' : 'toast-error';
+        const toastClass = type === 'success' ? 'bg-success text-white' : 'bg-danger text-white';
         const toastHeader = type === 'success' ? 'Success' : 'Error';
         const toastHtml = `
             <div id="${toastId}" class="toast ${toastClass}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
@@ -184,7 +184,7 @@ $(function() {
                     $('#passwordFeedback').remove();
                     $('#passwordSaveBtn').prop('disabled', true);
                 } else {
-                    showToast('Failed to change password: ' + (response.error || 'Current password incorrect'));
+                    showToast(response.error || 'Failed to change password');
                 }
             },
             error: function(xhr, status, error) {

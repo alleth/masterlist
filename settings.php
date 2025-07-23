@@ -180,33 +180,6 @@
             z-index: 1050;
         }
 
-        .toast {
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .toast-success {
-            background-color: #e6fffa;
-            color: #2b6cb0;
-        }
-
-        .toast-error {
-            background-color: #fff5f5;
-            color: #e53e3e;
-        }
-
-        .toast-header {
-            border-bottom: none;
-            font-weight: 600;
-        }
-
-        .toast-body {
-            padding: 1rem;
-        }
-
         @media (max-width: 768px) {
             .card-body {
                 padding: 1.5rem;

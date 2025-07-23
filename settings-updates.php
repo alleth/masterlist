@@ -39,7 +39,7 @@ switch ($action) {
         }
 
         $result = $dao->changePassword($userId, $currentPass, $newPass);
-        echo json_encode(['success' => $result, 'error' => $result ? null : 'Failed to change password']);
+        echo json_encode(['success' => $result['success'], 'error' => $result['error']]);
         break;
 
     case 'get_user_info':
