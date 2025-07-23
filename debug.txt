@@ -1,0 +1,35 @@
+Array
+(
+    [model_item_name] => 
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => 
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => CPU-PC
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => 
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => CPU-PC
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => 
+    [model_item_brand] => 
+)
+Array
+(
+    [model_item_name] => CPU-PC
+    [model_item_brand] => 
+)

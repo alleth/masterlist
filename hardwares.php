@@ -19,7 +19,7 @@ include("includes/header.php");
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <select class="form-select" name="hw_type"" id="viewHwType" disabled>
+                                    <select class="form-select" name="hw_type" id="viewHwType" disabled>
                                         <option value="all_hw" selected>All hardware</option>
                                         <option value="Server" >Server</option>
                                         <option value="UPS-Server" >UPS-Server</option>
@@ -86,9 +86,10 @@ include("includes/header.php");
             <div class="container mt-5"></div>
         </div>
 
+        <!-- Add Hardware Modal-->
         <div class="modal modal-lg fade" id="AddHardwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="AddHardwareModal" aria-hidden="true">
             <div class="modal-dialog">
-                <form method="POST" class="row g-3 needs-validation">
+                <form method="POST" class="row g-3 needs-validation" id="hardwareForm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">
@@ -103,11 +104,12 @@ include("includes/header.php");
                                     <div class="row">
                                         <div id="addHWMessage"></div>
                                         <div class="col-6">
-                                            <dd class='col-sm-12'>
+                                            <dd class="col-sm-12">
                                                 <div class="">Region</div>
-                                                <div>
-                                                    <div id="hardwareRegionModal"></div>
-                                                </div>
+                                                <select class="form-select addHardwareForm" name="RegionSelect" id="RegionSelect">
+                                                    <option value="" disabled selected>Select region</option>
+                                                </select>
+                                            </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Site Name</div>
                                                 <select class="form-select addHardwareForm" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
@@ -116,33 +118,59 @@ include("includes/header.php");
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Item Description</div>
-                                                <div>
-                                                    <div id="itemDescription"></div>
-                                                </div>
+                                                <select class="form-select addHardwareForm" name="itemSelect" id="itemSelect">
+                                                    <option value="" selected>Select Item</option>
+                                                </select>
+                                            </dd>
+                                            <dd class="col-sm-12 d-none">
+                                                <div class="">Sub Type</div>
+                                                    <input type="text" class="form-control" id="SubType" name="sub_major_type" readonly>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Brand</div>
-                                                <select class="form-select addHardwareForm" name="itemBrand" id="itemBrand" disabled>
-                                                    <option value="" selected></option>
+                                                <select class="form-select addHardwareForm" name="itemBrand" id="itemBrand">
+                                                    <option value="" selected>Select Brand</option>
                                                 </select>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Model</div>
-                                                <select class="form-select addHardwareForm" name="itemModel" id="itemModel" disabled>
+                                                <select class="form-select addHardwareForm" name="itemModel" id="itemModel">
                                                     <option value="" selected></option>
                                                 </select>
                                             </dd>
                                         </div>
                                         <div class="col-6">
+                                            <div class="mb-3">
+                                                <div class="form-label">Choose Asset Type:</div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="assetType" id="radioPE" value="PE" required>
+                                                    <label class="form-check-label" for="typeA">PE</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"  name="assetType" id="radioCI" value="CI">
+                                                    <label class="form-check-label" for="typeB">CI</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"  name="assetType" id="radioCI" value="Unreadable">
+                                                    <label class="form-check-label" for="typeB">Unreadable</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"  name="assetType" id="radioCI" value="No Tag">
+                                                    <label class="form-check-label" for="typeB">No Tag</label>
+                                                </div>
+                                                </div>
                                             <dd class="col-sm-12">
-                                                <div class="">Asset No.:</div>
-                                                <input type="text" class="form-control addHardwareForm" name="asset_num" id="asset_num" required>
+                                                <div class="">Asset No.: <span id="result" class="text-primary"></span></div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="prefixText">Type</span>
+                                                    <input type="number" class="form-control addHardwareForm" name="asset_num" id="asset_num" required>
+                                                </div>
                                             </dd>
                                             <dd class="col-sm-12">
                                                 <div class="">Serial No.</div>
                                                 <input type="text" class="form-control addHardwareForm" name="serial_num" id="serial_num" required>
                                             </dd>
-                                            <dt class="">Date Deployed:</dt>
+                                            <dd class="">Date Deployed:</dd>
                                             <dd class="d-flex col-sm-12">
                                                 <input class="form-control addHardwareForm" type="date" id="date" name="date" required>
                                             </dd>
@@ -156,11 +184,170 @@ include("includes/header.php");
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="addNewHardwareBtn">Save</button>
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <button type="button" class="btn btn-success" id="addNewHardwareBtn">Save</button>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+        
+
+        <!-- Edit Hardware Modal -->
+        <div class="modal modal-lg fade" id="EditHardwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EditHardwareModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" class="row g-3 needs-validation" id="editHardwareForm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="EditHardwareModalLabel">Update Hardware</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <input type="hidden" id="edit_hw_id" name="hw_id">
+
+                            <div id="hw_edit">
+                                <div class="container">
+                                    <div class="row">
+                                        <div id="editHWMessage"></div>
+
+                                        <div class="col-6">
+                                            <dd class="col-sm-12">
+                                                <div>Region</div>
+                                                <span class="input-group-text d-none" id="editPrefixRegion" style="cursor: pointer;">Click to edit</span>
+                                                <span class="input-group-text" id="editPrefixRegionName" style="cursor: pointer;">Click to edit</span>
+                                                <select class="form-select d-none" name="editRegionSelect" id="editRegionSelect">
+                                                    <option value="" disabled selected>Select region</option>
+                                                </select>
+                                            </dd>
+                                            <dd class="col-sm-12">
+                                                <div>Site Name</div>
+                                                <select class="form-select" name="hardwareSiteModal" id="editHardwareSiteModal" disabled>
+                                                    <option value="" selected></option>
+                                                </select>
+                                            </dd>
+
+                                            <dd class="col-sm-12">
+                                                <div>Item Description</div>
+                                                    <span class="input-group-text" id="editPrefixType" style="cursor: pointer;">Click to edit</span>
+                                                    <select class="form-select d-none" name="itemSelect" id="editItemSelect" required>
+                                                        <option value="" selected>Select Item</option>
+                                                    </select>
+                                            </dd>
+
+                                            <dd class="col-sm-12 d-none">
+                                                <div class="">Sub Type</div>
+                                                    <input type="text" class="form-control" id="editSubType" name="sub_major_type" readonly>
+                                            </dd>
+
+                                            <dd class="col-sm-12">
+                                                <div>Brand</div>
+                                                <select class="form-select" name="itemBrand" id="editItemBrand" required>
+                                                    <option value="" selected>Select Brand</option>
+                                                </select>
+                                            </dd>
+
+                                            <dd class="col-sm-12">
+                                                <div>Model</div>
+                                                <select class="form-select" name="itemModel" id="editItemModel" required>
+                                                    <option value="" selected></option>
+                                                </select>
+                                            </dd>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <dd class="col-sm-12">
+                                                <div class="mb-3">
+                                                    <div class="form-label">Choose Asset Type:</div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="editAssetType" id="editRadioPE" value="PE" required>
+                                                        <label class="form-check-label" for="editRadioPE">PE</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="editAssetType" id="editRadioCI" value="CI">
+                                                        <label class="form-check-label" for="editRadioCI">CI</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="editAssetType" id="editRadioUnreadable" value="Unreadable">
+                                                        <label class="form-check-label" for="editRadioUnreadable">Unreadable</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="editAssetType" id="editRadioNoTag" value="No Tag">
+                                                        <label class="form-check-label" for="editRadioNoTag">No Tag</label>
+                                                    </div>
+                                                </div>
+                                            </dd>
+                                    
+                                            <dd class="col-sm-12">
+                                                <div>Asset No.: <span id="editResult" class="text-primary"></span></div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="editPrefixText">Type</span>
+                                                    <input type="number" class="form-control" name="asset_num" id="editAssetNum" required>
+                                                </div>
+                                            </dd>
+                                            
+                                            <dd class="col-sm-12">
+                                                <div>Serial No.</div>
+                                                <input type="text" class="form-control" name="serial_num" id="editSerialNum" required>
+                                            </dd>
+
+                                            <dd class="">Date Deployed:</dd>
+                                            <dd class="d-flex col-sm-12">
+                                                <input class="form-control" type="date" id="editDate" name="date" required>
+                                            </dd>
+                                            <dd>
+                                                <div>Hardware Status</div>
+                                            <?php
+                                                $user_type = $_SESSION['sess_user_type'];
+                                                if($user_type == "ADM" || $user_type == "SPV"){
+                                                    echo "";
+                                                }else{
+                                                    echo "<dd class='col-sm-12'>
+                                                                <select class='form-select' name='hardware_status_option'>
+                                                                    <option value='' selected disabled>Select Status</option>
+                                                                    <option value='On Site'>On Site</option>
+                                                                    <option value='Pull Out'>Pull out</option>
+                                                                </select>
+                                                            </dd>";
+                                                }
+                                            ?>
+                                            </dd>
+                                            <dd class="col-sm-12">
+                                                <div hidden>Acquired Value</div>
+                                                <input class="form-control" type="text" name="acquired_value" id="editAcquiredValue" placeholder="" value="-" hidden>
+                                            </dd>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <button type="submit" class="btn btn-warning w-400" id="updateHardwareBtn2">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal --->
+        <div class="modal fade custom-modal-slide" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-0">Are you sure you want to delete this hardware?</p>
+                    <input type="hidden" id="delete_hw_id">
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+                </div>
             </div>
         </div>
 

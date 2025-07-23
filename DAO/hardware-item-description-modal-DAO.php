@@ -1,18 +1,21 @@
 <?php
 include "BaseDAO.php";
 
-class hardwareItemDescriptionDAO extends BaseDAO {
-    function hardwareItemDescription(){
-        $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM item_description");
-        $stmt->execute();
+class OptionHandler extends BaseDAO {
+    private $allowed_tables = ['item_description'];
+    private $allowed_columns = ['item_desc'];
 
-        echo "<select id='itemSelect' class='form-select' name='itemSelect' onchange='hardware_brand_option(); hardware_model_option()' required>";
-        echo "<option value='' selected></option>";
-        while ($row3 = $stmt->fetch()){
-            echo "<option value='".$row3[1]."' onchange=''>".$row3[1]."</option>";
+    public function fetchOptions($table, $column) {
+        if (!in_array($table, $this->allowed_tables) || !in_array($column, $this->allowed_columns)) {
+            throw new Exception("Invalid table or column");
         }
-        echo "</select>";
+
+        $this->openConn();
+        $stmt = $this->dbh->prepare("SELECT DISTINCT `$column` FROM `$table` ORDER BY `$column` ASC");
+        $stmt->execute();
+        $options = $stmt->fetchAll(PDO::FETCH_COLUMN);
         $this->closeConn();
+
+        return $options;
     }
 }

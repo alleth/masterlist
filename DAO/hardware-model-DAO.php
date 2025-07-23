@@ -1,17 +1,24 @@
 <?php
+
 include "BaseDAO.php";
 
-class hardwareModelDAO extends BaseDAO{
-    function hardwareModel($model_item_name){
+class ModelHandler extends BaseDAO {
+    public function getModelsByItemAndBrand($item_desc, $brand) {
         $this->openConn();
-        $stmt = $this->dbh->prepare("SELECT * FROM item_models WHERE item_desc = ? ORDER BY model");
-        $stmt->bindParam(1, $model_item_name);
+
+        $query = "SELECT DISTINCT model FROM item_models 
+                  WHERE item_desc = :item_desc AND brand = :brand 
+                  ORDER BY model ASC";
+
+        $stmt = $this->dbh->prepare($query);
+        $stmt->bindParam(':item_desc', $item_desc);
+        $stmt->bindParam(':brand', $brand);
         $stmt->execute();
 
-        while ($row6 = $stmt->fetch()){
-            echo "<option value='".$row6[3]."' onchange=''>".$row6[3]."</option>";
-        }
+        $models = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        $this->closeConn();
+        return $models;
     }
 }
-
 ?>
