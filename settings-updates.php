@@ -31,6 +31,13 @@ switch ($action) {
     case 'change_password':
         $currentPass = $_POST['current_password'] ?? '';
         $newPass = $_POST['new_password'] ?? '';
+
+        // Password validation
+        if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{}|;:,.<>?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{}|;:,.<>?]{8,}$/', $newPass)) {
+            echo json_encode(['success' => false, 'error' => 'New password must be at least 8 characters long and include an uppercase letter, a number, and a special character']);
+            exit;
+        }
+
         $result = $dao->changePassword($userId, $currentPass, $newPass);
         echo json_encode(['success' => $result, 'error' => $result ? null : 'Failed to change password']);
         break;

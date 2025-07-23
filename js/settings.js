@@ -2,6 +2,54 @@ $(function() {
     // Store initial form values
     let personalFormInitial = {};
 
+    // Password validation regex
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{}|;:,.<>?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{}|;:,.<>?]{8,}$/;
+
+    // Function to show Bootstrap toast
+    function showToast(message, type = 'error') {
+        const toastContainer = $('#toastContainer');
+        const toastId = 'toast-' + new Date().getTime();
+        const toastClass = type === 'success' ? 'toast-success' : 'toast-error';
+        const toastHeader = type === 'success' ? 'Success' : 'Error';
+        const toastHtml = `
+            <div id="${toastId}" class="toast ${toastClass}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
+                <div class="toast-header">
+                    <strong class="me-auto">${toastHeader}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">${message}</div>
+            </div>
+        `;
+        toastContainer.append(toastHtml);
+        const toastElement = $(`#${toastId}`);
+        toastElement.toast('show');
+        toastElement.on('hidden.bs.toast', function () {
+            $(this).remove();
+        });
+    }
+
+    // Real-time password feedback
+    function updatePasswordFeedback() {
+        const newPassword = $('#new_password').val();
+        const feedback = $('#passwordFeedback');
+        if (!feedback.length) {
+            $('#new_password').after('<div id="passwordFeedback" style="font-size: 0.85rem; color: #e53e3e;"></div>');
+        }
+        if (newPassword && !passwordRegex.test(newPassword)) {
+            $('#passwordFeedback').text('Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.');
+            $('#passwordSaveBtn').prop('disabled', true);
+        } else {
+            $('#passwordFeedback').text('');
+            const currentValues = {
+                current_password: $('#current_password').val(),
+                new_password: $('#new_password').val(),
+                confirm_password: $('#confirm_password').val()
+            };
+            const hasChanged = Object.values(currentValues).some(val => val !== '');
+            $('#passwordSaveBtn').prop('disabled', !hasChanged);
+        }
+    }
+
     // Fetch and fill personal info
     $.ajax({
         url: 'settings-updates.php',
@@ -33,7 +81,7 @@ $(function() {
                     user_name: u.user_name || ''
                 };
             } else {
-                alert('Failed to load user information: ' + (response.error || 'Unknown error'));
+                showToast('Failed to load user information: ' + (response.error || 'Unknown error'));
                 $('#profilePicture').attr('src', 'assets/img/avatar.png').show();
                 $('#avatarPlaceholder').hide();
                 $('#region_assigned_display').text('Not set');
@@ -42,7 +90,7 @@ $(function() {
             }
         },
         error: function(xhr, status, error) {
-            alert('Error loading user data: ' + error);
+            showToast('Error loading user data: ' + error);
             $('#profilePicture').attr('src', 'assets/img/avatar.png').show();
             $('#avatarPlaceholder').hide();
             $('#region_assigned_display').text('Not set');
@@ -74,7 +122,7 @@ $(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    alert('Personal info updated!');
+                    showToast('Personal info updated!', 'success');
                     // Update initial values after successful save
                     personalFormInitial = {
                         fname: $('#fname').val(),
@@ -84,28 +132,20 @@ $(function() {
                     $('#personalSaveBtn').prop('disabled', true);
                 } else {
                     if (response.error === 'Username is already taken') {
-                        alert('The username is already in use. Please choose a different username.');
+                        showToast('The username is already in use. Please choose a different username.');
                     } else {
-                        alert('Failed to update personal info: ' + (response.error || 'Unknown error'));
+                        showToast('Failed to update personal info: ' + (response.error || 'Unknown error'));
                     }
                 }
             },
             error: function(xhr, status, error) {
-                alert('Error updating personal info: ' + error);
+                showToast('Error updating personal info: ' + error);
             }
         });
     });
 
-    // Enable Save Changes button when password form changes
-    $('#changePasswordForm input').on('input', function() {
-        const currentValues = {
-            current_password: $('#current_password').val(),
-            new_password: $('#new_password').val(),
-            confirm_password: $('#confirm_password').val()
-        };
-        const hasChanged = Object.values(currentValues).some(val => val !== '');
-        $('#passwordSaveBtn').prop('disabled', !hasChanged);
-    });
+    // Enable Save Changes button when password form changes with real-time validation
+    $('#changePasswordForm input').on('input', updatePasswordFeedback);
 
     // Change password
     $('#changePasswordForm').on('submit', function(e) {
@@ -115,12 +155,17 @@ $(function() {
         const confirmPassword = $('#confirm_password').val();
 
         if (!currentPassword || !newPassword || !confirmPassword) {
-            alert('All password fields are required.');
+            showToast('All password fields are required.');
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            alert('New passwords do not match!');
+            showToast('New passwords do not match!');
+            return;
+        }
+
+        if (!passwordRegex.test(newPassword)) {
+            showToast('Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.');
             return;
         }
 
@@ -134,15 +179,16 @@ $(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    alert('Password changed successfully!');
+                    showToast('Password changed successfully!', 'success');
                     $('#changePasswordForm')[0].reset();
+                    $('#passwordFeedback').remove();
                     $('#passwordSaveBtn').prop('disabled', true);
                 } else {
-                    alert('Failed to change password: ' + (response.error || 'Current password incorrect'));
+                    showToast('Failed to change password: ' + (response.error || 'Current password incorrect'));
                 }
             },
             error: function(xhr, status, error) {
-                alert('Error changing password: ' + error);
+                showToast('Error changing password: ' + error);
             }
         });
     });

@@ -166,6 +166,47 @@
             border-radius: 8px;
         }
 
+        #passwordFeedback {
+            font-size: 0.85rem;
+            color: #e53e3e;
+            margin-top: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+
+        .toast {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .toast-success {
+            background-color: #e6fffa;
+            color: #2b6cb0;
+        }
+
+        .toast-error {
+            background-color: #fff5f5;
+            color: #e53e3e;
+        }
+
+        .toast-header {
+            border-bottom: none;
+            font-weight: 600;
+        }
+
+        .toast-body {
+            padding: 1rem;
+        }
+
         @media (max-width: 768px) {
             .card-body {
                 padding: 1.5rem;
@@ -179,11 +220,19 @@
             .profile-header {
                 font-size: 1.25rem;
             }
+
+            .toast-container {
+                top: 10px;
+                right: 10px;
+                width: 90%;
+                max-width: 350px;
+            }
         }
     </style>
 
     <main>
         <div class="container-fluid">
+            <div class="toast-container" id="toastContainer"></div>
             <h4 class="profile-header">User Profile</h4>
             <div class="card">
                 <div class="card-body">
@@ -252,6 +301,7 @@
                                 <div class="mb-3">
                                     <label for="new_password" class="form-label">New Password</label>
                                     <input type="password" class="form-control" name="new_password" id="new_password">
+                                    <div id="passwordFeedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="confirm_password" class="form-label">Confirm New Password</label>
