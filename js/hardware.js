@@ -419,37 +419,31 @@ document.addEventListener("DOMContentLoaded", function () {
             // Remove previous error states
             $('#RegionSelect, #hardwareSiteModal, #itemSelect, #itemBrand, #itemModel, #asset_num, #serial_num, #date')
                 .removeClass('is-invalid');
-
             // Region
             if (!RegionSelect) {
                 $('#RegionSelect').addClass('is-invalid');
                 hasError = true;
             }
-
             // Site
             if (!hardwareSiteModal) {
                 $('#hardwareSiteModal').addClass('is-invalid');
                 hasError = true;
             }
-
             // Item
             if (!itemSelect || itemSelect === "Select item") {
                 $('#itemSelect').addClass('is-invalid');
                 hasError = true;
             }
-
             // Brand
             if (!itemBrand || itemBrand === "Select brand") {
                 $('#itemBrand').addClass('is-invalid');
                 hasError = true;
             }
-
             // Model
             if (!itemModel || itemModel === "Select model") {
                 $('#itemModel').addClass('is-invalid');
                 hasError = true;
             }
-
             // Asset type radio buttons
             if (!isAssetTypeSelected) {
                 $("input[name='assetType']").addClass('is-invalid');
@@ -496,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (saveResponse.includes('Already Exist')) {
                         $('#addHWMessage').html(`
                             <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                                <strong>${saveResponse}</strong>
+                                ${saveResponse}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`);
                     } else {
@@ -867,8 +861,7 @@ function updateHardwareTable() {
         });
     }
 
-//----------------------------------------------------------------------------------------------------------------------------
-    //------ function for Delete record by hw_id -----------------------------------------------------------------------------------------------------------------
+    //------ for Delete record by hw_id -------------------------
     let selectedHwIdToDelete = null;
 
     function hardwareDelete(hw_id) {
@@ -952,6 +945,7 @@ function updateHardwareTable() {
                     let prefix = "";
                     let number = "";
 
+                    // Special cases
                     if (hwAsset === "No Tag") {
                         prefix = "No Tag";
                         number = "";
@@ -959,9 +953,30 @@ function updateHardwareTable() {
                         prefix = "Unreadable";
                         number = "";
                     } else {
-                        const parts = hwAsset.split(/\s+/); // Split by whitespace
-                        prefix = parts.slice(0, -1).join(" "); // All except last
-                        number = parts.slice(-1)[0] || "";    // Last part
+                        const parts = hwAsset.split(/\s+/);
+
+                        if (parts.length > 1) {
+                            // e.g., "PE 12345"
+                            prefix = parts.slice(0, -1).join(" ");
+                            number = parts.slice(-1)[0];
+                        } else {
+                            // e.g., "PE12345" or just "12345"
+                            const knownPrefixes = ["PE", "CI"];
+                            const match = knownPrefixes.find(p => hwAsset.startsWith(p));
+
+                            if (match && hwAsset.length > match.length) {
+                                prefix = match;
+                                number = hwAsset.slice(match.length).trim();
+                            } else if (/^\d+$/.test(hwAsset)) {
+                                // Pure number only
+                                prefix = "";
+                                number = hwAsset;
+                            } else {
+                                // Unknown format fallback
+                                prefix = hwAsset;
+                                number = "";
+                            }
+                        }
                     }
 
                     console.log("Prefix:", prefix, "| Asset Number:", number);
@@ -1073,6 +1088,13 @@ function updateHardwareTable() {
                     isInvalid = true;
                 }
 
+                if (key === 'prefixText' && isFieldInvalid) {
+                    // Apply Bootstrap red validation to each radio in the group
+                    $("input[name='editAssetType']").addClass('is-invalid');
+                    isInvalid = true;
+                }
+
+
                 // For non-inputs like regionName and prefixText (spans), you can optionally highlight their containers
                 if (isFieldInvalid && !selector) {
                     // Optional: Add a red border to span wrappers if desired
@@ -1095,16 +1117,41 @@ function updateHardwareTable() {
                 type: 'POST',
                 data: data,
                 success: function (saveResponse) {
-                    if (saveResponse.trim() === 'success') {
-                        //alert('Hardware updated successfully!');
+                    if (saveResponse.includes('Already Exist')) {
+                        $('#editHWMessage').html(`
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                                ${saveResponse}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`);
+                    } else if (saveResponse.trim() === 'success') {
                         $('#EditHardwareModal').modal('hide');
-                        //$('#AddHardwareModal').modal('hide');
+                        $('#response').html(saveResponse);
+                        alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
+
+                        /*/ Optional: Reset edit form (if you want)
+                        $('#editHardwareForm')[0].reset();
+                        $('#editPrefixText').text("Type");
+                        $('input[name="editAssetType"], input[name="type"]').prop('checked', false);
+                        $('#editItemSelect').val('').trigger('change');
+                        $('#editItemBrand, #editItemModel, #editHardwareSiteModal').val('').prop('disabled', true);
+                        $('#editAssetNum, #editSerialNum').val('').prop('disabled', false);*/
+                    } else {
+                        $('#editHWMessage').html(`
+                            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                                ${saveResponse}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`);
+                    }
+                },
+                /*success: function (saveResponse) {
+                    if (saveResponse.trim() === 'success') {
+                        $('#EditHardwareModal').modal('hide');
                         $('#response').html(saveResponse);
                         alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
                     } else {
                         alert('Update failed: ' + saveResponse);
                     }
-                },
+                },*/
                 error: function (xhr, status, error) {
                     console.error('AJAX error:', error);
                     alert('An error occurred while updating.');
@@ -1121,6 +1168,12 @@ function updateHardwareTable() {
                 $("#editAssetNum").prop("disabled", true).val("");
             } else {
                 $("#editAssetNum").prop("disabled", false);
+            }
+        });
+
+        $(document).on('keydown', 'input[type=number]', function (e) {
+            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                e.preventDefault();
             }
         });
 
@@ -1151,10 +1204,18 @@ function updateHardwareTable() {
                 $('#editSubType').val('');
                 $('#editResult').text('');
 
+                // Reset the the radio
+                $("input[name='editAssetType']").removeClass('is-invalid');
+
                 // Optional: remove dynamically injected options if you add any
                 $('#editItemSelect option.added-dynamically').remove();
                 $('#editItemBrand option.added-dynamically').remove();
                 $('#editItemModel option.added-dynamically').remove();
+
+                $("input[name='editAssetType']").on('change', function () {
+                    $("input[name='editAssetType']").removeClass('is-invalid');
+                });
+
             });
         });
 

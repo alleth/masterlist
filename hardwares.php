@@ -257,7 +257,7 @@ include("includes/header.php");
 
                                         <div class="col-6">
                                             <dd class="col-sm-12">
-                                                <div class="mb-3">
+                                                <div class="mb-3" id="editAssetTypeGroup">
                                                     <div class="form-label">Choose Asset Type:</div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="editAssetType" id="editRadioPE" value="PE" required>
