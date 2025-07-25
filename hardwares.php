@@ -113,7 +113,7 @@ include("includes/header.php");
                                             <dd class="col-sm-12">
                                                 <div class="">Site Name</div>
                                                 <select class="form-select addHardwareForm" name="hardwareSiteModal" id="hardwareSiteModal" disabled>
-                                                    <option value="" selected></option>
+                                                    <option value="" selected>Select Site</option>
                                                 </select>
                                             </dd>
                                             <dd class="col-sm-12">
@@ -223,7 +223,7 @@ include("includes/header.php");
                                             <dd class="col-sm-12">
                                                 <div>Site Name</div>
                                                 <select class="form-select" name="hardwareSiteModal" id="editHardwareSiteModal" disabled>
-                                                    <option value="" selected></option>
+                                                    <option value="" selected>Select Site</option>
                                                 </select>
                                             </dd>
 

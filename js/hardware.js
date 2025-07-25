@@ -122,12 +122,13 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
 
     $(document).ready(function () {
         loadRegionOptions("RegionSelect");
-         loadRegionOptions("editRegionSelect");
+        loadRegionOptions("editRegionSelect");
+        loadRegionOptions("CpuPCRegionSelect");
     });
 
     //-Script for site select option-----------------------------------------------------------------------------------------
    /**
-     * Reusable AJAX-based select population
+     * Reusable AJAX-based select population with prompt
      * @param {string} triggerSelectName - the <select name=""> that user changes (the parent)
      * @param {string} targetSelectId - the ID of the <select> to populate
      * @param {string} phpHandler - path to PHP file that returns the <option> list
@@ -138,32 +139,34 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
             const selectedValue = $(this).val();
             const $targetSelect = $("#" + targetSelectId);
 
-            // Handle empty input
             if (!selectedValue) {
                 $targetSelect.prop("disabled", true).html(`<option value="">Select ${triggerSelectName} first</option>`);
                 return;
             }
 
-            // Enable and populate the dependent <select>
-            $targetSelect.prop("disabled", false);
+            $targetSelect.prop("disabled", false).html(`<option disabled selected>Loading...</option>`);
+
             $.ajax({
                 type: "POST",
                 url: phpHandler,
                 data: { [requestKey]: selectedValue },
                 success: function (response) {
-                    $targetSelect.html(response);
+                    const defaultPrompt = `<option value="" disabled selected>Select Site</option>`;
+                    $targetSelect.html(defaultPrompt + response);
                 },
                 error: function (xhr, status, error) {
                     console.error(`Error loading options for #${targetSelectId}`, { status, error });
-                    alert(`Failed to load data for ${targetSelectId}`);
+                    $targetSelect.html(`<option disabled selected>Error loading options</option>`);
                 }
             });
         });
     }
+
     $(document).ready(function () {
         // Setup all dependent selects here
         setupDependentSelect("RegionSelect", "hardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("editRegionSelect", "editHardwareSiteModal", "hardwares-site-modal.php", "region_name");
+        setupDependentSelect("CpuPCRegionSelect", "CpuPCSiteSelect", "hardwares-site-modal.php", "region_name");
     });
 
 //-------------- select for item descriptions  --------------------------------------------------------------------------------

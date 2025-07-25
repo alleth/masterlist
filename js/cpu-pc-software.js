@@ -1,199 +1,64 @@
-$(function(){
-    $("#updateServerBtn").hide();
+    //- Enable the show button when the region is Selected
+    $(document).ready(function () {
+        $('#CpuPCRegionSelect').on('change', function () {
+            const selectedRegion = $(this).val();
 
-    $.ajax({
-        type: "POST",
-        url: "server-region.php",
-        success: function(data){
-            $("#displayRegionServer").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "server-region-modal.php",
-        success: function(data){
-            $("#regionRegionModal").html(data);
-        },
-        error: function(){
-            alert(data);
-        }
-    });
-
-    $("#showCpuPCTye").click(function (){
-        // Destroy any existing DataTable instance before making the AJAX request
-        if ($.fn.DataTable.isDataTable('#CpuPCTble')) {
-            $('#CpuPCTable').DataTable().destroy();
-        }
-        var region_name = $("select[name='server_region_name']").val();
-        var server_type = $("select[name='server_type']").val();
-
-        if ((region_name != 'all') || (server_type != 'all_server')) {
-            if (server_type != 'all_server') {
-                var wordObj = {
-                    "region_name": region_name,
-                    "server_type": server_type
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "server-specific-serverType.php",
-                    data: wordObj,
-                    beforeSend: function () {
-                        // Show spinner before request starts
-
-                        $("#serverDisplay").html(`
-                            <tr>
-                                <td colspan="10" class="text-center">
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        `);
-                    },
-                    success: function (data) {
-                        $("#serverDisplay").html(data);
-
-                        // Reinitialize the DataTable
-                        $('#CpuPCTble').DataTable({
-                            "paging": true,
-                            "ordering": false,
-                            "searching": true
-                        });
-                    },
-                    error: function () {
-                        alert(data);
-                    }
-                });
-
-            }else{
-                var wordObj = {
-                    "region_name" : region_name
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "cpu-pc-software-specific-region.php",
-                    data: wordObj,
-                    beforeSend: function () {
-                        // Show spinner before request starts
-                        $("#serverDisplay").html(`
-                            <tr>
-                                <td colspan="9" class="text-center">
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        `);
-                    },
-                    success: function(data){
-                        $("#serverDisplay").html(data);
-
-                        // Reinitialize the DataTable
-                        $('#CpuPCTble').DataTable({
-                            "paging": true,
-                            "ordering": false,
-                            "searching": true
-                        });
-                    },
-                    error: function(){
-                        alert(data);
-                    }
-                });
+            if (selectedRegion) {
+                // Enable the Show button
+                $('#showCPUPCButton').prop('disabled', false);
+            } else {
+                // Disable if no region is selected (optional fallback)
+                $('#showCPUPCButton').prop('disabled', true);
             }
-        }else{
+        });
+    });
+
+    $(document).ready(function () {
+        $("#showCPUPCButton").on("click", function (e) {
+            e.preventDefault(); // Prevent any default form behavior
+
+            const tbody = $("#hardwareDisplay");
+
+            // Show loading spinner
+            tbody.html(`
+                <tr>
+                    <td colspan="8" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="mt-2 text-muted fst-italic">Loading CPU-PC records...</div>
+                    </td>
+                </tr>
+            `);
+
+            // Fetch data via AJAX
             $.ajax({
-                type: "POST",
-                url: "server-all-details.php",
-                beforeSend: function () {
-                    // Show spinner before request starts
-                    $("#serverDisplay").html(`
-                    <tr>
-                        <td colspan="10" class="text-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </td>
-                    </tr>
-                `);
+                url: 'hardware-cpupc-details.php',
+                method: 'POST',
+                data: {}, // No filters; fetch all CPU-PC records
+                success: function (response) {
+                    if ($.trim(response) === "") {
+                        tbody.html(`
+                            <tr>
+                                <td colspan="8" class="text-muted text-center fst-italic">No CPU-PC records found.</td>
+                            </tr>
+                        `);
+                    } else {
+                        tbody.html(response);
+                    }
                 },
-
-                success: function(data){
-
-                    $("#serverDisplay").html(data);
-                    // Reinitialize the DataTable
-                    $('#CpuPCTble').DataTable({
-                        "paging": true,
-                        "ordering": false,
-                        "searching": true
-                    });
-                },
-                error: function(){
-                    alert(data);
+                error: function () {
+                    tbody.html(`
+                        <tr>
+                            <td colspan="8" class="text-danger text-center">An error occurred while fetching data.</td>
+                        </tr>
+                    `);
                 }
             });
-        }
+        });
     });
 
-    $("#addServerBtn").click(function (){
-        $("#saveServerBtn").show();
-        $("#updateServerBtn").hide();
-        $("#updateServerRegion").hide();
-        $("#serverModalInput").modal('show');
-        $("#staticBackdropLabel").html(`
-            <i class="fas fa-info-circle"></i> Add Server
-        `);
-    });
 
-});
 
-function server_site_option(){
-    document.getElementById('viewTypeServer').disabled = false;
-    document.getElementById('showServerType').disabled = false;
-}
 
-function serverUpdate(id){
-    $("#saveServerBtn").hide();
-    $("#updateServerBtn").show();
-    $("#updateServerRegion").show();
-    $("#serverModalInput").modal('show');
-    $("#staticBackdropLabel").html(`
-            <i class="fas fa-info-circle"></i> Update server details
-        `);
-    document.getElementById('region_server_modal').disabled = true;
 
-    var wordObj = {"id" : id};
-
-    $.ajax({
-        type: "POST",
-        url: "server-update-details.php",
-        data: wordObj,
-        success: function(data){
-            var obj = JSON.parse(data);
-            $("input[name='regionNameModal']").val(obj.server_id);
-            $("select[name='server_region_name_modal']").val(obj.region_id);
-            $("input[name='site_name_input']").val(obj.site_code+" - "+obj.site_name);
-            $("select[name='brand_name']").val(obj.brand_name);
-        }
-    });
-}
