@@ -1,17 +1,12 @@
-
 function timestamp() {
     return new Date().toLocaleString("en-US", { timeZone: "UTC" });
 }
+
 $(function(){
     console.log("=== hardware.js loaded successfully at %s ===", timestamp());
 
     $("#updateHardwareBtn").hide();
     $("#displayHardwareValidation").hide();
-
-    // Helper function for timestamp
-    function timestamp() {
-        return new Date().toLocaleString("en-US", { timeZone: "UTC" });
-    }
 
     $(".datepicker-input").datepicker({
         dateFormat: "yy-mm-dd",
@@ -51,9 +46,9 @@ $(function(){
         url: "hardwares-view-region.php",
         success: function(data) {
             $("#displayRegionHW").html(data);
-            $("select[name='hw_region_name']").removeAttr("onchange");
-            $("select[name='hw_region_name']").off("change").on("change", hardware_site_option);
-            console.log("Region dropdown bound to hardware_site_option at %s", timestamp());
+            $("select[name='hw_region_name']").on("change", hardware_site_option);
+            console.log("Region dropdown loaded at %s", timestamp());
+            hardware_site_option(); // Initialize site dropdown
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error loading regions:", { status, error, response: xhr.responseText });
@@ -103,11 +98,34 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
     function loadRegionOptions(selectId) {
         $.ajax({
             type: "POST",
+<<<<<<< HEAD
             url: "hardware-region-modal.php",
             success: function(data) {
                 const options = '<option value="" disabled selected>Select region</option>' + data;
                 $("#" + selectId).html(options);
                 console.log("Region options loaded for #" + selectId + " at %s", timestamp());
+=======
+            url: "hardware-add-details.php",
+            data: wordObj,
+            success: function(saveResponse) {
+                if (saveResponse.includes("Asset Number Already Exist") ||
+                    saveResponse.includes("Serial Number Already Exist on site") ||
+                    saveResponse.includes("Asset Number and Serial Number Already Exist on site")) {
+                    $("#addHWMessage").html(`
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            <strong>${saveResponse}</strong><br>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `);
+                } else {
+                    $("#AddHardwareModal").modal('hide');
+                    $('#response').html(saveResponse);
+                    alertMessageSuccess(`<strong>Hardware successfully save!</strong>`);
+                    $('select, input').val('');
+                    updateHardwareTable(); // Refresh table
+                    console.log("Hardware added successfully at %s", timestamp());
+                }
+>>>>>>> 6a7b48c754a92bff5247c1629b0a800ca5dcef78
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error loading region options:", {
@@ -526,13 +544,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     $(document).on("click", "#updateHardwareBtn", function() {
-        $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num']").removeClass('is-invalid');
+        $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num'], select[name='edit_sub_major_type'], select[name='edit_item_desc']").removeClass('is-invalid');
         $("input[name='tracking_num']").val("").removeClass("is-invalid");
         $("#tracking_required").text("");
         $("input[name='edit_date_pullout']").val("").removeClass("is-invalid");
         $("#date_required").text("");
 
         var hw_id = $("input[name='edit_hw_id']").val();
+        var sub_major_type = $("select[name='edit_sub_major_type']").val();
+        var item_desc = $("select[name='edit_item_desc']").val();
         var brand_name = $("select[name='edit_brand_name']").val();
         var model_name = $("select[name='edit_model_name']").val();
         var acquired_value = $("input[name='edit_acquired_value']").val();
@@ -546,11 +566,19 @@ document.addEventListener("DOMContentLoaded", function () {
             $("input[name='edit_hw_id']").addClass('is-invalid');
             hasEmptyFields = true;
         }
-        if (brand_name === "") {
+        if (sub_major_type === "" || sub_major_type === null) {
+            $("select[name='edit_sub_major_type']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (item_desc === "" || item_desc === null) {
+            $("select[name='edit_item_desc']").addClass('is-invalid');
+            hasEmptyFields = true;
+        }
+        if (brand_name === "" || brand_name === null) {
             $("select[name='edit_brand_name']").addClass('is-invalid');
             hasEmptyFields = true;
         }
-        if (model_name === "") {
+        if (model_name === "" || model_name === null) {
             $("select[name='edit_model_name']").addClass('is-invalid');
             hasEmptyFields = true;
         }
@@ -565,14 +593,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (hasEmptyFields) {
             $("#addMessage").html(`
-                <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                    <strong>Warning!</strong> Please check the fields below.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `);
+            <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                <strong>Warning!</strong> Please check the fields below.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `);
             console.log("Update failed: missing fields at %s", timestamp());
         } else {
-            $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num']").removeClass('is-invalid');
+            $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num'], select[name='edit_sub_major_type'], select[name='edit_item_desc']").removeClass('is-invalid');
             $("#addMessage").html("");
             if (hardwareStatus === "Pull Out") {
                 $("#warning-pullout").html(`<i class='fas fa-exclamation-triangle'></i> You're about to pull out this hardware with Asset No. <b>${asset_num}</b>`);
@@ -582,12 +610,15 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 var wordObj = {
                     hw_id,
+                    sub_major_type,
+                    item_desc,
                     brand_name,
                     model_name,
                     acquired_value,
                     asset_num,
                     serial_num,
-                    date_acquired
+                    date_acquired,
+                    hardware_status: hardwareStatus
                 };
 
                 $.ajax({
@@ -595,38 +626,49 @@ document.addEventListener("DOMContentLoaded", function () {
                     url: "hardwares-save-details.php",
                     data: wordObj,
                     beforeSend: function () {
-                        $("#displayHardwareValidation").show();
+                        $("#displayHardwareValidation").removeClass('disabled').show();
                         console.log("Updating hardware ID: %s at %s", hw_id, timestamp());
                     },
                     success: function(data) {
-                        $(document.getElementById(wordObj.hw_id)).html(data);
-                        $("#addMessage").html(`
-                            <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                <strong>Updated Successfully!</strong> You updated hardware information.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        `);
+                        $("#hardwareModalInput").modal('hide');
+                        $("#displayHardwareValidation").addClass('disabled').hide();
+                        // Initialize and show Bootstrap Toast
+                        var toastElement = document.getElementById('successToast');
+                        var toastBody = toastElement.querySelector('.toast-body');
+                        toastBody.textContent = 'Hardware information updated successfully!';
+                        var toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+                        toast.show();
+
                         $("input[name='edit_hw_id']").val("");
                         $("input[name='edit_hw_region_name']").val("");
                         $("input[name='edit_site_name_input']").val("");
+                        $("select[name='edit_sub_major_type']").val("");
+                        $("select[name='edit_item_desc']").val("");
                         $("select[name='edit_brand_name']").val("");
                         $("select[name='edit_model_name']").val("");
                         $("input[name='edit_acquired_value']").val("");
                         $("input[name='edit_asset_num']").val("");
                         $("input[name='edit_serial_num']").val("");
                         $("input[name='edit_date_acquired']").val("");
-                        $("#displayHardwareValidation").hide();
-                        $("#updateHardwareBtn").show();
+                        $("select[name='hardware_status_option']").val("");
+                        updateHardwareTable(); // Refresh table
                         console.log("Hardware ID %s updated at %s", hw_id, timestamp());
                     },
                     error: function(xhr, status, error) {
+                        $("#displayHardwareValidation").addClass('disabled').hide();
                         console.error("AJAX Error updating hardware:", { status, error, response: xhr.responseText });
-                        alert("Error updating hardware.");
+                        $("#addMessage").html(`
+                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                            <strong>Error!</strong> Failed to update hardware. Please try again.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `);
                     }
                 });
             }
         }
     });
+
 
     $("#pullout-button").on("click", function() {
         const tracking_num = $("input[name='tracking_num']").val().trim();
@@ -692,178 +734,332 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 function updateHardwareTable() {
-    if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
-        $('#hardwarePerSite').DataTable().destroy();
-        console.log("DataTable destroyed at %s", timestamp());
+    // Check if table exists in DOM
+    if (!$("#hardwarePerSite").length) {
+        console.error("Table #hardwarePerSite not found in DOM at %s", timestamp());
+        $("#hardwareDisplay").html(`
+            <tr>
+                <td colspan='8' class='text-center text-danger'>
+                    Table not found in page. Please check HTML structure.
+                </td>
+            </tr>
+        `);
+        return;
     }
+
+    // Safely destroy DataTable if initialized
+    try {
+        if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
+            $('#hardwarePerSite').DataTable().destroy();
+            console.log("DataTable destroyed at %s", timestamp());
+        }
+    } catch (e) {
+        console.warn("Error destroying DataTable: %s at %s", e.message, timestamp());
+    }
+
     document.getElementById('viewHwType').disabled = false;
 
-    var site_name = $("select[name='site_name']").val();
-    var hw_type = $("select[name='hw_type']").val();
+    var region_name = $("select[name='hw_region_name']").val() || 'all_region';
+    var site_name = $("select[name='site_name']").val() || 'all_sites';
+    var hw_type = $("select[name='hw_type']").val() || 'all_hw';
 
-    console.log("Updating hardware table: site_name=%s, hw_type=%s at %s", site_name, hw_type, timestamp());
+    console.log("Updating hardware table: region_name=%s, site_name=%s, hw_type=%s at %s", region_name, site_name, hw_type, timestamp());
 
-    var url = hw_type !== 'all_hw' ? "hardwares-view-specific-details.php" : "hardwares-view-details.php";
-    var data = hw_type !== 'all_hw' ? { site_name, hw_type } : { site_name };
+    var url = "hardwares-view-details.php"; // Always use hardwares-view-details.php
+    var data = { region_name, site_name, hw_type };
 
     $.ajax({
         type: "POST",
         url: url,
         data: data,
         beforeSend: function() {
-            $("#rowdisplay").html(`
+            console.log("beforeSend triggered for URL: %s at %s", url, timestamp());
+            // Disable showHwButton if it exists
+            var showHwButton = document.getElementById('showHwButton');
+            if (showHwButton) {
+                showHwButton.disabled = true;
+            }
+            // Disable addHardwareButton if it exists, without interrupting flow
+            var addHardwareButton = document.getElementById('addHardwareButton');
+            if (addHardwareButton) {
+                addHardwareButton.disabled = true;
+            }
+            $("#hardwareDisplay").empty(); // Clear existing content
+            $("#hardwareDisplay").html(`
+                <tr>
+                    <td colspan='8' class='text-center'>
+                        <div class='spinner-grow spinner-grow-sm text-primary' role='status'>
+                            <span class='sr-only'>Loading...</span>
+                        </div>
+                        <div class='spinner-grow spinner-grow-sm text-primary'></div>
+                        <div class='spinner-grow spinner-grow-sm text-primary'></div>
+                    </td>
+                </tr>
+            `);
+        },
+        success: function(data) {
+            // Disable showHwButton if it exists
+            var showHwButton = document.getElementById('showHwButton');
+            if (showHwButton) {
+                showHwButton.disabled = false;
+            }
+            // Disable addHardwareButton if it exists, without interrupting flow
+            var addHardwareButton = document.getElementById('addHardwareButton');
+            if (addHardwareButton) {
+                addHardwareButton.disabled = false;
+            }
+            console.log("AJAX response received: %s at %s", data, timestamp());
+            // Validate response
+            if (!data.trim() || !data.includes('<tr')) {
+                console.error("Invalid or empty AJAX response at %s", timestamp());
+                $("#hardwareDisplay").html(`
                     <tr>
-                        <td colspan="8" class="text-center">
-                            <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
-                            <div class="spinner-grow spinner-grow-sm text-primary"></div>
+                        <td colspan='8' class='text-center text-danger'>
+                            No hardware found for the selected filters.
                         </td>
                     </tr>
                 `);
-            console.log("Loading hardware table at %s", timestamp());
-        },
-        success: function(data) {
+                return;
+            }
             $("#hardwareDisplay").html(data);
-            $('#hardwarePerSite').DataTable({
-                "paging": true,
-                "ordering": false,
-                "searching": true
+            // Validate table structure
+            var $tbody = $("#hardwarePerSite tbody");
+            var rowCount = $tbody.find("tr").length;
+            var headerCount = $("#hardwarePerSite thead th").length;
+            var isValid = true;
+            var isErrorResponse = false;
+            $tbody.find("tr").each(function(index) {
+                var cellCount = $(this).find("td").length;
+                var colspan = parseInt($(this).find("td:first").attr("colspan") || 1);
+                if (cellCount !== headerCount && !(cellCount === 1 && colspan === headerCount)) {
+                    console.error(`Invalid row ${index + 1}: cells=${cellCount}, colspan=${colspan}, expected=${headerCount} at %s`, timestamp());
+                    isValid = false;
+                }
+                if (cellCount === 1 && colspan === headerCount) {
+                    isErrorResponse = true;
+                }
             });
-            console.log("Hardware table loaded at %s", timestamp());
+            console.log("Validation: rows=%s, headers=%s, valid=%s, errorResponse=%s at %s", rowCount, headerCount, isValid, isErrorResponse, timestamp());
+            // Skip DataTables for error responses
+            if (isErrorResponse) {
+                console.log("Skipping DataTables initialization due to error response at %s", timestamp());
+                $("#hardwareDisplay").html(data);
+                return;
+            }
+            if (rowCount > 0 && isValid) {
+                try {
+                    $('#hardwarePerSite').DataTable({
+                        "paging": true,
+                        "ordering": false,
+                        "searching": true
+                    });
+                    console.log("Hardware table loaded successfully at %s", timestamp());
+                } catch (e) {
+                    console.error("DataTables initialization error: %s at %s", e.message, timestamp());
+                    $("#hardwareDisplay").html(`
+                        <tr>
+                            <td colspan='8' class='text-center text-danger'>
+                                Error initializing table. Invalid data structure.
+                            </td>
+                        </tr>
+                    `);
+                }
+            } else {
+                console.error("Invalid table structure: rows=%s, headers=%s, valid=%s at %s", rowCount, headerCount, isValid, timestamp());
+                $("#hardwareDisplay").html(`
+                    <tr>
+                        <td colspan='8' class='text-center text-danger'>
+                            Invalid table structure. Check server response for errors.
+                        </td>
+                    </tr>
+                `);
+            }
         },
         error: function(xhr, status, error) {
-            console.error("AJAX Error loading hardware table:", { status, error, response: xhr.responseText });
+            console.error("AJAX Error loading hardware table:", { status, error, response: xhr.responseText }, "at %s", timestamp());
+            $("#hardwareDisplay").html(`
+                <tr>
+                    <td colspan='8' class='text-center text-danger'>
+                    Error loading hardware data. Please try again.
+                    </td>
+                </tr>
+            `);
             alert("Error loading hardware data.");
         }
     });
 }
 
-    function hardware_site_option() {
-        var region_name = $("select[name='hw_region_name']").val();
+function hardware_site_option() {
+    var region_name = $("select[name='hw_region_name']").val() || 'all_region';
+
+    if (region_name === 'all_region'){
+        $("select[name='site_name']").val("all_sites");
+        document.getElementById('viewSiteOption').disabled = true;
+    }else{
         document.getElementById('viewSiteOption').disabled = false;
         document.getElementById('showHwButton').disabled = false;
-
         console.log("hardware_site_option called with region_name: %s at %s", region_name, timestamp());
-
-        var wordObj = { region_name };
-
         $.ajax({
             type: "POST",
             url: "hardwares-view-site.php",
-            data: wordObj,
+            data: { region_name },
             success: function(data) {
                 $("#viewSiteOption").html(data);
+                $("select[name='site_name']").val('all_sites');
+                console.log("Site dropdown options: %s at %s", data, timestamp());
                 console.log("Site dropdown populated at %s", timestamp());
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error loading sites:", { status, error, response: xhr.responseText });
+                $("#viewSiteOption").html('<option value="all_sites">All Sites</option>');
                 alert("Error loading sites.");
             }
         });
     }
+}
+function hardwareUpdate(id) {
+    $("#addMessage").html("");
+    $("#saveHardwareBtn").hide();
+    $("#updateHardwareBtn").show();
+    $("#hardwareModalInput").modal('show');
+    $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num'], select[name='edit_sub_major_type'], select[name='edit_item_desc']").removeClass('is-invalid');
 
-    function hardwareUpdate(id) {
-        $("#addMessage").html("");
-        $("#saveHardwareBtn").hide();
-        $("#updateHardwareBtn").show();
-        $("#hardwareModalInput").modal('show');
-        $("input[name='edit_hw_id'], select[name='edit_brand_name'], select[name='edit_model_name'], input[name='edit_asset_num'], input[name='edit_serial_num']").removeClass('is-invalid');
+    console.log("hardwareUpdate called with id: %s at %s", id, timestamp());
 
-        console.log("hardwareUpdate called with id: %s at %s", id, timestamp());
+    $.ajax({
+        type: "POST",
+        url: "hardware-update-details.php",
+        data: { hw_id: id, action: 'fetch_hardware' },
+        dataType: "json",
+        success: function(data) {
+            if (data.error) {
+                console.error("Error from server: %s", data.error);
+                $("#addMessage").html(`<div class="alert alert-danger">${data.error}</div>`);
+                return;
+            }
 
-        var wordObj = { hw_id: id };
-        $.ajax({
-            type: "POST",
-            url: "hardware-update-details.php",
-            data: wordObj,
-            dataType: "json",
-            success: function(data) {
-                console.log("Hardware details loaded for id: %s at %s", id, timestamp());
-                $("input[name='edit_hw_id']").val(data.hw_id);
-                $("input[name='edit_hw_region_name']").val(data.region_name);
-                $("input[name='edit_site_name_input']").val(data.site_code + " - " + data.site_name);
+            console.log("Hardware details loaded for id: %s at %s", id, timestamp());
+            $("input[name='edit_hw_id']").val(data.hw_id || '');
+            $("input[name='edit_hw_region_name']").val(data.region_name || '');
+            $("input[name='edit_site_name_input']").val(data.site_code && data.site_name ? `${data.site_code} - ${data.site_name}` : '');
 
-                var brandDropdown = $("#edit_brandSelect");
-                brandDropdown.empty();
-                brandDropdown.append('<option value="" disabled>Select Brand</option>');
+            var itemDescDropdown = $("#edit_item_desc");
+            itemDescDropdown.empty();
+            itemDescDropdown.append('<option value="" disabled>Select Item Description</option>');
+            if (data.item_descriptions && Array.isArray(data.item_descriptions)) {
+                $.each(data.item_descriptions, function(index, desc) {
+                    itemDescDropdown.append(`<option value="${desc}">${desc}</option>`);
+                });
+                itemDescDropdown.val(data.item_desc || '');
+            } else {
+                itemDescDropdown.append('<option value="" disabled>No item descriptions available</option>');
+            }
+
+            var brandDropdown = $("#edit_brandSelect");
+            brandDropdown.empty();
+            brandDropdown.append('<option value="" disabled>Select Brand</option>');
+            if (data.brands && Array.isArray(data.brands)) {
                 $.each(data.brands, function(index, brand) {
                     brandDropdown.append(`<option value="${brand}">${brand}</option>`);
                 });
-                if (data.selected_brand) {
-                    brandDropdown.val(data.selected_brand);
-                }
+                brandDropdown.val(data.selected_brand || '');
+            } else {
+                brandDropdown.append('<option value="" disabled>No brands available</option>');
+            }
 
-                var modelDropdown = $("#edit_model_option");
-                modelDropdown.empty();
-                modelDropdown.append('<option value="" disabled>Select model</option>');
+            var modelDropdown = $("#edit_model_option");
+            modelDropdown.empty();
+            modelDropdown.append('<option value="" disabled>Select model</option>');
+            if (data.hw_model && Array.isArray(data.hw_model)) {
                 $.each(data.hw_model, function(index, model) {
                     modelDropdown.append(`<option value="${model.model_name}">${model.model_name}</option>`);
                 });
-                if (data.selected_model) {
-                    modelDropdown.val(data.selected_model);
-                }
-                $("input[name='edit_acquired_value']").val(data.acq_val);
-                $("input[name='edit_asset_num']").val(data.asset_num);
-                $("input[name='edit_serial_num']").val(data.serial_num);
-                $("input[name='edit_date_acquired']").val(data.date_acq);
-                $("select[name='hardware_status_option']").val(data.hw_status);
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX Error loading hardware details:", { status, error, response: xhr.responseText });
-                alert("Error loading hardware details.");
+                modelDropdown.val(data.selected_model || '');
+            } else {
+                modelDropdown.append('<option value="" disabled>No models available</option>');
             }
-        });
-    }
 
-    function showHardwareModel() {
-        var hw_id = $("input[name='edit_hw_id']").val();
-        var brand_name = $("select[name='edit_brand_name']").val();
+            $("select[name='edit_sub_major_type']").val(data.sub_major_type || '');
+            $("input[name='edit_acquired_value']").val(data.acq_val || '');
+            $("input[name='edit_asset_num']").val(data.asset_num || '');
+            $("input[name='edit_serial_num']").val(data.serial_num || '');
+            $("input[name='edit_date_acquired']").val(data.date_acq || '');
+            $("select[name='hardware_status_option']").val(data.hw_status || '');
 
-        console.log("showHardwareModel called with hw_id: %s, brand_name: %s at %s", hw_id, brand_name, timestamp());
+            // Event listener for item_desc change
+            $("#edit_item_desc").off('change').on('change', function() {
+                var selectedItemDesc = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "hardware-update-details.php",
+                    data: { item_desc: selectedItemDesc, action: 'fetch_brands' },
+                    dataType: "json",
+                    success: function(data) {
+                        brandDropdown.empty();
+                        brandDropdown.append('<option value="" disabled selected>Select Brand</option>');
+                        if (data.brands && Array.isArray(data.brands)) {
+                            $.each(data.brands, function(index, brand) {
+                                brandDropdown.append(`<option value="${brand}">${brand}</option>`);
+                            });
+                        } else {
+                            brandDropdown.append('<option value="" disabled>No brands available</option>');
+                        }
+                        modelDropdown.empty();
+                        modelDropdown.append('<option value="" disabled selected>Select model</option>');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error loading brands:", { status, error, response: xhr.responseText });
+                        $("#addMessage").html('<div class="alert alert-danger">Error loading brands. Please try again.</div>');
+                    }
+                });
+            });
 
-        if (!hw_id || !brand_name) {
-            console.error("Missing hw_id or brand_name:", { hw_id, brand_name, time: timestamp() });
-            $("#edit_model_option").html('<option value="" disabled>Select model</option>');
-            return;
+            // Event listener for brand change
+            $("#edit_brandSelect").off('change').on('change', function() {
+                var selectedItemDesc = $("#edit_item_desc").val();
+                var selectedBrand = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "hardware-update-details.php",
+                    data: { item_desc: selectedItemDesc, brand: selectedBrand, action: 'fetch_models' },
+                    dataType: "json",
+                    success: function(data) {
+                        modelDropdown.empty();
+                        modelDropdown.append('<option value="" disabled selected>Select model</option>');
+                        if (data.models && Array.isArray(data.models)) {
+                            $.each(data.models, function(index, model) {
+                                modelDropdown.append(`<option value="${model.model_name}">${model.model_name}</option>`);
+                            });
+                        } else {
+                            modelDropdown.append('<option value="" disabled>No models available</option>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error loading models:", { status, error, response: xhr.responseText });
+                        $("#addMessage").html('<div class="alert alert-danger">Error loading models. Please try again.</div>');
+                    }
+                });
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading hardware details:", { status, error, response: xhr.responseText });
+            $("#addMessage").html('<div class="alert alert-danger">Error loading hardware details. Please try again.</div>');
         }
+    });
+}
+function showHardwareModel() {
+    var hw_id = $("input[name='edit_hw_id']").val();
+    var brand_name = $("select[name='edit_brand_name']").val();
 
-        var wordObj = { hw_id, brand_name };
+    console.log("showHardwareModel called with hw_id: %s, brand_name: %s at %s", hw_id, brand_name, timestamp());
 
-        $.ajax({
-            type: "POST",
-            url: "hardwares-change-model.php",
-            data: wordObj,
-            dataType: "json",
-            beforeSend: function() {
-                $("#edit_model_option").html('<option value="" disabled>Loading models...</option>');
-                console.log("Loading models for brand: %s at %s", brand_name, timestamp());
-            },
-            success: function(data) {
-                console.log("Model data received:", data, "at %s", timestamp());
-                var modelDropdown = $("#edit_model_option");
-                modelDropdown.empty();
-                modelDropdown.append('<option value="" disabled>Select model</option>');
-
-                if (data.hw_model && data.hw_model.length > 0) {
-                    $.each(data.hw_model, function(index, model) {
-                        modelDropdown.append(`<option value="${model.model_name}">${model.model_name}</option>`);
-                    });
-                    console.log("Models loaded for brand: %s at %s", brand_name, timestamp());
-                } else {
-                    console.warn("No models returned for brand: %s at %s", brand_name, timestamp());
-                    modelDropdown.append('<option value="" disabled>No models available</option>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX Error loading models:", { status, error, response: xhr.responseText });
-                $("#edit_model_option").html('<option value="" disabled>Error loading models</option>');
-                alert("Error loading models: " + (xhr.responseText || "Unknown error. Check console for details."));
-            }
-        });
+    if (!hw_id || !brand_name) {
+        console.error("Missing hw_id or brand_name:", { hw_id, brand_name, time: timestamp() });
+        $("#edit_model_option").html('<option value="" disabled>Select model</option>');
+        return;
     }
 
+<<<<<<< HEAD
     //------ for Delete record by hw_id -------------------------
     let selectedHwIdToDelete = null;
 
@@ -1287,25 +1483,125 @@ function updateHardwareTable() {
     //----------------------------------------------------------------------------------------------------------------------------
     function alertMessageSuccess(messageHTML) {
         const alert = document.getElementById("alertMessage");
+=======
+    $.ajax({
+        type: "POST",
+        url: "hardwares-change-model.php",
+        data: { hw_id, brand_name },
+        dataType: "json",
+        beforeSend: function() {
+            $("#edit_model_option").html('<option value="" disabled>Loading models...</option>');
+            console.log("Loading models for brand: %s at %s", brand_name, timestamp());
+        },
+        success: function(data) {
+            console.log("Model data received at %s", timestamp());
+            var modelDropdown = $("#edit_model_option");
+            modelDropdown.empty();
+            modelDropdown.append('<option value="" disabled>Select model</option>');
 
-        // Set message
-        alert.innerHTML = messageHTML;
+            if (data.hw_model && Array.isArray(data.hw_model)) {
+                $.each(data.hw_model, function(index, model) {
+                    modelDropdown.append(`<option value="${model.model_name}">${model.model_name}</option>`);
+                });
+                console.log("Models loaded for brand: %s at %s", brand_name, timestamp());
+            } else {
+                console.warn("No models returned for brand: %s at %s", brand_name, timestamp());
+                modelDropdown.append('<option value="" disabled>No models available</option>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading models:", { status, error, response: xhr.responseText });
+            $("#edit_model_option").html('<option value="" disabled>Error loading models</option>');
+            alert("Error loading models.");
+        }
+    });
+}
 
-        // Reset display and classes
-        alert.style.display = "block";
-        alert.classList.remove("fade-out");
-        void alert.offsetWidth; // Force reflow
+function hardware_site_select() {
+    var region_name = $("select[name='RegionSelect']").val();
+    document.getElementById('hardwareSiteModal').disabled = false;
 
-        // Fade in
-        alert.classList.add("fade-in");
+    console.log("hardware_site_select called with site_name: %s at %s", region_name, timestamp());
 
-        // Fade out after 3 seconds
+    $.ajax({
+        type: "POST",
+        url: "hardwares-site-modal.php",
+        data: { region_name },
+        success: function(data) {
+            $("#hardwareSiteModal").html(data);
+            console.log("Site modal populated at %s", timestamp());
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading site modal:", { status, error, response: xhr.responseText });
+            alert("Error loading site modal data.");
+        }
+    });
+}
+
+function hardware_brand_option() {
+    var item_name = $("select[name='itemSelect']").val();
+    document.getElementById('itemBrand').disabled = false;
+    document.getElementById('itemModel').disabled = false;
+
+    console.log("hardware_brand_option called with item_name: %s at %s", item_name, timestamp());
+
+    $.ajax({
+        type: "POST",
+        url: "hardware-brand-modal.php",
+        data: { item_name },
+        success: function(data) {
+            $("#itemBrand").html(data);
+            console.log("Brands loaded at %s", timestamp());
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading brands:", { status, error, response: xhr.responseText });
+            alert("Error loading brands.");
+        }
+    });
+}
+
+function hardware_model_option() {
+    var model_item_name = $("select[name='itemSelect']").val();
+
+    console.log("hardware_model_option called with model_item_name: %s at %s", model_item_name, timestamp());
+
+    $.ajax({
+        type: "POST",
+        url: "hardware-model-modal.php",
+        data: { model_item_name },
+        success: function(data) {
+            $("#itemModel").html(data);
+            console.log("Models loaded at %s", timestamp());
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error loading models:", { status, error, response: xhr.responseText });
+            alert("Error loading models.");
+        }
+    });
+}
+>>>>>>> 6a7b48c754a92bff5247c1629b0a800ca5dcef78
+
+function alertMessageSuccess(messageHTML) {
+    const alert = document.getElementById("alertMessage");
+
+    // Set message
+    alert.innerHTML = messageHTML;
+
+    // Reset display and classes
+    alert.style.display = "block";
+    alert.classList.remove("fade-out");
+    void alert.offsetWidth; // Force reflow
+
+    // Fade in
+    alert.classList.add("fade-in");
+
+    // Fade out after 3 seconds
+    setTimeout(() => {
+        alert.classList.remove("fade-in");
+        alert.classList.add("fade-out");
+
         setTimeout(() => {
-            alert.classList.remove("fade-in");
-            alert.classList.add("fade-out");
-
-            setTimeout(() => {
-                alert.style.display = "none";
-            }, 500); // Match transition duration
-        }, 3000);
-    }
+            alert.style.display = "none";
+        }, 500); // Match transition duration
+    }, 3000);
+}

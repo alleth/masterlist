@@ -18,6 +18,7 @@ require_once "auth.php";
     <link href="css/alert-style.css" rel="stylesheet" />
     <link href="icons/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="icons/cube.png" type="image/x-icon">
     <link href="css/datepicker-min.css" rel="stylesheet">
     <script src="js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -70,7 +71,7 @@ require_once "auth.php";
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <!-- Dropdown Links -->
-                <li><a class="dropdown-item" href="#!"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i> Settings</a></li>
                 <li><a class="dropdown-item" href="activity-log.php"><i class="fa fa-history"></i> Activity Log</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -92,20 +93,20 @@ require_once "auth.php";
                     <div class="sb-sidenav-menu-heading">ASSET</div>
                     <a class="nav-link" href="hardwares.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
-                        Hardwares
+                        Hardware
                     </a>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Utilities
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <!-- <a class="nav-link" href="servers.php">Server Software</a> -->
+                            <a class="nav-link" href="servers.php">Server Software</a>
                             <a class="nav-link" href="cpu-pc-softwares.php">CPU-PC Software</a>
-                            <!-- <a class="nav-link" href="hardware-switch.php">Network Equipment</a> -->
+                            <a class="nav-link" href="hardware-switch.php">Network Equipment</a>
                         </nav>
-                    </div>
+                    </div> -->
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                         Hardware Status

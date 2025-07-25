@@ -1,5 +1,24 @@
-// dashboardv2.js
+// Back to Top Button Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopButton = document.getElementById('backToTop');
 
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+
+    // Smooth scroll to top on click
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
 // Dynamically adjust main-content margin based on filter width
 function adjustMainContentMargin() {
     const filter = document.querySelector('.filter-fixed');
@@ -59,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchRegions() {
     console.log('Fetching regions via jQuery');
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: { action: 'getRegions' },
         dataType: 'json',
@@ -89,7 +108,7 @@ function fetchRegions() {
 function fetchSites(regionId) {
     console.log('Fetching sites for region:', regionId);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: { action: 'getSites', region_id: regionId },
         dataType: 'json',
@@ -119,7 +138,7 @@ function fetchHardwareData(params) {
     showSpinners();
     const data = Object.assign({ action: 'getHardwareCounts' }, params);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: data,
         dataType: 'json',
@@ -149,7 +168,7 @@ function updateHardwareData() {
 function fetchSiteCounts(params) {
     console.log('Fetching site counts with params:', params);
     $.ajax({
-        url: 'http://localhost/masterlist/api.php',
+        url: 'api.php',
         method: 'GET',
         data: Object.assign({ action: 'getSiteCounts' }, params),
         dataType: 'json',
@@ -185,6 +204,11 @@ function updateSiteCard(data) {
             <div class="col-12">
                 <label class="form-label text-muted">Ownership</label>
                 <h6 class="text-dark">${data.site_partnership}</h6>
+            </div>
+            
+            <div class="col-12">
+                <label class="form-label text-muted">Transaction Catered</label>
+                <h6 class="text-dark">${data.trxn_catered}</h6>
             </div>
             
             <div class="col-12">

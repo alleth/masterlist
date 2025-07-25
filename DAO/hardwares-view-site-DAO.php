@@ -7,6 +7,7 @@
             $stmt->bindParam(1, $region_name);
             $stmt->execute();
 
+            echo "<option value='all_sites'>All Sites</option>";
             while ($row = $stmt->fetch()){
                 echo "<option value='$row[1]'>$row[1] &ndash; $row[2]</option>";
             }
