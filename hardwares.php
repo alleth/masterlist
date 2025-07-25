@@ -18,11 +18,7 @@ include("includes/header.php");
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-<<<<<<< HEAD
-                                    <select class="form-select" name="hw_type" id="viewHwType" disabled>
-=======
                                     <select class="form-select" name="hw_type" id="viewHwType">
->>>>>>> 6a7b48c754a92bff5247c1629b0a800ca5dcef78
                                         <option value="all_hw" selected>All hardware</option>
                                         <option value="Server" >Server</option>
                                         <option value="UPS-Server" >UPS-Server</option>

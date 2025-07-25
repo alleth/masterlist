@@ -98,13 +98,6 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
     function loadRegionOptions(selectId) {
         $.ajax({
             type: "POST",
-<<<<<<< HEAD
-            url: "hardware-region-modal.php",
-            success: function(data) {
-                const options = '<option value="" disabled selected>Select region</option>' + data;
-                $("#" + selectId).html(options);
-                console.log("Region options loaded for #" + selectId + " at %s", timestamp());
-=======
             url: "hardware-add-details.php",
             data: wordObj,
             success: function(saveResponse) {
@@ -125,7 +118,6 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
                     updateHardwareTable(); // Refresh table
                     console.log("Hardware added successfully at %s", timestamp());
                 }
->>>>>>> 6a7b48c754a92bff5247c1629b0a800ca5dcef78
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error loading region options:", {
@@ -1059,7 +1051,6 @@ function showHardwareModel() {
         return;
     }
 
-<<<<<<< HEAD
     //------ for Delete record by hw_id -------------------------
     let selectedHwIdToDelete = null;
 
@@ -1095,7 +1086,7 @@ function showHardwareModel() {
             }
         });
     });
-
+}
 
     //---for edit modal------------------------------------------
         function hardwareUpdate2(hw_id) {
@@ -1483,7 +1474,7 @@ function showHardwareModel() {
     //----------------------------------------------------------------------------------------------------------------------------
     function alertMessageSuccess(messageHTML) {
         const alert = document.getElementById("alertMessage");
-=======
+
     $.ajax({
         type: "POST",
         url: "hardwares-change-model.php",
@@ -1579,7 +1570,6 @@ function hardware_model_option() {
         }
     });
 }
->>>>>>> 6a7b48c754a92bff5247c1629b0a800ca5dcef78
 
 function alertMessageSuccess(messageHTML) {
     const alert = document.getElementById("alertMessage");
