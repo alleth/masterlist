@@ -95,6 +95,10 @@ require_once "auth.php";
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         Hardware
                     </a>
+                    <a class="nav-link" href="cpu-pc-softwares.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
+                        CPU-PC Utilities
+                    </a>
                     <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Utilities

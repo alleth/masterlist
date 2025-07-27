@@ -84,17 +84,16 @@ $(function(){
     });
 });
 
-//------------------------------------------------------------------------------------------------------------------------------------------------
 // for binding edit hardware modal 2-----------------------------------
 $('#EditHardwareModal').on('shown.bs.modal', function () {
     setupCascadingItemBrandModel('editItemSelect', 'editItemBrand', 'editItemModel');
 });
 
-//----------------- Load region select options ------------------------
+/* /----------------- Load region select options ------------------------
    /**
      * Reusable loader for region dropdowns
      * @param {string} selectId - ID of the <select> element to populate
-     */
+     *
     function loadRegionOptions(selectId) {
         $.ajax({
             type: "POST",
@@ -118,6 +117,31 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
                     updateHardwareTable(); // Refresh table
                     console.log("Hardware added successfully at %s", timestamp());
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error loading region options:", {
+                    status,
+                    error,
+                    response: xhr.responseText
+                });
+                alert("Error loading region options for #" + selectId);
+            }
+        });
+    }
+    */
+   //----------------- Load region select options ------------------------
+   /**
+     * Reusable loader for region dropdowns
+     * @param {string} selectId - ID of the <select> element to populate
+     */
+    function loadRegionOptions(selectId) {
+        $.ajax({
+            type: "POST",
+            url: "hardware-region-modal.php",
+            success: function(data) {
+                const options = '<option value="" disabled selected>Select region</option>' + data;
+                $("#" + selectId).html(options);
+                console.log("Region options loaded for #" + selectId + " at %s", timestamp());
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error loading region options:", {
