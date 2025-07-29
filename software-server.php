@@ -11,17 +11,17 @@ include("includes/header.php");
                     <div class="card-body">
                         <div class="row g-2 align-items-center">
                             <div class="col-md-2">
-                                <select class="form-select" name="CpuPCRegionSelect" id="CpuPCRegionSelect">
-                                    <option value="" disabled selected>Select region</option>
+                                <select class="form-select" name="ServerRegionSelect" id="ServerRegionSelect">
+                                    <option value="All Region" selected>All Region</option>
                                 </select>
                             </div>               
-                            <div class="col-md-2">
-                                <select class="form-select" name="CpuPCSiteSelect" id="CpuPCSiteSelect" disabled>
+                            <div class="col-md-2 d-none">
+                                <select class="form-select" name="ServerSiteSelect" id="ServerSiteSelect" disabled>
                                     <option value="All Site" selected>All Site</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary d-flex justify-content-center align-items-center" id="showCPUPCButton">
+                                <button class="btn btn-primary d-flex justify-content-center align-items-center" id="showServerButton">
                                     <i class="fas fa-search"></i> <span class="ms-1">Show</span>
                                 </button>
                             </div>
@@ -64,12 +64,12 @@ include("includes/header.php");
 
     <!-- Utilitites Edit Modal ------------------->
      <!-- Edit CPU-PC Modal -->
-<div class="modal modal-lg fade" id="EditCpuPcModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EditCpuPcModalLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="EditServerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EditServerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form method="POST" class="row g-3 needs-validation" id="editCpuPcForm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="EditCpuPcModalLabel">Update CPU-PC Information</h1>
+                    <h1 class="modal-title fs-5" id="EditServerModalLabel">Update CPU-PC Information</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -97,10 +97,11 @@ include("includes/header.php");
                                         <!-- <input type="text" class="form-control" id="editCpuPcItem" name="item_desc"> -->
                                         <select class="form-select" name="item_desc" id="editCpuPcItem">
                                             <option value="" selected>Select Operating System</option>
-                                            <option value="Windows XP">Windows XP</option>
-                                            <option value="Windows 10 32Bit">Windows 10 32Bit</option>
-                                            <option value="Windows 10 64Bit">Windows 10 64Bit</option>
-                                            <option value="Windows 11 64Bit">Windows 11 64Bit</option>
+                                            <option value="Windows Server 2022">Windows Server 2022</option>
+                                            <option value="Windows Server 2019">Windows Server 2019</option>
+                                            <option value="Windows Server 2016">Windows Server 2016</option>
+                                            <option value="Windows Server 2012">Windows Server 2012</option>
+                                            <option value="Windows Server 2012 R2">Windows Server 2012 R2</option>
                                         </select>
                                     </dd>
                                     <!--
@@ -159,7 +160,7 @@ include("includes/header.php");
 </main>
 <?php include 'includes/components.php'; ?>
     <script src="js/hardware.js?v=<?= time() ?>" type="text/javascript"></script>
-    <script src="js/cpu-pc-software.js?v=<?= time() ?>" type="text/javascript"></script>
+    <script src="js/software-server.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/datepicker.min.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/inactivity.js.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>

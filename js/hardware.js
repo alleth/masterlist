@@ -158,6 +158,7 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
         loadRegionOptions("RegionSelect");
         loadRegionOptions("editRegionSelect");
         loadRegionOptions("CpuPCRegionSelect");
+        loadRegionOptions("ServerRegionSelect");
     });
 
     //-Script for site select option-----------------------------------------------------------------------------------------
@@ -201,6 +202,7 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
         setupDependentSelect("RegionSelect", "hardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("editRegionSelect", "editHardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("CpuPCRegionSelect", "CpuPCSiteSelect", "hardwares-site-modal.php", "region_name");
+        setupDependentSelect("ServerRegionSelect", "ServerSiteSelect", "hardwares-site-modal.php", "region_name");
     });
 
 //-------------- select for item descriptions  --------------------------------------------------------------------------------

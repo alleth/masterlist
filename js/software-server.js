@@ -1,23 +1,24 @@
     //- Enable the show button when the region is Selected
     $(document).ready(function () {
-        $('#CpuPCRegionSelect').on('change', function () {
+        $('#ServerRegionSelect').on('change', function () {
             const selectedRegion = $(this).val();
 
             if (selectedRegion) {
                 // Enable the Show button
-                $('#showCPUPCButton').prop('disabled', false);
+                $('#showServerButton').prop('disabled', false);
             } else {
                 // Disable if no region is selected (optional fallback)
-                $('#showCPUPCButton').prop('disabled', true);
+                $('#showServerButton').prop('disabled', true);
             }
         });
     });
-
-    //-- Script for all site option for select with id id="CpuPCSiteSelect" ------
+    
+    
+    //-- Script for all site option for select with id id="ServerSiteSelect" ------
     $(document).ready(function () {
-        // Watch for changes in CpuPCRegionSelect (when site options are loaded)
-        $(document).on("change", "#CpuPCRegionSelect", function () {
-            const siteSelect = $("#CpuPCSiteSelect");
+        // Watch for changes in ServerRegionSelect (when site options are loaded)
+        $(document).on("change", "#ServerRegionSelect", function () {
+            const siteSelect = $("#ServerSiteSelect");
 
             // Use a small delay to allow the AJAX call in reusable script to finish
             setTimeout(function () {
@@ -29,15 +30,15 @@
         });
     });
 
-    //--- Script For Show Button ------------------------------
+    //--- Script For Show data on the table ------------------------------
     $(document).ready(function () {
     let cpuPcTable; // Store DataTable instance
 
-        $("#showCPUPCButton").on("click", function (e) {
+        $("#showServerButton").on("click", function (e) {
             e.preventDefault();
 
-            const selectedRegionId = $("#CpuPCRegionSelect").val();
-            const selectedSiteCode = $("#CpuPCSiteSelect").val();
+            const selectedRegionId = $("#ServerRegionSelect").val();
+            const selectedSiteCode = $("#ServerSiteSelect").val();
             const tbody = $("#hardwareDisplay");
 
             if (!selectedRegionId) {
@@ -66,7 +67,7 @@
             `);
 
             $.ajax({
-                url: 'hardware-cpupc-details.php',
+                url: 'software-server-details.php',
                 method: 'POST',
                 data: {
                     region_id: selectedRegionId,
@@ -102,7 +103,7 @@
     });
 
 
-    // Function for Edit Modal
+    //-- Script for edit button to show data on modal-----------------------
     $(document).ready(function () {
         // When Edit button is clicked
         $(document).on("click", ".edit-hardware-btn", function (e) {
@@ -130,11 +131,11 @@
             $("#editCpuPcStatus").val("On Site"); // Default or fetched later
 
             // Show modal
-            $("#EditCpuPcModal").modal("show");
+            $("#EditServerModal").modal("show");
         });
     });
     
-    // for edit button
+    
     $(document).ready(function () {
         $(document).on("click", ".edit-hardware-btn", function (e) {
             e.preventDefault();
@@ -143,7 +144,7 @@
             const hwId = $(this).data("id");
 
             $.ajax({
-                url: "hardware-cpupc-edit.php",
+                url: "software-server-edit.php",
                 type: "POST",
                 data: { hw_id: hwId },
                 dataType: "json",
@@ -158,7 +159,7 @@
                         $("#editCpuPcItem").val(data.hw.os_type);
 
                         // Show modal
-                        $("#EditCpuPcModal").modal("show");
+                        $("#EditServerModal").modal("show");
                     } else {
                         alert("Failed to load data: " + data.message);
                     }
@@ -171,6 +172,7 @@
         });
     });
 
+    //-- Script  to Update button to save updated data ----------------------------
     $(document).ready(function () {
     // Handle Update button click
         $("#updateCpuPcBtn").on("click", function (e) {
@@ -224,7 +226,7 @@
 
             // Proceed with AJAX if all fields are valid
             $.ajax({
-                url: "hardware-cpupc-update.php",
+                url: "software-server-update.php",
                 type: "POST",
                 data: {
                     hw_id: hw_id,
@@ -239,8 +241,8 @@
 
                     // After success, hide modal and refresh table
                     setTimeout(() => {
-                        $("#EditCpuPcModal").modal("hide");
-                        $("#showCPUPCButton").click(); // Refresh the table
+                        $("#EditServerModal").modal("hide");
+                        $("#showServerButton").click(); // Refresh the table
                     }, 1500);
                 },
                 error: function (xhr, status, error) {
@@ -254,7 +256,7 @@
         });
 
         // Clear messages and validation when modal is closed
-        $('#EditCpuPcModal').on('hidden.bs.modal', function () {
+        $('#EditServerModal').on('hidden.bs.modal', function () {
             $("#editCpuPcMessage").html(""); // Clear alert message
             $("#editCpuPcForm")[0].reset();  // Reset form
             $("#editCpuPcForm input, #editCpuPcForm select").removeClass("is-invalid"); // Remove red borders
