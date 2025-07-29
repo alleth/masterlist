@@ -1,26 +1,31 @@
 <?php
-
 include "BaseDAO.php";
 
 class CpuPcDetailsDAO extends BaseDAO {
-    function getCpuPcDetails($site_code = null) {
+    function getCpuPcDetails($region_id = null, $site_code = null) {
         $this->openConn();
 
         $sql = "SELECT 
+                    hw.hw_id,  /* Added hw_id for button data attribute */
                     r.region_name, 
                     s.site_name,
                     CONCAT(hw.hw_asset_num, ' / ', hw.hw_serial_num) AS asset_serial,
                     hw.hw_host_name,           
                     hw.hw_ip_add,            
                     hw.hw_mac_add,          
-                    hw.hw_host_name AS hw_workstep     
+                    hw.os_type AS hw_workstep     
                 FROM hw_tbl hw
                 JOIN site_list_tbl s ON hw.site_code = s.site_code
                 JOIN region_tbl r ON s.region_id = r.region_id
                 WHERE hw.item_desc = 'CPU-PC'";
 
-        // Add filtering by site_code only if provided
-        if (!empty($site_code)) {
+        // Always require region filter
+        if (!empty($region_id)) {
+            $sql .= " AND r.region_id = ?";
+        }
+
+        // Add site filter only if site_code is not "All Site" and not empty
+        if (!empty($site_code) && $site_code !== "All Site") {
             $sql .= " AND hw.site_code = ?";
         }
 
@@ -28,8 +33,13 @@ class CpuPcDetailsDAO extends BaseDAO {
 
         $stmt = $this->dbh->prepare($sql);
 
-        if (!empty($site_code)) {
-            $stmt->bindParam(1, $site_code);
+        // Bind parameters dynamically
+        $bindIndex = 1;
+        if (!empty($region_id)) {
+            $stmt->bindParam($bindIndex++, $region_id, PDO::PARAM_INT);
+        }
+        if (!empty($site_code) && $site_code !== "All Site") {
+            $stmt->bindParam($bindIndex++, $site_code, PDO::PARAM_STR);
         }
 
         $stmt->execute();
@@ -48,8 +58,8 @@ class CpuPcDetailsDAO extends BaseDAO {
             echo "<td>{$row['hw_mac_add']}</td>";
             echo "<td>{$row['hw_workstep']}</td>";
             echo "<td>
-                    <button class='btn btn-warning btn-sm' onclick='hardwareUpdate(this)'>
-                        <i class='fas fa-edit'></i>
+                    <button title='Edit' class='btn btn-outline-warning btn-sm edit-hardware-btn' data-id='{$row['hw_id']}'>
+                        <span class='fas fa-edit'></span>
                     </button>
                   </td>";
             echo "</tr>";

@@ -95,7 +95,11 @@ require_once "auth.php";
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         Hardware
                     </a>
-                    <a class="nav-link" href="cpu-pc-softwares.php">
+                    <a class="nav-link" href="software-server.php">
+                        <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
+                        Server Utilities
+                    </a>
+                    <a class="nav-link" href="software-cpu-pc.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         CPU-PC Utilities
                     </a>

@@ -1248,8 +1248,8 @@ function showHardwareModel() {
                 data.prefixText,
                 data.asset_num,
                 data.serial_num,
-                data.date,
-                data.acquired_value,
+                //data.date, //-- Remove the Comments to include in validation
+                //data.acquired_value, //-- Remove the Comments to include in validation
                 data.subType,
                 data.regionName,
                 data.siteCode
@@ -1258,7 +1258,7 @@ function showHardwareModel() {
             // Field keys in order
             const keys = [
                 'itemSelect', 'itemBrand', 'itemModel', 'prefixText',
-                'asset_num', 'serial_num', 'date', 'acquired_value',
+                'asset_num', 'serial_num', //'date', //'acquired_value', //-- Remove the Comments to include in validation
                 'subType', 'regionName', 'siteCode'
             ];
 
@@ -1269,8 +1269,8 @@ function showHardwareModel() {
                 itemModel: '#editItemModel',
                 asset_num: '#editAssetNum',
                 serial_num: '#editSerialNum',
-                date: '#editDate',
-                acquired_value: '#editAcquiredValue',
+                //date: '#editDate', //-- Remove Comment to include validation
+                //acquired_value: '#editAcquiredValue', //-- Remove Comment to include validation
                 subType: '#editSubType',
                 siteCode: '#editHardwareSiteModal'
             };
