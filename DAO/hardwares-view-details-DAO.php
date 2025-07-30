@@ -111,12 +111,14 @@ class viewHardwareDetailsDAO extends BaseDAO {
                     echo $this->tdCell($serial);
 
                     // Action button
-                    echo "<td>";
-                    if (!empty($hw_id)) {
-                        echo "<button title='Edit' class='btn btn-outline-warning btn-sm edit-hardware-btn' data-hw-id='{$hw_id}'>
+                    /* backup
+                    <button title='Edit' class='btn btn-outline-warning btn-sm edit-hardware-btn' data-hw-id='{$hw_id}'>
                                 <span class='fas fa-edit'></span>
                               </button>
-                              <button title='Edit 2' class='btn btn-outline-success btn-sm' onclick='hardwareUpdate2({$row['hw_id']})'>
+                    */
+                    echo "<td>";
+                    if (!empty($hw_id)) {
+                        echo "<button title='Edit 2' class='btn btn-outline-success btn-sm' onclick='hardwareUpdate2({$row['hw_id']})'>
                                     <span class='fas fa-edit'></span>
                                 </button>
                                 <button title='Delete' class='btn btn-outline-danger btn-sm' onclick='hardwareDelete({$row["hw_id"]})'>

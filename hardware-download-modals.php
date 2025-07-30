@@ -33,17 +33,13 @@
 </div>
 
 <!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content bg-success text-white text-center">
       <div class="modal-body">
-        <p class="mb-0"><i class="fas fa-check-circle me-2"></i>Download starting...</p>
+        <i class="fas fa-check-circle fa-2x mb-2"></i><br>
+        Downloading Inventory List...
       </div>
     </div>
   </div>
 </div>
-
-<script src="hardware-downloadExcelData.js?v=<?= time() ?>" type="text/javascript"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
