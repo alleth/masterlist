@@ -32,6 +32,17 @@ $headers = [
 ];
 $sheet->fromArray($headers, NULL, 'A1');
 
+// Apply styling to header row (A1 to H1)
+$headerStyle = $sheet->getStyle('A1:H1');
+$headerStyle->getFont()->setBold(true)->getColor()->setRGB('FFFFFF'); // White bold font
+$headerStyle->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+$headerStyle->getFill()->getStartColor()->setRGB('4F81BD'); // Blue background
+$headerStyle->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+$headerStyle->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+
+
+
 // Write data rows starting from row 2
 $rowNum = 2;
 foreach ($data as $row) {
@@ -47,6 +58,12 @@ foreach ($data as $row) {
     ], NULL, "A{$rowNum}");
     $rowNum++;
 }
+
+$lastRow = count($data) + 1; // +1 for header
+$sheet->getStyle("A1:H{$lastRow}")
+      ->getAlignment()
+      ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+
 
 // Optional: Set column widths for better spacing
 $columnWidths = [
