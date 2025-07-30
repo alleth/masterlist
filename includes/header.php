@@ -96,11 +96,11 @@ require_once "auth.php";
                         Hardware
                     </a>
                     <a class="nav-link" href="software-server.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
                         Server Utilities
                     </a>
                     <a class="nav-link" href="software-cpu-pc.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
                         CPU-PC Utilities
                     </a>
                     <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

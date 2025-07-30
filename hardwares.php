@@ -1,5 +1,6 @@
 <?php
 include("includes/header.php");
+include("hardware-download-modals.php");
 ?>
     <main>
         <div class="container-fluid px-4">
@@ -51,9 +52,15 @@ include("includes/header.php");
                                     if($user_type == "ADM" || $user_type == "SPV"){
                                         echo "";
                                     }else{
-                                        echo "<button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id='addHardwareButton'>
+                                        echo "
+                                            <div class='d-flex gap-2'>
+                                                <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#filterModal'>
+                                                <i class='fas fa-download'></i> Download
+                                            </button>
+                                            <button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id='addHardwareButton'>
                                                 <i class='fas fa-plus-circle'></i> Add Hardware
-                                                </button>";
+                                            </button>
+                                            </div>";
                                     }
                                     ?>
                                 </div>
@@ -506,6 +513,7 @@ include("includes/header.php");
     </div>
 <?php include 'includes/components.php'; ?>
     <script src="js/hardware.js?v=<?= time() ?>" type="text/javascript"></script>
+    <script src="js/hardware-downloadExcelData.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/datepicker.min.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/inactivity.js.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>
