@@ -19,7 +19,7 @@ class viewHardwareDetailsDAO extends BaseDAO {
         $hw_type = $_POST["hw_type"] ?? 'all_hw';
 
         $valid_hw_types = [
-            'all_hw', 'CPU-Server', 'UPS-Server',
+            'all_hw', 'CPU-Server', 'UPS-SERVER',
             'CPU-PC', 'Monitor', 'UPS-PC',
             'Keyboard', 'Mouse', 'Webcam', 'Sigpad',
             'Laserjet', 'Inkjet', 'Dot Matrix', 'Deskjet',
