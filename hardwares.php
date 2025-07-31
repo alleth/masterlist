@@ -21,7 +21,7 @@ include("hardware-download-modals.php");
                                 <div class="col-md-2">
                                     <select class="form-select" name="hw_type" id="viewHwType">
                                         <option value="all_hw" selected>All hardware</option>
-                                        <option value="Server" >Server</option>
+                                        <option value="CPU-Server" >Server</option>
                                         <option value="UPS-Server" >UPS-Server</option>
                                         <option value="CPU-PC" >CPU-PC</option>
                                         <option value="Monitor" >Monitor</option>
@@ -37,6 +37,7 @@ include("hardware-download-modals.php");
                                         <option value="Deskjet">Deskjet</option>
                                         <option class="text-muted" disabled>*** Network Equipment ***</option>
                                         <option value="Router">Router</option>
+                                        <option value="SDWAN">SDWAN</option>
                                         <option value="Switch">Switch</option>
                                         <option value="Modem">Modem</option>
                                     </select>
