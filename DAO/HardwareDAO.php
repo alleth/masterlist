@@ -174,7 +174,7 @@ class HardwareDAO extends BaseDAO
 
             // Server Brands
             $query = "SELECT h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
-                      FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'servers' OR LOWER(h.item_desc) LIKE 'server') 
+                      FROM hw_tbl h $where AND (LOWER(h.sub_major_type) LIKE 'servers' OR LOWER(h.item_desc) LIKE 'CPU-Server') 
                       GROUP BY h.hw_brand_name, h.hw_model
                       ORDER BY count DESC";
             $stmt = $conn->prepare($query);
@@ -212,7 +212,7 @@ class HardwareDAO extends BaseDAO
             }
 
             // Workstations
-            $query = "SELECT COUNT(*) as total FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU-PC'";
+            $query = "SELECT COUNT(*) as total FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU'";
             $stmt = $conn->prepare($query);
             $stmt->execute($whereParams);
             $total = (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -220,7 +220,7 @@ class HardwareDAO extends BaseDAO
 
             // Workstation Brands
             $query = "SELECT h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
-                      FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU-PC' 
+                      FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU' 
                       GROUP BY h.hw_brand_name, h.hw_model 
                       ORDER BY count DESC";
             $stmt = $conn->prepare($query);
@@ -244,7 +244,7 @@ class HardwareDAO extends BaseDAO
 
             // Workstation OS
             $query = "SELECT h.os_type as name, COUNT(*) as count 
-                      FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU-PC' 
+                      FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE 'CPU' 
                       GROUP BY h.os_type 
                       ORDER BY count DESC";
             $stmt = $conn->prepare($query);
