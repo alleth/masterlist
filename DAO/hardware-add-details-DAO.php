@@ -39,8 +39,6 @@ class addHardwareDAO extends BaseDAO {
                 }
             }
 
-
-
             // === Return detailed message based on real data ===
             if ($assetExists && $serialExists) {
                 echo "Asset Number and Serial Number Already Exist on sites: Asset - " . htmlspecialchars($assetSite) . ", Serial - " . htmlspecialchars($serialSite);

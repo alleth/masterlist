@@ -13,22 +13,6 @@
         });
     });
 
-    //-- Script for all site option for select with id id="CpuPCSiteSelect" ------
-    $(document).ready(function () {
-        // Watch for changes in CpuPCRegionSelect (when site options are loaded)
-        $(document).on("change", "#CpuPCRegionSelect", function () {
-            const siteSelect = $("#CpuPCSiteSelect");
-
-            // Use a small delay to allow the AJAX call in reusable script to finish
-            setTimeout(function () {
-                // Prepend "All Site" option if not already present
-                if (siteSelect.find("option[value='All Site']").length === 0) {
-                    siteSelect.prepend('<option value="All Site" selected>All Site</option>');
-                }
-            }, 300); // Adjust delay if needed
-        });
-    });
-
     //--- Script For Show Button ------------------------------
     $(document).ready(function () {
     let cpuPcTable; // Store DataTable instance

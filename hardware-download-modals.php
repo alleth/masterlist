@@ -1,6 +1,6 @@
 <!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Download Hardware Inventory List</h5>
@@ -8,19 +8,27 @@
       </div>
 
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="downloadRegionSelect" class="form-label">Select Site</label>
+        <div class="mb-3 col-md-6">
+          <label for="downloadRegionSelect" class="form-label">Select Region</label>
           <select class="form-select addHardwareForm" name="downloadRegionSelect" id="downloadRegionSelect">
-              <option value="" disabled selected>Select region</option>
           </select>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 col-md-6">
           <label for="downloadSiteSelect" class="form-label">Select Site</label>
           <select class="form-select addHardwareForm" name="downloadSiteSelect" id="downloadSiteSelect" disabled>
             <option value="" selected>Select Site</option>
           </select>
         </div>
+        <!-- 
+        <div class="mb-3 col-md-6">
+          <label for="downloadHwType" class="form-label">Select Hardware Type</label>
+          <select class="form-select addHardwareForm" name="downloadHwType" id="downloadHwType">
+            <option value="" selected>All Hardware</option>
+            <option value="All Site">All Site</option>
+          </select>
+        </div>
+        -->
       </div>
 
       <div class="modal-footer">

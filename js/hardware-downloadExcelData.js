@@ -3,14 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   downloadButton.addEventListener("click", function () {
     const siteCode = document.getElementById("downloadSiteSelect").value;
+    const regionName = document.getElementById("downloadRegionSelect").value;
 
     if (!siteCode) {
       alert("Please select a site before downloading.");
       return;
     }
 
-    // Prepare download URL
-    const downloadUrl = `hardware-download-csv-data.php?site_code=${encodeURIComponent(siteCode)}`;
+    // Build query string
+    let queryParams = `site_code=${encodeURIComponent(siteCode)}`;
+    if (siteCode === "All Site") {
+      if (!regionName) {
+        alert("Please select a region for All Site download.");
+        return;
+      }
+      queryParams += `&region_name=${encodeURIComponent(regionName)}`;
+    }
+
+    const downloadUrl = `hardware-download-csv-data.php?${queryParams}`;
 
     // Trigger download
     const tempLink = document.createElement("a");
@@ -21,14 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
     tempLink.click();
     document.body.removeChild(tempLink);
 
-    // Hide filter modal immediately
+    // Hide filter modal
     const filterModalEl = document.getElementById("filterModal");
     const filterModal = bootstrap.Modal.getInstance(filterModalEl);
     if (filterModal) {
       filterModal.hide();
     }
 
-    // Wait for modal to fully close before showing success
+    // Show success modal after filter modal hides
     filterModalEl.addEventListener("hidden.bs.modal", function onHidden() {
       filterModalEl.removeEventListener("hidden.bs.modal", onHidden);
 
@@ -36,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const successModal = new bootstrap.Modal(successModalEl);
       successModal.show();
 
-      // Auto-close success modal after 2 seconds
+      // Auto-hide after 2 seconds
       setTimeout(() => {
         const instance = bootstrap.Modal.getInstance(successModalEl);
         if (instance) instance.hide();
@@ -44,5 +54,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
-

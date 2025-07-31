@@ -133,14 +133,30 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
    /**
      * Reusable loader for region dropdowns
      * @param {string} selectId - ID of the <select> element to populate
+     * @param {Object} options - { prepend: string, append: string }
      */
-    function loadRegionOptions(selectId) {
+    function loadRegionOptions(selectId, options = {}) {
         $.ajax({
             type: "POST",
             url: "hardware-region-modal.php",
             success: function(data) {
-                const options = '<option value="" disabled selected>Select region</option>' + data;
-                $("#" + selectId).html(options);
+                let combinedOptions = '';
+
+                if (options.prepend) combinedOptions += options.prepend;
+                combinedOptions += data;
+                if (options.append) combinedOptions += options.append;
+
+                const defaultOption = '<option value="" disabled selected>Select region</option>';
+                const $select = $("#" + selectId);
+                $select.html(defaultOption + combinedOptions);
+
+                // ✅ Auto-select if only one valid option
+                const enabledOptions = $select.find("option:not([disabled])");
+                if (enabledOptions.length === 1) {
+                    enabledOptions[0].selected = true;
+                    $select.trigger("change"); // Trigger event for dependent selects
+                }
+
                 console.log("Region options loaded for #" + selectId + " at %s", timestamp());
             },
             error: function(xhr, status, error) {
@@ -154,23 +170,25 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
         });
     }
 
+
     $(document).ready(function () {
         loadRegionOptions("RegionSelect");
         loadRegionOptions("editRegionSelect");
-        loadRegionOptions("CpuPCRegionSelect");
-        loadRegionOptions("ServerRegionSelect");
-        loadRegionOptions("downloadRegionSelect");
+        loadRegionOptions("CpuPCRegionSelect", { prepend: '<option value="All Region">All Region</option>'});
+        loadRegionOptions("ServerRegionSelect", { prepend: '<option value="All Region">All Region</option>'});
+        loadRegionOptions("downloadRegionSelect", { prepend: '<option value="All Region">All Region</option>'});
     });
 
     //-Script for site select option-----------------------------------------------------------------------------------------
    /**
-     * Reusable AJAX-based select population with prompt
-     * @param {string} triggerSelectName - the <select name=""> that user changes (the parent)
-     * @param {string} targetSelectId - the ID of the <select> to populate
-     * @param {string} phpHandler - path to PHP file that returns the <option> list
-     * @param {string} requestKey - key to send in POST (e.g., region_name, item_name)
+     * Reusable AJAX-based select population with prompt + optional static option
+     * @param {string} triggerSelectName - name of parent <select>
+     * @param {string} targetSelectId - ID of child <select>
+     * @param {string} phpHandler - PHP URL to fetch options
+     * @param {string} requestKey - key to send in POST
+     * @param {Object} [options] - Optional config: { staticOption: string }
      */
-    function setupDependentSelect(triggerSelectName, targetSelectId, phpHandler, requestKey) {
+    function setupDependentSelect(triggerSelectName, targetSelectId, phpHandler, requestKey, options = {}) {
         $(document).on("change", `select[name='${triggerSelectName}']`, function () {
             const selectedValue = $(this).val();
             const $targetSelect = $("#" + targetSelectId);
@@ -187,8 +205,16 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
                 url: phpHandler,
                 data: { [requestKey]: selectedValue },
                 success: function (response) {
-                    const defaultPrompt = `<option value="" disabled selected>Select Site</option>`;
-                    $targetSelect.html(defaultPrompt + response);
+                    let defaultPrompt = `<option value="" disabled selected>Select Site</option>`;
+                    let staticOption = options.staticOption || "";
+                    $targetSelect.html(defaultPrompt + staticOption + response);
+
+                    // ✅ Auto-select if only one valid option
+                    const enabledOptions = $targetSelect.find("option:not([disabled])");
+                    if (enabledOptions.length === 1) {
+                        enabledOptions[0].selected = true;
+                        $targetSelect.trigger("change"); // If there are child dependencies
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error(`Error loading options for #${targetSelectId}`, { status, error });
@@ -198,13 +224,22 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
         });
     }
 
+
+
     $(document).ready(function () {
         // Setup all dependent selects here
         setupDependentSelect("RegionSelect", "hardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("editRegionSelect", "editHardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("CpuPCRegionSelect", "CpuPCSiteSelect", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("ServerRegionSelect", "ServerSiteSelect", "hardwares-site-modal.php", "region_name");
-        setupDependentSelect("downloadRegionSelect", "downloadSiteSelect", "hardwares-site-modal.php", "region_name");
+        // 👇 Add static "All Site" option to downloadSiteSelect only
+        setupDependentSelect(
+            "downloadRegionSelect",
+            "downloadSiteSelect",
+            "hardwares-site-modal.php",
+            "region_name",
+            { staticOption: '<option value="All Site">All Site</option>' }
+        );
         
     });
 
@@ -367,6 +402,9 @@ function fetchSubType(item_desc, inputId) {
 $(document).ready(function () {
     setupCascadingItemBrandModel('itemSelect', 'itemBrand', 'itemModel');
     setupCascadingItemBrandModel('editItemSelect', 'editItemBrand', 'editItemModel');
+    loadSelectOptions('downloadHwType', 'item_description', 'item_desc', 'hardware-item-description-modal.php', 'Select Item'); // For download filter
+
+
 
     setupSubTypeAutofill('itemSelect', 'SubType');
     setupSubTypeAutofill('editItemSelect', 'editSubType');
@@ -1068,6 +1106,7 @@ function hardwareUpdate(id) {
         }
     });
 }
+
 function showHardwareModel() {
     var hw_id = $("input[name='edit_hw_id']").val();
     var brand_name = $("select[name='edit_brand_name']").val();
@@ -1079,8 +1118,9 @@ function showHardwareModel() {
         $("#edit_model_option").html('<option value="" disabled>Select model</option>');
         return;
     }
+}
 
-    //------ for Delete record by hw_id -------------------------
+//------ for Delete record by hw_id -------------------------
     let selectedHwIdToDelete = null;
 
     function hardwareDelete(hw_id) {
@@ -1115,7 +1155,6 @@ function showHardwareModel() {
             }
         });
     });
-}
 
     //---for edit modal------------------------------------------
         function hardwareUpdate2(hw_id) {

@@ -55,7 +55,7 @@ include("hardware-download-modals.php");
                                         echo "
                                             <div class='d-flex gap-2'>
                                                 <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#filterModal'>
-                                                <i class='fas fa-download'></i> Download
+                                                <i class='fas fa-download'></i> Reports
                                             </button>
                                             <button class='btn btn-success justify-content-center align-items-center' data-bs-toggle='modal' data-bs-target='#AddHardwareModal' id='addHardwareButton'>
                                                 <i class='fas fa-plus-circle'></i> Add Hardware
@@ -121,7 +121,7 @@ include("hardware-download-modals.php");
                                             <dd class="col-sm-12">
                                                 <div class="">Region</div>
                                                 <select class="form-select addHardwareForm" name="RegionSelect" id="RegionSelect">
-                                                    <option value="" disabled selected>Select region</option>
+                                                    <option value="" selected>Select Region</option>
                                                 </select>
                                             </dd>
                                             <dd class="col-sm-12">
@@ -198,7 +198,7 @@ include("hardware-download-modals.php");
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <button type="button" class="btn btn-secondary">Search</button>
                             <button type="button" class="btn btn-success" id="addNewHardwareBtn">Save</button>
                         </div>
                     </div>
@@ -354,7 +354,7 @@ include("hardware-download-modals.php");
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p class="mb-0">Are you sure you want to delete this hardware?</p>
+                    <p class="mb-0">Select the Reasons</p>
                     <input type="hidden" id="delete_hw_id">
                 </div>
                 <div class="modal-footer justify-content-center">
