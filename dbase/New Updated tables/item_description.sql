@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2025 at 11:04 AM
+-- Generation Time: Aug 01, 2025 at 05:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,9 +45,9 @@ INSERT INTO `item_description` (`item_id`, `item_desc`, `sub_major_type`) VALUES
 (5, 'Keyboard', 'Other Peripherals'),
 (6, 'Mouse', 'Other Peripherals'),
 (8, 'UPS-Server', 'UPS'),
-(9, 'Printer-LaserJet', 'Printer'),
-(10, 'Printer-InkJet', 'Printer'),
-(13, 'Printer-Dotmatrix', 'Printer'),
+(9, 'LaserJet', 'Printer'),
+(10, 'InkJet', 'Printer'),
+(13, 'Dotmatrix', 'Printer'),
 (14, 'SDWAN', 'Network Equipment'),
 (15, 'Webcam', 'Other Peripherals'),
 (16, 'Sigpad', 'Other Peripherals'),
