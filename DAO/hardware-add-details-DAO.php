@@ -17,7 +17,7 @@ class addHardwareDAO extends BaseDAO {
             $assetExists = 0;
             $assetSite = "";
             if ($normalizedAssetId !== "unreadable" && $normalizedAssetId !== "no tag") {
-                $checkAssetStmt = $this->dbh->prepare("SELECT site_code FROM hw_tbl WHERE hw_asset_num = ? LIMIT 1");
+                $checkAssetStmt = $this->dbh->prepare("SELECT site_code FROM hw_tbl WHERE hw_asset_num = ? AND hw_status = 'On Site' LIMIT 1");
                 $checkAssetStmt->bindParam(1, $assetIdCombined);
                 $checkAssetStmt->execute();
                 if ($row = $checkAssetStmt->fetch(PDO::FETCH_ASSOC)) {
@@ -30,7 +30,7 @@ class addHardwareDAO extends BaseDAO {
             $serialExists = 0;
             $serialSite = "";
             if ($normalizedSerialNum !== "unreadable" && $normalizedSerialNum !== "none") {
-                $checkSerialStmt = $this->dbh->prepare("SELECT site_code FROM hw_tbl WHERE BINARY hw_serial_num = ? LIMIT 1");
+                $checkSerialStmt = $this->dbh->prepare("SELECT site_code FROM hw_tbl WHERE BINARY hw_serial_num = ? AND hw_status = 'On Site' LIMIT 1");
                 $checkSerialStmt->bindParam(1, $serial_num);
                 $checkSerialStmt->execute();
                 if ($row = $checkSerialStmt->fetch(PDO::FETCH_ASSOC)) {
