@@ -1,23 +1,29 @@
 //Description Show on Table-------------<td><button title='Delete' class='btn btn-outline-danger btn-sm' onclick=''><span class='fas fa-trash-alt'></span></button></td>
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: 'view-item-description-tbl.php',
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             var rows = '';
-            data.forEach(function(item_description) {
+            data.forEach(function (item_description) {
                 rows += `<tr>
                     <td>${item_description.item_desc}</td>
+                    <td style="text-align: right;">
+                        <button title="Delete Model" class="btn btn-outline-danger btn-sm delete-item-description-btn" data-id="${item_description.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
                 </tr>`;
             });
             $('#itemDescTBL tbody').html(rows);
         },
-        error: function() {
+        error: function () {
             alert("Failed to fetch Brand data.");
         }
     });
 });
+
 
 document.getElementById('setupAddDescriptionBTN').addEventListener('click', function () {var setupAddDescriptionBTN = new bootstrap.Modal(document.getElementById('setupAddDescription'));setupAddDescriptionBTN.show();});
 
@@ -50,26 +56,44 @@ function addDescriptionBTN() {
 }
 
 //Brand show on table-----------------------------------------------------------------------------------------------------------------------------------
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: 'view-item-brand-tbl.php',
         type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var rows = '';
-            data.forEach(function(item_brand) {
-                rows += `<tr>
-                    <td>${item_brand.item_desc}</td>
-                    <td>${item_brand.brand}</td>
-                </tr>`;
-            });
-            $('#itemBrandTBL tbody').html(rows);
+        dataType: 'html',
+        success: function (response) {
+            $('#itemBrandTBL tbody').html(response);
         },
-        error: function() {
-            alert("Failed to fetch Brand data.");
+        error: function () {
+            alert("Failed to fetch item Brands.");
         }
     });
 });
+
+// Delete data from table
+$(document).on('click', '.delete-brand-btn', function () {
+    const id = $(this).data('id');
+
+    if (confirm("Are you sure you want to delete this brand?")) {
+        $.ajax({
+            url: 'delete-item-brand.php',
+            method: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response.trim() === "success") {
+                    alert("Deleted successfully.");
+                    loadItemBrandTBL();
+                } else {
+                    alert("Failed to delete.");
+                }
+            },
+            error: function () {
+                alert("AJAX error occurred.");
+            }
+        });
+    }
+});
+
 //Open add brand modal ---------------------------------------------------------------------------------------------------------------------------------
 document.getElementById('setupAddBrandBTN').addEventListener('click', function () {
     var setupAddBrandBTN = new bootstrap.Modal(document.getElementById('setupAddBrand'));
@@ -104,29 +128,105 @@ function addBrandBTN() {
 }
 
 //Model show on table-----------------------------------------------------------------------------------------------------------------------------------
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: 'view-item-model-tbl.php',
         type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var rows = '';
-            data.forEach(function(item_model) {
-                rows += `<tr>
-                    <td>${item_model.item_desc}</td>
-                    <td>${item_model.brand}</td>
-                    <td>${item_model.model}</td>
-                </tr>`;
-            });
-            $('#itemModelTBL tbody').html(rows);
+        dataType: 'html',
+        success: function (response) {
+            $('#itemModelTBL tbody').html(response);
         },
-        error: function() {
-            alert("Failed to fetch Brand data.");
+        error: function () {
+            alert("Failed to fetch item models.");
         }
     });
 });
 
-//Brand Add on database-----------------------------------------------------------------------------------------------------------------------
+function editItemModel(id) {
+    $.ajax({
+        url: 'item-model-get-by-id.php',
+        type: 'GET',
+        data: { id: id },
+        dataType: 'json',
+        success: function(data) {
+            $('#editModelID').val(data.id);
+            $('#editItemDescriptionText').text(data.item_desc);
+            $('#editItemBrand').val(data.brand);
+            $('#editItemModel').val(data.model);
+            $('#setupEditModel').modal('show');
+        },
+        error: function() {
+            alert("Failed to fetch model details.");
+        }
+    });
+}
+
+function updateModelBTN() {
+    const id = $('#editModelID').val();
+    const model = $('#editItemModel').val().trim();
+
+    if (model === "") {
+        $('#editItemModelMSG').html('<div class="alert alert-danger">Model name is required.</div>');
+        return;
+    }
+
+    $.ajax({
+        url: 'update-item-model.php',
+        type: 'POST',
+        data: {
+            editModelID: id,
+            editItemModel: model
+        },
+        success: function(response) {
+            const res = JSON.parse(response);
+            if (res.status === 'success') {
+                $('#editItemModelMSG').html('<div class="alert alert-success">' + res.message + '</div>');
+                setTimeout(() => {
+                    $('#setupEditModel').modal('hide');
+
+                    // Wait for modal to close, then reload page
+                    $('#setupEditModel').on('hidden.bs.modal', function () {
+                        location.reload();
+                    });
+
+                }, 1000);
+            } else {
+                $('#editItemModelMSG').html('<div class="alert alert-danger">' + res.message + '</div>');
+            }
+        },
+        error: function() {
+            $('#editItemModelMSG').html('<div class="alert alert-danger">AJAX error occurred.</div>');
+        }
+    });
+}
+
+$(document).on('click', '.delete-model-btn', function () {
+    const id = $(this).data('id');
+
+    if (confirm("Are you sure you want to delete this model?")) {
+        $.ajax({
+            url: 'delete-item-model.php',
+            type: 'POST',
+            data: { modelID: id },
+            success: function (response) {
+                const res = JSON.parse(response);
+                if (res.status === 'success') {
+                    alert(res.message);
+                    location.reload(); // or refresh table dynamically
+                } else {
+                    alert("Error: " + res.message);
+                }
+            },
+            error: function () {
+                alert("AJAX error occurred while deleting.");
+            }
+        });
+    }
+});
+
+
+
+//Model Add on database-----------------------------------------------------------------------------------------------------------------------
 function addModelBTN() {
 
     var itemSelect3 = $('#itemSelect3').val();
