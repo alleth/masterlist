@@ -71,7 +71,8 @@ class HardwareUpdateDAO2 extends BaseDAO {
                     hw_date_acq = :date,
                     hw_acq_val = :acq,
                     sub_major_type = :sub_type,
-                    site_code = :site_code
+                    site_code = :site_code,
+                    hw_status = :hw_status
                 WHERE hw_id = :id
             ");
 
@@ -85,6 +86,7 @@ class HardwareUpdateDAO2 extends BaseDAO {
                 ':acq'       => $p['acquired_value'],
                 ':sub_type'  => $p['subType'],
                 ':site_code' => $p['siteCode'],
+                ':hw_status' => $p['hw_status'],
                 ':id'        => $hw_id
             ]);
 
