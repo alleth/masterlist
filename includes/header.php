@@ -95,14 +95,17 @@ require_once "auth.php";
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         Hardware
                     </a>
-                    <a class="nav-link" href="software-server.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
-                        Server Utilities
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNetwork" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div>
+                        Network Settings
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                    <a class="nav-link" href="software-cpu-pc.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
-                        CPU-PC Utilities
-                    </a>
+                    <div class="collapse" id="collapseNetwork" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="software-server.php">Server</a>
+                            <a class="nav-link" href="software-cpu-pc.php">CPU-PC</a>
+                        </nav>
+                    </div>
                     <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Utilities
@@ -116,7 +119,7 @@ require_once "auth.php";
                         </nav>
                     </div> -->
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                         Hardware Status
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>

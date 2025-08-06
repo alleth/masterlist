@@ -2,7 +2,7 @@
 include("includes/header.php");
 
 // Maintenance mode flag (set to true when under maintenance)
-$maintenance_mode = true; // Change to false to disable maintenance mode
+$maintenance_mode = false; // Change to false to disable maintenance mode
 
 if ($maintenance_mode) {
     // Include the coming-soon.php file for maintenance page
@@ -15,9 +15,7 @@ $user_type = $_SESSION['sess_user_type'];
 ?>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4 display-6">Requests</h1>
-        <ol class="breadcrumb mb-4">
-        </ol>
+        <h4 class="mt-4">Requests</h4>
         <div class="row mt-3">
             <div class="col-lg-12">
                 <!-- Bootstrap Nav Tabs -->
@@ -25,9 +23,15 @@ $user_type = $_SESSION['sess_user_type'];
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pullout-tab" data-bs-toggle="tab" data-bs-target="#pullout" type="button" role="tab" aria-controls="pullout" aria-selected="true">Pullout</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="deploy-tab" data-bs-toggle="tab" data-bs-target="#deploy" type="button" role="tab" aria-controls="deploy" aria-selected="false">Deploy</button>
-                    </li>
+
+                    <?php
+                        if ($user_type == "SPV" || $user_type == "ADM") {
+                            echo "<li class='nav-item' role='presentation'>
+                                    <button class='nav-link' id='deploy-tab' data-bs-toggle='tab' data-bs-target='#deploy' type='button' role='tab' aria-controls='deploy' aria-selected='false'>Deploy</button>
+                                </li>";
+                        }
+                    ?>
+
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="relocation-tab" data-bs-toggle="tab" data-bs-target="#relocation" type="button" role="tab" aria-controls="relocation" aria-selected="false">Relocation</button>
                     </li>
@@ -36,6 +40,21 @@ $user_type = $_SESSION['sess_user_type'];
                 <div class="tab-content" id="requestTabsContent">
                     <!-- Pullout Tab -->
                     <div class="tab-pane fade show active" id="pullout" role="tabpanel" aria-labelledby="pullout-tab">
+                        <?php
+                            if ($user_type == "SPV" || $user_type == "ADM") {
+                                echo "";
+                            }else{
+                                echo"
+                                    <div class='d-grid gap-2 d-md-flex mt-3'>
+                                        <button class='btn btn-primary me-md-2' type='button'>
+                                            <i class='fa fa-plus'></i> Create
+                                        </button>
+                                    </div>
+                                ";
+                            }
+                        ?>
+
+
                         <div class="card border border-dark-subtle shadow-sm mt-3">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -249,5 +268,5 @@ $user_type = $_SESSION['sess_user_type'];
 </div>
 
 <?php include 'includes/components.php'; ?>
-<script src="js/request-hw.js" type="text/javascript"></script>
+<script src="js/request-hw.js?v=<?= time()?>" type="text/javascript"></script>
 <?php include 'includes/footer.php'; ?>

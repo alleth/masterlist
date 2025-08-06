@@ -22,7 +22,7 @@ include("hardware-download-modals.php");
                                     <select class="form-select" name="hw_type" id="viewHwType">
                                         <option value="all_hw" selected>All hardware</option>
                                         <option value="CPU-Server" >Server</option>
-                                        <option value="UPS-Server" >UPS-Server</option>
+                                        <option value="UPS-SERVER" >UPS-Server</option>
                                         <option value="CPU-PC" >CPU-PC</option>
                                         <option value="Monitor" >Monitor</option>
                                         <option value="UPS-PC" >UPS-PC</option>
@@ -206,7 +206,6 @@ include("hardware-download-modals.php");
                 </form>
             </div>
         </div>
-        
 
         <!-- Edit Hardware Modal -->
         <div class="modal modal-lg fade" id="EditHardwareModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EditHardwareModalLabel" aria-hidden="true">
@@ -310,23 +309,24 @@ include("hardware-download-modals.php");
                                             <dd class="d-flex col-sm-12">
                                                 <input class="form-control" type="date" id="editDate" name="date" required>
                                             </dd>
-                                            <dd>
-                                                <div>Hardware Status</div>
+
                                             <?php
                                                 $user_type = $_SESSION['sess_user_type'];
                                                 if($user_type == "ADM" || $user_type == "SPV"){
                                                     echo "";
                                                 }else{
-                                                    echo "<dd class='col-sm-12'>
-                                                                <select class='form-select' name='hardware_status_option'>
-                                                                    <option value='' selected disabled>Select Status</option>
-                                                                    <option value='On Site'>On Site</option>
-                                                                    <option value='Pull Out'>Pull out</option>
-                                                                </select>
-                                                            </dd>";
+                                                    echo "<dd>
+                                                            <div>Hardware Status</div>
+                                                                <dd class='col-sm-12'>
+                                                                    <select class='form-select' id='hardware_status_option' name='hardware_status_option'>
+                                                                        <option value='' selected disabled>Select Status</option>
+                                                                        <option value='On Site'>On Site</option>
+                                                                        <option value='Pull Out'>Pull out</option>
+                                                                    </select>
+                                                                </dd>
+                                                          </dd>";
                                                 }
                                             ?>
-                                            </dd>
                                             <dd class="col-sm-12">
                                                 <div hidden>Acquired Value</div>
                                                 <input class="form-control" type="text" name="acquired_value" id="editAcquiredValue" placeholder="" value="-" hidden>
@@ -437,12 +437,12 @@ include("hardware-download-modals.php");
                                                 echo "";
                                             }else{
                                                 echo "<dd class='col-sm-12'>
-                                                <select class='form-select' name='hardware_status_option'>
-                                                    <option value='' selected disabled>Select Status</option>
-                                                    <option value='On Site'>On Site</option>
-                                                    <option value='Pull Out'>Pull out</option>
-                                                </select>
-                                            </dd>";
+                                                        <select class='form-select' name='hardware_status_option'>
+                                                            <option value='' selected disabled>Select Status</option>
+                                                            <option value='On Site'>On Site</option>
+                                                            <option value='Pull Out'>Pull out</option>
+                                                        </select>
+                                                    </dd>";
                                             }
                                             ?>
                                         </div>

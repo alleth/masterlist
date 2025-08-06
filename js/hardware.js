@@ -1281,7 +1281,8 @@ function showHardwareModel() {
                 acquired_value: $('#editAcquiredValue').val(),
                 subType: $('#editSubType').val(),
                 regionName: $('#editPrefixRegion').text().trim(),
-                siteCode: $('#editHardwareSiteModal').val()
+                siteCode: $('#editHardwareSiteModal').val(),
+                hw_status: $('#hardware_status_option').val()
             };
 
             // Define which fields are required (for validation)

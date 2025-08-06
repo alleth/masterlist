@@ -19,7 +19,7 @@ class viewHardwareDetailsDAO extends BaseDAO {
         $hw_type = $_POST["hw_type"] ?? 'all_hw';
 
         $valid_hw_types = [
-            'all_hw', 'CPU-Server', 'UPS-Server',
+            'all_hw', 'CPU-Server', 'UPS-SERVER',
             'CPU-PC', 'Monitor', 'UPS-PC',
             'Keyboard', 'Mouse', 'Webcam', 'Sigpad',
             'Laserjet', 'Inkjet', 'Dot Matrix', 'Deskjet',
@@ -121,11 +121,10 @@ class viewHardwareDetailsDAO extends BaseDAO {
                         echo "<button title='Edit 2' class='btn btn-outline-success btn-sm' onclick='hardwareUpdate2({$row['hw_id']})'>
                                     <span class='fas fa-edit'></span>
                                 </button>
-                                <button title='Delete' class='btn btn-outline-danger btn-sm' onclick='hardwareDelete({$row["hw_id"]})'>
-                                    <span class='fas fa-trash'></span>
-                                </button>
                               ";
-                              
+                        /*<button title='Delete' class='btn btn-outline-danger btn-sm' onclick='hardwareDelete({$row["hw_id"]})'>
+                                    <span class='fas fa-trash'></span>
+                                </button>*/
                     } else {
                         echo "<span class='text-muted'>N/A</span>";
                     }
