@@ -1293,8 +1293,8 @@ function showHardwareModel() {
                 data.prefixText,
                 data.asset_num,
                 data.serial_num,
-                //data.date, //-- Remove the Comments to include in validation
-                //data.acquired_value, //-- Remove the Comments to include in validation
+                //data.date, //-- Remove the Comments to include in validation .
+                //data.acquired_value, //-- Remove the Comments to include in validation .
                 data.subType,
                 data.regionName,
                 data.siteCode
