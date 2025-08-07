@@ -544,7 +544,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 hasError = true;
             }
 
-            /*/ Date(Disabled to exempted in validation)
+            /* / Date(Disabled to exempted in validation)
             if (!date) {
                 $('#date').addClass('is-invalid');
                 hasError = true;
