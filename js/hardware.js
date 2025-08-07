@@ -544,11 +544,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 hasError = true;
             }
 
-            // Date
+            /* / Date(Disabled to exempted in validation)
             if (!date) {
                 $('#date').addClass('is-invalid');
                 hasError = true;
             }
+            */
 
             if (hasError) {
                 $('#addHWMessage').html(`
