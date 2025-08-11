@@ -40,7 +40,8 @@ class HardwareEditFetchDAO extends BaseDAO {
             'site_html'      => $site_html,
             'item_html'      => $item_html,
             'brand_html'     => $brand_html,
-            'model_html'     => $model_html
+            'model_html'     => $model_html,
+            'hw_status'     => $row['hw_status']
         ];
     }
 }

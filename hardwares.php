@@ -299,7 +299,7 @@ include("hardware-download-modals.php");
                                                     <input type="number" class="form-control" name="asset_num" id="editAssetNum" required>
                                                 </div>
                                             </dd>
-                                            
+
                                             <dd class="col-sm-12">
                                                 <div>Serial No.</div>
                                                 <input type="text" class="form-control" name="serial_num" id="editSerialNum" required>
@@ -516,5 +516,5 @@ include("hardware-download-modals.php");
     <script src="js/hardware.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/hardware-downloadExcelData.js?v=<?= time() ?>" type="text/javascript"></script>
     <script src="js/datepicker.min.js?v=<?= time() ?>" type="text/javascript"></script>
-    <script src="js/inactivity.js.js?v=<?= time() ?>"></script>
+    <script src="js/inactivity.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>

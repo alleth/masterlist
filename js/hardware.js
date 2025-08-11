@@ -1263,6 +1263,7 @@ function showHardwareModel() {
                     $("#editSerialNum").val(data.hw_serial_num);
                     $("#editDate").val(data.hw_date_acq);
                     $("#editAcquiredValue").val(data.hw_acq_val);
+                    $("select[name='hardware_status_option']").val(data.hw_status);
                 }
             });
         } 

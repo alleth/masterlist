@@ -244,5 +244,5 @@
 
 <?php include 'includes/components.php'; ?>
     <script src="js/dashboardv2.js?v=<?= time() ?>"></script>
-    <script src="js/inactivity.js.js?v=<?= time() ?>"></script>
+    <script src="js/inactivity.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>
