@@ -12,12 +12,11 @@ include("includes/header.php");
                         <div class="row g-2 align-items-center">
                             <div class="col-md-2">
                                 <select class="form-select" name="ServerRegionSelect" id="ServerRegionSelect">
-                                    <option value="All Region" selected>All Region</option>
                                 </select>
                             </div>               
                             <div class="col-md-2 d-none">
                                 <select class="form-select" name="ServerSiteSelect" id="ServerSiteSelect" disabled>
-                                    <option value="All Site" selected>All Site</option>
+                                    <!-- <option value="All Site" selected>All Site</option> -->
                                 </select>
                             </div>
                             <div class="col-md-2">

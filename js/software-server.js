@@ -22,7 +22,7 @@
             e.preventDefault();
 
             const selectedRegionId = $("#ServerRegionSelect").val();
-            const selectedSiteCode = $("#ServerSiteSelect").val();
+            //const selectedSiteCode = $("#ServerSiteSelect").val();
             const tbody = $("#hardwareDisplay");
 
             if (!selectedRegionId) {
@@ -45,7 +45,7 @@
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <div class="mt-2 text-muted fst-italic">Loading CPU-PC records...</div>
+                        <div class="mt-2 text-muted fst-italic">Loading Servers records...</div>
                     </td>
                 </tr>
             `);
@@ -55,7 +55,6 @@
                 method: 'POST',
                 data: {
                     region_id: selectedRegionId,
-                    site_code: selectedSiteCode
                 },
                 success: function (response) {
                     if ($.trim(response) === "") {
