@@ -230,16 +230,10 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
         // Setup all dependent selects here
         setupDependentSelect("RegionSelect", "hardwareSiteModal", "hardwares-site-modal.php", "region_name");
         setupDependentSelect("editRegionSelect", "editHardwareSiteModal", "hardwares-site-modal.php", "region_name");
-        setupDependentSelect("CpuPCRegionSelect", "CpuPCSiteSelect", "hardwares-site-modal.php", "region_name");
+        setupDependentSelect("CpuPCRegionSelect", "CpuPCSiteSelect", "hardwares-site-modal.php", "region_name", { staticOption: '<option value="All Site">All Site</option>' });
         setupDependentSelect("ServerRegionSelect", "ServerSiteSelect", "hardwares-site-modal.php", "region_name");
         // 👇 Add static "All Site" option to downloadSiteSelect only
-        setupDependentSelect(
-            "downloadRegionSelect",
-            "downloadSiteSelect",
-            "hardwares-site-modal.php",
-            "region_name",
-            { staticOption: '<option value="All Site">All Site</option>' }
-        );
+        setupDependentSelect("downloadRegionSelect", "downloadSiteSelect", "hardwares-site-modal.php", "region_name", { staticOption: '<option value="All Site">All Site</option>' });
         
     });
 

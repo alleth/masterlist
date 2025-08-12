@@ -6,7 +6,7 @@ class CpuPcDetailsDAO extends BaseDAO {
         $this->openConn();
 
         $sql = "SELECT 
-                    hw.hw_id,  /* Added hw_id for button data attribute */
+                    hw.hw_id,
                     r.region_name, 
                     s.site_name,
                     CONCAT(hw.hw_asset_num, ' / ', hw.hw_serial_num) AS asset_serial,
@@ -19,12 +19,12 @@ class CpuPcDetailsDAO extends BaseDAO {
                 JOIN region_tbl r ON s.region_id = r.region_id
                 WHERE hw.item_desc = 'CPU-PC'";
 
-        // Always require region filter
-        if (!empty($region_id)) {
+        // Only filter by region if NOT "All Region"
+        if (!empty($region_id) && $region_id !== "All Region") {
             $sql .= " AND r.region_id = ?";
         }
 
-        // Add site filter only if site_code is not "All Site" and not empty
+        // Add site filter only if NOT "All Site"
         if (!empty($site_code) && $site_code !== "All Site") {
             $sql .= " AND hw.site_code = ?";
         }
@@ -33,9 +33,9 @@ class CpuPcDetailsDAO extends BaseDAO {
 
         $stmt = $this->dbh->prepare($sql);
 
-        // Bind parameters dynamically
+        // Bind parameters in correct order
         $bindIndex = 1;
-        if (!empty($region_id)) {
+        if (!empty($region_id) && $region_id !== "All Region") {
             $stmt->bindParam($bindIndex++, $region_id, PDO::PARAM_INT);
         }
         if (!empty($site_code) && $site_code !== "All Site") {
