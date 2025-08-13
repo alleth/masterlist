@@ -1,33 +1,60 @@
-//Description Show on Table-------------<td><button title='Delete' class='btn btn-outline-danger btn-sm' onclick=''><span class='fas fa-trash-alt'></span></button></td>
+//Show data on Table item description---------------------------------------------------------------------------------------------------
 $(document).ready(function () {
     $.ajax({
         url: 'view-item-description-tbl.php',
         type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            var rows = '';
-            data.forEach(function (item_description) {
-                rows += `<tr>
-                    <td>${item_description.item_desc}</td>
-                    <td style="text-align: right;">
-                        <button title="Delete Model" class="btn btn-outline-danger btn-sm delete-item-description-btn" data-id="${item_description.id}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>`;
-            });
-            $('#itemDescTBL tbody').html(rows);
+        dataType: 'html',
+        success: function (htmlRows) {
+            $('#itemDescTBL tbody').html(htmlRows);
         },
-        error: function () {
-            alert("Failed to fetch Brand data.");
+        error: function (xhr, status, error) {
+            console.error("Error fetching data:", status, error);
+            alert("Failed to fetch item description data.");
         }
     });
 });
 
+//delete data from table item description
+$(document).on('click', '.delete-item-description-btn', function () {
+    const id = $(this).data('id');
+
+    if (confirm("Are you sure you want to delete this item description?")) {
+        $.ajax({
+            url: 'delete-item-description.php',
+            method: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response.trim() === "success") {
+                    alert("Item deleted successfully.");
+
+                    location.reload(); // or refresh table dynamically
+                } else {
+                    alert("Failed to delete item: " + response);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("AJAX Error: " + error);
+            }
+        });
+    }
+});
+
+function loadItemDescriptionTable() {
+    $.ajax({
+        url: 'view-item-description-tbl.php',
+        method: 'GET',
+        success: function (data) {
+            $('#itemDescriptionTable tbody').html(data);
+        }
+    });
+}
+
+
+
 
 document.getElementById('setupAddDescriptionBTN').addEventListener('click', function () {var setupAddDescriptionBTN = new bootstrap.Modal(document.getElementById('setupAddDescription'));setupAddDescriptionBTN.show();});
 
-//Description Add on database-----------------------------------------------------------------------------------------------------------------------
+//Description Add on database----------------------------------------------------------------------------------------------------------------------
 function addDescriptionBTN() {
 
     var item_desc_add = $('#item_desc_add').val();
@@ -46,6 +73,8 @@ function addDescriptionBTN() {
                 $('#response').html(response);
                 $("#addItemdDescMSG").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added New Harware Description to Equpments Reference.");
                 $("input[name='item_desc_add']").val("");
+
+                location.reload(); // or refresh table dynamically
             },
             error: function() {
                 $('#response').html('<p> AN error occured while saving the data');
@@ -55,7 +84,7 @@ function addDescriptionBTN() {
     }
 }
 
-//Brand show on table-----------------------------------------------------------------------------------------------------------------------------------
+//Show Brands on table----------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
     $.ajax({
         url: 'view-item-brand-tbl.php',
@@ -70,7 +99,7 @@ $(document).ready(function () {
     });
 });
 
-// Delete data from table
+// Delete Brand from table
 $(document).on('click', '.delete-brand-btn', function () {
     const id = $(this).data('id');
 
@@ -82,7 +111,8 @@ $(document).on('click', '.delete-brand-btn', function () {
             success: function (response) {
                 if (response.trim() === "success") {
                     alert("Deleted successfully.");
-                    loadItemBrandTBL();
+
+                    location.reload(); // or refresh table dynamically
                 } else {
                     alert("Failed to delete.");
                 }
@@ -94,13 +124,12 @@ $(document).on('click', '.delete-brand-btn', function () {
     }
 });
 
-//Open add brand modal ---------------------------------------------------------------------------------------------------------------------------------
+//Add brand on table -------------------------------------------------------------------------------
 document.getElementById('setupAddBrandBTN').addEventListener('click', function () {
     var setupAddBrandBTN = new bootstrap.Modal(document.getElementById('setupAddBrand'));
     setupAddBrandBTN.show();
 });
 
-//Brand Add on database-----------------------------------------------------------------------------------------------------------------------
 function addBrandBTN() {
 
     var itemSelect2 = $('#itemSelect2').val();
@@ -122,12 +151,14 @@ function addBrandBTN() {
                 $("#addItemBrandMSG").html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Added Successfully!</strong> You added New Harware Description to Equpments Reference.");
                 $("select[name='itemSelect2']").val("");
                 $("input[name='item_brand_add']").val("");
+
+                location.reload(); // or refresh table dynamically
             },
         });
     }
 }
 
-//Model show on table-----------------------------------------------------------------------------------------------------------------------------------
+//Show Model on table--------------------------------------------------------------------------
 $(document).ready(function () {
     $.ajax({
         url: 'view-item-model-tbl.php',
@@ -142,6 +173,7 @@ $(document).ready(function () {
     });
 });
 
+//Update buton
 function editItemModel(id) {
     $.ajax({
         url: 'item-model-get-by-id.php',
@@ -161,6 +193,7 @@ function editItemModel(id) {
     });
 }
 
+//Update Model
 function updateModelBTN() {
     const id = $('#editModelID').val();
     const model = $('#editItemModel').val().trim();
@@ -200,6 +233,7 @@ function updateModelBTN() {
     });
 }
 
+//Delete Model-----------------------
 $(document).on('click', '.delete-model-btn', function () {
     const id = $(this).data('id');
 
@@ -251,6 +285,8 @@ function addModelBTN() {
                 $("select[name='itemSelect3']").val("");
                 $("select[name='itemBrand2']").val("");
                 $("input[name='item_model_add']").val("");
+
+                location.reload(); // or refresh table dynamically
             },
         });
     }
@@ -269,7 +305,7 @@ $.ajax({
     success: function(data){
         $("#itemDescription2").html(data);
     },
-    error: function(){s
+    error: function(){
         alert(data);
     }
 });
@@ -280,8 +316,8 @@ $.ajax({
     success: function(data){
         $("#itemDescription3").html(data);
     },
-    error: function(){
-        alert(data);
+    error: function(xhr, status, error){
+        console.error(error);
     }
 });
 
@@ -305,3 +341,13 @@ function hardware_brand_option2() {
     });
 
 }
+
+
+
+
+
+
+
+
+
+
