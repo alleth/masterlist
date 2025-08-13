@@ -50,7 +50,7 @@ include("hardware-download-modals.php");
                                 <div class="col-md-4 d-flex justify-content-md-end justify-content-center">
                                     <?php
                                     $user_type = $_SESSION['sess_user_type'];
-                                    if($user_type == "ADM" || $user_type == "SPV"){
+                                    if($user_type == "ADM"){
                                         echo "";
                                     }else{
                                         echo "
