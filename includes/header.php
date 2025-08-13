@@ -134,6 +134,7 @@ require_once "auth.php";
                     <?php
                         $user_type = $_SESSION['sess_user_type'];
                         if($user_type == "ADM" || $user_type == "SPV"){
+
                             echo "<a class='nav-link' href='user.php'>
                                         <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
                                         Users
@@ -142,14 +143,15 @@ require_once "auth.php";
                                     <div class='sb-nav-link-icon'><i class='fas fa-archive'></i></div>
                                     Reference
                                     </a>";
-                            echo "<a class='nav-link' href='hardware-database-csv-download.php'>
+                            if($user_type == "ADM"){
+                                echo "<a class='nav-link' href='hardware-database-csv-download.php'>
                                     <div class='sb-nav-link-icon'><i class='fas fa-database'></i></div>
                                     Database Backup
                                     </a>";
+                            }
                         }else{
                             echo "";
                         }
-
                     ?>
 
                     <a class="nav-link" href="directory.php">
