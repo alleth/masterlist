@@ -316,8 +316,8 @@ $.ajax({
     success: function(data){
         $("#itemDescription3").html(data);
     },
-    error: function(){
-        alert(data);
+    error: function(xhr, status, error){
+        console.error(error);
     }
 });
 
@@ -341,3 +341,13 @@ function hardware_brand_option2() {
     });
 
 }
+
+
+
+
+
+
+
+
+
+

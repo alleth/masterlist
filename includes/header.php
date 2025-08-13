@@ -139,8 +139,12 @@ require_once "auth.php";
                                         Users
                                     </a>";
                             echo "<a class='nav-link' href='hardware-management.php'>
-                                    <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
+                                    <div class='sb-nav-link-icon'><i class='fas fa-archive'></i></div>
                                     Reference
+                                    </a>";
+                            echo "<a class='nav-link' href='hardware-database-csv-download.php'>
+                                    <div class='sb-nav-link-icon'><i class='fas fa-database'></i></div>
+                                    Database Backup
                                     </a>";
                         }else{
                             echo "";
