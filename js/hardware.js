@@ -686,6 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     success: function(data) {
                         $("#hardwareModalInput").modal('hide');
                         $("#displayHardwareValidation").addClass('disabled').hide();
+
                         // Initialize and show Bootstrap Toast
                         var toastElement = document.getElementById('successToast');
                         var toastBody = toastElement.querySelector('.toast-body');
@@ -705,9 +706,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         $("input[name='edit_serial_num']").val("");
                         $("input[name='edit_date_acquired']").val("");
                         $("select[name='hardware_status_option']").val("");
-                        updateHardwareTable(); // Refresh table
+            
                         console.log("Hardware ID %s updated at %s", hw_id, timestamp());
                     },
+                    
                     error: function(xhr, status, error) {
                         $("#displayHardwareValidation").addClass('disabled').hide();
                         console.error("AJAX Error updating hardware:", { status, error, response: xhr.responseText });
@@ -1140,6 +1142,8 @@ function showHardwareModel() {
                 $('#' + hw_id).remove();
                 const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
                 modal.hide();
+                
+                updateHardwareTable();
                 } else {
                 alert("Delete failed: " + response);
                 }
@@ -1150,7 +1154,7 @@ function showHardwareModel() {
             }
         });
     });
-
+    
     //---for edit modal------------------------------------------
         function hardwareUpdate2(hw_id) {
             console.log("hardwareUpdate2 called:", hw_id);
@@ -1381,8 +1385,12 @@ function showHardwareModel() {
                     } else if (saveResponse.trim() === 'success') {
                         $('#EditHardwareModal').modal('hide');
                         $('#response').html(saveResponse);
-                        alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
+                        //alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
 
+
+                
+                        updateHardwareTable();
+                        
                         /*/ Optional: Reset edit form (if you want)
                         $('#editHardwareForm')[0].reset();
                         $('#editPrefixText').text("Type");
@@ -1398,15 +1406,7 @@ function showHardwareModel() {
                             </div>`);
                     }
                 },
-                /*success: function (saveResponse) {
-                    if (saveResponse.trim() === 'success') {
-                        $('#EditHardwareModal').modal('hide');
-                        $('#response').html(saveResponse);
-                        alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
-                    } else {
-                        alert('Update failed: ' + saveResponse);
-                    }
-                },*/
+                
                 error: function (xhr, status, error) {
                     console.error('AJAX error:', error);
                     alert('An error occurred while updating.');

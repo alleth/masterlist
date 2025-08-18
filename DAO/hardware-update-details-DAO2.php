@@ -21,7 +21,9 @@ class HardwareUpdateDAO2 extends BaseDAO {
             if ($normalizedAssetId !== "unreadable" && $normalizedAssetId !== "no tag") {
                 $checkAssetStmt = $this->dbh->prepare("
                     SELECT site_code FROM hw_tbl 
-                    WHERE hw_asset_num = ? AND hw_id != ? 
+                    WHERE hw_asset_num = ? 
+                    AND hw_id != ? 
+                    AND hw_status = 'On Site'
                     LIMIT 1
                 ");
                 $checkAssetStmt->bindParam(1, $assetIdCombined);
@@ -39,7 +41,9 @@ class HardwareUpdateDAO2 extends BaseDAO {
             if ($normalizedSerialNum !== "unreadable" && $normalizedSerialNum !== "none") {
                 $checkSerialStmt = $this->dbh->prepare("
                     SELECT site_code FROM hw_tbl 
-                    WHERE BINARY hw_serial_num = ? AND hw_id != ? 
+                    WHERE BINARY hw_serial_num = ? 
+                    AND hw_id != ? 
+                    AND hw_status = 'On Site'
                     LIMIT 1
                 ");
                 $checkSerialStmt->bindParam(1, $serial_num);
@@ -50,6 +54,7 @@ class HardwareUpdateDAO2 extends BaseDAO {
                     $serialSite = $row['site_code'];
                 }
             }
+
 
             // === Return detailed message if conflicts exist ===
             if ($assetExists && $serialExists) {

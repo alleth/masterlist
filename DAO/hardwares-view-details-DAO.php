@@ -118,11 +118,11 @@ class viewHardwareDetailsDAO extends BaseDAO {
                     */
                     echo "<td>";
                     if (!empty($hw_id)) {
-                        echo "<button title='Edit 2' class='btn btn-outline-success btn-sm' onclick='hardwareUpdate2({$row['hw_id']})'>
+                        echo "<button title='Edit' class='btn btn-outline-info btn-sm' onclick='hardwareUpdate2({$row['hw_id']})'>
                                     <span class='fas fa-edit'></span>
                                 </button>
-                                <button title='Delete' class='btn btn-outline-danger btn-sm' onclick='hardwareDelete({$row["hw_id"]})'>
-                                    <span class='fas fa-trash'></span>
+                                <button title='Pull Out' class='btn btn-outline-danger btn-sm' onclick='hardwareDelete({$row["hw_id"]})'>
+                                    <span class='fas fa-truck'></span>
                                 </button>
                               ";
                         /**/

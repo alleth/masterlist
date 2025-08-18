@@ -199,7 +199,7 @@ include("hardware-download-modals.php");
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary">Search</button>
+                            <!-- <button type="button" class="btn btn-secondary">Search</button> -->
                             <button type="button" class="btn btn-success" id="addNewHardwareBtn">Save</button>
                         </div>
                     </div>
@@ -348,24 +348,54 @@ include("hardware-download-modals.php");
 
         <!-- Delete Confirmation Modal --->
         <div class="modal fade custom-modal-slide" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Confirm Delete</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <p class="mb-0">Select the Reasons</p>
-                    <input type="hidden" id="delete_hw_id">
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pull Out Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                 
+                    <div class="modal-body">
+                        <div class="row">
+                        <div class="mb-3 col-md-6 offset-md-6">
+                            <input type="hidden" id="delete_hw_id">
+                            <label for="trackingNumber" class="form-label">Tracking Number:</label>
+                            <input type="text" class="form-control" id="trackingNumber" name="trackingNumber">
+                        </div>
+
+                        <div class="mb-3 col-md-6 offset-md-6">
+                            <label for="pullOutDate" class="form-label">Pull Out Date:</label>
+                            <input type="date" class="form-control" id="pullOutDate" name="pullOutDate" required>
+                        </div>
+
+                        <div class="mb-3 col-md-6 offset-md-6">
+                            <label for="pullOutReason" class="form-label">Reason for Pullout:</label>
+                            <select class="form-select" id="pullOutReason" name="pullOutReason">
+                            <option selected></option>
+                            <option>For Repair</option>
+                            <option>For Return</option>
+                            <option>For Transfer</option>
+                            <option>Not On site</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6 offset-md-6">
+                            <label for="remarks" class="form-label">Remarks:</label>
+                            <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
+                        </div>
+                        </div>
+
+                        <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Pull Out</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
+
+        <!-- Add CPU Hardware---->
         <div class="modal fade" id="hardwareModalInput" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCPUHardwareLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form>

@@ -8,27 +8,32 @@
       </div>
 
       <div class="modal-body">
-        <div class="mb-3 col-md-6">
-          <label for="downloadRegionSelect" class="form-label">Select Region</label>
-          <select class="form-select addHardwareForm" name="downloadRegionSelect" id="downloadRegionSelect">
-          </select>
-        </div>
+        <div class="row justify-content-end">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="downloadRegionSelect" class="form-label">Select Region</label>
+              <select class="form-select addHardwareForm" name="downloadRegionSelect" id="downloadRegionSelect">
+              </select>
+            </div>
 
-        <div class="mb-3 col-md-6">
-          <label for="downloadSiteSelect" class="form-label">Select Site</label>
-          <select class="form-select addHardwareForm" name="downloadSiteSelect" id="downloadSiteSelect" disabled>
-            <option value="" selected>Select Site</option>
-          </select>
+            <div class="mb-3">
+              <label for="downloadSiteSelect" class="form-label">Select Site</label>
+              <select class="form-select addHardwareForm" name="downloadSiteSelect" id="downloadSiteSelect" disabled>
+                <option value="" selected>Select Site</option>
+              </select>
+            </div>
+
+            <!-- Optional Hardware Type -->
+            <!--
+            <div class="mb-3">
+              <label for="downloadHwType" class="form-label">Select Hardware Type</label>
+              <select class="form-select" name="downloadHwType" id="downloadHwType">
+                <option value="All Hardware">All Hardware</option>
+              </select>
+            </div>
+            -->
+          </div>
         </div>
-  
-        <!--
-        <div class="mb-3 col-md-6">
-          <label for="downloadHwType" class="form-label">Select Hardware Type</label>
-          <select class="form-select" name="downloadHwType" id="downloadHwType">
-            <option value="All Hardware">All Hardware</option>
-          </select>
-        </div>
--->
       </div>
 
       <div class="modal-footer">
@@ -39,6 +44,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
