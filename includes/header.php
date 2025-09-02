@@ -96,14 +96,15 @@ require_once "auth.php";
                         Hardware
                     </a>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNetwork" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div>
-                        Network Settings
+                        <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
+                        System Tagging
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapseNetwork" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="software-server.php">Server</a>
-                            <a class="nav-link" href="software-cpu-pc.php">CPU-PC</a>
+                            <a class="nav-link" href="software-server.php"><div class="sb-nav-link-icon"><i class="fas fa-database"></i></div> Server</a>
+                            <a class="nav-link" href="software-cpu-pc.php"><div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div> CPU-PC</a>
+                            <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div> Network Switch</a>
                         </nav>
                     </div>
                     <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
