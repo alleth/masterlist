@@ -492,8 +492,6 @@ include("hardware-download-modals.php");
                 </form>
             </div>
         </div>
-
-
     </main>
 
 
@@ -531,7 +529,6 @@ include("hardware-download-modals.php");
             </div>
         </div>
     </div>
-
 
     <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
