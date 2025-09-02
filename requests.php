@@ -2,7 +2,7 @@
 include("includes/header.php");
 
 // Maintenance mode flag (set to true when under maintenance)
-$maintenance_mode = false; // Change to false to disable maintenance mode
+$maintenance_mode = true; // Change to false to disable maintenance mode
 
 if ($maintenance_mode) {
     // Include the coming-soon.php file for maintenance page
