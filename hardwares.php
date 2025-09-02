@@ -178,7 +178,8 @@ include("hardware-download-modals.php");
                                                 <div class="">Asset No.: <span id="result" class="text-primary"></span></div>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="prefixText">Type</span>
-                                                    <input type="number" class="form-control addHardwareForm" name="asset_num" id="asset_num" required>
+                                                    <!-- <input type="number" class="form-control addHardwareForm" name="asset_num" id="asset_num" required> -->
+                                                    <input type="text" class="form-control addHardwareForm" name="asset_num" id="asset_num" required oninput="this.value = this.value.replace(/[^0-9-]/g, '')">
                                                 </div>
                                             </dd>
                                             <dd class="col-sm-12">
@@ -296,7 +297,8 @@ include("hardware-download-modals.php");
                                                 <div>Asset No.: <span id="editResult" class="text-primary"></span></div>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="editPrefixText">Type</span>
-                                                    <input type="number" class="form-control" name="asset_num" id="editAssetNum" required>
+                                                    <!-- <input type="number" class="form-control" name="asset_num" id="editAssetNum" required> -->
+                                                    <input type="text" class="form-control addHardwareForm" name="asset_num" id="editAssetNum" required oninput="this.value = this.value.replace(/[^0-9-]/g, '')">
                                                 </div>
                                             </dd>
 
@@ -312,7 +314,7 @@ include("hardware-download-modals.php");
 
                                             <?php
                                                 $user_type = $_SESSION['sess_user_type'];
-                                                if($user_type == "ADM" || $user_type == "SPV"){
+                                                if($user_type == "ADM"/*|| $user_type == "SPV"*/){
                                                     echo "";
                                                 }else{
                                                     echo "<dd>
