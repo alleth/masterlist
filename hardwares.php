@@ -24,7 +24,8 @@ include("hardware-download-modals.php");
                                         <option value="CPU-Server" >Server</option>
                                         <option value="UPS-SERVER" >UPS-Server</option>
                                         <option value="CPU-PC" >CPU-PC</option>
-                                        <option value="Monitor" >Monitor</option>
+                                        <option value="Monitor-LCD" >Monitor-LCD</option>
+                                        <option value="Monitor-CRT" >Monitor-CRT</option>
                                         <option value="UPS-PC" >UPS-PC</option>
                                         <option value="Keyboard" >Keyboard</option>
                                         <option value="Mouse" >Mouse</option>
@@ -312,7 +313,7 @@ include("hardware-download-modals.php");
 
                                             <?php
                                                 $user_type = $_SESSION['sess_user_type'];
-                                                if($user_type == "ADM" || $user_type == "SPV"){
+                                                if($user_type == "ADM"){
                                                     echo "";
                                                 }else{
                                                     echo "<dd>
@@ -463,7 +464,7 @@ include("hardware-download-modals.php");
                                             </dd>
                                             <?php
                                             $user_type = $_SESSION['sess_user_type'];
-                                            if($user_type == "ADM" || $user_type == "SPV"){
+                                            if($user_type == "ADM"){
                                                 echo "";
                                             }else{
                                                 echo "<dd class='col-sm-12'>
