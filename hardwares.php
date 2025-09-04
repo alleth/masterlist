@@ -24,8 +24,8 @@ include("hardware-download-modals.php");
                                         <option value="CPU-Server" >Server</option>
                                         <option value="UPS-SERVER" >UPS-Server</option>
                                         <option value="CPU-PC" >CPU-PC</option>
-                                        <option value="Monitor-LCD" >Monitor-LCD</option>
-                                        <option value="Monitor-CRT" >Monitor-CRT</option>
+                                        <option value="Monitor-LCD">Monitor-LCD</option>
+                                        <option value="Monitor-CRT">Monitor-CRT</option>
                                         <option value="UPS-PC" >UPS-PC</option>
                                         <option value="Keyboard" >Keyboard</option>
                                         <option value="Mouse" >Mouse</option>

@@ -1459,7 +1459,7 @@ function showHardwareModel() {
                 $('#editSubType').val('');
                 $('#editResult').text('');
 
-                // Reset the the radio
+                // Reset the radio
                 $("input[name='editAssetType']").removeClass('is-invalid');
 
                 // Optional: remove dynamically injected options if you add any

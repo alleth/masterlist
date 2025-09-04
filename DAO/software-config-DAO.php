@@ -10,7 +10,7 @@ class SoftwareConfigDAO extends BaseDAO {
         while ($retryCount <= $maxRetries) {
             try {
                 $this->openConn();
-                $stmt = $this->dbh->prepare("SELECT region_id, region_name FROM region_tbl ORDER BY region_id");
+                $stmt = $this->dbh->prepare("SELECT * FROM region_tbl ORDER BY region_id");
                 $stmt->execute();
                 $regions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $this->closeConn();
@@ -47,7 +47,7 @@ class SoftwareConfigDAO extends BaseDAO {
         while ($retryCount <= $maxRetries) {
             try {
                 $this->openConn();
-                $stmt = $this->dbh->prepare("SELECT site_code, site_name FROM site_list_tbl WHERE region_id = ? ORDER BY site_code");
+                $stmt = $this->dbh->prepare("SELECT * FROM site_list_tbl WHERE region_id = ? ORDER BY site_code");
                 $stmt->execute([$regionId]);
                 $sites = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $this->closeConn();
@@ -86,9 +86,7 @@ class SoftwareConfigDAO extends BaseDAO {
                 $this->openConn();
                 $sql = "SELECT * FROM hw_tbl WHERE item_desc = 'CPU-PC' AND region_name = ? AND site_code = ? AND hw_status = 'On Site'";
                 $stmt = $this->dbh->prepare($sql);
-                $stmt->bindParam(1, $regionId);
-                $stmt->bindParam(2, $siteCode);
-                $stmt->execute();
+                $stmt->execute([$regionId, $siteCode]);
                 $hardware = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 // Convert hw_utilities string to array for frontend
@@ -124,7 +122,7 @@ class SoftwareConfigDAO extends BaseDAO {
         ];
     }
 
-    public function updateHardware($hw_asset_num, $hw_host_name, $hw_mac_add, $hw_ip_add, $os_type, $dotnet, $hw_primary_role, $hw_memory, $hdd_capacity, $hdd_free_space, $utilities) {
+    public function updateHardware($hw_asset_num, $hw_serial_num, $site_code, $region_id, $hw_host_name, $hw_mac_add, $hw_ip_add, $os_type, $dotnet, $hw_primary_role, $hw_memory, $hdd_capacity, $hdd_free_space, $utilities) {
         $retryCount = 0;
         $maxRetries = 2;
 
@@ -160,7 +158,12 @@ class SoftwareConfigDAO extends BaseDAO {
                     $stmt = $this->dbh->prepare("SELECT site_code FROM hw_tbl WHERE hw_asset_num = ?");
                     $stmt->execute([$hw_asset_num]);
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $site_code = $result['site_code'];
+                    $db_site_code = $result['site_code'];
+
+                    if ($db_site_code !== $site_code) {
+                        $this->closeConn();
+                        return ['success' => false, 'message' => 'Site code mismatch for hardware'];
+                    }
 
                     $stmt = $this->dbh->prepare("SELECT hw_asset_num FROM hw_tbl WHERE site_code = ? AND hw_primary_role = 'Approving' AND hw_asset_num != ?");
                     $stmt->execute([$site_code, $hw_asset_num]);
@@ -185,7 +188,7 @@ class SoftwareConfigDAO extends BaseDAO {
                         hdd_capacity = ?, 
                         hdd_free_space = ?, 
                         hw_utilities = ?
-                        WHERE hw_asset_num = ?";
+                        WHERE hw_asset_num = ? AND hw_serial_num = ? AND site_code = ? AND region_name = ?";
                 $stmt = $this->dbh->prepare($sql);
                 $stmt->execute([
                     $hw_host_name ?: null,
@@ -198,7 +201,10 @@ class SoftwareConfigDAO extends BaseDAO {
                     $hdd_capacity ?: null,
                     $hdd_free_space ?: null,
                     $utilities_str,
-                    $hw_asset_num
+                    $hw_asset_num,
+                    $hw_serial_num,
+                    $site_code,
+                    $region_id
                 ]);
 
                 $this->closeConn();

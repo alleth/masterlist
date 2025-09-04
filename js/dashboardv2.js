@@ -477,11 +477,11 @@ function updateHardwareAccordion(data) {
         if (tableContent || OSTableContent) {
             accordion.innerHTML += `
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="${category.id}-header">
+                    <h1 class="accordion-header" id="${category.id}-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${category.id}-collapse" aria-controls="${category.id}-collapse">
                             ${category.name} (${category.total.toLocaleString('en-US')})
                         </button>
-                    </h2>
+                    </h1>
                     <div id="${category.id}-collapse" class="accordion-collapse collapse" aria-labelledby="${category.id}-header" data-bs-parent="#hardwareAccordion">
                         <div class="accordion-body">
                             ${category.id === 'workstations' ? OSTableContent : tableContent}

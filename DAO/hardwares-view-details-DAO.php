@@ -20,7 +20,7 @@ class viewHardwareDetailsDAO extends BaseDAO {
 
         $valid_hw_types = [
             'all_hw', 'CPU-Server', 'UPS-SERVER',
-            'CPU-PC', 'Monitor', 'UPS-PC',
+            'CPU-PC', 'Monitor-LCD', 'Monitor-CRT', 'UPS-PC',
             'Keyboard', 'Mouse', 'Webcam', 'Sigpad',
             'Laserjet', 'Inkjet', 'Dot Matrix', 'Deskjet',
             'Modem', 'Router', 'Switch', 'SDWAN'

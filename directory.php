@@ -267,5 +267,5 @@
 
 <?php include 'includes/components.php'; ?>
 <script src="js/directory.js?v=<?= time() ?>" type="text/javascript"></script>
-<script src="js/inactivity.js.js?v=<?= time() ?>"></script>
+<script src="js/inactivity.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>
