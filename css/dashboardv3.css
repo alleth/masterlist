@@ -1,0 +1,200 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+:root{
+    --accent-1: #0d6efd;   /* blue */
+    --accent-2: #198754;   /* green */
+    --accent-3: #fd7e14;   /* orange */
+    --muted: #6c757d;
+    --card-bg: #ffffff;
+}
+
+body {
+    background: linear-gradient(180deg,#f4f6f9 0%, #eef2f7 100%);
+    font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+}
+
+.page-header h1 {
+    font-weight: 700;
+    letter-spacing: -0.2px;
+}
+
+.form-select {
+    border-radius: 10px;
+    padding: .55rem .75rem;
+}
+
+/* Small stat box */
+.stat-box {
+    background: var(--card-bg);
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+    transition: transform .18s ease, box-shadow .18s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+.color-box1 {
+    background-color: rgb(224, 245, 255);
+}
+
+.color-box2 {
+    background-color: rgb(230, 255, 243);
+}
+.color-box3 {
+    background-color: rgb(251, 240, 255);
+}
+.color-box4 {
+    background-color: rgb(255, 241, 234);
+}
+.color-box5 {
+    background-color: rgb(255, 253, 223);
+}
+.color-box6 {
+    background-color: rgb(255, 236, 241);
+}
+.color-box7 {
+    background-color: rgb(236, 254, 255);
+}
+.color-box8 {
+    background-color: rgb(246, 236, 255);
+}
+
+.stat-box:hover {
+    transform: translateY(-6px);
+
+}
+.stat-icon {
+    font-size: 1.2rem;
+    color: var(--accent-1);
+}
+.large-number {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--accent-1);
+    color: black;
+}
+.stat-label {
+    font-size: .875rem;
+    color: var(--muted);
+    text-align:center;
+}
+
+.card-header.custom {
+    background: linear-gradient(90deg, var(--accent-1), #00aaff);
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    padding: 10px 16px;
+    font-weight:600;
+}
+
+.section-title {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+}
+
+.stats-card .stats-item {
+    display:flex;
+    justify-content:space-between;
+    padding: .45rem .75rem;
+    border-bottom: 1px solid #f1f3f5;
+    align-items:center;
+}
+.stats-card .stats-item:last-child { border-bottom: none; }
+
+.small-box {
+    background: linear-gradient(180deg,#fff,#fbfdff);
+    padding: .75rem;
+    border-radius: 8px;
+}
+
+.laserjet-cell {
+    background-color: #ffcc00; /* replace with your color */
+}
+
+table.table thead th {
+    background: var(--accent-1);
+    color: #fff;
+    vertical-align: middle;
+    border: none;
+}
+
+.badge-compact { padding: .35rem .6rem; border-radius: 8px; font-weight:600; }
+
+/* hidden helper */
+.hidden, .d-none.custom-hide { display:none !important; }
+
+/* responsiveness tweaks */
+@media (max-width: 768px) {
+    .large-number { font-size: 1.45rem; }
+}
+
+/* Make page full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Container should stretch full height */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* full viewport height */
+  padding-top: 20px; /* adjust instead of my-5 */
+}
+
+/* Header stays fixed at top of container */
+.page-header {
+  flex-shrink: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;   /* no scrolling on body */
+}
+
+.fixed-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.scrollable-content {
+    height: calc(100vh - 100px);  /* adjust 100px to your header’s real height */
+    overflow-y: auto;             /* scroll only inside here */
+    padding: 1rem;
+}
+
+.stat-box.red-bg {
+  background-color: #ffeeee !important;
+}
+
+.stat-box.green-bg {
+  background-color: #eeffee !important;
+}
+
+.stat-box {
+  transition: background-color 0.4s ease;
+}
+
+
+
