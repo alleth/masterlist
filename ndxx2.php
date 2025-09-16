@@ -87,12 +87,12 @@ require_once "auth.php";
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">ANALYTICS</div>
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </a>
                     <div class="sb-sidenav-menu-heading">ASSET</div>
-                    <a class="nav-link" href="hardwares.php">
+                    <a class="nav-link" href="">
                         <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
                         Hardware
                     </a>
@@ -103,8 +103,8 @@ require_once "auth.php";
                     </a>
                     <div class="collapse" id="collapseNetwork" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="software-server.php"><div class="sb-nav-link-icon"><i class="fas fa-database"></i></div> Server</a>
-                            <a class="nav-link" href="software-cpu-pc.php"><div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div> CPU-PC</a>
+                            <a class="nav-link" href=""><div class="sb-nav-link-icon"><i class="fas fa-database"></i></div> Server</a>
+                            <a class="nav-link" href=""><div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div> CPU-PC</a>
                             <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div> Network Switch</a>
                         </nav>
                     </div>
@@ -115,8 +115,8 @@ require_once "auth.php";
                     </a>
                     <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="requests.php">Requests</a>
-                            <a class="nav-link" href="pullout-hw.php">Pulled Out</a>
+                            <a class="nav-link" href="">Requests</a>
+                            <a class="nav-link" href="">Pulled Out</a>
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Set-up</div>
