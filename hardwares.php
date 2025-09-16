@@ -184,9 +184,31 @@ include("hardware-download-modals.php");
                                                 </div>
                                             </dd>
                                             <dd class="col-sm-12">
-                                                <div class="">Serial No.</div>
-                                                <input type="text" class="form-control addHardwareForm" name="serial_num" id="serial_num" required>
+                                                <!-- Label and Radios -->
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <label class="form-label mb-0">Serial No.</label>
+                                                    <div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="serial_status" onclick="setSerialValue('Unreadable')" id="radioUnreadable">
+                                                            <label class="form-check-label" for="radioUnreadable">Unreadable</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="serial_status" onclick="setSerialValue('N/A')" id="radioNA">
+                                                            <label class="form-check-label" for="radioNA">N/A</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Serial No. Input and Overlay (only here) -->
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" name="serial_num" id="serial_num" required disabled>
+                                                    <button type="button" id="inputOverlay" onclick="clearRadios()" 
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; border: none; cursor: pointer;">
+                                                    </button>
+                                                </div>
                                             </dd>
+
+
                                             <dd class="">Date Deployed:</dd>
                                             <dd class="d-flex col-sm-12">
                                                 <input class="form-control addHardwareForm" type="date" id="date" name="date" required>
@@ -298,14 +320,39 @@ include("hardware-download-modals.php");
                                                 <div>Asset No.: <span id="editResult" class="text-primary"></span></div>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="editPrefixText">Type</span>
-                                                    <!-- <input type="number" class="form-control" name="asset_num" id="editAssetNum" required> -->
                                                     <input type="text" class="form-control addHardwareForm" name="asset_num" id="editAssetNum" required oninput="this.value = this.value.replace(/[^0-9-]/g, '')">
                                                 </div>
                                             </dd>
 
                                             <dd class="col-sm-12">
-                                                <div>Serial No.</div>
-                                                <input type="text" class="form-control" name="serial_num" id="editSerialNum" required>
+                                                <div class="form-group position-relative">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="form-label mb-0">Serial No.</label>
+
+                                                        <div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="edit_serial_status" onclick="setEditSerialValue('Unreadable')">
+                                                            <label class="form-check-label">Unreadable</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="edit_serial_status" onclick="setEditSerialValue('N/A')">
+                                                            <label class="form-check-label">N/A</label>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" name="serial_num" id="editSerialNum" required disabled>
+
+                                                <!-- Overlay button only shown when input is disabled -->
+                                                <button
+                                                    type="button"
+                                                    id="editInputOverlay"
+                                                    onclick="clearEditRadios()"
+                                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; border: none; cursor: pointer;"
+                                                ></button>
+                                                </div>
+                                            </div>
                                             </dd>
 
                                             <dd class="">Date Deployed:</dd>

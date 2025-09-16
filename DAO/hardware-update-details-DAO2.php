@@ -38,7 +38,7 @@ class HardwareUpdateDAO2 extends BaseDAO {
             // === Serial Number Exists (excluding "Unreadable" and "None") ===
             $serialExists = 0;
             $serialSite = "";
-            if ($normalizedSerialNum !== "unreadable" && $normalizedSerialNum !== "none") {
+            if ($normalizedSerialNum !== "unreadable" && $normalizedSerialNum !== "n/a") {
                 $checkSerialStmt = $this->dbh->prepare("
                     SELECT site_code FROM hw_tbl 
                     WHERE BINARY hw_serial_num = ? 

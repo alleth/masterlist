@@ -1660,3 +1660,37 @@ function alertMessageSuccess(messageHTML) {
         }, 500); // Match transition duration
     }, 3000);
 }
+
+ const input = document.getElementById('serial_num');
+  const overlay = document.getElementById('inputOverlay');
+
+  function setSerialValue(value) {
+    input.value = value;
+    input.disabled = true;
+    overlay.style.display = 'block'; // show overlay when input is disabled
+  }
+
+  function clearRadios() {
+    document.querySelectorAll('input[name="serial_status"]').forEach(r => r.checked = false);
+    input.disabled = false;
+    input.value = '';
+    input.focus();
+    overlay.style.display = 'none'; // hide overlay when input is enabled
+  }
+
+  const editInput = document.getElementById('editSerialNum');
+  const editOverlay = document.getElementById('editInputOverlay');
+
+  function setEditSerialValue(value) {
+    editInput.value = value;
+    editInput.disabled = true;
+    editOverlay.style.display = 'block';
+  }
+
+  function clearEditRadios() {
+    document.querySelectorAll('input[name="edit_serial_status"]').forEach(r => r.checked = false);
+    editInput.disabled = false;
+    editInput.value = '';
+    editInput.focus();
+    editOverlay.style.display = 'none';
+  }
