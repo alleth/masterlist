@@ -1,3 +1,15 @@
+<?php
+// Maintenance mode flag (set to true when under maintenance)
+$maintenance_mode = true; // Change to false to disable maintenance mode
+
+if ($maintenance_mode) {
+    // Include the coming-soon.php file for maintenance page
+    include("maintenance.html");
+    exit; // Stop further execution
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

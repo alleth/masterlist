@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Joint Circuit Globe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            overflow: hidden;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .planet-wrapper {
+            perspective: 1200px;
+        }
+
+        .planet {
+            position: relative;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #f5fffa 0%, #e0f7f4 50%, #b3eae3 100%);
+            box-shadow: inset -40px -40px 80px rgba(0,0,0,0.25), 0 0 60px rgba(0,170,136,0.4);
+            overflow: hidden;
+            animation: wobble 12s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            stroke: #00aa88;
+            stroke-width: 1;
+            fill: none;
+            opacity: 0.9;
+            animation: rotate 40s linear infinite;
+            filter: drop-shadow(0 0 3px rgba(0,170,136,0.4));
+        }
+
+        circle {
+            fill: #00aa88;
+            stroke: #fff;
+            stroke-width: 0.6;
+            filter: drop-shadow(0 0 2px rgba(0,170,136,0.7));
+        }
+
+        @keyframes rotate {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-25%); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotateX(10deg) rotateY(-5deg); }
+            50%      { transform: rotateX(-10deg) rotateY(5deg); }
+        }
+
+        .highlight {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 70%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .content {
+            position: absolute;
+            bottom: 30px;
+            text-align: center;
+            color: #00aa88;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="planet-wrapper">
+    <div class="planet">
+        <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid slice">
+            <!-- horizontal circuit lines -->
+            <path d="M100 100 H900" />
+            <path d="M100 180 H900" />
+            <path d="M100 260 H900" />
+            <path d="M100 340 H900" />
+            <path d="M100 420 H900" />
+
+            <!-- vertical circuit lines -->
+            <path d="M200 60 V440" />
+            <path d="M400 60 V440" />
+            <path d="M600 60 V440" />
+            <path d="M800 60 V440" />
+
+            <!-- diagonal connections -->
+            <path d="M200 100 L400 180" />
+            <path d="M400 180 L600 260" />
+            <path d="M600 260 L800 340" />
+            <path d="M200 180 L400 260" />
+            <path d="M400 260 L600 340" />
+            <path d="M600 340 L800 420" />
+
+            <!-- nodes at every joint -->
+            <circle cx="200" cy="100" r="4"/>
+            <circle cx="400" cy="180" r="4"/>
+            <circle cx="600" cy="260" r="4"/>
+            <circle cx="800" cy="340" r="4"/>
+            <circle cx="200" cy="180" r="4"/>
+            <circle cx="400" cy="260" r="4"/>
+            <circle cx="600" cy="340" r="4"/>
+            <circle cx="800" cy="420" r="4"/>
+
+            <!-- full grid joints -->
+            <circle cx="200" cy="100" r="3"/>
+            <circle cx="200" cy="180" r="3"/>
+            <circle cx="200" cy="260" r="3"/>
+            <circle cx="200" cy="340" r="3"/>
+            <circle cx="200" cy="420" r="3"/>
+
+            <circle cx="400" cy="100" r="3"/>
+            <circle cx="400" cy="180" r="3"/>
+            <circle cx="400" cy="260" r="3"/>
+            <circle cx="400" cy="340" r="3"/>
+            <circle cx="400" cy="420" r="3"/>
+
+            <circle cx="600" cy="100" r="3"/>
+            <circle cx="600" cy="180" r="3"/>
+            <circle cx="600" cy="260" r="3"/>
+            <circle cx="600" cy="340" r="3"/>
+            <circle cx="600" cy="420" r="3"/>
+
+            <circle cx="800" cy="100" r="3"/>
+            <circle cx="800" cy="180" r="3"/>
+            <circle cx="800" cy="260" r="3"/>
+            <circle cx="800" cy="340" r="3"/>
+            <circle cx="800" cy="420" r="3"/>
+        </svg>
+        <div class="highlight"></div>
+    </div>
+</div>
+
+<div class="content">
+    <h2>Joint Circuit Globe 🌐</h2>
+    <p>Clean grid with nodes, fully connected like a PCB sphere</p>
+</div>
+</body>
+</html>
