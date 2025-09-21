@@ -27,20 +27,31 @@ include("hardware-download-modals.php");
                                         <option value="Monitor-LCD">Monitor-LCD</option>
                                         <option value="Monitor-CRT">Monitor-CRT</option>
                                         <option value="UPS-PC" >UPS-PC</option>
-                                        <option value="Keyboard" >Keyboard</option>
-                                        <option value="Mouse" >Mouse</option>
-                                        <option value="Sigpad" >Signature Pad</option>
-                                        <option value="Webcam" >Webcam</option>
                                         <option class="text-muted" disabled>*** Printers ***</option>
                                         <option value="Laserjet">Laserjet</option>
                                         <option value="Inkjet">Inkjet</option>
                                         <option value="Dot Matrix">Dotmatrix</option>
                                         <option value="Deskjet">Deskjet</option>
                                         <option class="text-muted" disabled>*** Network Equipment ***</option>
+                                        <option value="Data Cabinet">Data Cabinet</option>
                                         <option value="Router">Router</option>
                                         <option value="SDWAN">SDWAN</option>
                                         <option value="Switch">Switch</option>
                                         <option value="Modem">Modem</option>
+                                        <option class="text-muted" disabled>*** Peripherals ***</option>
+                                        <option value="Sigpad">Signature Pad</option>
+                                        <option value="Webcam">Webcam</option>
+                                        <option value="Keyboard" >Keyboard</option>
+                                        <option value="Mouse" >Mouse</option>
+                                        <option class="text-muted" disabled >*** Other Equipment ***</option>
+                                        <option value="Scanner">Scanner</option>
+                                        <option value="LCD Display">LCD Display</option>
+                                        <option value="POS">POS</option>
+                                        <option value="Capacitive Interactive Display | LTO Kiosk">LTO KIOSK</option>
+                                        <option class="text-muted">*** Furniture & Fixture ***</option>
+                                        <option value="Table">Table</option>
+                                        <option value="Drawer">Drawer</option>
+                                        <option value="Chair">Chair</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
@@ -475,7 +486,7 @@ include("hardware-download-modals.php");
                                                 <div class="">Sub Major Type</div>
                                                 <select class="form-select" name="edit_sub_major_type" id="edit_sub_major_type">
                                                     <option value="" selected disabled>Select Sub Major Type</option>
-                                                    <option value="Server">Server</option>
+                                                    <option value="CPU-Server">Server</option>
                                                     <option value="CPUC-PC">CPUC-PC</option>
                                                     <option value="Printers">Printers</option>
                                                     <option value="Network Equipment">Network Equipment</option>

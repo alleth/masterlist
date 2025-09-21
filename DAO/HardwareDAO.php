@@ -122,15 +122,13 @@ class HardwareDAO extends BaseDAO
                 'total' => 0,
                 'servers' => ['total' => 0, 'brands' => [], 'os' => []],
                 'workstations' => ['total' => 0, 'brands' => [], 'os' => []],
+                'monitor' => ['total' => 0, 'brands' => []],
                 'printers' => ['total' => 0, 'brands' => []],
                 'peripherals' => [
                     'total' => 0,
                     'categories' => [],
                     'webcam_brands' => [],
-                    'sigpad_brands' => [],
-                    'pos_brands' => [],
-                    'lcd_brands' => [],
-                    'cashdrawer_brands' => []
+                    'sigpad_brands' => []
                 ],
                 'network_equipment' => [
                     'total' => 0,
@@ -139,6 +137,12 @@ class HardwareDAO extends BaseDAO
                 'ups' => [
                     'total' => 0,
                     'categories' => []
+                ],
+                'other_equipment' => [
+                    'total' => 0,
+                    'categories' => [],
+                    'pos' => [],
+                    'sigpad_brands' => []
                 ]
             ];
 
@@ -281,6 +285,31 @@ class HardwareDAO extends BaseDAO
                 ];
             }, $rows);
 
+            // Monitors
+            $query = "SELECT COUNT(*) as total FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE '%Monitor%'";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($whereParams);
+            $total = (int)$stmt->fetch(PDO::FETCH_COLUMN);
+            $response['monitors']['total'] = $total;
+
+            // Printer Types
+            $query = "SELECT h.item_desc as name, COUNT(*) as count 
+          FROM hw_tbl h $where AND LOWER(h.sub_major_type) LIKE '%monitor%' 
+          GROUP BY h.item_desc 
+          HAVING count > 0 
+          ORDER BY count DESC";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($whereParams);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $response['monitors']['monitor_types'] = array_map(function($row) {
+                return [
+                    'name' => $row['name'] ?: 'Unknown',
+                    'count' => (int)$row['count']
+                ];
+            }, $rows);
+
+
+
             // Network Equipment
             $query = "SELECT COUNT(*) as total 
                       FROM hw_tbl h $where 
@@ -386,8 +415,45 @@ class HardwareDAO extends BaseDAO
             }
             $response['peripherals']['categories'] = array_values($categories);
 
+
+            // Other Equipment
+            $query = "SELECT COUNT(*) as total 
+                      FROM hw_tbl h $where 
+                      AND LOWER(h.sub_major_type) LIKE '%Other Equipment%'";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($whereParams);
+            $total = (int)$stmt->fetch(PDO::FETCH_COLUMN);
+            $response['other_equipment']['total'] = $total;
+
+            // Peripheral Categories
+            $query = "SELECT h.item_desc as category, h.hw_brand_name as brand, h.hw_model as model, COUNT(*) as count 
+                      FROM hw_tbl h $where 
+                      AND LOWER(h.sub_major_type) LIKE '%Other Equipment%'
+                      GROUP BY h.item_desc, h.hw_brand_name, h.hw_model
+                      ORDER BY count DESC";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($whereParams);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $categories = [];
+            foreach ($rows as $row) {
+                $categoryName = $row['category'] ?: 'Unknown';
+                if (!isset($categories[$categoryName])) {
+                    $categories[$categoryName] = [
+                        'name' => $categoryName,
+                        'items' => []
+                    ];
+                }
+                $categories[$categoryName]['items'][] = [
+                    'brand' => $row['brand'] ?: 'Unknown',
+                    'model' => $row['model'] ?: null,
+                    'count' => (int)$row['count']
+                ];
+            }
+            $response['other_equipment']['categories'] = array_values($categories);
+
             $this->closeConn();
             return $response;
+
         } catch (PDOException $e) {
             $this->closeConn();
             return ['error' => 'Database connection failed: ' . $e->getMessage()];

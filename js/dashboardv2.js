@@ -296,6 +296,15 @@ function updateHardwareAccordion(data) {
             )
         },
         {
+            name: 'Monitors',
+            id: 'monitors',
+            total: data.monitors?.total || 0,
+            monitor_types: (data.monitors?.monitor_types || []).map(type => ({
+                name: type.name || textUnidentified,
+                count: type.count || 0
+            }))
+        },
+        {
             name: 'Printers',
             id: 'printers',
             total: data.printers?.total || 0,
@@ -340,21 +349,35 @@ function updateHardwareAccordion(data) {
                     count: item.items?.reduce((sum, i) => sum + i.count, 0) || 0
                 }))
             ]
+        },
+        {
+            name: 'Other Equipment',
+            id: 'other_equipment',
+            total: data.other_equipment?.total || 0,
+            items: [
+                ...(data.other_equipment?.categories || []).map(item => ({
+                    description: `${item.name || textUnidentified}`,
+                    count: item.items?.reduce((sum, i) => sum + i.count, 0) || 0
+                }))
+            ]
         }
+
     ];
 
     categories.forEach(category => {
         const hasBrands = category.brands?.length > 0 && category.total > 0;
         const hasOS = category.os?.length > 0;
         const hasTypes = category.printer_types?.length > 0 && category.total > 0;
+        const hasMonitorTypes = category.monitor_types?.length > 0 && category.total > 0;
         const validSubcategories = category.subcategories?.filter(sub => sub.items?.length > 0) || [];
         const hasSubcategories = validSubcategories.length > 0 && category.total > 0;
         const hasItems = category.items?.length > 0;
 
         // Display category if it has a non-zero total, brands, OS, subcategories, items, or printer types
-        if (category.total === 0 && !hasBrands && !hasOS && !hasSubcategories && !hasItems && !(category.id === 'printers' && hasTypes)) return;
+        if (category.total === 0 && !hasBrands && !hasOS && !hasSubcategories && !hasItems && !(category.id === 'printers' && hasTypes) && !(category.id === 'monitors' && hasMonitorTypes)) return;
 
         let tableContent = '';
+
         if (hasBrands && category.id !== 'printers') {
             tableContent += `
                 <table class="table table-bordered table-striped">
@@ -395,6 +418,31 @@ function updateHardwareAccordion(data) {
                         `).join('') : `
                             <tr>
                                 <td>Total Printers</td>
+                                <td class="count-column">${category.total.toLocaleString('en-US')}</td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+            `;
+        } else if (category.id === 'monitors') {
+            // Always show printers table, even if only total is available
+            tableContent += `
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Monitor Type</th>
+                            <th class="count-column">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${hasMonitorTypes ? category.monitor_types.map(item => `
+                            <tr>
+                                <td>${item.name}</td>
+                                <td class="count-column">${(item.count || 0).toLocaleString('en-US')}</td>
+                            </tr>
+                        `).join('') : `
+                            <tr>
+                                <td>Total Monitors</td>
                                 <td class="count-column">${category.total.toLocaleString('en-US')}</td>
                             </tr>
                         `}
@@ -444,6 +492,31 @@ function updateHardwareAccordion(data) {
                         `).join('') : `
                             <tr>
                                 <td>Total Peripherals</td>
+                                <td class="count-column">${category.total.toLocaleString('en-US')}</td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+            `;
+        } else if (category.id === 'other_equipment') {
+            // Always show peripherals table, even if only total is available
+            tableContent += `
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item Description</th>
+                            <th class="count-column">Total Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${hasItems ? category.items.map(item => `
+                            <tr>
+                                <td>${item.description}</td>
+                                <td class="count-column">${item.count.toLocaleString('en-US')}</td>
+                            </tr>
+                        `).join('') : `
+                            <tr>
+                                <td>Total</td>
                                 <td class="count-column">${category.total.toLocaleString('en-US')}</td>
                             </tr>
                         `}

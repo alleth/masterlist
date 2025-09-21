@@ -23,7 +23,9 @@ class viewHardwareDetailsDAO extends BaseDAO {
             'CPU-PC', 'Monitor-LCD', 'Monitor-CRT', 'UPS-PC',
             'Keyboard', 'Mouse', 'Webcam', 'Sigpad',
             'Laserjet', 'Inkjet', 'Dot Matrix', 'Deskjet',
-            'Modem', 'Router', 'Switch', 'SDWAN'
+            'Modem', 'Router', 'Switch', 'SDWAN', 'Scanner',
+            'LCD Display', 'Table', 'Chair', 'Capacitive Interactive Display | LTO Kiosk',
+            'Drawer', 'POS', 'Data Cabinet'
         ];
 
         if (!in_array($hw_type, $valid_hw_types)) {
