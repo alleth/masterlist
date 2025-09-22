@@ -16,14 +16,15 @@ class DashboardDAO extends BaseDAO {
     public function getDashboardCounts($region = '', $site = '') {
         $sql = "
             SELECT 
-                SUM(CASE WHEN item_desc = 'CPU-Server' THEN 1 ELSE 0 END) AS server_count,
-                SUM(CASE WHEN item_desc = 'CPU-Server' THEN 1 ELSE 0 END) AS server2_count,
+                SUM(CASE WHEN sub_major_type = 'Server' THEN 1 ELSE 0 END) AS server_count,
+                SUM(CASE WHEN sub_major_type = 'Server' THEN 1 ELSE 0 END) AS server2_count,
 
-                SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%HP%' THEN 1 ELSE 0 END) AS server_hp_count,
+                SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%hp%' THEN 1 ELSE 0 END) AS server_hp_count,
                 SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%IBM%' THEN 1 ELSE 0 END) AS server_ibm_count,
                 SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%Xitrix%' THEN 1 ELSE 0 END) AS server_xitrix_count,
                 SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%DELL%' THEN 1 ELSE 0 END) AS server_dell_count,
                 SUM(CASE WHEN item_desc = 'CPU-Server' AND hw_brand_name LIKE '%Lenovo%' THEN 1 ELSE 0 END) AS server_lenovo_count,
+                SUM(CASE WHEN item_desc = 'VM-Server' THEN 1 ELSE 0 END) AS vm_server_count,
 
                 SUM(CASE WHEN item_desc = 'CPU-PC' THEN 1 ELSE 0 END) AS cpu_pc_count,
                 SUM(CASE WHEN os_type LIKE '%XP%' THEN 1 ELSE 0 END) AS xp_count,
@@ -37,9 +38,9 @@ class DashboardDAO extends BaseDAO {
 
                 SUM(CASE WHEN item_desc LIKE 'webcam' THEN 1 ELSE 0 END) AS webcam_count,
                 SUM(CASE WHEN item_desc LIKE 'sigpad' THEN 1 ELSE 0 END) AS sigpad_count,
-                SUM(CASE WHEN item_desc LIKE '%POS%' THEN 1 ELSE 0 END) AS pos_count,
-                SUM(CASE WHEN item_desc LIKE 'LCD Display' THEN 1 ELSE 0 END) AS LCD_Display_count,
-                SUM(CASE WHEN item_desc LIKE 'Cash Drawer' THEN 1 ELSE 0 END) AS cash_drawer_count,
+                SUM(CASE WHEN item_desc LIKE '%pos%' THEN 1 ELSE 0 END) AS pos_count,
+                SUM(CASE WHEN item_desc LIKE '%lcd display%' THEN 1 ELSE 0 END) AS LCD_Display_count,
+                SUM(CASE WHEN item_desc LIKE '%cash drawer%' THEN 1 ELSE 0 END) AS cash_drawer_count,
 
                 SUM(CASE WHEN rsu_fac = '1' OR hw_utilities LIKE '%RSU Facility%' THEN 1 ELSE 0 END) AS rsu_count,
                 SUM(CASE WHEN mv_dto = '1' OR hw_utilities LIKE '%MV DTO%' THEN 1 ELSE 0 END) AS mvdto_count,

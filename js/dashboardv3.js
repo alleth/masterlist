@@ -49,6 +49,7 @@ function loadDashboardCounts() {
             $('#serverXitrixCount').text(data.server_xitrix_count ?? 0);
             $('#serverDellCount').text(data.server_dell_count ?? 0);
             $('#serverLenovoCount').text(data.server_lenovo_count ?? 0);
+            $('#VMServerCount').text(data.vm_server_count ?? 0);
 
             $('#cpuPcCount').text(data.cpu_pc_count ?? 0);
             $('#xpCount').text(data.xp_count ?? 0);
@@ -61,9 +62,9 @@ function loadDashboardCounts() {
             $('#mouseCount').text(data.mouse_count ?? 0);
             $('#webcamCount').text(data.webcam_count ?? 0);
             $('#sigpadCount').text(data.sigpad_count ?? 0);
-            $('#pos').text(data.pos_count ?? 0);
+            $('#posCount').text(data.pos_count ?? 0);
             $('#LCDDisplayCount').text(data.LCD_Display_count ?? 0);
-            $('#CashDrawerCount').text(data.cash_drawer_count ?? 0);
+            $('#cashDrawerCount').text(data.cash_drawer_count ?? 0);
             $('#totalCount').text(data.total_count ?? 0);
 
             $('#rsuCount').text(data.rsu_count ?? 0);

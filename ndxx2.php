@@ -171,7 +171,7 @@ require_once "auth.php";
     <!-- Header -->
     <div class="row align-items-center page-header">
         <div class="col-md-4">
-            <h1 class="mb-0"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h1>
+            <h1 class="mb-0"><!--<i class="bi bi-speedometer2 me-2"></i>-->Dashboard</h1>
             <div class="text-muted small">Directory & Hardware overview</div>
         </div>
 
@@ -295,6 +295,7 @@ require_once "auth.php";
                         <div class="stat-label">Dual Server Site</div>
                     </div>
                 </div>
+                <!--
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box5 text-center">
                         <div class="stat-icon"></div>
@@ -304,13 +305,23 @@ require_once "auth.php";
                         <div class="stat-label">Government</div>
                     </div>
                 </div>
+                -->
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box6 text-center">
                         <div class="stat-icon"></div>
                         <div class="large-number" data-target="0">
                             <p class="card-text" id="proponentCount">0</p>
                         </div>
-                        <div class="stat-label">Proponent</div>
+                        <div class="stat-label">Proponent Sites</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <div class="stat-box color-box5 text-center">
+                        <div class="stat-icon"></div>
+                        <div class="large-number" data-target="3">
+                            <p class="card-text" id="totalCount">0</p>
+                        </div>
+                        <div class="stat-label">Total Hardware</div>
                     </div>
                 </div>
             </div>
@@ -393,28 +404,13 @@ require_once "auth.php";
                             <i class="bi bi-server me-1"></i> Servers
                         </div>
                         <div class="stats-item">
-                            <div class="stats-label"><strong>Total</strong></div>
-                            <div> <strong><p class="card-text" id="serverCount2">0</p></strong></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">HP</div>
-                            <div><p class="card-text" id="serverHpCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">IBM</div>
-                            <div><p class="card-text" id="serverIbmCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Xitrix</div>
-                            <div><p class="card-text" id="serverXitrixCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">DELL</div>
-                            <div><p class="card-text" id="serverDellCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Lenovo</div>
-                            <div><p class="card-text" id="serverLenovoCount">0</p></div>
+                            <div class="stats-label"><strong>Total</strong></div><div> <strong><p class="card-text" id="serverCount2">0</p></strong></div></div>
+                            <div class="stats-item"><div class="stats-label">HP</div><div><p class="card-text" id="serverHpCount">0</p></div></div>
+                            <div class="stats-item"><div class="stats-label">IBM</div><div><p class="card-text" id="serverIbmCount">0</p></div></div>
+                            <div class="stats-item"><div class="stats-label">Xitrix</div><div><p class="card-text" id="serverXitrixCount">0</p></div></div>
+                            <div class="stats-item"> <div class="stats-label">DELL</div><div><p class="card-text" id="serverDellCount">0</p></div></div>
+                            <div class="stats-item"><div class="stats-label">Lenovo</div><div><p class="card-text" id="serverLenovoCount">0</p></div></div>
+                            <div class="stats-item"><div class="stats-label">VM-Server</div><div><p class="card-text" id="VMServerCount">0</p></div>
                         </div>
                     </div>
 
@@ -422,44 +418,20 @@ require_once "auth.php";
                         <div class="card-header color-box2 py-2 px-3">
                             <i class="bi bi-box-seam me-1"></i> Others
                         </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Monitor</div>
-                            <div><p class="card-text" id="monitorCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Keyboard</div>
-                            <div><p class="card-text" id="keyboardCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Mouse</div>
-                            <div><p class="card-text" id="mouseCount">0</p></div>
-                        </div>
+                        <div class="stats-item"><div class="stats-label">Monitor</div><div><p class="card-text" id="monitorCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Keyboard</div><div><p class="card-text" id="keyboardCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Mouse</div><div><p class="card-text" id="mouseCount">0</p></div></div>
                     </div>
 
                     <div class="card stats-card">
                         <div class="card-header color-box3 py-2 px-3">
                             <i class="bi bi-usb-plug me-1"></i> Peripherals
                         </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Webcam</div>
-                            <div><p class="card-text" id="webcamCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Sigpad</div>
-                            <div><p class="card-text" id="sigpadCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">POS</div>
-                            <div><p class="card-text" id="posCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">LCD Display</div>
-                            <div><p class="card-text" id="LCDDisplayCount">0</p></div>
-                        </div>
-                        <div class="stats-item">
-                            <div class="stats-label">Cash Drawer</div>
-                            <div><p class="card-text" id="cashDrawerCount">0</p></div>
-                        </div>
+                        <div class="stats-item"><div class="stats-label">Webcam</div><div><p class="card-text" id="webcamCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Sigpad</div><div><p class="card-text" id="sigpadCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">POS</div><div><p class="card-text" id="posCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">LCD Display</div><div><p class="card-text" id="LCDDisplayCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Cash Drawer</div><div><p class="card-text" id="cashDrawerCount">0</p></div></div>
                     </div>
                 </div>
 
@@ -573,9 +545,9 @@ require_once "auth.php";
                                     </tbody>
                                 </table>
                                 <div class="card-footer text-center border-0 bg-transparent pt-3">
-                                    <span class="badge bg-primary me-1 badge-compact">Fixed Sharing: 99</span>
-                                    <span class="badge bg-warning text-dark me-1 badge-compact">Separate Meter: 89</span>
-                                    <span class="badge bg-success badge-compact">No Cost: 217</span>
+                                    <span class="badge bg-primary me-1 badge-compact">Fixed Sharing:</span>
+                                    <span class="badge bg-warning text-dark me-1 badge-compact">Separate Meter:</span>
+                                    <span class="badge bg-success badge-compact">No Cost:</span>
                                 </div>
                             </div>
 
