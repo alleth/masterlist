@@ -20,6 +20,7 @@ class SiteCountDAO extends BaseDAO {
                 CAST(SUM(CASE WHEN physical_site_count > 0 THEN 1.0 / physical_site_count ELSE 0 END) AS UNSIGNED) AS actualSite_total,
                 CAST(SUM(CASE WHEN physical_site_count = 2 THEN 1.0 / 2 ELSE 0 END) AS UNSIGNED) AS dualServer_total,
                 SUM(CASE WHEN site_partnership IS NOT NULL AND site_partnership NOT LIKE '%proponent%' THEN 1 ELSE 0 END) AS government_total, 
+                
                 SUM(CASE WHEN site_partnership LIKE '%proponent%' THEN 1 ELSE 0 END) AS proponent_count,
 
                 SUM(CASE WHEN office_type LIKE '%Regional Office%' THEN 1 ELSE 0 END) AS ro_count,

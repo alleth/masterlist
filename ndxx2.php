@@ -326,7 +326,8 @@ require_once "auth.php";
                 </div>
             </div>
 
-            <!-- nested two columns for Office Type & Transactions -->
+            <!--nested two columns for Office Type & Transactions -->
+            <!--nested two columns for Office Type & Transactions -->
             <div class="row g-3 mt-4">
                 <!-- Office Type -->
                 <div class="col-md-6">
