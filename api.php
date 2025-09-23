@@ -6,16 +6,17 @@ ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 
-// Disable error logging
-ini_set('log_errors', 0);
+// Enable error logging
+ini_set('log_errors', 1);
+ini_set('error_log', 'php_errors.log');
 
 ob_start();
 header('Content-Type: application/json');
 
 try {
-    // Define file paths using absolute paths
-    $hardwareDAOPath = 'DAO\HardwareDAO.php';
-    $baseDAOPath = 'DAO\BaseDAO.php';
+    // Define file paths using forward slashes
+    $hardwareDAOPath = 'DAO/HardwareDAO.php';
+    $baseDAOPath = 'DAO/BaseDAO.php';
 
     // Check file existence
     $missingFiles = [];
@@ -27,6 +28,7 @@ try {
     }
 
     if (!empty($missingFiles)) {
+        error_log('Missing files: ' . implode(', ', $missingFiles));
         echo json_encode(['error' => 'Server configuration error: Missing files - ' . implode(', ', $missingFiles)]);
         exit;
     }
@@ -35,6 +37,7 @@ try {
     require_once $baseDAOPath;
 
     $action = $_GET['action'] ?? '';
+    error_log("API request: action=$action, params=" . json_encode($_GET));
 
     $dao = new HardwareDAO();
 
@@ -46,13 +49,16 @@ try {
         if (isset($_GET['site_code']) && $_GET['site_code'] !== '' && $_GET['site_code'] !== '0') {
             $params['site_code'] = $_GET['site_code'];
         }
+        error_log("getHardwareCounts params: " . json_encode($params));
         $result = $dao->getHardwareCounts($params);
         echo json_encode($result);
     } elseif ($action === 'getRegions') {
+        error_log("Executing getRegions");
         $result = $dao->getRegions();
         echo json_encode($result);
     } elseif ($action === 'getSites') {
         $region_id = $_GET['region_id'] ?? '';
+        error_log("Executing getSites for region_id=$region_id");
         $result = $dao->getSites($region_id);
         echo json_encode($result);
     } elseif ($action === 'getSiteCounts') {
@@ -63,13 +69,17 @@ try {
         if (isset($_GET['site_code']) && $_GET['site_code'] !== '' && $_GET['site_code'] !== '0') {
             $params['site_code'] = $_GET['site_code'];
         }
+        error_log("getSiteCounts params: " . json_encode($params));
         $result = $dao->getSiteCounts($params);
         echo json_encode($result);
     } else {
+        error_log("Invalid action: $action");
         echo json_encode(['error' => 'Invalid action']);
     }
 } catch (Exception $e) {
+    error_log("API error: " . $e->getMessage());
     echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
 }
 
 ob_end_flush();
+?>

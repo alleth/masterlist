@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 // Dynamically adjust main-content margin based on filter width
 function adjustMainContentMargin() {
     const filter = document.querySelector('.filter-fixed');
@@ -161,10 +162,6 @@ function fetchHardwareData(params) {
     });
 }
 
-function updateHardwareData() {
-    console.error('Error fetching hardwareData');
-}
-
 function fetchSiteCounts(params) {
     console.log('Fetching site counts with params:', params);
     $.ajax({
@@ -253,8 +250,8 @@ function updateHardwareAccordion(data) {
         return;
     }
 
-    // Debug: Log printers data to verify content
-    console.log('Printers data:', JSON.stringify(data.printers, null, 2));
+    // Debug: Log servers data to verify content
+    console.log('Servers data:', JSON.stringify(data.servers, null, 2));
 
     accordion.innerHTML = '';
     if (!data.total && !data.servers?.total && !data.workstations?.total && !data.printers?.total && !data.peripherals?.total && !data.network_equipment?.total && !data.ups?.total) {
@@ -267,6 +264,10 @@ function updateHardwareAccordion(data) {
             name: 'Servers',
             id: 'servers',
             total: data.servers?.total || 0,
+            server_type: (data.servers?.server_type || []).map(item => ({
+                name: item.name || textUnidentified,
+                count: item.count
+            })),
             brands: (data.servers?.brands || []).flatMap(item =>
                 (item.models || []).map(model => ({
                     brand: item.brand || textUnidentified,
@@ -361,11 +362,11 @@ function updateHardwareAccordion(data) {
                 }))
             ]
         }
-
     ];
 
     categories.forEach(category => {
         const hasBrands = category.brands?.length > 0 && category.total > 0;
+        const hasServerType = category.server_type?.length > 0 || category.id === 'servers';
         const hasOS = category.os?.length > 0;
         const hasTypes = category.printer_types?.length > 0 && category.total > 0;
         const hasMonitorTypes = category.monitor_types?.length > 0 && category.total > 0;
@@ -373,11 +374,41 @@ function updateHardwareAccordion(data) {
         const hasSubcategories = validSubcategories.length > 0 && category.total > 0;
         const hasItems = category.items?.length > 0;
 
-        // Display category if it has a non-zero total, brands, OS, subcategories, items, or printer types
+        // Display category if it has a non-zero total, brands, OS, subcategories, items, or printer/monitor types
         if (category.total === 0 && !hasBrands && !hasOS && !hasSubcategories && !hasItems && !(category.id === 'printers' && hasTypes) && !(category.id === 'monitors' && hasMonitorTypes)) return;
 
         let tableContent = '';
+        let serverTypeTableContent = '';
+        let osTableContent = '';
 
+        // Server Type Table (always show for servers)
+        if (category.id === 'servers') {
+            serverTypeTableContent = `
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Server Type</th>
+                            <th class="count-column">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${category.server_type.length > 0 ? category.server_type.map(item => `
+                            <tr>
+                                <td>${item.name}</td>
+                                <td class="count-column">${item.count.toLocaleString('en-US')}</td>
+                            </tr>
+                        `).join('') : `
+                            <tr>
+                                <td>Total Servers</td>
+                                <td class="count-column">${category.total.toLocaleString('en-US')}</td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Brands Table
         if (hasBrands && category.id !== 'printers') {
             tableContent += `
                 <table class="table table-bordered table-striped">
@@ -400,7 +431,6 @@ function updateHardwareAccordion(data) {
                 </table>
             `;
         } else if (category.id === 'printers') {
-            // Always show printers table, even if only total is available
             tableContent += `
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -425,7 +455,6 @@ function updateHardwareAccordion(data) {
                 </table>
             `;
         } else if (category.id === 'monitors') {
-            // Always show printers table, even if only total is available
             tableContent += `
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -473,9 +502,9 @@ function updateHardwareAccordion(data) {
                     </table>
                 `;
             });
-        } else if (category.id === 'peripherals') {
-            // Always show peripherals table, even if only total is available
+        } else if (category.id === 'peripherals' || category.id === 'other_equipment') {
             tableContent += `
+                <h5>${category.id === 'peripherals' ? 'Peripheral Items' : 'Other Equipment'}</h5>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -491,32 +520,7 @@ function updateHardwareAccordion(data) {
                             </tr>
                         `).join('') : `
                             <tr>
-                                <td>Total Peripherals</td>
-                                <td class="count-column">${category.total.toLocaleString('en-US')}</td>
-                            </tr>
-                        `}
-                    </tbody>
-                </table>
-            `;
-        } else if (category.id === 'other_equipment') {
-            // Always show peripherals table, even if only total is available
-            tableContent += `
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Item Description</th>
-                            <th class="count-column">Total Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${hasItems ? category.items.map(item => `
-                            <tr>
-                                <td>${item.description}</td>
-                                <td class="count-column">${item.count.toLocaleString('en-US')}</td>
-                            </tr>
-                        `).join('') : `
-                            <tr>
-                                <td>Total</td>
+                                <td>Total ${category.id === 'peripherals' ? 'Peripherals' : 'Other Equipment'}</td>
                                 <td class="count-column">${category.total.toLocaleString('en-US')}</td>
                             </tr>
                         `}
@@ -525,10 +529,11 @@ function updateHardwareAccordion(data) {
             `;
         }
 
-        let OSTableContent = '';
+        // OS Table
         if (hasOS) {
-            OSTableContent = `
-                <table class="table table-bordered">
+            osTableContent = `
+                <h5>Operating Systems</h5>
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Operating System Version</th>
@@ -547,7 +552,7 @@ function updateHardwareAccordion(data) {
             `;
         }
 
-        if (tableContent || OSTableContent) {
+        if (tableContent || serverTypeTableContent || osTableContent) {
             accordion.innerHTML += `
                 <div class="accordion-item">
                     <h1 class="accordion-header" id="${category.id}-header">
@@ -557,8 +562,10 @@ function updateHardwareAccordion(data) {
                     </h1>
                     <div id="${category.id}-collapse" class="accordion-collapse collapse" aria-labelledby="${category.id}-header" data-bs-parent="#hardwareAccordion">
                         <div class="accordion-body">
-                            ${category.id === 'workstations' ? OSTableContent : tableContent}
-                            ${category.id === 'workstations' ? tableContent : OSTableContent}
+                            ${category.id === 'servers' ? serverTypeTableContent : ''}
+                            ${tableContent}
+                            ${category.id === 'servers' ? osTableContent : ''}
+                            ${category.id === 'workstations' ? osTableContent : ''}
                         </div>
                     </div>
                 </div>
