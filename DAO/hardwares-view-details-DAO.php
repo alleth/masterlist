@@ -24,7 +24,7 @@ class viewHardwareDetailsDAO extends BaseDAO {
             'Keyboard', 'Mouse', 'Webcam', 'Sigpad',
             'Laserjet', 'Inkjet', 'Dot Matrix', 'Deskjet',
             'Modem', 'Router', 'Switch', 'SDWAN', 'Scanner',
-            'LCD Display', 'Table', 'Chair', 'Capacitive Interactive Display | LTO Kiosk',
+            'LCD Display', 'Table', 'Chair', 'LTO Kiosk',
             'Drawer', 'POS', 'Data Cabinet'
         ];
 

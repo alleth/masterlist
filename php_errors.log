@@ -122,3 +122,21 @@
 [23-Sep-2025 19:24:59 Europe/Berlin] getHardwareCounts params: []
 [23-Sep-2025 19:24:59 Europe/Berlin] getSiteCounts: total_sites=441, proponent=270, government=203
 [23-Sep-2025 19:25:00 Europe/Berlin] getHardwareCounts: total=2842, servers=477, workstations=2871
+[24-Sep-2025 06:55:45 Europe/Berlin] API request: action=getSiteCounts, params={"action":"getSiteCounts"}
+[24-Sep-2025 06:55:45 Europe/Berlin] getSiteCounts params: []
+[24-Sep-2025 06:55:45 Europe/Berlin] API request: action=getRegions, params={"action":"getRegions"}
+[24-Sep-2025 06:55:45 Europe/Berlin] Executing getRegions
+[24-Sep-2025 06:55:45 Europe/Berlin] getRegions: Found 18 regions
+[24-Sep-2025 06:55:45 Europe/Berlin] API request: action=getHardwareCounts, params={"action":"getHardwareCounts"}
+[24-Sep-2025 06:55:45 Europe/Berlin] getHardwareCounts params: []
+[24-Sep-2025 06:55:45 Europe/Berlin] getSiteCounts: total_sites=441, proponent=270, government=203
+[24-Sep-2025 06:55:45 Europe/Berlin] getHardwareCounts: total=2842, servers=477, workstations=2871
+[24-Sep-2025 06:56:09 Europe/Berlin] API request: action=getSiteCounts, params={"action":"getSiteCounts"}
+[24-Sep-2025 06:56:09 Europe/Berlin] API request: action=getRegions, params={"action":"getRegions"}
+[24-Sep-2025 06:56:09 Europe/Berlin] getSiteCounts params: []
+[24-Sep-2025 06:56:09 Europe/Berlin] Executing getRegions
+[24-Sep-2025 06:56:09 Europe/Berlin] getRegions: Found 18 regions
+[24-Sep-2025 06:56:09 Europe/Berlin] API request: action=getHardwareCounts, params={"action":"getHardwareCounts"}
+[24-Sep-2025 06:56:09 Europe/Berlin] getHardwareCounts params: []
+[24-Sep-2025 06:56:09 Europe/Berlin] getSiteCounts: total_sites=441, proponent=270, government=203
+[24-Sep-2025 06:56:09 Europe/Berlin] getHardwareCounts: total=2842, servers=477, workstations=2871
