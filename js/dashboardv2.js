@@ -532,7 +532,6 @@ function updateHardwareAccordion(data) {
         // OS Table
         if (hasOS) {
             osTableContent = `
-                <h5>Operating Systems</h5>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
