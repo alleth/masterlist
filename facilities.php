@@ -37,13 +37,11 @@ include("includes/header.php");
                                 <tr>
                                     <th>Site Name</th>
                                     <th>Node Count</th>
-                                    <th>Node Working</th>
-                                    <th>Node Defective</th>
                                     <th>Node Available</th>
                                     <th>Outlet Count</th>
-                                    <th>Outlet Working</th>
-                                    <th>Outlet Defective</th>
                                     <th>Outlet Available</th>
+                                    <th>Port Count</th>
+                                    <th>Port Available</th>
                                     <th>Connection Type</th>
                                     <th>Action</th>
                                 </tr>
@@ -60,70 +58,108 @@ include("includes/header.php");
             </div>
         </div>
 
-        <!-- Edit Site Modal -->
-        <div class="modal fade" id="EditHardwareModal" tabindex="-1" aria-labelledby="EditHardwareModalLabel" aria-hidden="true">
+        <!-- Edit Modal -->
+        <div class="modal fade" id="EditFacilitiesModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                <form id="editHardwareForm" class="needs-validation" novalidate>
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="EditHardwareModalLabel">Edit Site Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" name="site_id" id="editSiteId">
-
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="editRegionId" class="form-label">Region ID</label>
-                                    <input type="text" class="form-control" id="editRegionId" name="region_id" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="editPhysicalSiteCount" class="form-label">Physical Site Count</label>
-                                    <input type="number" class="form-control" id="editPhysicalSiteCount" name="physical_site_count" required>
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="editNodeCount" class="form-label">Node Count</label>
-                                    <input type="number" class="form-control" id="editNodeCount" name="node_count" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="editNodeWorking" class="form-label">Node Working</label>
-                                    <input type="number" class="form-control" id="editNodeWorking" name="node_working" required>
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="editNodeDefective" class="form-label">Node Defective</label>
-                                    <input type="number" class="form-control" id="editNodeDefective" name="node_defective" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="editNodeAvailable" class="form-label">Node Available</label>
-                                    <input type="number" class="form-control" id="editNodeAvailable" name="node_available" required>
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="editOutletCount" class="form-label">Outlet Count</label>
-                                    <input type="number" class="form-control" id="editOutletCount" name="outlet_count" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="editOutletWorking" class="form-label">Outlet Working</label>
-                                    <input type="number" class="form-control" id="editOutletWorking" name="outlet_working" required>
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="editOutletDefective" class="form-label">Outlet Defective</label>
-                                    <input type="number" class="form-control" id="editOutletDefective" name="outlet_defective" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="editOutletAvailable" class="form-label">Outlet Available</label>
-                                    <input type="number" class="form-control" id="editOutletAvailable" name="outlet_available" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning">Update</button>
-                        </div>
+                <div class="modal-content">
+                
+                    <div class="modal-header"> 
+                        <h5 class="modal-title">Edit Site Facilities</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                </form>
+
+                    <div class="modal-body">
+                        <form id="editFacilitiesForm">
+                            <input type="hidden" id="editSiteId" name="site_id">
+
+                            <div class="row g-3">
+                                <!-- Node -->
+                                <div class="col-md-3">
+                                    <label for="editNodeCount" class="form-label">Node Count</label>
+                                    <input type="text" class="form-control" id="editNodeCount" name="node_count">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editNodeWorking" class="form-label">Node Working</label>
+                                    <input type="text" class="form-control" id="editNodeWorking" name="node_working">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editNodeDefective" class="form-label">Node Defective</label>
+                                    <input type="text" class="form-control" id="editNodeDefective" name="node_defective">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editNodeAvailable" class="form-label">Node Available</label>
+                                    <input type="text" class="form-control" id="editNodeAvailable" name="node_available">
+                                </div>
+
+                                <!-- Outlet -->
+                                <div class="col-md-3">
+                                    <label for="editOutletCount" class="form-label">Outlet Count</label>
+                                    <input type="text" class="form-control" id="editOutletCount" name="outlet_count">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editOutletWorking" class="form-label">Outlet Working</label>
+                                    <input type="text" class="form-control" id="editOutletWorking" name="outlet_working">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editOutletDefective" class="form-label">Outlet Defective</label>
+                                    <input type="text" class="form-control" id="editOutletDefective" name="outlet_defective">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editOutletAvailable" class="form-label">Outlet Available</label>
+                                    <input type="text" class="form-control" id="editOutletAvailable" name="outlet_available">
+                                </div>
+
+                                 <!-- Port -->
+                                <div class="col-md-3">
+                                    <label for="editPortCount" class="form-label">Port Count</label>
+                                    <input type="text" class="form-control" id="editPortCount" name="port_count">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editPortWorking" class="form-label">Port Working</label>
+                                    <input type="text" class="form-control" id="editPortWorking" name="port_working">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editPortDefective" class="form-label">Port Defective</label>
+                                    <input type="text" class="form-control" id="editPortDefective" name="port_defective">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="editPortAvailable" class="form-label">Port Available</label>
+                                    <input type="text" class="form-control" id="editPortAvailable" name="port_available">
+                                </div>
+
+                                <!-- Electrical -->
+                                    <div class="col-md-6">
+                                        <label for="editTypeElectricalCon" class="form-label">Electrical Connection Type</label>
+                                        <select class="form-select" id="editTypeElectricalCon" name="type_electrical_con">
+                                            <option value="">-- Select Connection Type --</option>
+                                            <option value="Separate Meter">Separate Meter</option>
+                                            <option value="Sub-meter">Sub-meter</option>
+                                            <option value="Fixed Sharing">Fixed Sharing</option>
+                                            <option value="No Cost">No Cost</option>
+                                        </select>
+                                    </div>
+                               
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="saveFacilitiesBtn" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Update Success Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content bg-success text-white text-center">
+                <div class="modal-body">
+                    <i class="fas fa-check-circle fa-2x mb-2"></i><br>
+                    Facilities Updated...
+                </div>
+                </div>
             </div>
         </div>
 
@@ -138,14 +174,7 @@ include("includes/header.php");
         </div>
     </div>
 </main>
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Bootstrap JS (optional, if you use modals/toasts) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Your custom JS -->
-<script src="js/site_list.js?v=<?= time() ?>"></script>
-
-
+<?php include 'includes/components.php'; ?>
+<script src="js/facilities.js?v=<?= time() ?>"></script>
+<script src="js/inactivity.js?v=<?= time() ?>"></script>
 <?php include 'includes/footer.php'; ?>

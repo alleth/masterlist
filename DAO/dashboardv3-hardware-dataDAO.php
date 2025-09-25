@@ -39,6 +39,7 @@ class DashboardDAO extends BaseDAO {
                 SUM(CASE WHEN item_desc LIKE 'webcam' THEN 1 ELSE 0 END) AS webcam_count,
                 SUM(CASE WHEN item_desc LIKE 'sigpad' THEN 1 ELSE 0 END) AS sigpad_count,
                 SUM(CASE WHEN item_desc LIKE '%pos%' THEN 1 ELSE 0 END) AS pos_count,
+                SUM(CASE WHEN item_desc LIKE 'scanner%' THEN 1 ELSE 0 END) AS scanner_count,
                 SUM(CASE WHEN item_desc LIKE '%lcd display%' THEN 1 ELSE 0 END) AS LCD_Display_count,
                 SUM(CASE WHEN item_desc LIKE '%cash drawer%' THEN 1 ELSE 0 END) AS cash_drawer_count,
 
@@ -52,11 +53,17 @@ class DashboardDAO extends BaseDAO {
                 SUM(CASE WHEN item_desc LIKE '%switch%' THEN 1 ELSE 0 END) AS switch_count,
                 SUM(CASE WHEN item_desc LIKE '%sdwan%' THEN 1 ELSE 0 END) AS sdwan_count,
                 SUM(CASE WHEN item_desc LIKE '%router%' THEN 1 ELSE 0 END) AS router_count,
+                SUM(CASE WHEN item_desc LIKE 'modem' THEN 1 ELSE 0 END) AS modem_count,
+                SUM(CASE WHEN item_desc LIKE '%data%' THEN 1 ELSE 0 END) AS dataCabCount_count,
 
                 SUM(CASE WHEN item_desc LIKE '%LaserJet%' THEN 1 ELSE 0 END) AS laserjet_count,
                 SUM(CASE WHEN item_desc LIKE '%dot%' THEN 1 ELSE 0 END) AS dotmatrix_count,
                 SUM(CASE WHEN item_desc LIKE '%inkjet%' THEN 1 ELSE 0 END) AS inkjet_count,
                 SUM(CASE WHEN item_desc LIKE '%deskjet%' THEN 1 ELSE 0 END) AS deskjet_count,
+
+                SUM(CASE WHEN item_desc LIKE '%table%' THEN 1 ELSE 0 END) AS table_count,
+                SUM(CASE WHEN item_desc LIKE '%chair%' THEN 1 ELSE 0 END) AS chair_count,
+                SUM(CASE WHEN (item_desc LIKE '%drawer%' OR item_desc LIKE '%pedestal%') AND item_desc NOT LIKE '%cash drawer%' THEN 1 ELSE 0 END) AS drawer_count,
 
                 SUM(CASE WHEN item_desc LIKE 'laserjet' AND hw_model LIKE '%4100%' THEN 1 ELSE 0 END) AS l4100_count,
                 SUM(CASE WHEN item_desc LIKE 'laserjet' AND hw_model LIKE '%507%' THEN 1 ELSE 0 END) AS l507_count,

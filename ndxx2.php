@@ -1,181 +1,22 @@
 <?php
-require_once "auth.php";
+include 'includes/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Masterfile | Hardware Inventory System</title>
-    <!--<link href="css/spinner/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="css/alert-style.css" rel="stylesheet" />
-    <link href="icons/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="css/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="icons/cube.png" type="image/x-icon">
-    <link href="css/datepicker-min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/dashboardv3.css">
-    <script src="js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
-    <!-- Navbar Brand -->
-    <a class="navbar-brand ps-3" href="index.php">Masterfile</a>
-
-    <!-- Sidebar Toggle -->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Navbar Content -->
-    <ul class="navbar-nav ms-auto align-items-center">
-        <!-- Greeting for Wide Screens -->
-        <li class="nav-item d-none d-lg-block me-1">
-            <span class="navbar-text text-muted small">
-                Hello,
-                <strong>
-                    <?php
-                    if (isset($_SESSION['sess_fname'])) {
-                        echo htmlspecialchars($_SESSION['sess_fname']); // Escape output for safety
-                    } else {
-                        echo "Guest"; // Fallback message
-                    }
-                    ?>
-                </strong>!
-            </span>
-        </li>
-
-        <!-- User Dropdown -->
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user-circle fa-lg"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <!-- Greeting for Small Screens -->
-                <li class="dropdown-item d-lg-none">
-                    Hello,
-                    <strong>
-                        <?php
-                        if (isset($_SESSION['sess_fname'])) {
-                            echo htmlspecialchars($_SESSION['sess_fname']); // Escape output for safety
-                        } else {
-                            echo "Guest"; // Fallback message
-                        }
-                        ?>
-                    </strong>!
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <!-- Dropdown Links -->
-                <li><a class="dropdown-item" href="settings.php"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a class="dropdown-item" href="activity-log.php"><i class="fa fa-history"></i> Activity Log</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion custom-shadow sb-sidenav-light" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">ANALYTICS</div>
-                    <a class="nav-link" href="">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
-                    </a>
-                    <div class="sb-sidenav-menu-heading">ASSET</div>
-                    <a class="nav-link" href="">
-                        <div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div>
-                        Hardware
-                    </a>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNetwork" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
-                        System Tagging
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseNetwork" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href=""><div class="sb-nav-link-icon"><i class="fas fa-database"></i></div> Server</a>
-                            <a class="nav-link" href=""><div class="sb-nav-link-icon"><i class="fas fa-desktop"></i></div> CPU-PC</a>
-                            <a class="nav-link" href="#"><div class="sb-nav-link-icon"><i class="fas fa-network-wired"></i></div> Network Switch</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
-                        Hardware Status
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="">Requests</a>
-                            <a class="nav-link" href="">Pulled Out</a>
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">Set-up</div>
-
-                    <?php
-                        $user_type = $_SESSION['sess_user_type'];
-                        if($user_type == "ADM" || $user_type == "SPV"){
-
-                            echo "<a class='nav-link' href='user.php'>
-                                        <div class='sb-nav-link-icon'><i class='fa fa-users'></i></div>
-                                        Users
-                                    </a>";
-                            echo "<a class='nav-link' href='hardware-management.php'>
-                                    <div class='sb-nav-link-icon'><i class='fas fa-archive'></i></div>
-                                    Reference
-                                    </a>";
-                            if($user_type == "ADM"){
-                                echo "<a class='nav-link' href='hardware-database-csv-download.php'>
-                                    <div class='sb-nav-link-icon'><i class='fas fa-database'></i></div>
-                                    Database Backup
-                                    </a>";
-                            }
-                        }else{
-                            echo "";
-                        }
-                    ?>
-
-                    <a class="nav-link" href="directory.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-store-alt"></i></div>
-                        Directory
-                    </a>
-                </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                <?php
-                    $user_type = $_SESSION['sess_user_type'];
-                    if ($user_type == "ADM"){
-                        echo "Administrator";
-                    }else if($user_type == "SPV"){
-                        echo "Supervisor";
-                    }else{
-                        echo "FSE";
-                    }
-                ?>
-            </div>
-        </nav>
-    </div>
-    <div id="layoutSidenav_content">
-<main>
-<div class="container-fluid mt-0">
+<main class="flex-grow-1">
+<div class="container-fluid">
     <!-- Header -->
-    <div class="row align-items-center page-header">
+    <div class="row align-items-center page-header sticky-header">
         <div class="col-md-4">
-            <h1 class="mb-0"><!--<i class="bi bi-speedometer2 me-2"></i>-->Dashboard</h1>
+            <h3>Dashboard</h3>
             <div class="text-muted small">Directory & Hardware overview</div>
         </div>
 
-        <div class="col-md-8 text-md-end mt-3 mt-md-0">
+        <div class="col-md-8 text-md-end">
             <div class="row g-2 justify-content-end">
                 <div class="col-md-5">
                     <select id="dbregionSelect" class="form-select">
@@ -190,8 +31,6 @@ require_once "auth.php";
             </div>
         </div>
     </div>
-
-    <div class="scrollable-content">
 
     <!-- Transactions Catered (shown per-site) -->
     <div id="allSiteCard2" class="card mb-4 d-none">
@@ -212,7 +51,7 @@ require_once "auth.php";
                         <div class="large-number" data-target="20">
                             <p class="card-text" id="mvnewtxCount" hidden>0</p>
                         </div>
-                        <div class="stat-label">New Registrationn</div>
+                        <div class="stat-label">New Registration</div>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
@@ -261,7 +100,6 @@ require_once "auth.php";
             <div class="row g-3">
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box1 text-center">
-                        <div class="stat-icon"><!--<i class="bi bi-hdd-network"></i>--></div>
                         <div class="large-number" data-target="18">
                             <p class="card-text" id="actualSiteCount">0</p>
                         </div>
@@ -270,7 +108,6 @@ require_once "auth.php";
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box2 text-center">
-                        <div class="stat-icon"></div>
                         <div class="large-number" data-target="20">
                             <p class="card-text" id="siteCount">0</p>
                         </div>
@@ -279,7 +116,6 @@ require_once "auth.php";
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box3 text-center">
-                        <div class="stat-icon"></div>
                         <div class="large-number" data-target="20">
                             <p class="card-text" id="serverCount">0</p>
                         </div>
@@ -288,7 +124,6 @@ require_once "auth.php";
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box4 text-center">
-                        <div class="stat-icon"></div>
                         <div class="large-number" data-target="2">
                             <p class="card-text" id="dualServerCount">0</p>
                         </div>
@@ -308,7 +143,7 @@ require_once "auth.php";
                 -->
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box6 text-center">
-                        <div class="stat-icon"></div>
+
                         <div class="large-number" data-target="0">
                             <p class="card-text" id="proponentCount">0</p>
                         </div>
@@ -317,7 +152,6 @@ require_once "auth.php";
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box5 text-center">
-                        <div class="stat-icon"></div>
                         <div class="large-number" data-target="3">
                             <p class="card-text" id="totalCount">0</p>
                         </div>
@@ -325,9 +159,7 @@ require_once "auth.php";
                     </div>
                 </div>
             </div>
-
-            <!--nested two columns for Office Type & Transactions -->
-            <!--nested two columns for Office Type & Transactions -->
+            <!--Office Type & Transactions -->
             <div class="row g-3 mt-4">
                 <!-- Office Type -->
                 <div class="col-md-6">
@@ -338,24 +170,6 @@ require_once "auth.php";
                         <div class="card-body p-0">
                             <canvas id="officeBarChart" style="height: 400px;"></canvas>
                         </div>
-                        <!--
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped text-center mb-0">
-                                    <tbody>
-                                        <tr><td>Regional Office</td><td><p class="card-text" id="roCount">0</p></td></tr>
-                                        <tr><td>District Office</td><td><p class="card-text" id="doCount">0</p></td></tr>
-                                        <tr><td>Licensing Center</td><td><p class="card-text" id="lcCount">0</p></td></tr>
-                                        <tr><td>Extension Office</td><td><p class="card-text" id="eoCount">0</p></td></tr>
-                                        <tr><td>New Registration Unit</td><td><p class="card-text" id="nruCount">0</p></td></tr>
-                                        <tr><td>MAIDRS</td><td><p class="card-text" id="maidrsCount">0</p></td></tr>
-                                        <tr><td>EPATROL</td><td><p class="card-text" id="epatCount">0</p></td></tr>
-                                        <tr><td>DLRO</td><td><p class="card-text" id="dlroCount">0</p></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        -->
                     </div>
                 </div>
 
@@ -368,30 +182,12 @@ require_once "auth.php";
                         <div class="card-body p-0">
                             <canvas id="transactionBarChart" style="height: 400px;"></canvas>
                         </div>
-                        <!--
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped text-center mb-0">
-                                    <tbody>
-                                        <tr><td>MV Transactions</td><td><p class="card-text" id="mvCount">0</p></td></tr>
-                                        <tr><td>MV New</td><td><p class="card-text" id="mvnewCount">0</p></td></tr>
-                                        <tr><td>DL Transaction</td><td><p class="card-text" id="dlCount">0</p></td></tr>
-                                        <tr><td>DL New</td><td><p class="card-text" id="dlnewCount">0</p></td></tr>
-                                        <tr><td>LETAS</td><td><p class="card-text" id="letasCount">0</p></td></tr>
-                                        <tr><td>MAIDRS</td><td><p class="card-text" id="maidrstxCount">0</p></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
 
         </div> <!-- end card-body Directory -->
     </div> <!-- end Directory card -->
-
-    <!-- end Directory card -->
 
     <!-- Hardware Section (keeps order of your original layout) -->
     <div class="card shadow-sm mb-4">
@@ -417,7 +213,7 @@ require_once "auth.php";
 
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box2 py-2 px-3">
-                            <i class="bi bi-box-seam me-1"></i> Others
+                            <i class="bi bi-box-seam me-1"></i>Peripherals
                         </div>
                         <div class="stats-item"><div class="stats-label">Monitor</div><div><p class="card-text" id="monitorCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Keyboard</div><div><p class="card-text" id="keyboardCount">0</p></div></div>
@@ -426,10 +222,11 @@ require_once "auth.php";
 
                     <div class="card stats-card">
                         <div class="card-header color-box3 py-2 px-3">
-                            <i class="bi bi-usb-plug me-1"></i> Peripherals
+                            <i class="bi bi-usb-plug me-1"></i>Other Peripherals
                         </div>
                         <div class="stats-item"><div class="stats-label">Webcam</div><div><p class="card-text" id="webcamCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Sigpad</div><div><p class="card-text" id="sigpadCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Scanner</div><div><p class="card-text" id="scannerCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">POS</div><div><p class="card-text" id="posCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">LCD Display</div><div><p class="card-text" id="LCDDisplayCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Cash Drawer</div><div><p class="card-text" id="cashDrawerCount">0</p></div></div>
@@ -467,6 +264,8 @@ require_once "auth.php";
                         <div class="stats-item"><div class="stats-label">Switch</div><div><p class="card-text" id="switchCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">SDWAN</div><div><p class="card-text" id="sdwanCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Router</div><div><p class="card-text" id="routerCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Modem</div><div><p class="card-text" id="modemCount">0</p></div></div>
+                        <div class="stats-item"><div class="stats-label">Data Cabinet</div><div><p class="card-text" id="dataCabCount">0</p></div></div>
                     </div>
                 </div>
 
@@ -481,10 +280,10 @@ require_once "auth.php";
                                 <table class="table table-bordered text-center mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <td colspan="2">Laserjet <br><p class="card-text" id="laserjetCount">0</p></td>
-                                            <td>Dotmatrix <br><p class="card-text" id="dotmatrixCount">0</p></td>
-                                            <td>Inkjet <br><p class="card-text" id="inkjetCount">0</p></td>
-                                            <td>Deskjet <br><p class="card-text" id="deskjetCount">0</p></td>
+                                            <td colspan="2">LaserJet <br><p class="card-text" id="laserjetCount">0</p></td>
+                                            <td>Dot Matrix <br><p class="card-text" id="dotmatrixCount">0</p></td>
+                                            <td>InkJet <br><p class="card-text" id="inkjetCount">0</p></td>
+                                            <td>DeskJet <br><p class="card-text" id="deskjetCount">0</p></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -519,63 +318,101 @@ require_once "auth.php";
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
 
+                    <div class="card mb-3">
+                            <div class="card-header color-box8">
+                                <i class="bi bi-building-check me-1"></i> Facilities
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="small-box m-0 p-0">
+                                    <table class="table table-bordered text-center mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <td></td>
+                                                <td>Node</td>
+                                                <td>Electrical</td>
+                                                <td>Switch Port</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><th scope="row">Total</th><td><p class="card-text" id="nodeCount">0</p></td><td><p class="card-text" id="outlet">0</p></td><td><p class="card-text" id="portCount">0</p></td></tr>
+                                            <tr><th scope="row">Working</th><td><p class="card-text" id="ndWorking">0</p></td><td><p class="card-text" id="outletWorking">0</p></td><td><p class="card-text" id="portWorking">0</p></td></tr>
+                                            <tr><th scope="row">Available</th><td><p class="card-text" id="ndAvailable">0</p></td><td><p class="card-text" id="outletAvailable">0</p></td><td><p class="card-text" id="portAvailable">0</p></td></tr>
+                                            <tr><th scope="row">Defective</th><td><p class="card-text" id="ndDefective">0</p></td><td><p class="card-text" id="outletDefective">0</p></td><td><p class="card-text" id="portDefective">0</p></td></tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="card-footer text-center border-0 bg-transparent p-0 m-0">
+                                        <table class="table table-bordered text-center mb-0 mt-3">
+                                            <tbody>
+                                            <tr>
+                                                <td class="p-1" style="background-color: #daecffff;">
+                                                    <span class="d-flex justify-content-center align-items-center gap-2" style="font-size: 1rem;">
+                                                        Fixed Sharing:
+                                                        <span id="fxdSharing" class="card-text">0</span>
+                                                    </span>
+                                                </td>
+                                                <td class="p-1" style="background-color: #fcf0f2ff;">
+                                                    <span class="d-flex justify-content-center align-items-center gap-2" style="font-size: 1rem;">
+                                                        Separate Meter:
+                                                        <span id="seprateMeter" class="card-text">0</span>
+                                                    </span>
+                                                </td>
+                                                <td class="p-1" style="background-color: #eaffe7ff;">
+                                                    <span class="d-flex justify-content-center align-items-center gap-2" style="font-size: 1rem;">
+                                                        No Cost:
+                                                        <span id="noCost" class="card-text">0</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
                     <div class="card">
-                        <div class="card-header color-box8">
-                            <i class="bi bi-building-check me-1"></i> Facilities
+                        <div class="card-header color-box1">
+                            <i class="bi bi-building-check me-1"></i> Furnitures
                         </div>
                         <div class="card-body p-0">
                             <div class="small-box m-0 p-0">
                                 <table class="table table-bordered text-center mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <td></tD>
-                                            <td>Node</td>
-                                            <td>Electrical</td>
-                                            <td>Switch Port</td>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Free Standing Table</span>
+                                            <span><p class="card-text" id="tableCount">0</p></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Office Chair</span>
+                                            <span><p class="card-text" id="chairCount">0</p></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Mobile Pedestal Drawer</span>
+                                            <span><p class="card-text" id="drawerCount">0</p></span>
+                                            </div>
+                                        </td>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr><th scope="row">Total</th><td>0</td><td>0</td><td>0</td></tr>
-                                        <tr><th scope="row">Working</th><td>0</td><td>0</td><td>0</td></tr>
-                                        <tr><th scope="row">Available</th><td>0</td><td>0</td><td>0</td></tr>
-                                        <tr><th scope="row">Defective</th><td>0</td><td>0</td><td>0</td></tr>
-                                    </tbody>
                                 </table>
-                                <div class="card-footer text-center border-0 bg-transparent pt-3">
-                                    <span class="badge bg-primary me-1 badge-compact">Fixed Sharing:</span>
-                                    <span class="badge bg-warning text-dark me-1 badge-compact">Separate Meter:</span>
-                                    <span class="badge bg-success badge-compact">No Cost:</span>
-                                </div>
                             </div>
-
                         </div>
                     </div>
 
                 </div> <!-- end right col -->
             </div> <!-- end hardware row -->
         </div> <!-- end hardware body -->
-    
-<footer class="py-4 bg-light mt-auto">
-    <div class="container-fluid px-4">
-        <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Masterfile | Hardware Inventory System &copy; 2024 &dash; <?php echo date("Y");?> </div>
-        </div>
     </div>
-</footer>
 </div>
-</div>
-
-<script src="js/jquery.main.js" type="text/javascript"></script>
-<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="js/datatables-simple-demo.js"></script>
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
-<script src="js/dashboardv3.js"></script>
-<script src="js/cdn.jsdelivr.js" type="text/javascript"></script>
-<script src="js/chart.min.js"></script>
-</body>
-</html>
+<?php include 'includes/components.php'; ?>
+    <script src="js/dashboardv3.js?v=<?= time() ?>"></script>
+    <script src="js/inactivity.js?v=<?= time() ?>"></script>
+<?php include 'includes/footer.php'; ?>

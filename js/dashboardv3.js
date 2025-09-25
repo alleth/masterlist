@@ -62,6 +62,7 @@ function loadDashboardCounts() {
             $('#mouseCount').text(data.mouse_count ?? 0);
             $('#webcamCount').text(data.webcam_count ?? 0);
             $('#sigpadCount').text(data.sigpad_count ?? 0);
+            $('#scannerCount').text(data.scanner_count ?? 0);
             $('#posCount').text(data.pos_count ?? 0);
             $('#LCDDisplayCount').text(data.LCD_Display_count ?? 0);
             $('#cashDrawerCount').text(data.cash_drawer_count ?? 0);
@@ -77,11 +78,17 @@ function loadDashboardCounts() {
             $('#switchCount').text(data.switch_count ?? 0);
             $('#sdwanCount').text(data.sdwan_count ?? 0);
             $('#routerCount').text(data.router_count ?? 0);
+            $('#modemCount').text(data.modem_count ?? 0);
+            $('#dataCabCount').text(data.dataCabCount_count ?? 0);
 
             $('#laserjetCount').text(data.laserjet_count ?? 0);
             $('#dotmatrixCount').text(data.dotmatrix_count ?? 0);
             $('#inkjetCount').text(data.inkjet_count ?? 0);
             $('#deskjetCount').text(data.deskjet_count ?? 0);
+
+            $('#tableCount').text(data.table_count ?? 0);
+            $('#chairCount').text(data.chair_count ?? 0);
+            $('#drawerCount').text(data.drawer_count ?? 0);
 
             $('#4100Count').text(data.l4100_count ?? 0);
             $('#507Count').text(data.l507_count ?? 0);
@@ -144,13 +151,32 @@ function loadSiteCounts() {
             $('#letastxCount').text(data.letas_count ?? 0);
             $('#maidrstxtxCount').text(data.maidrstxtx_count ?? 0);
 
+            $('#nodeCount').text(data.nd_count ?? 0);
+            $('#ndWorking').text(data.ndWorking_count ?? 0);
+            $('#ndAvailable').text(data.ndAvailable_count ?? 0);
+            $('#ndDefective').text(data.ndDefective_count ?? 0);
+
+            $('#outlet').text(data.outlet_count ?? 0);
+            $('#outletWorking').text(data.outletWorking_count ?? 0);
+            $('#outletAvailable').text(data.outletAvailable_count ?? 0);
+            $('#outletDefective').text(data.outletDefective_count ?? 0);
+
+            $('#portCount').text(data.port_count ?? 0);
+            $('#portWorking').text(data.portWorking_count ?? 0);
+            $('#portAvailable').text(data.portAvailable_count ?? 0);
+            $('#portDefective').text(data.portDefective_count ?? 0);
+
+            $('#fxdSharing').text(data.fxdSharing_count ?? 0);
+            $('#seprateMeter').text(data.seprateMeter_count ?? 0);
+            $('#noCost').text(data.noCost_count ?? 0);
+
             $('#siteCount').text(data.site_total ?? 0);
 
             updateStatBoxColors();
 
             // now render the office type horizontal bar chart
             renderOfficeBarChart(data);
-            renderTransactionBarChart(data); // ✅ call it here
+            renderTransactionBarChart(data); // call it here
         },
         error: function(xhr, status, err) {
             console.error('AJAX error', status, err, xhr.responseText);
@@ -162,37 +188,27 @@ function loadSiteCounts() {
 $(function() {
     loadFilters();
     loadDashboardCounts();
-    loadSiteCounts(); // ✅ also load site counts on page load
+    loadSiteCounts(); // also load site counts on page load
 
     $('#dbregionSelect').off('change').on('change', function() {
         let regionId = $(this).val();
         loadSites(regionId);
         loadDashboardCounts();
-        loadSiteCounts(); // ✅ reload site counts when region changes
+        loadSiteCounts(); // reload site counts when region changes
     });
 
     $('#dbsiteSelect').off('change').on('change', function() {
         loadDashboardCounts();
-        loadSiteCounts(); // ✅ reload site counts when site changes
+        loadSiteCounts(); // reload site counts when site changes
     });
 
     // Auto-refresh every 5s
     setInterval(function() {
         loadDashboardCounts();
-        loadSiteCounts(); // ✅ refresh site counts too
+        loadSiteCounts(); // refresh site counts too
     }, 5000);
 });
 
-// Debug alerts (you can remove later)
-$('#dbregionSelect').on('change', function() {
-    let regionId = $(this).val();
-    alert("Selected Region ID: " + (regionId || "All Regions"));
-});
-
-$('#dbsiteSelect').on('change', function() {
-    let siteCode = $(this).val();
-    alert("Selected Site Code: " + (siteCode || "All Sites"));
-});
 
 function toggleCards() {
     const selectedValue = $('#dbsiteSelect').val();
@@ -400,6 +416,9 @@ $(document).ready(function () {
             }]
         });
     }
+
+
+
 
 
 
