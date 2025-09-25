@@ -47,7 +47,7 @@ include("hardware-download-modals.php");
                                         <option value="Scanner">Scanner</option>
                                         <option value="LCD Display">LCD Display</option>
                                         <option value="POS">POS</option>
-                                        <option value="Capacitive Interactive Display | LTO Kiosk">LTO KIOSK</option>
+                                        <option value="LTO Kiosk">LTO KIOSK</option>
                                         <option class="text-muted">*** Furniture & Fixture ***</option>
                                         <option value="Table">Table</option>
                                         <option value="Drawer">Drawer</option>
