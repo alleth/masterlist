@@ -63,8 +63,8 @@ class addSiteDetailsDAO extends BaseDAO {
 
             // Insert new site
             $stmt = $this->dbh->prepare("
-                INSERT INTO site_list_tbl (site_code, site_name, region_id, office_type, site_address, site_partnership, trxn_catered)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO site_list_tbl (site_code, site_name, region_id, office_type, site_address, site_partnership, trxn_catered, physical_site_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->bindParam(1, $site_code);
             $stmt->bindParam(2, $site_name);
@@ -73,6 +73,10 @@ class addSiteDetailsDAO extends BaseDAO {
             $stmt->bindParam(5, $site_address);
             $stmt->bindParam(6, $site_partnership);
             $stmt->bindParam(7, $trxn_catered);
+
+            $physical_site_count = 1;
+            $stmt->bindParam(8, $physical_site_count);
+
             $stmt->execute();
 
             $this->closeConn();

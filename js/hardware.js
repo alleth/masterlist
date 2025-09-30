@@ -1387,10 +1387,9 @@ function showHardwareModel() {
                         $('#response').html(saveResponse);
                         //alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
 
-
-                
-                        updateHardwareTable();
                         
+                        updateHardwareTable();
+                  
                         /*/ Optional: Reset edit form (if you want)
                         $('#editHardwareForm')[0].reset();
                         $('#editPrefixText').text("Type");

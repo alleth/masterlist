@@ -276,7 +276,8 @@ $(document).ready(function () {
             'Licensing Center',
             'Extension Office',
             'New Registration Unit',
-            'MAIDRS',
+            'LRS',
+            //'MAIDRS',
             'EPATROL',
             'DLRO'
         ].map(label => {
@@ -305,7 +306,8 @@ $(document).ready(function () {
             data.lc_count ?? 0,
             data.eo_count ?? 0,
             data.nru_count ?? 0,
-            data.maidrs_count ?? 0,
+            data.lrs_count ?? 0,
+            //data.maidrs_count ?? 0,
             data.epat_count ?? 0,
             data.dlro_count ?? 0
         ];

@@ -35,15 +35,15 @@ include("includes/header.php");
                             <table id="hardwarePerSite" class="table table-striped table-bordered">
                                 <thead class="table-dark">
                                 <tr>
-                                    <th>Site Name</th>
-                                    <th>Node Count</th>
-                                    <th>Node Available</th>
-                                    <th>Outlet Count</th>
-                                    <th>Outlet Available</th>
-                                    <th>Port Count</th>
-                                    <th>Port Available</th>
-                                    <th>Connection Type</th>
-                                    <th>Action</th>
+                                    <td>Site Name</td>
+                                    <td>Node Count</td>
+                                    <td>Node Available</td>
+                                    <td>Outlet Count</td>
+                                    <td>Outlet Available</td>
+                                    <td>Port Count</td>
+                                    <td>Port Available</td>
+                                    <td>Connection Type</td>
+                                    <td>Action</td>
                                 </tr>
                                 </thead>
                                 <tbody id="facilitiesDisplay">
