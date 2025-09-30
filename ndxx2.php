@@ -107,6 +107,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <!--
+
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box2 text-center">
                         <div class="large-number" data-target="20">
@@ -133,6 +134,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <!--
+
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box5 text-center">
                         <div class="stat-icon"></div>
@@ -178,6 +180,7 @@ include 'includes/header.php';
                 </div>
 
                 <!--
+                
                 Transactions Catered
                 <div class="col-md-6">
                     <div class="card mb-3">
@@ -205,7 +208,7 @@ include 'includes/header.php';
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box1 py-2 px-3 d-flex justify-content-between align-items-center">
                             <div><i class="bi bi-server me-1"></i> Servers</div>
-                            <strong><p class="card-text mb-0" id="serverCount2">0</p></strong> <!-- Header count only -->
+                            <strong><p class="card-text mb-0" id="serverCount2"> 0</p></strong> <!-- Header count only -->
                         </div>
                         <div class="stats-item"><div class="stats-label">HP</div><div><p class="card-text" id="serverHpCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">IBM</div><div><p class="card-text" id="serverIbmCount">0</p></div></div>
@@ -242,7 +245,7 @@ include 'includes/header.php';
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box4 py-2 px-3 d-flex justify-content-between align-items-center">
                             <div><i class="bi bi-server me-1"></i>Workstations</div>
-                            <strong><p class="card-text mb-0" id="cpuPcCount">0</p></strong> <!-- Header count only -->
+                            <strong><p class="card-text mb-0" id="cpuPcCount"> 0</p></strong> <!-- Header count only -->
                         </div>
                         <div class="stats-item"><div class="stats-label">Windows XP</div><div><p class="card-text" id="xpCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Windows 10 32Bit</div><div><p class="card-text" id="w1032bitCount">0</p></div></div>

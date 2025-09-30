@@ -308,6 +308,7 @@ $(document).ready(function () {
             data.nru_count ?? 0,
             data.lrs_count ?? 0,
             //data.maidrs_count ?? 0,
+            
             data.epat_count ?? 0,
             data.dlro_count ?? 0
         ];
