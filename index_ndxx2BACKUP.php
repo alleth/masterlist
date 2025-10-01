@@ -20,11 +20,12 @@ include 'includes/header.php';
             <div class="row g-2 justify-content-end">
                 <div class="col-md-5">
                     <select id="dbregionSelect" class="form-select">
+                        <option value="">All Regions</option>
                     </select>
                 </div>
-                
                 <div class="col-md-5">
                     <select id="dbsiteSelect" class="form-select">
+                        <option value="">All Sites</option>
                     </select>
                 </div>
             </div>
@@ -32,7 +33,7 @@ include 'includes/header.php';
     </div>
 
     <!-- Transactions Catered (shown per-site) -->
-    <div id="allSiteCard2" class="card mb-4 d-none" hidden>
+    <div id="allSiteCard2" class="card mb-4 d-none">
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-md-2 col-sm-4 col-6">
@@ -105,15 +106,8 @@ include 'includes/header.php';
                         <div class="stat-label">Total Sites</div>
                     </div>
                 </div>
-                 <div class="col-md-2 col-sm-4 col-6">
-                    <div class="stat-box color-box2 text-center">
-                        <div class="large-number" data-target="2">
-                            <p class="card-text" id="dualServerCount">0</p>
-                        </div>
-                        <div class="stat-label">Dual Server Site</div>
-                    </div>
-                </div>
                 <!--
+
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="stat-box color-box2 text-center">
                         <div class="large-number" data-target="20">
@@ -129,6 +123,14 @@ include 'includes/header.php';
                             <p class="card-text" id="serverCount">0</p>
                         </div>
                         <div class="stat-label">Total Server</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <div class="stat-box color-box4 text-center">
+                        <div class="large-number" data-target="2">
+                            <p class="card-text" id="dualServerCount">0</p>
+                        </div>
+                        <div class="stat-label">Dual Server Site</div>
                     </div>
                 </div>
                 <!--
@@ -165,7 +167,7 @@ include 'includes/header.php';
             </div>
             <!--Office Type & Transactions -->
             <div class="row g-3 mt-4">
-                <!-- Office Type 
+                <!-- Office Type -->
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-header">
@@ -177,7 +179,7 @@ include 'includes/header.php';
                     </div>
                 </div>
 
-            
+                <!--
                 
                 Transactions Catered
                 <div class="col-md-6">
@@ -205,7 +207,7 @@ include 'includes/header.php';
                 <div class="col-md-3">
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box1 py-2 px-3 d-flex justify-content-between align-items-center">
-                            <div><i class="bi bi-server me-1"></i><strong>Servers</strong></div>
+                            <div><i class="bi bi-server me-1"></i> Servers</div>
                             <strong><p class="card-text mb-0" id="serverCount2"> 0</p></strong> <!-- Header count only -->
                         </div>
                         <div class="stats-item"><div class="stats-label">HP</div><div><p class="card-text" id="serverHpCount">0</p></div></div>
@@ -218,7 +220,7 @@ include 'includes/header.php';
 
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box2 py-2 px-3">
-                            <i class="bi bi-box-seam me-1"></i><strong>Peripherals</strong>
+                            <i class="bi bi-box-seam me-1"></i>Peripherals
                         </div>
                         <div class="stats-item"><div class="stats-label">Monitor</div><div><p class="card-text" id="monitorCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Keyboard</div><div><p class="card-text" id="keyboardCount">0</p></div></div>
@@ -227,7 +229,7 @@ include 'includes/header.php';
 
                     <div class="card stats-card">
                         <div class="card-header color-box3 py-2 px-3">
-                            <i class="bi bi-usb-plug me-1"></i><strong>Peripherals</strong>
+                            <i class="bi bi-usb-plug me-1"></i>Other Peripherals
                         </div>
                         <div class="stats-item"><div class="stats-label">Webcam</div><div><p class="card-text" id="webcamCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Sigpad</div><div><p class="card-text" id="sigpadCount">0</p></div></div>
@@ -242,7 +244,7 @@ include 'includes/header.php';
                 <div class="col-md-3">
                     <div class="card stats-card mb-3">
                         <div class="card-header color-box4 py-2 px-3 d-flex justify-content-between align-items-center">
-                            <div><i class="bi bi-server me-1"></i><strong>Workstations</strong></div>
+                            <div><i class="bi bi-server me-1"></i>Workstations</div>
                             <strong><p class="card-text mb-0" id="cpuPcCount"> 0</p></strong> <!-- Header count only -->
                         </div>
                         <div class="stats-item"><div class="stats-label">Windows XP</div><div><p class="card-text" id="xpCount">0</p></div></div>
@@ -252,7 +254,7 @@ include 'includes/header.php';
                     </div>
 
                     <div class="card stats-card mb-3">
-                        <div class="card-header color-box5 py-2 px-3"><i class="bi bi-tools me-1"></i><strong>Utilities</strong></div>
+                        <div class="card-header color-box5 py-2 px-3"><i class="bi bi-tools me-1"></i> Utilities</div>
                         <div class="stats-item"><div class="stats-label">RSU Facility</div><div><p class="card-text" id="rsuCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">MV Data Take-On</div><div><p class="card-text" id="mvdtoCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">MV Maintenance</div><div><p class="card-text" id="mvmaintCount">0</p></div></div>
@@ -262,7 +264,7 @@ include 'includes/header.php';
                     </div>
 
                     <div class="card stats-card">
-                        <div class="card-header color-box6 py-2 px-3"><i class="bi bi-ethernet me-1"></i><strong>Network Equipment</strong></div>
+                        <div class="card-header color-box6 py-2 px-3"><i class="bi bi-ethernet me-1"></i> Network Equipment</div>
                         <div class="stats-item"><div class="stats-label">Switch</div><div><p class="card-text" id="switchCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">SDWAN</div><div><p class="card-text" id="sdwanCount">0</p></div></div>
                         <div class="stats-item"><div class="stats-label">Router</div><div><p class="card-text" id="routerCount">0</p></div></div>
@@ -274,20 +276,18 @@ include 'includes/header.php';
                 <!-- Right column: Printers & Facilities (with charts + tables) -->
                 <div class="col-md-6">
                     <div class="card mb-3">
-                        <div class="card-header color-box7 py-2 px-3 d-flex justify-content-between align-items-center">
-                            <div><i class="bi bi-server me-1"></i><strong>Printers</strong></div>
-                            <strong><p class="card-text mb-0" id="printerCount"> 0</p></strong> <!-- Header count only -->
+                        <div class="card-header color-box7">
+                            <i class="bi bi-printer-fill me-1"></i> Printers
                         </div>
-
                         <div class="card-body p-0">
                             <div class="small-box m-0 p-0">
                                 <table class="table table-bordered text-center mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <td colspan="2"><strong>LaserJet</strong><br><p class="card-text" id="laserjetCount">0</p></td>
-                                            <td><strong>Dot Matrix</strong><br><p class="card-text" id="dotmatrixCount">0</p></td>
-                                            <td><strong>InkJet</strong><br><p class="card-text" id="inkjetCount">0</p></td>
-                                            <td><strong>DeskJet</strong><br><p class="card-text" id="deskjetCount">0</p></td>
+                                            <td colspan="2">LaserJet <br><p class="card-text" id="laserjetCount">0</p></td>
+                                            <td>Dot Matrix <br><p class="card-text" id="dotmatrixCount">0</p></td>
+                                            <td>InkJet <br><p class="card-text" id="inkjetCount">0</p></td>
+                                            <td>DeskJet <br><p class="card-text" id="deskjetCount">0</p></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -327,7 +327,7 @@ include 'includes/header.php';
 
                     <div class="card mb-3">
                             <div class="card-header color-box8">
-                                <i class="bi bi-building-check me-1"></i><strong>Facilities</strong>
+                                <i class="bi bi-building-check me-1"></i> Facilities
                             </div>
                             <div class="card-body p-0">
                                 <div class="small-box m-0 p-0">
@@ -379,7 +379,7 @@ include 'includes/header.php';
 
                     <div class="card">
                         <div class="card-header color-box1">
-                            <i class="bi bi-building-check me-1"></i><Strong>Furnitures</Strong>
+                            <i class="bi bi-building-check me-1"></i> Furnitures
                         </div>
                         <div class="card-body p-0">
                             <div class="small-box m-0 p-0">

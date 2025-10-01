@@ -61,7 +61,6 @@ class SiteCountDAO extends BaseDAO {
                 SUM(port_available) AS portAvailable_count,
                 SUM(port_defective) AS portDefective_count,
                 
-
                 SUM(CASE WHEN type_electrical_con LIKE '%Fixed Sharing%' THEN 1 ELSE 0 END) AS fxdSharing_count,
                 SUM(CASE WHEN type_electrical_con LIKE '%Separate Meter%' THEN 1 ELSE 0 END) AS seprateMeter_count,
                 SUM(CASE WHEN type_electrical_con LIKE '%No Cost%' THEN 1 ELSE 0 END) AS noCost_count,
@@ -72,10 +71,17 @@ class SiteCountDAO extends BaseDAO {
         ";
 
         $params = [];
+
         if (!empty($region)) {
-            $sql .= " AND region_id = :region";
-            $params[':region'] = $region;
+            if ($region === "LTO") {
+                $sql .= " AND region_id <> :excludedRegion";
+                $params[':excludedRegion'] = 15;
+            } else {
+                $sql .= " AND region_id = :region";
+                $params[':region'] = $region;
+            }
         }
+
         if (!empty($site)) {
             $sql .= " AND site_code = :site";
             $params[':site'] = $site;
@@ -87,7 +93,6 @@ class SiteCountDAO extends BaseDAO {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
-
 /*
 require_once "BaseDAO.php";
 

@@ -2,8 +2,9 @@
 function loadFilters() {
     $.getJSON('dashboardv3-filters.php', { type: 'region' }, function(data) {
         let $dbregionSelect = $('#dbregionSelect');
-        $dbregionSelect.empty().append('<option value="">All Regions</option>');
-        
+        $dbregionSelect.empty()
+                        .append('<option value="">All Regions</option>')
+                        .append('<option value="LTO">LTO National</option>');
         data.forEach(function(region) {
             $dbregionSelect.append(
                 $('<option>', { value: region.region_id, text: region.region_name })
@@ -41,69 +42,78 @@ function loadDashboardCounts() {
         data: { region: region, site: site },
         dataType: 'json',
         success: function(data) {
-            $('#serverCount').text(data.server_count ?? 0);
-            $('#serverCount2').text(data.server2_count ?? 0);
+            // helper function to format numbers
+            function formatNum(num) {
+                return Number(num ?? 0).toLocaleString();
+            }
 
-            $('#serverHpCount').text(data.server_hp_count ?? 0);
-            $('#serverIbmCount').text(data.server_ibm_count ?? 0);
-            $('#serverXitrixCount').text(data.server_xitrix_count ?? 0);
-            $('#serverDellCount').text(data.server_dell_count ?? 0);
-            $('#serverLenovoCount').text(data.server_lenovo_count ?? 0);
-            $('#VMServerCount').text(data.vm_server_count ?? 0);
+            $('#serverCount').text(formatNum(data.server_count));
+            $('#serverCount2').text(formatNum(data.server2_count));
 
-            $('#cpuPcCount').text(data.cpu_pc_count ?? 0);
-            $('#xpCount').text(data.xp_count ?? 0);
-            $('#w1032bitCount').text(data.w1032bit_count ?? 0);
-            $('#w1064bitCount').text(data.w1064bit_count ?? 0);
-            $('#w11Count').text(data.w11_count ?? 0);
+            $('#serverHpCount').text(formatNum(data.server_hp_count));
+            $('#serverIbmCount').text(formatNum(data.server_ibm_count));
+            $('#serverXitrixCount').text(formatNum(data.server_xitrix_count));
+            $('#serverDellCount').text(formatNum(data.server_dell_count));
+            $('#serverLenovoCount').text(formatNum(data.server_lenovo_count));
+            $('#VMServerCount').text(formatNum(data.vm_server_count));
 
-            $('#monitorCount').text(data.monitor_count ?? 0);
-            $('#keyboardCount').text(data.keybpard_count ?? 0);
-            $('#mouseCount').text(data.mouse_count ?? 0);
-            $('#webcamCount').text(data.webcam_count ?? 0);
-            $('#sigpadCount').text(data.sigpad_count ?? 0);
-            $('#scannerCount').text(data.scanner_count ?? 0);
-            $('#posCount').text(data.pos_count ?? 0);
-            $('#LCDDisplayCount').text(data.LCD_Display_count ?? 0);
-            $('#cashDrawerCount').text(data.cash_drawer_count ?? 0);
-            $('#totalCount').text(data.total_count ?? 0);
+            $('#cpuPcCount').text(formatNum(data.cpu_pc_count));
+            $('#xpCount').text(formatNum(data.xp_count));
+            $('#w1032bitCount').text(formatNum(data.w1032bit_count));
+            $('#w1064bitCount').text(formatNum(data.w1064bit_count));
+            $('#w11Count').text(formatNum(data.w11_count));
 
-            $('#rsuCount').text(data.rsu_count ?? 0);
-            $('#mvdtoCount').text(data.mvdto_count ?? 0);
-            $('#mvmaintCount').text(data.mvmaint_count ?? 0);
-            $('#imsaiuCount').text(data.imsaiu_count ?? 0);
-            $('#dldtoCount').text(data.dldto_count ?? 0);
-            $('#dlmaintCount').text(data.dlmaint_count ?? 0);
+            $('#monitorCount').text(formatNum(data.monitor_count));
+            $('#keyboardCount').text(formatNum(data.keybpard_count));
+            $('#mouseCount').text(formatNum(data.mouse_count));
+            $('#webcamCount').text(formatNum(data.webcam_count));
+            $('#sigpadCount').text(formatNum(data.sigpad_count));
+            $('#scannerCount').text(formatNum(data.scanner_count));
+            $('#posCount').text(formatNum(data.pos_count));
+            $('#LCDDisplayCount').text(formatNum(data.LCD_Display_count));
+            $('#cashDrawerCount').text(formatNum(data.cash_drawer_count));
+            $('#totalCount').text(formatNum(data.total_count));
 
-            $('#switchCount').text(data.switch_count ?? 0);
-            $('#sdwanCount').text(data.sdwan_count ?? 0);
-            $('#routerCount').text(data.router_count ?? 0);
-            $('#modemCount').text(data.modem_count ?? 0);
-            $('#dataCabCount').text(data.dataCabCount_count ?? 0);
+            $('#rsuCount').text(formatNum(data.rsu_count));
+            $('#mvdtoCount').text(formatNum(data.mvdto_count));
+            $('#mvmaintCount').text(formatNum(data.mvmaint_count));
+            $('#imsaiuCount').text(formatNum(data.imsaiu_count));
+            $('#dldtoCount').text(formatNum(data.dldto_count));
+            $('#dlmaintCount').text(formatNum(data.dlmaint_count));
 
-            $('#laserjetCount').text(data.laserjet_count ?? 0);
-            $('#dotmatrixCount').text(data.dotmatrix_count ?? 0);
-            $('#inkjetCount').text(data.inkjet_count ?? 0);
-            $('#deskjetCount').text(data.deskjet_count ?? 0);
+            $('#switchCount').text(formatNum(data.switch_count));
+            $('#sdwanCount').text(formatNum(data.sdwan_count));
+            $('#routerCount').text(formatNum(data.router_count));
+            $('#modemCount').text(formatNum(data.modem_count));
+            $('#dataCabCount').text(formatNum(data.dataCabCount_count));
 
-            $('#tableCount').text(data.table_count ?? 0);
-            $('#chairCount').text(data.chair_count ?? 0);
-            $('#drawerCount').text(data.drawer_count ?? 0);
+            $('#laserjetCount').text(formatNum(data.laserjet_count));
+            $('#dotmatrixCount').text(formatNum(data.dotmatrix_count));
+            $('#inkjetCount').text(formatNum(data.inkjet_count));
+            $('#deskjetCount').text(formatNum(data.deskjet_count));
 
-            $('#4100Count').text(data.l4100_count ?? 0);
-            $('#507Count').text(data.l507_count ?? 0);
-            $('#lx300Count').text(data.lx300_count ?? 0);
-            $('#l310Count').text(data.l310_count ?? 0);
-            $('#4250Count').text(data.l4250_count ?? 0);
-            $('#2015Count').text(data.l2015_count ?? 0);
-            $('#lx310Count').text(data.lx310_count ?? 0);
-            $('#l360Count').text(data.l360_count ?? 0);
-            $('#m401Count').text(data.m401_count ?? 0);
-            $('#402nCount').text(data.m402_count ?? 0);
-            $('#4003dnCount').text(data.l4003_count ?? 0);
-            $('#hp1280Count').text(data.hp1280_count ?? 0);
-            $('#otherprintersCount').text(data.other_printer_count ?? 0);
+            $('#tableCount').text(formatNum(data.table_count));
+            $('#chairCount').text(formatNum(data.chair_count));
+            $('#drawerCount').text(formatNum(data.drawer_count));
+
+            $('#printerCount').text(formatNum(data.printer_count));
+
+            $('#4100Count').text(formatNum(data.l4100_count));
+            $('#507Count').text(formatNum(data.l507_count));
+            $('#lx300Count').text(formatNum(data.lx300_count));
+            $('#l310Count').text(formatNum(data.l310_count));
+            $('#4250Count').text(formatNum(data.l4250_count));
+            $('#2015Count').text(formatNum(data.l2015_count));
+            $('#lx310Count').text(formatNum(data.lx310_count));
+            $('#l360Count').text(formatNum(data.l360_count));
+            $('#m401Count').text(formatNum(data.m401_count));
+            $('#402nCount').text(formatNum(data.m402_count));
+            $('#4003dnCount').text(formatNum(data.l4003_count));
+            $('#hp1280Count').text(formatNum(data.hp1280_count));
+
+            $('#otherprintersCount').text(formatNum(data.other_printer_count));
         },
+
         error: function(xhr, status, err) {
             console.error('AJAX error', status, err, xhr.responseText);
             $('#totalCount').text('Error');

@@ -56,6 +56,8 @@ class DashboardDAO extends BaseDAO {
                 SUM(CASE WHEN item_desc LIKE 'modem' THEN 1 ELSE 0 END) AS modem_count,
                 SUM(CASE WHEN item_desc LIKE '%data%' THEN 1 ELSE 0 END) AS dataCabCount_count,
 
+                SUM(CASE WHEN sub_major_type LIKE 'printer' THEN 1 ELSE 0 END) AS printer_count,
+
                 SUM(CASE WHEN item_desc LIKE '%LaserJet%' THEN 1 ELSE 0 END) AS laserjet_count,
                 SUM(CASE WHEN item_desc LIKE '%dot%' THEN 1 ELSE 0 END) AS dotmatrix_count,
                 SUM(CASE WHEN item_desc LIKE '%inkjet%' THEN 1 ELSE 0 END) AS inkjet_count,
@@ -103,9 +105,16 @@ class DashboardDAO extends BaseDAO {
         $params = [];
 
         if (!empty($region)) {
-            $sql .= " AND region_name = :region";
-            $params[':region'] = $region;
+            if ($region === "LTO") {
+                // special case: include all but region_id = 15
+                $sql .= " AND region_name <> :excludedRegion";
+                $params[':excludedRegion'] = 15;
+            } else {
+                $sql .= " AND region_name = :region";
+                $params[':region'] = $region;
+            }
         }
+
         if (!empty($site)) {
             $sql .= " AND site_code = :site";
             $params[':site'] = $site;
@@ -115,4 +124,5 @@ class DashboardDAO extends BaseDAO {
         $stmt->execute($params);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
 }
