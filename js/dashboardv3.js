@@ -1,3 +1,4 @@
+/*
 // Load Regions (and then auto-load sites for the first region)
 function loadFilters() {
     $.getJSON('dashboardv3-filters.php', { type: 'region' }, function(data) {
@@ -31,6 +32,59 @@ function loadSites(regionId) {
          
     });
 }
+*/
+
+// loadFilters: build region options and preselect LTO, then load sites and data
+function loadFilters() {
+    $.getJSON('dashboardv3-filters.php', { type: 'region' }, function(data) {
+        let $dbregionSelect = $('#dbregionSelect');
+        $dbregionSelect.empty()
+                        .append('<option value="LTO">LTO National</option>')
+                        .append('<option value="">All Regions</option>');
+
+        data.forEach(function(region) {
+            $dbregionSelect.append(
+                $('<option>', { value: region.region_id, text: region.region_name })
+            );
+        });
+
+        //set LTO as the selected region
+        $dbregionSelect.val('LTO');
+
+        // Load sites for LTO AND when finished, load dashboard/site counts
+        loadSites('LTO', function() {
+            // ensure site dropdown shows "All Sites"
+            $('#dbsiteSelect').val(''); // empty => All Sites
+
+            // Now load the counts (with region='LTO' and site='')
+            loadDashboardCounts();
+            loadSiteCounts();
+
+            // If you rely on change handlers elsewhere, trigger change so UI reacts consistently
+            $dbregionSelect.trigger('change');
+        });
+    });
+}
+
+// loadSites: accept an optional callback executed after sites are populated
+function loadSites(regionId, callback) {
+    $.getJSON('dashboardv3-filters.php', { type: 'site', region_id: regionId }, function(data) {
+        let $site = $('#dbsiteSelect');
+        $site.empty().append('<option value="">All Sites</option>');
+        data.forEach(function(site) {
+            $site.append(
+                $('<option>', { value: site.site_code, text: site.site_code + ' - ' + site.site_name })
+            );
+        });
+
+        // Update UI (toggle cards) now that site options are present
+        toggleCards();
+
+        // If a callback was provided, call it now (after sites finished loading)
+        if (typeof callback === 'function') callback();
+    });
+}
+
 
 function loadDashboardCounts() {
     const region = $('#dbregionSelect').val();

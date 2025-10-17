@@ -102,7 +102,7 @@ include 'includes/header.php';
                         <div class="large-number" data-target="18">
                             <p class="card-text" id="actualSiteCount">0</p>
                         </div>
-                        <div class="stat-label">Total Sites</div>
+                        <div class="">Total Sites</div>
                     </div>
                 </div>
                  <div class="col-md-2 col-sm-4 col-6">
@@ -110,7 +110,7 @@ include 'includes/header.php';
                         <div class="large-number" data-target="2">
                             <p class="card-text" id="dualServerCount">0</p>
                         </div>
-                        <div class="stat-label">Dual Server Site</div>
+                        <div class="">Dual Server Site</div>
                     </div>
                 </div>
                 <!--
@@ -128,7 +128,7 @@ include 'includes/header.php';
                         <div class="large-number" data-target="20">
                             <p class="card-text" id="serverCount">0</p>
                         </div>
-                        <div class="stat-label">Total Server</div>
+                        <div class="">Total Server</div>
                     </div>
                 </div>
                 <!--
@@ -159,7 +159,7 @@ include 'includes/header.php';
                         <div class="large-number" data-target="3">
                             <p class="card-text" id="totalCount">0</p>
                         </div>
-                        <div class="stat-label">Total Hardware</div>
+                        <div class="">Total Hardware</div>
                     </div>
                 </div>
             </div>

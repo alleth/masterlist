@@ -109,7 +109,14 @@ html, body {
 }
 
 /* Color boxes for stats */
-.color-box1 { background-color: rgb(224, 245, 255); }
+.color-box11 { background-color: rgb(178, 228, 253); }
+.color-box22 { background-color: rgb(176, 252, 215); }
+.color-box33 { background-color: rgb(237, 194, 253); }
+.color-box55 { background-color: rgb(255, 251, 194); }
+
+
+
+.color-box1 { background-color: rgb(216, 242, 255); }
 .color-box2 { background-color: rgb(230, 255, 243); }
 .color-box3 { background-color: rgb(251, 240, 255); }
 .color-box4 { background-color: rgb(255, 241, 234); }
