@@ -21,7 +21,8 @@ include("hardware-download-modals.php");
                                 <div class="col-md-2">
                                     <select class="form-select" name="hw_type" id="viewHwType">
                                         <option value="all_hw" selected>All hardware</option>
-                                        <option value="CPU-Server" >Server</option>
+                                        <option value="CPU-Server" >CPU-Server</option>
+                                        <option value="VM-Server" >VM-Server</option>
                                         <option value="UPS-SERVER" >UPS-Server</option>
                                         <option value="CPU-PC" >CPU-PC</option>
                                         <option value="Monitor-LCD">Monitor-LCD</option>
