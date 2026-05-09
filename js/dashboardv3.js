@@ -166,6 +166,20 @@ function loadDashboardCounts() {
             $('#hp1280Count').text(formatNum(data.hp1280_count));
 
             $('#otherprintersCount').text(formatNum(data.other_printer_count));
+
+            $('#5yearsYounger').text(formatNum(data.below_5yrs_cpu));
+            $('#5yearsOlder').text(formatNum(data.over_5yrs_cpu));
+
+            $('#serverCount').text(formatNum(data.server_count));
+            $('#cpuCount').text(formatNum(data.cpu_count));
+            $('#monitorCount').text(formatNum(data.monitor_count));
+
+            // Update below/over 5-year summary boxes
+            $('#5yearsYounger').text(formatNum(data.total_below_5yrs ?? 0));
+            $('#5yearsOlder').text(formatNum(data.total_over_5yrs ?? 0));
+
+            // ✅ Render the bar chart
+            renderHardwareAgingChart(data);
         },
 
         error: function(xhr, status, err) {
@@ -329,6 +343,84 @@ $(document).ready(function () {
   $(document).ready(function () {
     updateStatBoxColors();
   });
+
+
+    //Hardware Aging charts--------------------------------------------------------------
+    function renderHardwareAgingChart(data) {
+        const ctx = document.getElementById('hardwareAgingChart').getContext('2d');
+
+        // Extract counts (replace these with actual data keys from your PHP)
+        const below5yrsServer = data.below_5yrs_Server ?? 0;
+        const over5yrsServer = data.over_5yrs_Server ?? 0;
+        const below5yrsCPU = data.below_5yrs_cpu ?? 0;
+        const over5yrsCPU = data.over_5yrs_cpu ?? 0;
+        const below5yrsMonitor = data.below_5yrs_monitor ?? 0;
+        const over5yrsMonitor = data.over_5yrs_monitor ?? 0;
+        const below5yrsUPS = data.below_5yrs_ups ?? 0;
+        const over5yrsUPS = data.over_5yrs_ups ?? 0;
+        const below5yrsPrinter = data.below_5yrs_printer ?? 0;
+        const over5yrsPrinter = data.over_5yrs_printer ?? 0;
+
+        const labels = ['Servers', 'CPU-PC', 'Monitor', 'UPS', 'Printer'];
+        const belowData = [below5yrsServer, below5yrsCPU, below5yrsMonitor, below5yrsUPS, below5yrsPrinter];
+        const overData = [over5yrsServer, over5yrsCPU, over5yrsMonitor, over5yrsUPS, over5yrsPrinter];
+
+        // Destroy old chart if it exists (prevents duplication)
+        if (window.hardwareAgingChartInstance) {
+            window.hardwareAgingChartInstance.destroy();
+        }
+
+        // Create new bar chart (no animation)
+        window.hardwareAgingChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Below 5 Years',
+                        data: belowData,
+                        backgroundColor: 'rgba(40, 85, 167, 0.7)', // green
+                        borderColor: 'rgba(40, 59, 167, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '5 Years Above',
+                        data: overData,
+                        backgroundColor: 'rgba(220, 53, 53, 0.7)', // red
+                        borderColor: 'rgba(220, 53, 53, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false, // ✅ Disable animations completely
+                transitions: {
+                    active: {
+                        animation: { duration: 0 } // ✅ No hover transition either
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    title: {
+                        display: true,
+                        text: 'Hardware'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Count' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Hardware Type' }
+                    }
+                }
+            }
+        });
+    }
+    //End Of hardware aging charts---------------------------------------------------------
 
     function renderOfficeBarChart(data) {
         const ctx = document.getElementById('officeBarChart').getContext('2d');

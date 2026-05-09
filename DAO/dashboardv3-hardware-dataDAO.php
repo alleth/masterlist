@@ -79,8 +79,8 @@ class DashboardDAO extends BaseDAO {
                 SUM(CASE WHEN item_desc LIKE 'laserjet' AND hw_model LIKE '%402%' THEN 1 ELSE 0 END) AS m402_count,
                 SUM(CASE WHEN item_desc LIKE '%laserjet%' AND hw_model LIKE '%4003dn%' THEN 1 ELSE 0 END) AS l4003_count,
                 SUM(CASE WHEN item_desc LIKE '%deskjet%' AND hw_model LIKE '%1280%' THEN 1 ELSE 0 END) AS hp1280_count,
-                SUM(
-                    CASE 
+
+                SUM(CASE 
                         WHEN item_desc LIKE 'LASERJET' 
                             AND hw_model NOT LIKE '%4100%'
                             AND hw_model NOT LIKE '%507%'
@@ -92,12 +92,79 @@ class DashboardDAO extends BaseDAO {
                             AND hw_model NOT LIKE '%401%'
                             AND hw_model NOT LIKE '%402%'
                             AND hw_model NOT LIKE '%4003%'
-                        THEN 1 
-                        ELSE 0 
-                    END
-                ) AS other_printer_count,
+                        THEN 1 ELSE 0 END) AS other_printer_count,
+
+                SUM(CASE WHEN (
+                                -- Format 1: mm/dd/yy
+                                STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                                OR
+                                -- Format 2: yyyy-mm-dd
+                                STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                            )
+                THEN 1 ELSE 0 END) AS over_5yrs,
+
+                SUM(CASE WHEN (
+                                -- Format 1: mm/dd/yy
+                                STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                                OR
+                                -- Format 2: yyyy-mm-dd
+                                STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                            )
+                THEN 1 ELSE 0 END) AS below_5yrs,
+
+                -- inside SELECT in your DashboardDAO
+                SUM(CASE WHEN item_desc = 'CPU-Server' 
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS below_5yrs_Server,
+
+                SUM(CASE WHEN item_desc = 'CPU-Server'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS over_5yrs_Server,
+
+                SUM(CASE WHEN item_desc = 'CPU-PC' 
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS below_5yrs_cpu,
+
+                SUM(CASE WHEN item_desc = 'CPU-PC'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS over_5yrs_cpu,
+
+                SUM(CASE WHEN item_desc = 'Monitor'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS below_5yrs_monitor,
+
+                SUM(CASE WHEN item_desc = 'Monitor'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS over_5yrs_monitor,
+
+                SUM(CASE WHEN item_desc = 'Printer'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS below_5yrs_printer,
+
+                SUM(CASE WHEN item_desc = 'Printer'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS over_5yrs_printer,
+
+                SUM(CASE WHEN item_desc = 'UPS-PC'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS below_5yrs_ups,
+
+                SUM(CASE WHEN item_desc = 'UPS-PC'
+                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
+                    THEN 1 ELSE 0 END) AS over_5yrs_ups,
 
                 COUNT(*) AS total_count
+
             FROM hw_tbl
             WHERE hw_status = 'On Site'
         ";
