@@ -14,7 +14,8 @@
     $acquired_value = $_POST['acquired_value'];
     $assetIdCombined = $prefixText . ' ' . $asset_num;
     $hw_status = $_POST['hw_status'];
+    $OSSelect = $_POST['OSSelect'] ?? '';
 
 
     $action = new addHardwareDAO();
-    $action->addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $SubType, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $assetIdCombined, $hw_status);
+    $action->addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $SubType, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $assetIdCombined, $hw_status, $OSSelect);

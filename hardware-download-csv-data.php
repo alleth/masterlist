@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 $site_code = $_GET['site_code'] ?? '';
 $region_name = $_GET['region_name'] ?? '';
+$item_desc = $_GET['item_desc'] ?? '';
 
 if (!$site_code) {
     die("Site code is required.");
@@ -21,10 +22,10 @@ if (strtolower(trim($site_code)) === "all site") {
     if (!$region_name) {
         die("Region name is required for 'All Site'.");
     }
-    $data = $dao->fetchHardwareByRegion($region_name);
+    $data = $dao->fetchHardwareByRegion($region_name, $item_desc);
     $label = preg_replace('/\s+/', '_', $region_name);
 } else {
-    $data = $dao->fetchHardwareBySite($site_code);
+    $data = $dao->fetchHardwareBySite($site_code, $item_desc);
     $label = preg_replace('/\s+/', '_', $site_code);
 }
 

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   downloadButton.addEventListener("click", function () {
     const siteCode = document.getElementById("downloadSiteSelect").value;
     const regionName = document.getElementById("downloadRegionSelect").value;
+    const hwType = document.getElementById("downloadHwType").value;
 
     if (!siteCode) {
       alert("Please select a site before downloading.");
@@ -20,6 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       queryParams += `&region_name=${encodeURIComponent(regionName)}`;
     }
+    if (hwType && hwType !== "All Hardware") {
+      queryParams += `&item_desc=${encodeURIComponent(hwType)}`;
+    }
 
     const downloadUrl = `hardware-download-csv-data.php?${queryParams}`;
 
@@ -27,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tempLink = document.createElement("a");
     tempLink.href = downloadUrl;
     tempLink.style.display = "none";
-    tempLink.download = "hardware_inventory.csv";
+    tempLink.download = "hardware_inventory.xlsx";
     document.body.appendChild(tempLink);
     tempLink.click();
     document.body.removeChild(tempLink);

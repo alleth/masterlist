@@ -13,7 +13,44 @@ class DashboardDAO extends BaseDAO {
         $this->closeConn();
     }
 
+    // Item types tracked in the hardware aging chart, keyed by the column suffix used below.
+    private $agingTypes = [
+        'server'  => 'CPU-Server',
+        'cpu'     => 'CPU-PC',
+        'monitor' => 'Monitor',
+        'printer' => 'Printer',
+        'ups'     => 'UPS-PC',
+        'router'  => 'Router',
+        'sdwan'   => 'SDWAN',
+        'switch'  => 'Switch',
+    ];
+
+    private function buildAgingSql() {
+        // hw_date_acq is stored as either mm/dd/yy or yyyy-mm-dd.
+        $acq = "COALESCE(STR_TO_DATE(hw_date_acq, '%m/%d/%y'), STR_TO_DATE(hw_date_acq, '%Y-%m-%d'))";
+
+        $columns = [];
+        foreach ($this->agingTypes as $suffix => $itemDesc) {
+            $columns[] = "
+                SUM(CASE WHEN item_desc = '{$itemDesc}'
+                    AND {$acq} >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                    THEN 1 ELSE 0 END) AS yrs1_5_{$suffix},
+
+                SUM(CASE WHEN item_desc = '{$itemDesc}'
+                    AND {$acq} < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
+                    AND {$acq} >= DATE_SUB(CURDATE(), INTERVAL 10 YEAR)
+                    THEN 1 ELSE 0 END) AS yrs5_10_{$suffix},
+
+                SUM(CASE WHEN item_desc = '{$itemDesc}'
+                    AND {$acq} < DATE_SUB(CURDATE(), INTERVAL 10 YEAR)
+                    THEN 1 ELSE 0 END) AS yrs10_up_{$suffix}";
+        }
+
+        return implode(",\n", $columns);
+    }
+
     public function getDashboardCounts($region = '', $site = '') {
+        $agingSql = $this->buildAgingSql();
         $sql = "
             SELECT 
                 SUM(CASE WHEN sub_major_type = 'Server' THEN 1 ELSE 0 END) AS server_count,
@@ -94,74 +131,7 @@ class DashboardDAO extends BaseDAO {
                             AND hw_model NOT LIKE '%4003%'
                         THEN 1 ELSE 0 END) AS other_printer_count,
 
-                SUM(CASE WHEN (
-                                -- Format 1: mm/dd/yy
-                                STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                                OR
-                                -- Format 2: yyyy-mm-dd
-                                STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                            )
-                THEN 1 ELSE 0 END) AS over_5yrs,
-
-                SUM(CASE WHEN (
-                                -- Format 1: mm/dd/yy
-                                STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                                OR
-                                -- Format 2: yyyy-mm-dd
-                                STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                            )
-                THEN 1 ELSE 0 END) AS below_5yrs,
-
-                -- inside SELECT in your DashboardDAO
-                SUM(CASE WHEN item_desc = 'CPU-Server' 
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS below_5yrs_Server,
-
-                SUM(CASE WHEN item_desc = 'CPU-Server'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS over_5yrs_Server,
-
-                SUM(CASE WHEN item_desc = 'CPU-PC' 
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS below_5yrs_cpu,
-
-                SUM(CASE WHEN item_desc = 'CPU-PC'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS over_5yrs_cpu,
-
-                SUM(CASE WHEN item_desc = 'Monitor'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS below_5yrs_monitor,
-
-                SUM(CASE WHEN item_desc = 'Monitor'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS over_5yrs_monitor,
-
-                SUM(CASE WHEN item_desc = 'Printer'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS below_5yrs_printer,
-
-                SUM(CASE WHEN item_desc = 'Printer'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS over_5yrs_printer,
-
-                SUM(CASE WHEN item_desc = 'UPS-PC'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS below_5yrs_ups,
-
-                SUM(CASE WHEN item_desc = 'UPS-PC'
-                    AND (STR_TO_DATE(hw_date_acq, '%m/%d/%y') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR)
-                        OR STR_TO_DATE(hw_date_acq, '%Y-%m-%d') < DATE_SUB(CURDATE(), INTERVAL 5 YEAR))
-                    THEN 1 ELSE 0 END) AS over_5yrs_ups,
+                {$agingSql},
 
                 COUNT(*) AS total_count
 

@@ -349,21 +349,22 @@ $(document).ready(function () {
     function renderHardwareAgingChart(data) {
         const ctx = document.getElementById('hardwareAgingChart').getContext('2d');
 
-        // Extract counts (replace these with actual data keys from your PHP)
-        const below5yrsServer = data.below_5yrs_Server ?? 0;
-        const over5yrsServer = data.over_5yrs_Server ?? 0;
-        const below5yrsCPU = data.below_5yrs_cpu ?? 0;
-        const over5yrsCPU = data.over_5yrs_cpu ?? 0;
-        const below5yrsMonitor = data.below_5yrs_monitor ?? 0;
-        const over5yrsMonitor = data.over_5yrs_monitor ?? 0;
-        const below5yrsUPS = data.below_5yrs_ups ?? 0;
-        const over5yrsUPS = data.over_5yrs_ups ?? 0;
-        const below5yrsPrinter = data.below_5yrs_printer ?? 0;
-        const over5yrsPrinter = data.over_5yrs_printer ?? 0;
+        // Aging buckets computed server-side: yrs1_5_<type>, yrs5_10_<type>, yrs10_up_<type>
+        const types = [
+            { label: 'Servers', suffix: 'server' },
+            { label: 'CPU-PC', suffix: 'cpu' },
+            { label: 'Monitor', suffix: 'monitor' },
+            { label: 'UPS', suffix: 'ups' },
+            { label: 'Printer', suffix: 'printer' },
+            { label: 'Router', suffix: 'router' },
+            { label: 'SDWAN', suffix: 'sdwan' },
+            { label: 'Switch', suffix: 'switch' }
+        ];
 
-        const labels = ['Servers', 'CPU-PC', 'Monitor', 'UPS', 'Printer'];
-        const belowData = [below5yrsServer, below5yrsCPU, below5yrsMonitor, below5yrsUPS, below5yrsPrinter];
-        const overData = [over5yrsServer, over5yrsCPU, over5yrsMonitor, over5yrsUPS, over5yrsPrinter];
+        const labels = types.map(t => t.label);
+        const data1to5 = types.map(t => data[`yrs1_5_${t.suffix}`] ?? 0);
+        const data5to10 = types.map(t => data[`yrs5_10_${t.suffix}`] ?? 0);
+        const data10up = types.map(t => data[`yrs10_up_${t.suffix}`] ?? 0);
 
         // Destroy old chart if it exists (prevents duplication)
         if (window.hardwareAgingChartInstance) {
@@ -377,17 +378,24 @@ $(document).ready(function () {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Below 5 Years',
-                        data: belowData,
-                        backgroundColor: 'rgba(40, 85, 167, 0.7)', // green
-                        borderColor: 'rgba(40, 59, 167, 1)',
+                        label: '1 - 5 Years',
+                        data: data1to5,
+                        backgroundColor: '#29FF00',
+                        borderColor: '#29FF00',
                         borderWidth: 1
                     },
                     {
-                        label: '5 Years Above',
-                        data: overData,
-                        backgroundColor: 'rgba(220, 53, 53, 0.7)', // red
-                        borderColor: 'rgba(220, 53, 53, 1)',
+                        label: '5 - 10 Years',
+                        data: data5to10,
+                        backgroundColor: '#0073FF',
+                        borderColor: '#0073FF',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '10+ Years',
+                        data: data10up,
+                        backgroundColor: '#FF0000',
+                        borderColor: '#FF0000',
                         borderWidth: 1
                     }
                 ]

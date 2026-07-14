@@ -70,7 +70,7 @@ class viewHardwareDetailsDAO extends BaseDAO {
             $params[] = $hw_type;
         }
 
-        $query .= " ORDER BY h.site_code";
+        $query .= " ORDER BY h.site_code, h.hw_id";
 
         try {
             $stmt = $this->dbh->prepare($query);

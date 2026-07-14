@@ -4,7 +4,7 @@
 include "BaseDAO.php";
 
 class addHardwareDAO extends BaseDAO {
-    function addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $SubType, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $assetIdCombined, $hw_status) {
+    function addHardware($RegionSelect, $hardwareSiteModal, $itemSelect, $SubType, $itemBrand, $itemModel, $asset_num, $serial_num, $date, $acquired_value, $assetIdCombined, $hw_status, $os_type = '') {
         try {
             $this->openConn();
 
@@ -56,9 +56,12 @@ class addHardwareDAO extends BaseDAO {
             $stmt = $this->dbh->prepare("
                 INSERT INTO hw_tbl (
                     region_name, site_code, sub_major_type, item_desc, hw_brand_name, hw_model,
-                    hw_asset_num, hw_serial_num, hw_date_acq, hw_acq_val, hw_status
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    hw_asset_num, hw_serial_num, hw_date_acq, hw_acq_val, hw_status, os_type
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
+
+            // os_type only applies to CPU-PC entries; store NULL otherwise
+            $osType = ($itemSelect === 'CPU-PC' && $os_type !== '') ? $os_type : null;
 
             $stmt->bindParam(1, $RegionSelect);
             $stmt->bindParam(2, $hardwareSiteModal);
@@ -71,6 +74,7 @@ class addHardwareDAO extends BaseDAO {
             $stmt->bindParam(9, $date);
             $stmt->bindParam(10, $acquired_value);
             $stmt->bindParam(11, $hw_status);
+            $stmt->bindParam(12, $osType);
 
             $stmt->execute();
 

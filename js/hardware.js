@@ -2,6 +2,16 @@ function timestamp() {
     return new Date().toLocaleString("en-US", { timeZone: "UTC" });
 }
 
+// Remembers where the page was scrolled to before a save/update/delete action
+// so it can be restored afterward instead of jumping to the top.
+var __savedScrollY = 0;
+function saveScrollPosition() {
+    __savedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+}
+function restoreScrollPosition() {
+    window.scrollTo(0, __savedScrollY);
+}
+
 $(function(){
     console.log("=== hardware.js loaded successfully at %s ===", timestamp());
 
@@ -157,6 +167,19 @@ $('#EditHardwareModal').on('shown.bs.modal', function () {
                     $select.trigger("change"); // Trigger event for dependent selects
                 }
 
+                // ✅ Default the Add Hardware region to the logged-in user's assigned region
+                if (selectId === "RegionSelect") {
+                    const assignedRegion = $select.attr("data-assigned-region");
+                    const $match = assignedRegion ? $select.find("option[value='" + assignedRegion + "']") : $();
+                    if ($match.length) {
+                        // Set the "selected" attribute (not just the property) so the
+                        // region survives $('#hardwareForm')[0].reset() on modal open.
+                        $select.find("option").removeAttr("selected");
+                        $match.attr("selected", "selected");
+                        $select.val(assignedRegion).trigger("change");
+                    }
+                }
+
                 console.log("Region options loaded for #" + selectId + " at %s", timestamp());
             },
             error: function(xhr, status, error) {
@@ -249,15 +272,33 @@ function setupCascadingItemBrandModel(itemId, brandId, modelId) {
     const $brand = $('#' + brandId);
     const $model = $('#' + modelId);
 
-    // Load initial item options
-    loadSelectOptions(itemId, 'item_description', 'item_desc', 'hardware-item-description-modal.php', 'Select Item');
+    // Preserve any value already on the selects (e.g. pre-filled when editing existing hardware)
+    // so re-running this setup (modal re-shown) doesn't wipe out or re-lock a current selection.
+    const preselectedItem = $item.val();
+    const preselectedBrand = $brand.val();
+    const preselectedModel = $model.val();
 
-    // Disable brand/model at start
-    $brand.prop('disabled', true);
-    $model.prop('disabled', true);
+    // (Re)load the full item list, keeping the current item selected if there is one
+    loadSelectOptions(itemId, 'item_description', 'item_desc', 'hardware-item-description-modal.php', 'Select Item', preselectedItem);
 
+    if (preselectedItem) {
+        // Item already selected -> unlock brand/model and populate their full option lists
+        fetchBrands(preselectedItem, brandId, preselectedBrand);
+
+        if (preselectedBrand) {
+            fetchModels(preselectedItem, preselectedBrand, modelId, preselectedModel);
+        } else {
+            resetSelect(modelId, 'Select Model', true);
+        }
+    } else {
+        resetSelect(brandId, 'Select Brand', true);
+        resetSelect(modelId, 'Select Model', true);
+    }
+
+    // Namespaced so re-calling this setup (e.g. every time the modal is shown) replaces the
+    // previous handler instead of stacking duplicate ones on top of it.
     // When item changes → fetch brands
-    $item.on('change', function () {
+    $item.off('change.cascade').on('change.cascade', function () {
         const selectedItem = $(this).val();
 
         resetSelect(brandId, 'Select Brand');
@@ -269,7 +310,7 @@ function setupCascadingItemBrandModel(itemId, brandId, modelId) {
     });
 
     // When brand changes → fetch models
-    $brand.on('change', function () {
+    $brand.off('change.cascade').on('change.cascade', function () {
         const selectedBrand = $(this).val();
         const selectedItem = $item.val();
 
@@ -281,7 +322,7 @@ function setupCascadingItemBrandModel(itemId, brandId, modelId) {
     });
 }
 
-function loadSelectOptions(selectId, table, column, url, placeholder = 'Select an option') {
+function loadSelectOptions(selectId, table, column, url, placeholder = 'Select an option', preselectedValue = null) {
     const $select = $('#' + selectId);
 
     $.ajax({
@@ -294,6 +335,9 @@ function loadSelectOptions(selectId, table, column, url, placeholder = 'Select a
             options.forEach(opt => {
                 $select.append(`<option value="${opt}">${opt}</option>`);
             });
+            if (preselectedValue) {
+                $select.val(preselectedValue);
+            }
             $select.prop("disabled", false);
         },
         error: function (xhr) {
@@ -310,7 +354,7 @@ function resetSelect(selectId, placeholder = 'Select an option', disable = false
 }
 
 //-- for select brand -- //
-function fetchBrands(item_desc, brandId) {
+function fetchBrands(item_desc, brandId, preselectedValue = null) {
     const $brandSelect = $('#' + brandId);
 
     $.ajax({
@@ -325,6 +369,10 @@ function fetchBrands(item_desc, brandId) {
                 $brandSelect.append(`<option value="${brand}">${brand}</option>`);
             });
 
+            if (preselectedValue) {
+                $brandSelect.val(preselectedValue);
+            }
+
             $brandSelect.prop('disabled', false);
         },
         error: function (xhr) {
@@ -335,7 +383,7 @@ function fetchBrands(item_desc, brandId) {
 }
 
 //-- For Select Model --//
-function fetchModels(item_desc, brand, modelId) {
+function fetchModels(item_desc, brand, modelId, preselectedValue = null) {
     const $modelSelect = $('#' + modelId);
 
     $.ajax({
@@ -350,11 +398,29 @@ function fetchModels(item_desc, brand, modelId) {
                 $modelSelect.append(`<option value="${model}">${model}</option>`);
             });
 
+            if (preselectedValue) {
+                $modelSelect.val(preselectedValue);
+            }
+
             $modelSelect.prop('disabled', false);
         },
         error: function (xhr) {
             console.error("Error loading models:", xhr.responseText);
             $modelSelect.html('<option disabled>Error loading models</option>');
+        }
+    });
+}
+
+// Shows the OS Type field only when the selected item is 'CPU-PC'; hides + clears it otherwise.
+function setupOSTypeToggle(itemSelectId, osGroupId, osSelectId) {
+    $('#' + itemSelectId).on('change', function () {
+        const selectedItem = $(this).val();
+
+        if (selectedItem === 'CPU-PC') {
+            $('#' + osGroupId).removeClass('d-none');
+        } else {
+            $('#' + osGroupId).addClass('d-none');
+            $('#' + osSelectId).val('').removeClass('is-invalid');
         }
     });
 }
@@ -402,6 +468,8 @@ $(document).ready(function () {
 
     setupSubTypeAutofill('itemSelect', 'SubType');
     setupSubTypeAutofill('editItemSelect', 'editSubType');
+
+    setupOSTypeToggle('itemSelect', 'OSTypeGroup', 'OSSelect');
 });
 //end of codes for select options--------------------------------------------------------------------------------------------
 
@@ -441,8 +509,16 @@ document.addEventListener("DOMContentLoaded", function () {
             $('#itemBrand, #itemModel, #hardwareSiteModal').val('').prop('disabled', true);
             $('#asset_num, #serial_num').val('').prop('disabled', false);
 
+            // ✅ Re-sync the site dropdown with whatever region survived the reset
+            // (form.reset() doesn't fire 'change', so setupDependentSelect never ran).
+            // This enables + loads sites when a region defaulted in, or keeps it
+            // disabled when RegionSelect reset back to the empty placeholder.
+            $('#RegionSelect').trigger('change');
+            $('#OSSelect').val('');
+            $('#OSTypeGroup').addClass('d-none');
+
             // ✅ Remove is-invalid from inputs
-            $('#RegionSelect, #hardwareSiteModal, #itemSelect, #itemBrand, #itemModel, #asset_num, #serial_num, #date')
+            $('#RegionSelect, #hardwareSiteModal, #itemSelect, #itemBrand, #itemModel, #asset_num, #serial_num, #date, #OSSelect')
                 .removeClass('is-invalid');
 
             // ✅ Remove is-invalid from radio buttons
@@ -455,6 +531,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // === Save button logic ===
         $('#addNewHardwareBtn').off('click').on('click', function () {
+            saveScrollPosition();
 
             const prefixText = prefixTextEl.textContent.trim();
             const isAssetTypeSelected = $('input[name="assetType"]:checked').length > 0;
@@ -470,6 +547,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const acquired_value = $('#acquired_value').val();
             const hw_status = "On Site";
             const assetIdCombined = `${prefixText} ${asset_num}`;
+            // OS Type only applies (and is required) when the item is CPU-PC
+            const OSSelect = itemSelect === 'CPU-PC' ? $('#OSSelect').val() : '';
 
             const wordObj = {
                 RegionSelect,
@@ -484,7 +563,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 date,
                 acquired_value,
                 assetIdCombined,
-                hw_status
+                hw_status,
+                OSSelect
             };
 
             // === Validate required fields ===
@@ -506,6 +586,12 @@ document.addEventListener("DOMContentLoaded", function () {
             // Item
             if (!itemSelect || itemSelect === "Select item") {
                 $('#itemSelect').addClass('is-invalid');
+                hasError = true;
+            }
+            // OS Type (required only when item is CPU-PC)
+            $('#OSSelect').removeClass('is-invalid');
+            if (itemSelect === 'CPU-PC' && !OSSelect) {
+                $('#OSSelect').addClass('is-invalid');
                 hasError = true;
             }
             // Brand
@@ -569,6 +655,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`);
                     } else {
+                        $('#AddHardwareModal').one('hidden.bs.modal', restoreScrollPosition);
                         $('#AddHardwareModal').modal('hide');
                         $('#response').html(saveResponse);
                         alertMessageSuccess(`<strong>Hardware successfully Added!</strong>`);
@@ -580,6 +667,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         $('#itemSelect').val('').trigger('change');
                         $('#itemBrand, #itemModel, #hardwareSiteModal').val('').prop('disabled', true);
                         $('#asset_num, #serial_num').val('').prop('disabled', false);
+                        $('#OSSelect').val('').removeClass('is-invalid');
+                        $('#OSTypeGroup').addClass('d-none');
+
+                        // Refresh table while keeping the current "show entries" / page number
+                        updateHardwareTable(true);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -789,7 +881,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#addHWMessage").html("");
     });
 
-function updateHardwareTable() {
+function updateHardwareTable(preserveState) {
     // Check if table exists in DOM
     if (!$("#hardwarePerSite").length) {
         console.error("Table #hardwarePerSite not found in DOM at %s", timestamp());
@@ -803,10 +895,23 @@ function updateHardwareTable() {
         return;
     }
 
+    // Capture current "show entries" length, page number, and search term so
+    // we can restore them after the table is rebuilt (used after
+    // save/update/delete so the user doesn't lose their place in the list).
+    var previousPage = 0;
+    var previousLength = 10;
+    var previousSearch = '';
+
     // Safely destroy DataTable if initialized
     try {
         if ($.fn.DataTable.isDataTable('#hardwarePerSite')) {
-            $('#hardwarePerSite').DataTable().destroy();
+            var existingTable = $('#hardwarePerSite').DataTable();
+            if (preserveState) {
+                previousPage = existingTable.page();
+                previousLength = existingTable.page.len();
+                previousSearch = existingTable.search();
+            }
+            existingTable.destroy();
             console.log("DataTable destroyed at %s", timestamp());
         }
     } catch (e) {
@@ -904,11 +1009,25 @@ function updateHardwareTable() {
             }
             if (rowCount > 0 && isValid) {
                 try {
-                    $('#hardwarePerSite').DataTable({
+                    var newTable = $('#hardwarePerSite').DataTable({
                         "paging": true,
                         "ordering": false,
                         "searching": true
                     });
+
+                    if (preserveState) {
+                        newTable.page.len(previousLength);
+                        newTable.search(previousSearch);
+                        newTable.draw(false);
+                        // Keep the visible search box in sync with the restored value
+                        $('#hardwarePerSite_filter input').val(previousSearch);
+
+                        var totalPages = newTable.page.info().pages;
+                        var targetPage = Math.min(previousPage, Math.max(totalPages - 1, 0));
+                        newTable.page(targetPage).draw(false);
+                        restoreScrollPosition();
+                    }
+
                     console.log("Hardware table loaded successfully at %s", timestamp());
                 } catch (e) {
                     console.error("DataTables initialization error: %s at %s", e.message, timestamp());
@@ -1123,12 +1242,32 @@ function showHardwareModel() {
     function hardwareDelete(hw_id) {
         selectedHwIdToDelete = hw_id;
         $('#delete_hw_id').val(hw_id);
-        const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-        modal.show();
+
+        $.ajax({
+            type: "POST",
+            url: "hardware-edit-details2.php",
+            data: { hw_id },
+            dataType: "json",
+            error: function (xhr, status, error) {
+                console.error("Failed fetching hardware data:", status, error, xhr.responseText);
+                alert("Failed to fetch hardware data.");
+            },
+            success: function (data) {
+                $('#delete_item_desc').text($(data.item_html).text().trim());
+                $('#delete_item_brand').text($(data.brand_html).text().trim());
+                $('#delete_item_model').text($(data.model_html).text().trim());
+                $('#delete_asset_num').text(data.hw_asset_num);
+                $('#delete_serial_num').text(data.hw_serial_num);
+
+                const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+                modal.show();
+            }
+        });
         }
 
         document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
         const hw_id = $('#delete_hw_id').val();
+        saveScrollPosition();
 
         $.ajax({
             url: 'hardware-delete-details.php',
@@ -1141,9 +1280,11 @@ function showHardwareModel() {
                 if (response.trim() === "success") {
                 $('#' + hw_id).remove();
                 const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                $('#deleteConfirmModal').one('hidden.bs.modal', restoreScrollPosition);
                 modal.hide();
-                
-                updateHardwareTable();
+
+                // Refresh table while keeping the current "show entries" / page number
+                updateHardwareTable(true);
                 } else {
                 alert("Delete failed: " + response);
                 }
@@ -1186,9 +1327,10 @@ function showHardwareModel() {
                     // Site
                     $("#editHardwareSiteModal").html(data.site_html);
 
-                    // Item type (read-only)
+                    // Item type
                     const itemText = $(data.item_html).text().trim();
                     $("#editPrefixType").text(itemText);
+                    $("#editItemSelect").html(data.item_html);
 
                     // Sub Type
                     $('#editSubType').val(data.sub_major_type);
@@ -1268,6 +1410,7 @@ function showHardwareModel() {
 
         $('#updateHardwareBtn2').on('click', function (e) {
             e.preventDefault();
+            saveScrollPosition();
 
             const data = {
                 hw_id: $('#edit_hw_id').val(),
@@ -1383,13 +1526,14 @@ function showHardwareModel() {
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`);
                     } else if (saveResponse.trim() === 'success') {
+                        $('#EditHardwareModal').one('hidden.bs.modal', restoreScrollPosition);
                         $('#EditHardwareModal').modal('hide');
                         $('#response').html(saveResponse);
                         //alertMessageSuccess(`<strong>Hardware successfully Updated!</strong>`);
 
-                        
-                        updateHardwareTable();
-                  
+                        // Refresh table while keeping the current "show entries" / page number
+                        updateHardwareTable(true);
+
                         /*/ Optional: Reset edit form (if you want)
                         $('#editHardwareForm')[0].reset();
                         $('#editPrefixText').text("Type");
@@ -1637,6 +1781,10 @@ function hardware_model_option() {
 
 function alertMessageSuccess(messageHTML) {
     const alert = document.getElementById("alertMessage");
+    if (!alert) {
+        console.warn("alertMessageSuccess: #alertMessage element not found on this page at %s", timestamp());
+        return;
+    }
 
     // Set message
     alert.innerHTML = messageHTML;

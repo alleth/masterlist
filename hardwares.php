@@ -134,7 +134,7 @@ include("hardware-download-modals.php");
                                         <div class="col-6">
                                             <dd class="col-sm-12">
                                                 <div class="">Region</div>
-                                                <select class="form-select addHardwareForm" name="RegionSelect" id="RegionSelect">
+                                                <select class="form-select addHardwareForm" name="RegionSelect" id="RegionSelect" data-assigned-region="<?php echo htmlspecialchars($_SESSION['sess_assigned'] ?? '', ENT_QUOTES); ?>">
                                                     <option value="" selected>Select Region</option>
                                                 </select>
                                             </dd>
@@ -148,6 +148,16 @@ include("hardware-download-modals.php");
                                                 <div class="">Item Description</div>
                                                 <select class="form-select addHardwareForm" name="itemSelect" id="itemSelect">
                                                     <option value="" selected>Select Item</option>
+                                                </select>
+                                            </dd>
+                                            <dd class="col-sm-12 d-none" id="OSTypeGroup">
+                                                <div class="">Select OS Type</div>
+                                                <select class="form-select addHardwareForm" name="OSSelect" id="OSSelect">
+                                                    <option value="" selected>Select Item</option>
+                                                    <option value="Windows XP">Windows XP</option>
+                                                    <option value="Windows 10 32Bit">Windows 10 32Bit</option>
+                                                    <option value="Windows 10 64Bit">Windows 10 64Bit</option>
+                                                    <option value="Windows 11">Windows 11</option>
                                                 </select>
                                             </dd>
                                             <dd class="col-sm-12 d-none">
@@ -416,38 +426,57 @@ include("hardware-download-modals.php");
                         <h5 class="modal-title">Pull Out Confirmation</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                 
+
                     <div class="modal-body">
+
                         <div class="row">
-                        <div class="mb-3 col-md-6 offset-md-6">
                             <input type="hidden" id="delete_hw_id">
-                            <label for="trackingNumber" class="form-label">Tracking Number:</label>
-                            <input type="text" class="form-control" id="trackingNumber" name="trackingNumber">
+
+                            <div class="col-md-6">
+                                <p class="text-uppercase text-secondary small fw-semibold mb-2" style="letter-spacing: .04em;">Item details</p>
+                                <div class="card bg-light border-0">
+                                    <div class="card-body py-3">
+                                        <p class="mb-2"><strong>Item Description:</strong> <span id="delete_item_desc"></span></p>
+                                        <p class="mb-2"><strong>Item Brand:</strong> <span id="delete_item_brand"></span></p>
+                                        <p class="mb-2"><strong>Item Model:</strong> <span id="delete_item_model"></span></p>
+                                        <p class="mb-2"><strong>Asset Number:</strong> <span id="delete_asset_num"></span></p>
+                                        <p class="mb-0"><strong>Serial Number:</strong> <span id="delete_serial_num"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="text-uppercase text-secondary small fw-semibold mb-2" style="letter-spacing: .04em;">Additional information</p>
+
+                                <div class="mb-3">
+                                    <label for="trackingNumber" class="form-label">Tracking Number:</label>
+                                    <input type="text" class="form-control" id="trackingNumber" name="trackingNumber" placeholder="Enter tracking number">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="pullOutDate" class="form-label">Pull Out Date:</label>
+                                    <input type="date" class="form-control" id="pullOutDate" name="pullOutDate" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="pullOutReason" class="form-label">Reason for Pullout:</label>
+                                    <select class="form-select" id="pullOutReason" name="pullOutReason">
+                                    <option selected></option>
+                                    <option>For Repair</option>
+                                    <option>For Return</option>
+                                    <option>For Transfer</option>
+                                    <option>Not On site</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="remarks" class="form-label">Remarks:</label>
+                                    <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="mb-3 col-md-6 offset-md-6">
-                            <label for="pullOutDate" class="form-label">Pull Out Date:</label>
-                            <input type="date" class="form-control" id="pullOutDate" name="pullOutDate" required>
-                        </div>
-
-                        <div class="mb-3 col-md-6 offset-md-6">
-                            <label for="pullOutReason" class="form-label">Reason for Pullout:</label>
-                            <select class="form-select" id="pullOutReason" name="pullOutReason">
-                            <option selected></option>
-                            <option>For Repair</option>
-                            <option>For Return</option>
-                            <option>For Transfer</option>
-                            <option>Not On site</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3 col-md-6 offset-md-6">
-                            <label for="remarks" class="form-label">Remarks:</label>
-                            <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
-                        </div>
-                        </div>
-
-                        <div class="modal-footer justify-content-center">
+                        <div class="modal-footer justify-content-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Pull Out</button>
                         </div>
@@ -455,6 +484,7 @@ include("hardware-download-modals.php");
                 </div>
             </div>
         </div>
+
 
 
         <!-- Add CPU Hardware---->
